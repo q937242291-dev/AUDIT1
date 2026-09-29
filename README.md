@@ -4,10 +4,6 @@
 
 **Agent Utility and Dependency Intervention Testing**
 
-Reproducibility artifact for *What Actually Matters? An Empirical Study of the
-Gap between Process Quality and Necessity in Software Engineering Agents*.
-The accompanying manuscript is in paper/manuscript.pdf.
-
 AUDIT keeps process observations, matched localization necessity, repair
 outcomes, completion, and resource cost separate. It provides independently
 registered audit modules, explicit controller replacement, trace schemas,
