@@ -1,0 +1,47 @@
+{
+  "schema_id": "work2_deepswe_current_sota_top10_success_logs_v1",
+  "generated_at_utc": "2026-09-21T15:35:51.258176+00:00",
+  "official_leaderboard_source": "leaderboard-live.json",
+  "official_trials_source": "trials.json",
+  "official_release_source": "release.json",
+  "top10_configurations": [
+    "gpt-6-astra[xhigh]",
+    "gemini-3-8-flash[high]",
+    "claude-opus-5[max]",
+    "gpt-6-astra[high]",
+    "gpt-6-astra[max]",
+    "claude-opus-5[xhigh]",
+    "claude-opus-5[high]",
+    "gpt-6-astra[medium]",
+    "gpt-5-6-sol[max]",
+    "gemini-3-8-flash[medium]"
+  ],
+  "selected_success_trajectory_declared_rows": 1959,
+  "reused_rows": 1308,
+  "fresh_download_rows": 0,
+  "downloaded_rows": 1308,
+  "failed_rows": 651,
+  "downloaded_bytes": 617474705,
+  "benchmark_rerun": false,
+  "provider_calls": 0,
+  "task_or_source_payload_sent": false,
+  "claim_boundary": "Current official DeepSWE top-10 passed=true public trajectory artifacts only; inaccessible or absent artifacts remain explicit coverage gaps and no leaderboard score is converted into a trajectory.",
+  "manifest_rows": 1959,
+  "http_status_counts": {
+    "": 1,
+    "200": 1308,
+    "403": 650
+  },
+  "model_config_counts": {
+    "gpt-6-astra[xhigh]": 0,
+    "gemini-3-8-flash[high]": 0,
+    "claude-opus-5[max]": 327,
+    "gpt-6-astra[high]": 0,
+    "gpt-6-astra[max]": 0,
+    "claude-opus-5[xhigh]": 327,
+    "claude-opus-5[high]": 327,
+    "gpt-6-astra[medium]": 0,
+    "gpt-5-6-sol[max]": 327,
+    "gemini-3-8-flash[medium]": 0
+  }
+}

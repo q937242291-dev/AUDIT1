@@ -1,0 +1,13 @@
+{
+  "provider_calls": 1734,
+  "prompt_tokens": 5378363,
+  "completion_tokens": 725343,
+  "total_tokens": 6103706,
+  "token_cap": 12000000,
+  "usage_source": "provider_returned",
+  "shared_cost_policy": "count each API usage event once",
+  "trajectory_ledger_status": "PASS",
+  "trajectory_event_rows": 9,
+  "model_call_event_rows": 4,
+  "complete_token_call_event_equality": true
+}

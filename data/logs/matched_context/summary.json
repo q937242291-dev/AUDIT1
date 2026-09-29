@@ -1,0 +1,38 @@
+{
+  "base_summary_sha256": "1828003ad626fb168437a260a3d3adaf6084ce8f879564b8684146da49344e70",
+  "claim_boundary": "Fresh supplemental seven-condition context-ablation observations. Three previously schema-invalid cells were successfully repaired with a strict non-empty relative-path output contract; all 280 canonical rows are provider-completed. Results remain descriptive localization observations and do not imply benchmark, semantic, human, causal or formal outcomes.",
+  "completion_tokens": 131964,
+  "conditions": [
+    "c0_issue_only",
+    "c1_entity_tree",
+    "c2_symbol_evidence",
+    "c3_dependency_api",
+    "c4_structural_bundle",
+    "c5_checkpoint_history",
+    "c6_bounded_full_context"
+  ],
+  "coverage_audit": {
+    "coverage_complete": true,
+    "latest_completed_rows": 280,
+    "latest_error_rows": 0,
+    "latest_provider_identity_valid": true,
+    "missing_run_ids": [],
+    "planned_rows": 280,
+    "raw_rows": 311,
+    "unexpected_run_ids": [],
+    "unique_latest_rows": 280
+  },
+  "latest_completed_rows": 280,
+  "latest_error_rows": 0,
+  "model": "gpt-5.6-luna",
+  "planned_rows": 280,
+  "prompt_tokens": 968838,
+  "provider": "PinAI",
+  "provider_calls_observed": 280,
+  "raw_rows": 311,
+  "repair_summary_sha256": "68187a5b98788ba67f2a1ba240f4b4ad8a14c5831a6d94aa1746591b0a6590c2",
+  "retry_history_rows": 31,
+  "schema_repair_rows": 3,
+  "status": "PASS_CONTEXT_ABLATION_RECONCILED_WITH_SCHEMA_REPAIR",
+  "total_tokens": 1100802
+}

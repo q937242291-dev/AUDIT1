@@ -1,0 +1,30 @@
+diff --git a/tests/forms_tests/field_tests/test_filepathfield.py b/tests/forms_tests/field_tests/test_filepathfield.py
+--- a/tests/forms_tests/field_tests/test_filepathfield.py
++++ b/tests/forms_tests/field_tests/test_filepathfield.py
+@@ -1,6 +1,7 @@
+ import os.path
+ 
+ from django.forms import FilePathField, ValidationError
++from django.db.models import FilePathField as ModelFilePathField
+ from django.test import SimpleTestCase
+ 
+ PATH = os.path.dirname(os.path.abspath(__file__))
+@@ -92,8 +93,18 @@ class FilePathFieldTest(SimpleTestCase):
+     def test_recursive_folders_without_files(self):
+         f = FilePathField(path=self.path, recursive=True, allow_folders=True, allow_files=False)
+         self.assertChoices(f, [
+             ('/filepathfield_test_dir/c', 'c'),
+             ('/filepathfield_test_dir/h', 'h'),
+             ('/filepathfield_test_dir/j', 'j'),
+             ('/filepathfield_test_dir/c/f', 'c/f'),
+         ])
++
++    def test_callable_path(self):
++        path = self.path
++
++        def generate_path():
++            return path
++
++        field = ModelFilePathField(path=generate_path)
++        self.assertEqual(field.path(), path)
++        self.assertEqual(field.formfield().path, path)

@@ -1,0 +1,11 @@
+{
+  "task_id": "fixture_example",
+  "trial_id": "fixture_trial",
+  "issue": "Fixture only: inspect the example function; this is not a benchmark task.",
+  "context": "One source file was read using the repository evidence tool.",
+  "candidates": [{"path": "package/example.py", "evidence_refs": ["source_example"]}],
+  "evidence": [{"id": "source_example", "path": "package/example.py", "owner": "package/example.py", "content": "def example():\n    return 1\n", "kind": "source", "tool_ref": "read_example"}],
+  "history": [{"id": "read_example", "action": "read_file", "object": "package/example.py", "candidate": "package/example.py", "evidence_ref": ["source_example"]}],
+  "repository_files": ["package/example.py"],
+  "model_config": {}
+}

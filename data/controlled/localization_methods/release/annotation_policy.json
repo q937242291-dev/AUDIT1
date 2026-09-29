@@ -1,0 +1,7 @@
+{
+  "label": "人工+大模型辅助标注（模拟人工）",
+  "real_human_annotation_count": 0,
+  "human_agreement": "NA",
+  "status": "simulated_model_assisted_annotation_only",
+  "note": "This label is a disclosure name for model-assisted/simulated annotation and must not be read as real human annotation or human agreement."
+}

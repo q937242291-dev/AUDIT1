@@ -1,0 +1,42 @@
+[
+  {
+    "path": "annotation_policy.json",
+    "bytes": 341,
+    "sha256": "90b00fcb062515c8a1c6e69962bb7cc7d3b0ea28adcb61dd9813a6ef2624b8ef"
+  },
+  {
+    "path": "case_level_localization_results.csv",
+    "bytes": 1605354,
+    "sha256": "a700f85fc6aafca97b2f7b535d27ee7a9936c6497a7b79f98888fae500a88c87"
+  },
+  {
+    "path": "localization_method_summary.csv",
+    "bytes": 1075,
+    "sha256": "279fd1056b381f798da14fce222072d9ca48198495bad6ce088e4fb2dbfe02b1"
+  },
+  {
+    "path": "README.md",
+    "bytes": 979,
+    "sha256": "d57b7af3b0ea9dc79daeaf9de24b681805076ec58734f18db1526ec5d91f2908"
+  },
+  {
+    "path": "release_metadata.json",
+    "bytes": 1810,
+    "sha256": "54a01ceeac730440dc0d85de3457131c6915d9e524b6be6ca7997152393604c5"
+  },
+  {
+    "path": "repository_localization_summary.csv",
+    "bytes": 1798,
+    "sha256": "da2573aafac287fba2e2228958b64f9eaa40e59efa6053396bc0e1e677cdb09e"
+  },
+  {
+    "path": "valid_completed_results.csv",
+    "bytes": 3065410,
+    "sha256": "2422c53cd7e8c58bad67613b8a82cdc167654b873f0993dbdc69bb297cbce1bd"
+  },
+  {
+    "path": "valid_completed_results.jsonl",
+    "bytes": 4223188,
+    "sha256": "4db06006955830f26ec4aff928e6c1f8366cc00adfce8308114ac3006ca4daa9"
+  }
+]

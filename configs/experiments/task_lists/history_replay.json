@@ -1,0 +1,2299 @@
+{
+  "schema_version": 1,
+  "name": "history_replay",
+  "source": "logs/trajectory_replay/multicheckpoint_replay.csv",
+  "source_sha256": "2a2b684c64b377dfdd9166d0432dbd56a372b7bf58c030275144b6f737000e11",
+  "id_field": "task_id",
+  "repeat_fields": [
+    "checkpoint_id"
+  ],
+  "selection": [
+    "agent_or_human",
+    "human"
+  ],
+  "assignment_count": 150,
+  "task_ids": [
+    "astropy__astropy-12907",
+    "astropy__astropy-14182",
+    "astropy__astropy-14365",
+    "astropy__astropy-14995",
+    "matplotlib__matplotlib-22711",
+    "matplotlib__matplotlib-23299",
+    "matplotlib__matplotlib-23314",
+    "matplotlib__matplotlib-23476",
+    "matplotlib__matplotlib-23562",
+    "mwaskom__seaborn-2848",
+    "mwaskom__seaborn-3010",
+    "mwaskom__seaborn-3190",
+    "mwaskom__seaborn-3407",
+    "pallets__flask-4045",
+    "pallets__flask-5063",
+    "pylint-dev__pylint-6506",
+    "pylint-dev__pylint-7080",
+    "pylint-dev__pylint-7228",
+    "pytest-dev__pytest-5221",
+    "pytest-dev__pytest-5227",
+    "scikit-learn__scikit-learn-10297",
+    "scikit-learn__scikit-learn-10508",
+    "scikit-learn__scikit-learn-10949",
+    "scikit-learn__scikit-learn-11040",
+    "sphinx-doc__sphinx-10325",
+    "sphinx-doc__sphinx-11445",
+    "sphinx-doc__sphinx-7686",
+    "sympy__sympy-11400",
+    "sympy__sympy-11870",
+    "sympy__sympy-12171"
+  ],
+  "units": [
+    {
+      "unit_id": "37bc4f03fbd0b3f2fb33c9cb",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "astropy__astropy-12907-d180"
+      ],
+      "source_row": 65,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-12907-d180",
+      "repository": "astropy/astropy",
+      "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+      "source_commit": "8d49de97158c32b69aef95cfbaf301b54593755e",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "0b95cbcf037b70fee6dce85a",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "astropy__astropy-12907-d30"
+      ],
+      "source_row": 61,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-12907-d30",
+      "repository": "astropy/astropy",
+      "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+      "source_commit": "f5f39c0fff49347886f6d4e7670d7e67e37fd081",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "ab5621bcdebc64b245e75c00",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "astropy__astropy-12907-d365"
+      ],
+      "source_row": 67,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-12907-d365",
+      "repository": "astropy/astropy",
+      "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+      "source_commit": "45d43bfda30130a2139b0db92c19fd0c982de66d",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "fe06251a4747c490cca444c2",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "astropy__astropy-12907-d7"
+      ],
+      "source_row": 1,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-12907-d7",
+      "repository": "astropy/astropy",
+      "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+      "source_commit": "97be610d13cf314b28ffe8eddc20f9affa8a05ca",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "2b719a2542888ca242b25a0f",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "astropy__astropy-12907-d90"
+      ],
+      "source_row": 63,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-12907-d90",
+      "repository": "astropy/astropy",
+      "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+      "source_commit": "f7b1ac349183c4b88d74a4362654631b75e2559f",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "1077c0d610516b8499b0dc3a",
+      "instance_id": "astropy__astropy-14182",
+      "source_key": [
+        "astropy__astropy-14182",
+        "astropy__astropy-14182-d180"
+      ],
+      "source_row": 73,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14182-d180",
+      "repository": "astropy/astropy",
+      "base_commit": "a5917978be39d13cd90b517e1de4e7a539ffaa48",
+      "source_commit": "aa2c05dc222f36630c4bff7ca2b0c1f676b29561",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "3d7f2f47bc1e3fd3c8c9e78c",
+      "instance_id": "astropy__astropy-14182",
+      "source_key": [
+        "astropy__astropy-14182",
+        "astropy__astropy-14182-d30"
+      ],
+      "source_row": 69,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14182-d30",
+      "repository": "astropy/astropy",
+      "base_commit": "a5917978be39d13cd90b517e1de4e7a539ffaa48",
+      "source_commit": "adc70d859199969985522563a20a4744c09e8594",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "1c820e89e6f80d1964c3f872",
+      "instance_id": "astropy__astropy-14182",
+      "source_key": [
+        "astropy__astropy-14182",
+        "astropy__astropy-14182-d365"
+      ],
+      "source_row": 75,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14182-d365",
+      "repository": "astropy/astropy",
+      "base_commit": "a5917978be39d13cd90b517e1de4e7a539ffaa48",
+      "source_commit": "103a55a1017d711779fb04d66efb02645b1c0da1",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "a622fe1e92363a908f43a721",
+      "instance_id": "astropy__astropy-14182",
+      "source_key": [
+        "astropy__astropy-14182",
+        "astropy__astropy-14182-d7"
+      ],
+      "source_row": 3,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14182-d7",
+      "repository": "astropy/astropy",
+      "base_commit": "a5917978be39d13cd90b517e1de4e7a539ffaa48",
+      "source_commit": "a5ccc9522ca139df7a7cf4e2e506ffd288e55620",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "a98287eeaef9af8f22effa62",
+      "instance_id": "astropy__astropy-14182",
+      "source_key": [
+        "astropy__astropy-14182",
+        "astropy__astropy-14182-d90"
+      ],
+      "source_row": 71,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14182-d90",
+      "repository": "astropy/astropy",
+      "base_commit": "a5917978be39d13cd90b517e1de4e7a539ffaa48",
+      "source_commit": "f8877ac3ce7d6a175c17cc741ff688f0037caa8d",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "6a234c8fd7956e9e938a3893",
+      "instance_id": "astropy__astropy-14365",
+      "source_key": [
+        "astropy__astropy-14365",
+        "astropy__astropy-14365-d180"
+      ],
+      "source_row": 81,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14365-d180",
+      "repository": "astropy/astropy",
+      "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+      "source_commit": "a99f8c02722608775e07e17b49b99ff6657dce3f",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "a9517fe2684ae5587700ca79",
+      "instance_id": "astropy__astropy-14365",
+      "source_key": [
+        "astropy__astropy-14365",
+        "astropy__astropy-14365-d30"
+      ],
+      "source_row": 77,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14365-d30",
+      "repository": "astropy/astropy",
+      "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+      "source_commit": "80f5a7181afcea9e32a106b94a81e129b6659754",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "c417a9626826c782388418c9",
+      "instance_id": "astropy__astropy-14365",
+      "source_key": [
+        "astropy__astropy-14365",
+        "astropy__astropy-14365-d365"
+      ],
+      "source_row": 83,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14365-d365",
+      "repository": "astropy/astropy",
+      "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+      "source_commit": "0501404f010461fd0a185faad3a2851977fb4ce2",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "85ed9418b510ef02922e1304",
+      "instance_id": "astropy__astropy-14365",
+      "source_key": [
+        "astropy__astropy-14365",
+        "astropy__astropy-14365-d7"
+      ],
+      "source_row": 5,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14365-d7",
+      "repository": "astropy/astropy",
+      "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+      "source_commit": "5ac136ec0889b2829a7fb7e2065717c1b714a474",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "5e2184d2e5a00a9c6d50b468",
+      "instance_id": "astropy__astropy-14365",
+      "source_key": [
+        "astropy__astropy-14365",
+        "astropy__astropy-14365-d90"
+      ],
+      "source_row": 79,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14365-d90",
+      "repository": "astropy/astropy",
+      "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+      "source_commit": "72e09571fa838081689b4e27603fa45225bdb458",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "f43b842ee72563f2585f6ca9",
+      "instance_id": "astropy__astropy-14995",
+      "source_key": [
+        "astropy__astropy-14995",
+        "astropy__astropy-14995-d180"
+      ],
+      "source_row": 265,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14995-d180",
+      "repository": "astropy/astropy",
+      "base_commit": "b16c7d12ccbc7b2d20364b89fb44285bcbfede54",
+      "source_commit": "6568d90661f12a144ec9a2ccc814a3e2eaaf8a82",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "16b159ece45bab433ab87008",
+      "instance_id": "astropy__astropy-14995",
+      "source_key": [
+        "astropy__astropy-14995",
+        "astropy__astropy-14995-d30"
+      ],
+      "source_row": 261,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14995-d30",
+      "repository": "astropy/astropy",
+      "base_commit": "b16c7d12ccbc7b2d20364b89fb44285bcbfede54",
+      "source_commit": "bb0e1f61719a3be6ccddb802a3044ae5f264405b",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "b554f09efdcc4896dffaf0e0",
+      "instance_id": "astropy__astropy-14995",
+      "source_key": [
+        "astropy__astropy-14995",
+        "astropy__astropy-14995-d365"
+      ],
+      "source_row": 267,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14995-d365",
+      "repository": "astropy/astropy",
+      "base_commit": "b16c7d12ccbc7b2d20364b89fb44285bcbfede54",
+      "source_commit": "49127d6650cd2ccd076b88a8219d87166e5c57cb",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "dc38b5e1f1ff459398e85b43",
+      "instance_id": "astropy__astropy-14995",
+      "source_key": [
+        "astropy__astropy-14995",
+        "astropy__astropy-14995-d7"
+      ],
+      "source_row": 51,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14995-d7",
+      "repository": "astropy/astropy",
+      "base_commit": "b16c7d12ccbc7b2d20364b89fb44285bcbfede54",
+      "source_commit": "c0702dae400e4a3445afcb62e65e298b9d2f7465",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "8fd3524ff29398d5e4d5c034",
+      "instance_id": "astropy__astropy-14995",
+      "source_key": [
+        "astropy__astropy-14995",
+        "astropy__astropy-14995-d90"
+      ],
+      "source_row": 263,
+      "replicate": "NA",
+      "checkpoint_id": "astropy__astropy-14995-d90",
+      "repository": "astropy/astropy",
+      "base_commit": "b16c7d12ccbc7b2d20364b89fb44285bcbfede54",
+      "source_commit": "568e2e32072cbb89f9edaa52c6c0ec440a46f1ac",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "edf06f2efdd87a58d73b0bc2",
+      "instance_id": "matplotlib__matplotlib-22711",
+      "source_key": [
+        "matplotlib__matplotlib-22711",
+        "matplotlib__matplotlib-22711-d180"
+      ],
+      "source_row": 89,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-22711-d180",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "f670fe78795b18eb1118707721852209cd77ad51",
+      "source_commit": "d226954190e4d3299de4b600af0c19763a41edee",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "885b299230ae2378638b9052",
+      "instance_id": "matplotlib__matplotlib-22711",
+      "source_key": [
+        "matplotlib__matplotlib-22711",
+        "matplotlib__matplotlib-22711-d30"
+      ],
+      "source_row": 85,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-22711-d30",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "f670fe78795b18eb1118707721852209cd77ad51",
+      "source_commit": "1a016f0395c3a8d87b632a47d813db2491863164",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "5ee39e974699e256033fba9f",
+      "instance_id": "matplotlib__matplotlib-22711",
+      "source_key": [
+        "matplotlib__matplotlib-22711",
+        "matplotlib__matplotlib-22711-d365"
+      ],
+      "source_row": 91,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-22711-d365",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "f670fe78795b18eb1118707721852209cd77ad51",
+      "source_commit": "c8aaa903df68d6c82c59cb5a344b11232a4493e8",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "4ab940d2553c775b0dbda0b5",
+      "instance_id": "matplotlib__matplotlib-22711",
+      "source_key": [
+        "matplotlib__matplotlib-22711",
+        "matplotlib__matplotlib-22711-d7"
+      ],
+      "source_row": 7,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-22711-d7",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "f670fe78795b18eb1118707721852209cd77ad51",
+      "source_commit": "33b301589f2a164110df15f6187853692fb0135b",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "802fb81f9c563a0a8fa5669e",
+      "instance_id": "matplotlib__matplotlib-22711",
+      "source_key": [
+        "matplotlib__matplotlib-22711",
+        "matplotlib__matplotlib-22711-d90"
+      ],
+      "source_row": 87,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-22711-d90",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "f670fe78795b18eb1118707721852209cd77ad51",
+      "source_commit": "b02334b6e207bf155c1fa92e50a6607abdf4633a",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "9873ec2b8f01b5febb3b862d",
+      "instance_id": "matplotlib__matplotlib-23299",
+      "source_key": [
+        "matplotlib__matplotlib-23299",
+        "matplotlib__matplotlib-23299-d180"
+      ],
+      "source_row": 97,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23299-d180",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "3eadeacc06c9f2ddcdac6ae39819faa9fbee9e39",
+      "source_commit": "65dc9be34efb3a8b7b3bd7ccebeb9fff1dc85137",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "699931b0d5c441c9f24f8dda",
+      "instance_id": "matplotlib__matplotlib-23299",
+      "source_key": [
+        "matplotlib__matplotlib-23299",
+        "matplotlib__matplotlib-23299-d30"
+      ],
+      "source_row": 93,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23299-d30",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "3eadeacc06c9f2ddcdac6ae39819faa9fbee9e39",
+      "source_commit": "5fc0441f3b5848ef864e6ed74e3b0e5edcea8dec",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "5aa587bfe80c7828d1b0ac49",
+      "instance_id": "matplotlib__matplotlib-23299",
+      "source_key": [
+        "matplotlib__matplotlib-23299",
+        "matplotlib__matplotlib-23299-d365"
+      ],
+      "source_row": 99,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23299-d365",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "3eadeacc06c9f2ddcdac6ae39819faa9fbee9e39",
+      "source_commit": "c6f455bf35c15be1a5b131c8c1468c0f7a7d0163",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "e3684cd348c7e823fc176fce",
+      "instance_id": "matplotlib__matplotlib-23299",
+      "source_key": [
+        "matplotlib__matplotlib-23299",
+        "matplotlib__matplotlib-23299-d7"
+      ],
+      "source_row": 9,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23299-d7",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "3eadeacc06c9f2ddcdac6ae39819faa9fbee9e39",
+      "source_commit": "cd9d371cd473b286310845ada9e5a3e786630e1a",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "f0a3c17812f186f9a9c4889a",
+      "instance_id": "matplotlib__matplotlib-23299",
+      "source_key": [
+        "matplotlib__matplotlib-23299",
+        "matplotlib__matplotlib-23299-d90"
+      ],
+      "source_row": 95,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23299-d90",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "3eadeacc06c9f2ddcdac6ae39819faa9fbee9e39",
+      "source_commit": "363713442bdada82b5ce554be6e1da4c4db84184",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "ce02c1bc74ceb61e63eb96b1",
+      "instance_id": "matplotlib__matplotlib-23314",
+      "source_key": [
+        "matplotlib__matplotlib-23314",
+        "matplotlib__matplotlib-23314-d180"
+      ],
+      "source_row": 105,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23314-d180",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "97fc1154992f64cfb2f86321155a7404efeb2d8a",
+      "source_commit": "48747b29e67e9693ef98149a32672eb2f44589f0",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "9c352040556c4afc0626505d",
+      "instance_id": "matplotlib__matplotlib-23314",
+      "source_key": [
+        "matplotlib__matplotlib-23314",
+        "matplotlib__matplotlib-23314-d30"
+      ],
+      "source_row": 101,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23314-d30",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "97fc1154992f64cfb2f86321155a7404efeb2d8a",
+      "source_commit": "11a3e1b81747558d0e36c6d967cc61360e9853c6",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "067cffa48fb01b14671c2678",
+      "instance_id": "matplotlib__matplotlib-23314",
+      "source_key": [
+        "matplotlib__matplotlib-23314",
+        "matplotlib__matplotlib-23314-d365"
+      ],
+      "source_row": 107,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23314-d365",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "97fc1154992f64cfb2f86321155a7404efeb2d8a",
+      "source_commit": "9b47f81bf68bd7925f6e1c8f67b9b5ead7342431",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "bb5adeff518b7e4a4b39727a",
+      "instance_id": "matplotlib__matplotlib-23314",
+      "source_key": [
+        "matplotlib__matplotlib-23314",
+        "matplotlib__matplotlib-23314-d7"
+      ],
+      "source_row": 11,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23314-d7",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "97fc1154992f64cfb2f86321155a7404efeb2d8a",
+      "source_commit": "b02334b6e207bf155c1fa92e50a6607abdf4633a",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "4652ffc6eca260f2ff25c4d6",
+      "instance_id": "matplotlib__matplotlib-23314",
+      "source_key": [
+        "matplotlib__matplotlib-23314",
+        "matplotlib__matplotlib-23314-d90"
+      ],
+      "source_row": 103,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23314-d90",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "97fc1154992f64cfb2f86321155a7404efeb2d8a",
+      "source_commit": "1b4db29308230b232b505d28d2dd6d471d7be91c",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "e32e01ffa96e2d6e5c7f677d",
+      "instance_id": "matplotlib__matplotlib-23476",
+      "source_key": [
+        "matplotlib__matplotlib-23476",
+        "matplotlib__matplotlib-23476-d180"
+      ],
+      "source_row": 273,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23476-d180",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "33a0599711d26dc2b79f851c6daed4947df7c167",
+      "source_commit": "6d95491ea272db702f50493a01297db27f278d4a",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "e5fc787a536cda952dc17c69",
+      "instance_id": "matplotlib__matplotlib-23476",
+      "source_key": [
+        "matplotlib__matplotlib-23476",
+        "matplotlib__matplotlib-23476-d30"
+      ],
+      "source_row": 269,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23476-d30",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "33a0599711d26dc2b79f851c6daed4947df7c167",
+      "source_commit": "5773bf9a5ce11b7ba0c9bc1d6693ad99a39426cb",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "15b50f15e99cb50e7698cc0c",
+      "instance_id": "matplotlib__matplotlib-23476",
+      "source_key": [
+        "matplotlib__matplotlib-23476",
+        "matplotlib__matplotlib-23476-d365"
+      ],
+      "source_row": 275,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23476-d365",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "33a0599711d26dc2b79f851c6daed4947df7c167",
+      "source_commit": "6eeede6a1a96272c9f87ea2a0774baa79f8503b6",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "ecdcb5b11413bcc4c9fbfb62",
+      "instance_id": "matplotlib__matplotlib-23476",
+      "source_key": [
+        "matplotlib__matplotlib-23476",
+        "matplotlib__matplotlib-23476-d7"
+      ],
+      "source_row": 53,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23476-d7",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "33a0599711d26dc2b79f851c6daed4947df7c167",
+      "source_commit": "3c748ff8a6e249d7f0812210198b6edf7952b6b1",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "bb87cc3c3c3dbb0a5171ecef",
+      "instance_id": "matplotlib__matplotlib-23476",
+      "source_key": [
+        "matplotlib__matplotlib-23476",
+        "matplotlib__matplotlib-23476-d90"
+      ],
+      "source_row": 271,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23476-d90",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "33a0599711d26dc2b79f851c6daed4947df7c167",
+      "source_commit": "407e8d89a6221cb7ae149f41d49ea5873bd518f7",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "d405170573c33a1d4e8bc670",
+      "instance_id": "matplotlib__matplotlib-23562",
+      "source_key": [
+        "matplotlib__matplotlib-23562",
+        "matplotlib__matplotlib-23562-d180"
+      ],
+      "source_row": 281,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23562-d180",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "29a86636a9c45ab5ac4d80ac76eaee497f460dce",
+      "source_commit": "faf88bf807b9266263459afe01770814b7603d07",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "13da5de3f778838ee44623b5",
+      "instance_id": "matplotlib__matplotlib-23562",
+      "source_key": [
+        "matplotlib__matplotlib-23562",
+        "matplotlib__matplotlib-23562-d30"
+      ],
+      "source_row": 277,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23562-d30",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "29a86636a9c45ab5ac4d80ac76eaee497f460dce",
+      "source_commit": "4ad86c8ed5e3dc6cd426abdfe73346f6502787ba",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "75a958b5c451cb9bb1d93398",
+      "instance_id": "matplotlib__matplotlib-23562",
+      "source_key": [
+        "matplotlib__matplotlib-23562",
+        "matplotlib__matplotlib-23562-d365"
+      ],
+      "source_row": 283,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23562-d365",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "29a86636a9c45ab5ac4d80ac76eaee497f460dce",
+      "source_commit": "5140177a69f4bfc195975aa24f244e97e2ff1ab6",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "6d6a13518ab563436067c37d",
+      "instance_id": "matplotlib__matplotlib-23562",
+      "source_key": [
+        "matplotlib__matplotlib-23562",
+        "matplotlib__matplotlib-23562-d7"
+      ],
+      "source_row": 55,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23562-d7",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "29a86636a9c45ab5ac4d80ac76eaee497f460dce",
+      "source_commit": "37300c359533828e87a3d2e0e3a90fb37c01cdf6",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "b9eb1986269b0634dd9fedcd",
+      "instance_id": "matplotlib__matplotlib-23562",
+      "source_key": [
+        "matplotlib__matplotlib-23562",
+        "matplotlib__matplotlib-23562-d90"
+      ],
+      "source_row": 279,
+      "replicate": "NA",
+      "checkpoint_id": "matplotlib__matplotlib-23562-d90",
+      "repository": "matplotlib/matplotlib",
+      "base_commit": "29a86636a9c45ab5ac4d80ac76eaee497f460dce",
+      "source_commit": "6c09a56fa6f3f3c0cb5160af7207bf628c43405b",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "7a9c3c94f8ffac1fcf433ff6",
+      "instance_id": "mwaskom__seaborn-2848",
+      "source_key": [
+        "mwaskom__seaborn-2848",
+        "mwaskom__seaborn-2848-d180"
+      ],
+      "source_row": 113,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-2848-d180",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "94621cef29f80282436d73e8d2c0aa76dab81273",
+      "source_commit": "22cdfb0c93f8ec78492d87edb810f10cb7f57a31",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "c1681875176377190385dec0",
+      "instance_id": "mwaskom__seaborn-2848",
+      "source_key": [
+        "mwaskom__seaborn-2848",
+        "mwaskom__seaborn-2848-d30"
+      ],
+      "source_row": 109,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-2848-d30",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "94621cef29f80282436d73e8d2c0aa76dab81273",
+      "source_commit": "5910d6ef50196c8bd1f4ed40a5da202a39d7f62c",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "af6f97bd76978f80ae728aa8",
+      "instance_id": "mwaskom__seaborn-2848",
+      "source_key": [
+        "mwaskom__seaborn-2848",
+        "mwaskom__seaborn-2848-d365"
+      ],
+      "source_row": 115,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-2848-d365",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "94621cef29f80282436d73e8d2c0aa76dab81273",
+      "source_commit": "b6737d5aec9a91bb8840cdda896a7970e1830d56",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "4564c38de839ec477ca7e7be",
+      "instance_id": "mwaskom__seaborn-2848",
+      "source_key": [
+        "mwaskom__seaborn-2848",
+        "mwaskom__seaborn-2848-d7"
+      ],
+      "source_row": 13,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-2848-d7",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "94621cef29f80282436d73e8d2c0aa76dab81273",
+      "source_commit": "5ccd131e2b9abf7ebe335d429fba86fea9ca28d6",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "cd6a7e218e00b52eb63aa3bb",
+      "instance_id": "mwaskom__seaborn-2848",
+      "source_key": [
+        "mwaskom__seaborn-2848",
+        "mwaskom__seaborn-2848-d90"
+      ],
+      "source_row": 111,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-2848-d90",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "94621cef29f80282436d73e8d2c0aa76dab81273",
+      "source_commit": "0929b9aca26dea1e97a08f8ee70b807058d175ed",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "90341919a46ccda6678873d4",
+      "instance_id": "mwaskom__seaborn-3010",
+      "source_key": [
+        "mwaskom__seaborn-3010",
+        "mwaskom__seaborn-3010-d180"
+      ],
+      "source_row": 121,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3010-d180",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "0f5a013e2cf43562deec3b879458e59a73853813",
+      "source_commit": "7231fc24f6251fbc4b4757a56af7a0622a5b12f5",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "2b31b56e3facd8368bef4794",
+      "instance_id": "mwaskom__seaborn-3010",
+      "source_key": [
+        "mwaskom__seaborn-3010",
+        "mwaskom__seaborn-3010-d30"
+      ],
+      "source_row": 117,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3010-d30",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "0f5a013e2cf43562deec3b879458e59a73853813",
+      "source_commit": "85c8ed632a5e9ec45b7d69d89518bb784a6e05a5",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "fbc7259ae0861facbd84b26c",
+      "instance_id": "mwaskom__seaborn-3010",
+      "source_key": [
+        "mwaskom__seaborn-3010",
+        "mwaskom__seaborn-3010-d365"
+      ],
+      "source_row": 123,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3010-d365",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "0f5a013e2cf43562deec3b879458e59a73853813",
+      "source_commit": "1f788201822941a3aca7fedf0bcd49d16ebc313b",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "f9b1dbb86d396bb85d3ebc45",
+      "instance_id": "mwaskom__seaborn-3010",
+      "source_key": [
+        "mwaskom__seaborn-3010",
+        "mwaskom__seaborn-3010-d7"
+      ],
+      "source_row": 15,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3010-d7",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "0f5a013e2cf43562deec3b879458e59a73853813",
+      "source_commit": "1d4bec6bfdb52a39ed465916ac93e0b5ad828cd2",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "97713e7ef90883ef527119ea",
+      "instance_id": "mwaskom__seaborn-3010",
+      "source_key": [
+        "mwaskom__seaborn-3010",
+        "mwaskom__seaborn-3010-d90"
+      ],
+      "source_row": 119,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3010-d90",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "0f5a013e2cf43562deec3b879458e59a73853813",
+      "source_commit": "9bd166565beea99ab2e43a0576c59efab196940b",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "5250869d079eb6e69c908709",
+      "instance_id": "mwaskom__seaborn-3190",
+      "source_key": [
+        "mwaskom__seaborn-3190",
+        "mwaskom__seaborn-3190-d180"
+      ],
+      "source_row": 129,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3190-d180",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "4a9e54962a29c12a8b103d75f838e0e795a6974d",
+      "source_commit": "7780305bae63d8be3416858ac35f6fa706bab4d6",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "66ac2ddd81756d58d4110512",
+      "instance_id": "mwaskom__seaborn-3190",
+      "source_key": [
+        "mwaskom__seaborn-3190",
+        "mwaskom__seaborn-3190-d30"
+      ],
+      "source_row": 125,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3190-d30",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "4a9e54962a29c12a8b103d75f838e0e795a6974d",
+      "source_commit": "0ebc82e8580caab55eb7af1f66220eab6654af97",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "00bd0403d4ae85fe5426a5d0",
+      "instance_id": "mwaskom__seaborn-3190",
+      "source_key": [
+        "mwaskom__seaborn-3190",
+        "mwaskom__seaborn-3190-d365"
+      ],
+      "source_row": 131,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3190-d365",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "4a9e54962a29c12a8b103d75f838e0e795a6974d",
+      "source_commit": "45a098fd254b6b7385e708b29a556017808ecd40",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "58f5b53f61b0ceaf5f90413d",
+      "instance_id": "mwaskom__seaborn-3190",
+      "source_key": [
+        "mwaskom__seaborn-3190",
+        "mwaskom__seaborn-3190-d7"
+      ],
+      "source_row": 17,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3190-d7",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "4a9e54962a29c12a8b103d75f838e0e795a6974d",
+      "source_commit": "9b0baf65c879889489a4cce92aef552536e571eb",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "b2a7fe7934b83e118a784943",
+      "instance_id": "mwaskom__seaborn-3190",
+      "source_key": [
+        "mwaskom__seaborn-3190",
+        "mwaskom__seaborn-3190-d90"
+      ],
+      "source_row": 127,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3190-d90",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "4a9e54962a29c12a8b103d75f838e0e795a6974d",
+      "source_commit": "bd480f6280007b2ae6910ce4ee689f213f7a7e10",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "9d0c4288b328d6163fae665a",
+      "instance_id": "mwaskom__seaborn-3407",
+      "source_key": [
+        "mwaskom__seaborn-3407",
+        "mwaskom__seaborn-3407-d180"
+      ],
+      "source_row": 289,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3407-d180",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+      "source_commit": "d8476676a066c137ac43d50ad49b3ee586ea580f",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "28c6574a205ea9d4ab30a0ca",
+      "instance_id": "mwaskom__seaborn-3407",
+      "source_key": [
+        "mwaskom__seaborn-3407",
+        "mwaskom__seaborn-3407-d30"
+      ],
+      "source_row": 285,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3407-d30",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+      "source_commit": "3ef2a0f9580e5a4715be878c73751454089c945d",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "9ec0be1caa3d5385f72f4720",
+      "instance_id": "mwaskom__seaborn-3407",
+      "source_key": [
+        "mwaskom__seaborn-3407",
+        "mwaskom__seaborn-3407-d365"
+      ],
+      "source_row": 291,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3407-d365",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+      "source_commit": "2f5ea60930b96b461107a564ee706aca9d00a6d3",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "b8f2572c4eed156f1c841e68",
+      "instance_id": "mwaskom__seaborn-3407",
+      "source_key": [
+        "mwaskom__seaborn-3407",
+        "mwaskom__seaborn-3407-d7"
+      ],
+      "source_row": 57,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3407-d7",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+      "source_commit": "7780305bae63d8be3416858ac35f6fa706bab4d6",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "3cdd5da26e9e28bacd5deaa4",
+      "instance_id": "mwaskom__seaborn-3407",
+      "source_key": [
+        "mwaskom__seaborn-3407",
+        "mwaskom__seaborn-3407-d90"
+      ],
+      "source_row": 287,
+      "replicate": "NA",
+      "checkpoint_id": "mwaskom__seaborn-3407-d90",
+      "repository": "mwaskom/seaborn",
+      "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+      "source_commit": "1f788201822941a3aca7fedf0bcd49d16ebc313b",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "e972f2ad794e7870ef517a88",
+      "instance_id": "pallets__flask-4045",
+      "source_key": [
+        "pallets__flask-4045",
+        "pallets__flask-4045-d180"
+      ],
+      "source_row": 137,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-4045-d180",
+      "repository": "pallets/flask",
+      "base_commit": "d8c37f43724cd9fb0870f77877b7c4c7e38a19e0",
+      "source_commit": "ea93a52d7d94ba093bbce4680c622cc4fc9771d8",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "4426b26c29adc66c8a2ec664",
+      "instance_id": "pallets__flask-4045",
+      "source_key": [
+        "pallets__flask-4045",
+        "pallets__flask-4045-d30"
+      ],
+      "source_row": 133,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-4045-d30",
+      "repository": "pallets/flask",
+      "base_commit": "d8c37f43724cd9fb0870f77877b7c4c7e38a19e0",
+      "source_commit": "ba6db2e30783f81673bb8a6b5218f7bb8efa8f27",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "2b467ef3fb7cf61da39dbe2d",
+      "instance_id": "pallets__flask-4045",
+      "source_key": [
+        "pallets__flask-4045",
+        "pallets__flask-4045-d365"
+      ],
+      "source_row": 139,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-4045-d365",
+      "repository": "pallets/flask",
+      "base_commit": "d8c37f43724cd9fb0870f77877b7c4c7e38a19e0",
+      "source_commit": "00e2aac9371d94011279a6340ec3e7ecc86f097e",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "7fae7aa181fff9e4d6b1d4ee",
+      "instance_id": "pallets__flask-4045",
+      "source_key": [
+        "pallets__flask-4045",
+        "pallets__flask-4045-d7"
+      ],
+      "source_row": 19,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-4045-d7",
+      "repository": "pallets/flask",
+      "base_commit": "d8c37f43724cd9fb0870f77877b7c4c7e38a19e0",
+      "source_commit": "83f7efa04708a22c9701488f0f29b59c2b756bef",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "05c6e7eb02d1b6f267f53e42",
+      "instance_id": "pallets__flask-4045",
+      "source_key": [
+        "pallets__flask-4045",
+        "pallets__flask-4045-d90"
+      ],
+      "source_row": 135,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-4045-d90",
+      "repository": "pallets/flask",
+      "base_commit": "d8c37f43724cd9fb0870f77877b7c4c7e38a19e0",
+      "source_commit": "53eef278efd59222be406ff5be737f48c92f8313",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "c6c8b3881095948da402108a",
+      "instance_id": "pallets__flask-5063",
+      "source_key": [
+        "pallets__flask-5063",
+        "pallets__flask-5063-d180"
+      ],
+      "source_row": 145,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-5063-d180",
+      "repository": "pallets/flask",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "source_commit": "beedaa4eff3919f250fad49a5092cf07c4d638e1",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "406b005ff83ba165dbb2d6b3",
+      "instance_id": "pallets__flask-5063",
+      "source_key": [
+        "pallets__flask-5063",
+        "pallets__flask-5063-d30"
+      ],
+      "source_row": 141,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-5063-d30",
+      "repository": "pallets/flask",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "source_commit": "31fd9c87912a7020a00d83d2135559433173708c",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "a678928cbd712669a0375bf8",
+      "instance_id": "pallets__flask-5063",
+      "source_key": [
+        "pallets__flask-5063",
+        "pallets__flask-5063-d365"
+      ],
+      "source_row": 147,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-5063-d365",
+      "repository": "pallets/flask",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "source_commit": "db0fe9436e9da7f7bd14683542bbf33ba3c6d5e4",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "935c52ecd2e32233e7d7fd46",
+      "instance_id": "pallets__flask-5063",
+      "source_key": [
+        "pallets__flask-5063",
+        "pallets__flask-5063-d7"
+      ],
+      "source_row": 21,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-5063-d7",
+      "repository": "pallets/flask",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "source_commit": "9659b11a45281662c6aa1194dc95b46b1f566ba6",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "4f5722818de21e9e5da66744",
+      "instance_id": "pallets__flask-5063",
+      "source_key": [
+        "pallets__flask-5063",
+        "pallets__flask-5063-d90"
+      ],
+      "source_row": 143,
+      "replicate": "NA",
+      "checkpoint_id": "pallets__flask-5063-d90",
+      "repository": "pallets/flask",
+      "base_commit": "182ce3dd15dfa3537391c3efaf9c3ff407d134d4",
+      "source_commit": "6a5277d3417b30d6e7f5c93745e8a445dcb02b1c",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "7ef4c432b83c124b3e8d35a7",
+      "instance_id": "pylint-dev__pylint-6506",
+      "source_key": [
+        "pylint-dev__pylint-6506",
+        "pylint-dev__pylint-6506-d180"
+      ],
+      "source_row": 153,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-6506-d180",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "0a4204fd7555cfedd43f43017c94d24ef48244a5",
+      "source_commit": "c8cd3353f53c7d5e843a3420d69b7b7b56ecb2e8",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "96c3a5ab10e8d9e897bbcfa6",
+      "instance_id": "pylint-dev__pylint-6506",
+      "source_key": [
+        "pylint-dev__pylint-6506",
+        "pylint-dev__pylint-6506-d30"
+      ],
+      "source_row": 149,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-6506-d30",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "0a4204fd7555cfedd43f43017c94d24ef48244a5",
+      "source_commit": "aa40a36083473ea3fdfff910132873259e7c7a8a",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "0755b727f95d612179527b6a",
+      "instance_id": "pylint-dev__pylint-6506",
+      "source_key": [
+        "pylint-dev__pylint-6506",
+        "pylint-dev__pylint-6506-d365"
+      ],
+      "source_row": 155,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-6506-d365",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "0a4204fd7555cfedd43f43017c94d24ef48244a5",
+      "source_commit": "7574f6beaf9defdbc551bbe2f18064659caa870c",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "20440f351e4a14fc6362f7a7",
+      "instance_id": "pylint-dev__pylint-6506",
+      "source_key": [
+        "pylint-dev__pylint-6506",
+        "pylint-dev__pylint-6506-d7"
+      ],
+      "source_row": 23,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-6506-d7",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "0a4204fd7555cfedd43f43017c94d24ef48244a5",
+      "source_commit": "f4d42c8f1d727d0f0ecada358ff3bf3abeb89fd3",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "a34a2b363264d429e4905c0b",
+      "instance_id": "pylint-dev__pylint-6506",
+      "source_key": [
+        "pylint-dev__pylint-6506",
+        "pylint-dev__pylint-6506-d90"
+      ],
+      "source_row": 151,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-6506-d90",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "0a4204fd7555cfedd43f43017c94d24ef48244a5",
+      "source_commit": "dbc60af70fced751859377f6377b186c6403cdee",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "4d7a01d51b338122a7d90db5",
+      "instance_id": "pylint-dev__pylint-7080",
+      "source_key": [
+        "pylint-dev__pylint-7080",
+        "pylint-dev__pylint-7080-d180"
+      ],
+      "source_row": 161,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7080-d180",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+      "source_commit": "4a5f5be479952d5c865a18520f14db321d2432b2",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "61e9a9592f5f5fdbd93ceca1",
+      "instance_id": "pylint-dev__pylint-7080",
+      "source_key": [
+        "pylint-dev__pylint-7080",
+        "pylint-dev__pylint-7080-d30"
+      ],
+      "source_row": 157,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7080-d30",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+      "source_commit": "c33d237e6ea5795632295bb6390778a21e6f4080",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "79111e6ed596d4c1e40e6574",
+      "instance_id": "pylint-dev__pylint-7080",
+      "source_key": [
+        "pylint-dev__pylint-7080",
+        "pylint-dev__pylint-7080-d365"
+      ],
+      "source_row": 163,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7080-d365",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+      "source_commit": "bf8051b632afdba6792e55c20faec712b0ebebaf",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "62450c4c161265b563312622",
+      "instance_id": "pylint-dev__pylint-7080",
+      "source_key": [
+        "pylint-dev__pylint-7080",
+        "pylint-dev__pylint-7080-d7"
+      ],
+      "source_row": 25,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7080-d7",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+      "source_commit": "c1ffa59508841c87e4720c72b2d40fc0ae795622",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "f276b36f58834df32855779a",
+      "instance_id": "pylint-dev__pylint-7080",
+      "source_key": [
+        "pylint-dev__pylint-7080",
+        "pylint-dev__pylint-7080-d90"
+      ],
+      "source_row": 159,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7080-d90",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "3c5eca2ded3dd2b59ebaf23eb289453b5d2930f0",
+      "source_commit": "c3740d81918d83c91be698c674d2dd5f063e9530",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "e69e21c0d8fb390115c06264",
+      "instance_id": "pylint-dev__pylint-7228",
+      "source_key": [
+        "pylint-dev__pylint-7228",
+        "pylint-dev__pylint-7228-d180"
+      ],
+      "source_row": 169,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7228-d180",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "d597f252915ddcaaa15ccdfcb35670152cb83587",
+      "source_commit": "660405e6218258cee90570e8037c3b5e1440dcb6",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "74513d3c6da6947803ba0802",
+      "instance_id": "pylint-dev__pylint-7228",
+      "source_key": [
+        "pylint-dev__pylint-7228",
+        "pylint-dev__pylint-7228-d30"
+      ],
+      "source_row": 165,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7228-d30",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "d597f252915ddcaaa15ccdfcb35670152cb83587",
+      "source_commit": "ac8641e32d262b18c528951523d8ff7da07cf72c",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "f31533b9a40ad32bec470691",
+      "instance_id": "pylint-dev__pylint-7228",
+      "source_key": [
+        "pylint-dev__pylint-7228",
+        "pylint-dev__pylint-7228-d365"
+      ],
+      "source_row": 171,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7228-d365",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "d597f252915ddcaaa15ccdfcb35670152cb83587",
+      "source_commit": "68a79b2504c96205437ee9c3f09c4d7d90284bc5",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "96d1c2b22a45fc61587028c9",
+      "instance_id": "pylint-dev__pylint-7228",
+      "source_key": [
+        "pylint-dev__pylint-7228",
+        "pylint-dev__pylint-7228-d7"
+      ],
+      "source_row": 27,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7228-d7",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "d597f252915ddcaaa15ccdfcb35670152cb83587",
+      "source_commit": "e0ecc35e93c4dc32b691cfb8a3ad526ebfafb086",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "a9dde381545198d9cd346ee1",
+      "instance_id": "pylint-dev__pylint-7228",
+      "source_key": [
+        "pylint-dev__pylint-7228",
+        "pylint-dev__pylint-7228-d90"
+      ],
+      "source_row": 167,
+      "replicate": "NA",
+      "checkpoint_id": "pylint-dev__pylint-7228-d90",
+      "repository": "pylint-dev/pylint",
+      "base_commit": "d597f252915ddcaaa15ccdfcb35670152cb83587",
+      "source_commit": "5c7f98099c719038fa07eba61f288c0a7cc48f92",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "3cc5721bacc1a26f094f88ce",
+      "instance_id": "pytest-dev__pytest-5221",
+      "source_key": [
+        "pytest-dev__pytest-5221",
+        "pytest-dev__pytest-5221-d180"
+      ],
+      "source_row": 177,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5221-d180",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "4a2fdce62b73944030cff9b3e52862868ca9584d",
+      "source_commit": "0760406480495ceaf54755bdeed08e47570ffa2f",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "4bcee3bbcd8e0096f92b26d5",
+      "instance_id": "pytest-dev__pytest-5221",
+      "source_key": [
+        "pytest-dev__pytest-5221",
+        "pytest-dev__pytest-5221-d30"
+      ],
+      "source_row": 173,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5221-d30",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "4a2fdce62b73944030cff9b3e52862868ca9584d",
+      "source_commit": "0f4992c223bbf4757e83c20818538eb755604734",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "539792f357bd96dd32b2888b",
+      "instance_id": "pytest-dev__pytest-5221",
+      "source_key": [
+        "pytest-dev__pytest-5221",
+        "pytest-dev__pytest-5221-d365"
+      ],
+      "source_row": 179,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5221-d365",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "4a2fdce62b73944030cff9b3e52862868ca9584d",
+      "source_commit": "b4c46da278d26acbd2aa06195d67d4b8f538e726",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "07f62d981e29e05022102d5c",
+      "instance_id": "pytest-dev__pytest-5221",
+      "source_key": [
+        "pytest-dev__pytest-5221",
+        "pytest-dev__pytest-5221-d7"
+      ],
+      "source_row": 29,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5221-d7",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "4a2fdce62b73944030cff9b3e52862868ca9584d",
+      "source_commit": "58e6a09db49f34886ff13f3b7520dd0bcd7063cd",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "d16ed9ad6041d5294f971f27",
+      "instance_id": "pytest-dev__pytest-5221",
+      "source_key": [
+        "pytest-dev__pytest-5221",
+        "pytest-dev__pytest-5221-d90"
+      ],
+      "source_row": 175,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5221-d90",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "4a2fdce62b73944030cff9b3e52862868ca9584d",
+      "source_commit": "73e0bf92f7e1fc365b77ed57699c37454db6d812",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "c8f2a05287f1e0c8e6324309",
+      "instance_id": "pytest-dev__pytest-5227",
+      "source_key": [
+        "pytest-dev__pytest-5227",
+        "pytest-dev__pytest-5227-d180"
+      ],
+      "source_row": 185,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5227-d180",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "2051e30b9b596e944524ccb787ed20f9f5be93e3",
+      "source_commit": "0760406480495ceaf54755bdeed08e47570ffa2f",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "4dfc7849b9effa9ab869d43a",
+      "instance_id": "pytest-dev__pytest-5227",
+      "source_key": [
+        "pytest-dev__pytest-5227",
+        "pytest-dev__pytest-5227-d30"
+      ],
+      "source_row": 181,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5227-d30",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "2051e30b9b596e944524ccb787ed20f9f5be93e3",
+      "source_commit": "9f5c356784cd03d38704b1cdd49bdbaf275489f4",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "72563617c8f899c1eeae9c7a",
+      "instance_id": "pytest-dev__pytest-5227",
+      "source_key": [
+        "pytest-dev__pytest-5227",
+        "pytest-dev__pytest-5227-d365"
+      ],
+      "source_row": 187,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5227-d365",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "2051e30b9b596e944524ccb787ed20f9f5be93e3",
+      "source_commit": "81da5dac4840597ed05e2d216a2229acce62b26f",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "3feba995ac96230615e240d3",
+      "instance_id": "pytest-dev__pytest-5227",
+      "source_key": [
+        "pytest-dev__pytest-5227",
+        "pytest-dev__pytest-5227-d7"
+      ],
+      "source_row": 31,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5227-d7",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "2051e30b9b596e944524ccb787ed20f9f5be93e3",
+      "source_commit": "494ac28a320f9095d0a60d7d9a0158a04d1a09ed",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "281160120264e4243e76d17a",
+      "instance_id": "pytest-dev__pytest-5227",
+      "source_key": [
+        "pytest-dev__pytest-5227",
+        "pytest-dev__pytest-5227-d90"
+      ],
+      "source_row": 183,
+      "replicate": "NA",
+      "checkpoint_id": "pytest-dev__pytest-5227-d90",
+      "repository": "pytest-dev/pytest",
+      "base_commit": "2051e30b9b596e944524ccb787ed20f9f5be93e3",
+      "source_commit": "28fabc52bd3a35f1007ab82866940c9afdf7cefc",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "13740ff9d5443e17b7920aa4",
+      "instance_id": "scikit-learn__scikit-learn-10297",
+      "source_key": [
+        "scikit-learn__scikit-learn-10297",
+        "scikit-learn__scikit-learn-10297-d180"
+      ],
+      "source_row": 193,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10297-d180",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "b90661d6a46aa3619d3eec94d5281f5888add501",
+      "source_commit": "790af8db833d868b3206db78f89fb5d96a0d8dea",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "c06243a9a6103938de561a75",
+      "instance_id": "scikit-learn__scikit-learn-10297",
+      "source_key": [
+        "scikit-learn__scikit-learn-10297",
+        "scikit-learn__scikit-learn-10297-d30"
+      ],
+      "source_row": 189,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10297-d30",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "b90661d6a46aa3619d3eec94d5281f5888add501",
+      "source_commit": "47ce5e1c9d0a63ed3b56b4a9f44fb51a1b35b7cd",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "988d8d975536f67f5b0c79c4",
+      "instance_id": "scikit-learn__scikit-learn-10297",
+      "source_key": [
+        "scikit-learn__scikit-learn-10297",
+        "scikit-learn__scikit-learn-10297-d365"
+      ],
+      "source_row": 195,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10297-d365",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "b90661d6a46aa3619d3eec94d5281f5888add501",
+      "source_commit": "0a1ee74a14ed8fe94bb0c7c10c9e3d99db9cd2b8",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "220891c068411e9e352c6c8d",
+      "instance_id": "scikit-learn__scikit-learn-10297",
+      "source_key": [
+        "scikit-learn__scikit-learn-10297",
+        "scikit-learn__scikit-learn-10297-d7"
+      ],
+      "source_row": 33,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10297-d7",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "b90661d6a46aa3619d3eec94d5281f5888add501",
+      "source_commit": "3bcfd07a5f65c4a218533f79048d7f6ee16e606c",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "990b7a16151171f20accc0ae",
+      "instance_id": "scikit-learn__scikit-learn-10297",
+      "source_key": [
+        "scikit-learn__scikit-learn-10297",
+        "scikit-learn__scikit-learn-10297-d90"
+      ],
+      "source_row": 191,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10297-d90",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "b90661d6a46aa3619d3eec94d5281f5888add501",
+      "source_commit": "83a9eab8e1539480698c0452424746031ce68248",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "35ca358f2de23bef897a8333",
+      "instance_id": "scikit-learn__scikit-learn-10508",
+      "source_key": [
+        "scikit-learn__scikit-learn-10508",
+        "scikit-learn__scikit-learn-10508-d180"
+      ],
+      "source_row": 201,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10508-d180",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "c753b77ac49e72ebc0fe5e3c2369fe628f975017",
+      "source_commit": "4fd7332b19a9d3227315a2582b9676ef65d0bd75",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "a80c78f2059f49734d112b08",
+      "instance_id": "scikit-learn__scikit-learn-10508",
+      "source_key": [
+        "scikit-learn__scikit-learn-10508",
+        "scikit-learn__scikit-learn-10508-d30"
+      ],
+      "source_row": 197,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10508-d30",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "c753b77ac49e72ebc0fe5e3c2369fe628f975017",
+      "source_commit": "ff5aac0c9e5555f52165ccfbf489e6592a58cf9c",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "99945f62cbac7033175e9722",
+      "instance_id": "scikit-learn__scikit-learn-10508",
+      "source_key": [
+        "scikit-learn__scikit-learn-10508",
+        "scikit-learn__scikit-learn-10508-d365"
+      ],
+      "source_row": 203,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10508-d365",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "c753b77ac49e72ebc0fe5e3c2369fe628f975017",
+      "source_commit": "db17f3e2221fb6cec256d2d3501e259c5d5db934",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "62b745c18cccdd6c4f3913c8",
+      "instance_id": "scikit-learn__scikit-learn-10508",
+      "source_key": [
+        "scikit-learn__scikit-learn-10508",
+        "scikit-learn__scikit-learn-10508-d7"
+      ],
+      "source_row": 35,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10508-d7",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "c753b77ac49e72ebc0fe5e3c2369fe628f975017",
+      "source_commit": "ad230bce1a418232ed3ee4141199b80eec9b214f",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "f85e1a5e2cc1a277d7c5c268",
+      "instance_id": "scikit-learn__scikit-learn-10508",
+      "source_key": [
+        "scikit-learn__scikit-learn-10508",
+        "scikit-learn__scikit-learn-10508-d90"
+      ],
+      "source_row": 199,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10508-d90",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "c753b77ac49e72ebc0fe5e3c2369fe628f975017",
+      "source_commit": "e070611bdb4884c222b40e4f59b65e8c6ca35380",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "3487da94a022e7f7b1fe3c02",
+      "instance_id": "scikit-learn__scikit-learn-10949",
+      "source_key": [
+        "scikit-learn__scikit-learn-10949",
+        "scikit-learn__scikit-learn-10949-d180"
+      ],
+      "source_row": 209,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10949-d180",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "3b5abf76597ce6aff76192869f92647c1b5259e7",
+      "source_commit": "3cb31de2e5b2f071a9c56ae7619f8f9881fce2a1",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "01e2ea4260c48936a998ebb9",
+      "instance_id": "scikit-learn__scikit-learn-10949",
+      "source_key": [
+        "scikit-learn__scikit-learn-10949",
+        "scikit-learn__scikit-learn-10949-d30"
+      ],
+      "source_row": 205,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10949-d30",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "3b5abf76597ce6aff76192869f92647c1b5259e7",
+      "source_commit": "e3984fb3828bc0575895512ad47e85ecc9521fd9",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "fb8a429a9a423d3d590d25ac",
+      "instance_id": "scikit-learn__scikit-learn-10949",
+      "source_key": [
+        "scikit-learn__scikit-learn-10949",
+        "scikit-learn__scikit-learn-10949-d365"
+      ],
+      "source_row": 211,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10949-d365",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "3b5abf76597ce6aff76192869f92647c1b5259e7",
+      "source_commit": "3f25ea034cca6fa719dec024e0cbba608bce07e6",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "3dff69f99f50010aec16cea3",
+      "instance_id": "scikit-learn__scikit-learn-10949",
+      "source_key": [
+        "scikit-learn__scikit-learn-10949",
+        "scikit-learn__scikit-learn-10949-d7"
+      ],
+      "source_row": 37,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10949-d7",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "3b5abf76597ce6aff76192869f92647c1b5259e7",
+      "source_commit": "ea05295a1c5617157a8a53019d84f6061b98a53b",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "93314da6b26ac86996fc3a0c",
+      "instance_id": "scikit-learn__scikit-learn-10949",
+      "source_key": [
+        "scikit-learn__scikit-learn-10949",
+        "scikit-learn__scikit-learn-10949-d90"
+      ],
+      "source_row": 207,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-10949-d90",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "3b5abf76597ce6aff76192869f92647c1b5259e7",
+      "source_commit": "2d6603448a9d98212caaec9595b9b39067df54be",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "06f7ccaf7617fad29992c21f",
+      "instance_id": "scikit-learn__scikit-learn-11040",
+      "source_key": [
+        "scikit-learn__scikit-learn-11040",
+        "scikit-learn__scikit-learn-11040-d180"
+      ],
+      "source_row": 297,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-11040-d180",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "96a02f3934952d486589dddd3f00b40d5a5ab5f2",
+      "source_commit": "dc883c7d9e64bd78854c63435c666af880043d76",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "2ddcff1d749edfa3beabb316",
+      "instance_id": "scikit-learn__scikit-learn-11040",
+      "source_key": [
+        "scikit-learn__scikit-learn-11040",
+        "scikit-learn__scikit-learn-11040-d30"
+      ],
+      "source_row": 293,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-11040-d30",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "96a02f3934952d486589dddd3f00b40d5a5ab5f2",
+      "source_commit": "cb3c704fa12ff42d15bac7e241208df3d58c3cf8",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "69db7e4e3fdab20b175f8b5d",
+      "instance_id": "scikit-learn__scikit-learn-11040",
+      "source_key": [
+        "scikit-learn__scikit-learn-11040",
+        "scikit-learn__scikit-learn-11040-d365"
+      ],
+      "source_row": 299,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-11040-d365",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "96a02f3934952d486589dddd3f00b40d5a5ab5f2",
+      "source_commit": "5d168ddaaa54d477bedcc135890b8cddbe248b23",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "37f7a4ebc32a62952c2156fd",
+      "instance_id": "scikit-learn__scikit-learn-11040",
+      "source_key": [
+        "scikit-learn__scikit-learn-11040",
+        "scikit-learn__scikit-learn-11040-d7"
+      ],
+      "source_row": 59,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-11040-d7",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "96a02f3934952d486589dddd3f00b40d5a5ab5f2",
+      "source_commit": "aca956b738c0a839eee473acea794662a2c65608",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "dcb92d79d07f1ee9d5c37c7f",
+      "instance_id": "scikit-learn__scikit-learn-11040",
+      "source_key": [
+        "scikit-learn__scikit-learn-11040",
+        "scikit-learn__scikit-learn-11040-d90"
+      ],
+      "source_row": 295,
+      "replicate": "NA",
+      "checkpoint_id": "scikit-learn__scikit-learn-11040-d90",
+      "repository": "scikit-learn/scikit-learn",
+      "base_commit": "96a02f3934952d486589dddd3f00b40d5a5ab5f2",
+      "source_commit": "f1c967883b0ab5efe06a205a404ec6899abc5048",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "ec476edf055187bfc5f1672e",
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "source_key": [
+        "sphinx-doc__sphinx-10325",
+        "sphinx-doc__sphinx-10325-d180"
+      ],
+      "source_row": 217,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-10325-d180",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+      "source_commit": "63dea6172aa3d5351a80085b9bebf02985c267e5",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "2a7976b59a836947645e799c",
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "source_key": [
+        "sphinx-doc__sphinx-10325",
+        "sphinx-doc__sphinx-10325-d30"
+      ],
+      "source_row": 213,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-10325-d30",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+      "source_commit": "eb7f84d72618b084828b1dc6b20d2237601cd129",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "9a91378c1ae9d5736d6f163f",
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "source_key": [
+        "sphinx-doc__sphinx-10325",
+        "sphinx-doc__sphinx-10325-d365"
+      ],
+      "source_row": 219,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-10325-d365",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+      "source_commit": "126737c3cda13d063565d48499d0a5b0fe685eb9",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "98c054df934dbace00f37a6f",
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "source_key": [
+        "sphinx-doc__sphinx-10325",
+        "sphinx-doc__sphinx-10325-d7"
+      ],
+      "source_row": 39,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-10325-d7",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+      "source_commit": "babc6a7f8f4968c7328922d04b8b8bc0f2a65beb",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "f752872e2826947e859557cf",
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "source_key": [
+        "sphinx-doc__sphinx-10325",
+        "sphinx-doc__sphinx-10325-d90"
+      ],
+      "source_row": 215,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-10325-d90",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+      "source_commit": "3d175d9a2423e52e549f003700abb42c7a9db21f",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "0743945ff9eafd1a4eb4c435",
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "source_key": [
+        "sphinx-doc__sphinx-11445",
+        "sphinx-doc__sphinx-11445-d180"
+      ],
+      "source_row": 225,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-11445-d180",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "71db08c05197545944949d5aa76cd340e7143627",
+      "source_commit": "2ccc9d315ef062855e8040d8de5407c99e13dbf9",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "ab877663d9ea773cb37eee61",
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "source_key": [
+        "sphinx-doc__sphinx-11445",
+        "sphinx-doc__sphinx-11445-d30"
+      ],
+      "source_row": 221,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-11445-d30",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "71db08c05197545944949d5aa76cd340e7143627",
+      "source_commit": "a73fb59a71f205b9bae90ac28f65dd5c1e48ed9b",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "678e4b4052377b1de30336d5",
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "source_key": [
+        "sphinx-doc__sphinx-11445",
+        "sphinx-doc__sphinx-11445-d365"
+      ],
+      "source_row": 227,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-11445-d365",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "71db08c05197545944949d5aa76cd340e7143627",
+      "source_commit": "8c6d234e961eaf945567755863d377fa27dc6f22",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "a5c20c5c69e53355353979ae",
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "source_key": [
+        "sphinx-doc__sphinx-11445",
+        "sphinx-doc__sphinx-11445-d7"
+      ],
+      "source_row": 41,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-11445-d7",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "71db08c05197545944949d5aa76cd340e7143627",
+      "source_commit": "a549c6761520d4dc952ce0ced0d46330d123370b",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "4bb6c64a03a0d37c4b282f62",
+      "instance_id": "sphinx-doc__sphinx-11445",
+      "source_key": [
+        "sphinx-doc__sphinx-11445",
+        "sphinx-doc__sphinx-11445-d90"
+      ],
+      "source_row": 223,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-11445-d90",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "71db08c05197545944949d5aa76cd340e7143627",
+      "source_commit": "2d1e60748fe8bef6958c4747ce0a59b36f284c06",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "b9f73e4f9155d6e9641ebdd3",
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "source_key": [
+        "sphinx-doc__sphinx-7686",
+        "sphinx-doc__sphinx-7686-d180"
+      ],
+      "source_row": 233,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-7686-d180",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "752d3285d250bbaf673cff25e83f03f247502021",
+      "source_commit": "801999133f03c65b14a9432b631c5b781f81abf9",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "b4d062239c46a2e8f25114f4",
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "source_key": [
+        "sphinx-doc__sphinx-7686",
+        "sphinx-doc__sphinx-7686-d30"
+      ],
+      "source_row": 229,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-7686-d30",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "752d3285d250bbaf673cff25e83f03f247502021",
+      "source_commit": "44f4b2ad97bd36f938b1a64462ebb466334c8c80",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "fbd65ac7dedefa181fadd29d",
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "source_key": [
+        "sphinx-doc__sphinx-7686",
+        "sphinx-doc__sphinx-7686-d365"
+      ],
+      "source_row": 235,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-7686-d365",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "752d3285d250bbaf673cff25e83f03f247502021",
+      "source_commit": "1f711d0c089bf909bfce1de1649e98d9ceded7c3",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "97c6045e41c0226bc822fccd",
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "source_key": [
+        "sphinx-doc__sphinx-7686",
+        "sphinx-doc__sphinx-7686-d7"
+      ],
+      "source_row": 43,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-7686-d7",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "752d3285d250bbaf673cff25e83f03f247502021",
+      "source_commit": "4ded1d5644b4d97e5bd7a82b102fb853fa1ceafa",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "65cb0d1f4c8288ae6dd4432f",
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "source_key": [
+        "sphinx-doc__sphinx-7686",
+        "sphinx-doc__sphinx-7686-d90"
+      ],
+      "source_row": 231,
+      "replicate": "NA",
+      "checkpoint_id": "sphinx-doc__sphinx-7686-d90",
+      "repository": "sphinx-doc/sphinx",
+      "base_commit": "752d3285d250bbaf673cff25e83f03f247502021",
+      "source_commit": "bec30596a8f7487cad23df532bf02d1b29024dbc",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "dd3dc944cb6f3a138ecf982c",
+      "instance_id": "sympy__sympy-11400",
+      "source_key": [
+        "sympy__sympy-11400",
+        "sympy__sympy-11400-d180"
+      ],
+      "source_row": 241,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11400-d180",
+      "repository": "sympy/sympy",
+      "base_commit": "8dcb12a6cf500e8738d6729ab954a261758f49ca",
+      "source_commit": "1c752feee4167d13e326cca5f7bce67d8ab5bc36",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "dde01690cbf76dfc88c976eb",
+      "instance_id": "sympy__sympy-11400",
+      "source_key": [
+        "sympy__sympy-11400",
+        "sympy__sympy-11400-d30"
+      ],
+      "source_row": 237,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11400-d30",
+      "repository": "sympy/sympy",
+      "base_commit": "8dcb12a6cf500e8738d6729ab954a261758f49ca",
+      "source_commit": "9f1cf7f71ac64c4aeadbef56866bb825156f4cc9",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "f60f0318111f3fc3a586af04",
+      "instance_id": "sympy__sympy-11400",
+      "source_key": [
+        "sympy__sympy-11400",
+        "sympy__sympy-11400-d365"
+      ],
+      "source_row": 243,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11400-d365",
+      "repository": "sympy/sympy",
+      "base_commit": "8dcb12a6cf500e8738d6729ab954a261758f49ca",
+      "source_commit": "34ad4bd03e81f44ce4ed630efcc8c88b9e0b108f",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "c79f5a6b6dfef29531458857",
+      "instance_id": "sympy__sympy-11400",
+      "source_key": [
+        "sympy__sympy-11400",
+        "sympy__sympy-11400-d7"
+      ],
+      "source_row": 45,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11400-d7",
+      "repository": "sympy/sympy",
+      "base_commit": "8dcb12a6cf500e8738d6729ab954a261758f49ca",
+      "source_commit": "2befcc1014fe7ed8cd278f6f30edef98b33e3f2e",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "d9d13a5ca7a08a8f06eff036",
+      "instance_id": "sympy__sympy-11400",
+      "source_key": [
+        "sympy__sympy-11400",
+        "sympy__sympy-11400-d90"
+      ],
+      "source_row": 239,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11400-d90",
+      "repository": "sympy/sympy",
+      "base_commit": "8dcb12a6cf500e8738d6729ab954a261758f49ca",
+      "source_commit": "cdf6b67fbf6e5fe8a23377f36f42ee82c797bb15",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "6e4586b9a86224fc6c286d73",
+      "instance_id": "sympy__sympy-11870",
+      "source_key": [
+        "sympy__sympy-11870",
+        "sympy__sympy-11870-d180"
+      ],
+      "source_row": 249,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11870-d180",
+      "repository": "sympy/sympy",
+      "base_commit": "5c2e1f96a7ff562d4a778f4ca9ffc9c81557197e",
+      "source_commit": "8c9ff258ff14c9607fb37f5e09c4ddc904778be7",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "a363b9591d4fff56bc0c4404",
+      "instance_id": "sympy__sympy-11870",
+      "source_key": [
+        "sympy__sympy-11870",
+        "sympy__sympy-11870-d30"
+      ],
+      "source_row": 245,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11870-d30",
+      "repository": "sympy/sympy",
+      "base_commit": "5c2e1f96a7ff562d4a778f4ca9ffc9c81557197e",
+      "source_commit": "23c2a4624f3f28702b80a6ad8aa9d9e0dbbec67b",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "d56f0a984b965dbae2c57e4f",
+      "instance_id": "sympy__sympy-11870",
+      "source_key": [
+        "sympy__sympy-11870",
+        "sympy__sympy-11870-d365"
+      ],
+      "source_row": 251,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11870-d365",
+      "repository": "sympy/sympy",
+      "base_commit": "5c2e1f96a7ff562d4a778f4ca9ffc9c81557197e",
+      "source_commit": "27390f4b254714ad56217fa26328554a0952862c",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "b2035f17b16960ba618d4341",
+      "instance_id": "sympy__sympy-11870",
+      "source_key": [
+        "sympy__sympy-11870",
+        "sympy__sympy-11870-d7"
+      ],
+      "source_row": 47,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11870-d7",
+      "repository": "sympy/sympy",
+      "base_commit": "5c2e1f96a7ff562d4a778f4ca9ffc9c81557197e",
+      "source_commit": "41e59dd7e92350a90c792944953a7203325a6c4a",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "62b521575e0ac14a0b51bf98",
+      "instance_id": "sympy__sympy-11870",
+      "source_key": [
+        "sympy__sympy-11870",
+        "sympy__sympy-11870-d90"
+      ],
+      "source_row": 247,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-11870-d90",
+      "repository": "sympy/sympy",
+      "base_commit": "5c2e1f96a7ff562d4a778f4ca9ffc9c81557197e",
+      "source_commit": "d716108eca73061c2d5f8704774c12fff68255a9",
+      "days_after_t0": "90"
+    },
+    {
+      "unit_id": "adac5379984b81e3de74ba28",
+      "instance_id": "sympy__sympy-12171",
+      "source_key": [
+        "sympy__sympy-12171",
+        "sympy__sympy-12171-d180"
+      ],
+      "source_row": 257,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-12171-d180",
+      "repository": "sympy/sympy",
+      "base_commit": "ca6ef27272be31c9dc3753ede9232c39df9a75d8",
+      "source_commit": "662cfb818e865f580e18b59efbb3540c34232beb",
+      "days_after_t0": "180"
+    },
+    {
+      "unit_id": "7b0b0fcf0fed80064e9971a1",
+      "instance_id": "sympy__sympy-12171",
+      "source_key": [
+        "sympy__sympy-12171",
+        "sympy__sympy-12171-d30"
+      ],
+      "source_row": 253,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-12171-d30",
+      "repository": "sympy/sympy",
+      "base_commit": "ca6ef27272be31c9dc3753ede9232c39df9a75d8",
+      "source_commit": "c9d60afad4326c6059e2202b577155081f6b19cb",
+      "days_after_t0": "30"
+    },
+    {
+      "unit_id": "bd0ad1c8ebabc3dbfc1ee027",
+      "instance_id": "sympy__sympy-12171",
+      "source_key": [
+        "sympy__sympy-12171",
+        "sympy__sympy-12171-d365"
+      ],
+      "source_row": 259,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-12171-d365",
+      "repository": "sympy/sympy",
+      "base_commit": "ca6ef27272be31c9dc3753ede9232c39df9a75d8",
+      "source_commit": "84a58dd33abb1de9e9cf5b06e2a50d01477831c1",
+      "days_after_t0": "365"
+    },
+    {
+      "unit_id": "576a968533dc56151e6eed1f",
+      "instance_id": "sympy__sympy-12171",
+      "source_key": [
+        "sympy__sympy-12171",
+        "sympy__sympy-12171-d7"
+      ],
+      "source_row": 49,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-12171-d7",
+      "repository": "sympy/sympy",
+      "base_commit": "ca6ef27272be31c9dc3753ede9232c39df9a75d8",
+      "source_commit": "b0cd9815155815fff24563f8483762f58c5a0139",
+      "days_after_t0": "7"
+    },
+    {
+      "unit_id": "712dae776891f93dbb4caf5d",
+      "instance_id": "sympy__sympy-12171",
+      "source_key": [
+        "sympy__sympy-12171",
+        "sympy__sympy-12171-d90"
+      ],
+      "source_row": 255,
+      "replicate": "NA",
+      "checkpoint_id": "sympy__sympy-12171-d90",
+      "repository": "sympy/sympy",
+      "base_commit": "ca6ef27272be31c9dc3753ede9232c39df9a75d8",
+      "source_commit": "7d8917b0b45932d6c495906a7e6ea4b0dc9ed72b",
+      "days_after_t0": "90"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "annotation_name": "人工+大模型辅助标注（模拟人工）",
+  "causal_result_rows": 0,
+  "claim_boundary": "Only provider-returned Phase-6 model results and explicitly simulated annotation are included. Scores are post-hoc; no real human labels or causal effect is claimed.",
+  "completion_tokens": 138695,
+  "configuration_summary_rows": 18,
+  "generated_at_utc": "2026-09-03T06:45:02+00:00",
+  "gold_source_sha256": "976793cbff999fffa94885ac1807190267a761de0765b3d2947464d88ac62682",
+  "gold_used_in_runtime_rows": 0,
+  "model": "gpt-5.6-luna",
+  "observed_rows_by_config": {
+    "solver_only": 30,
+    "solver_plus_end_of_run_audit": 30,
+    "solver_plus_evidence_grounded_intervention": 30,
+    "solver_plus_full_shenji": 30,
+    "solver_plus_observe_only_shenji": 30,
+    "solver_plus_online_generic_intervention": 30
+  },
+  "paired_delta_rows": 2700,
+  "paired_summary_rows": 90,
+  "prompt_tokens": 3164736,
+  "provider": "PinAI",
+  "provider_calls_observed": 293,
+  "ranking_metric_rows": 540,
+  "real_human_annotation_rows": 0,
+  "release_id": "m3_shenji_phase6_pinai_luna_posthoc_stats_20260903_v1",
+  "runtime_source_rows": 180,
+  "simulated_annotation_rows": 540,
+  "source_execution": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_shenji_phase6_pinai_luna_20260903_v3_merged\\SUMMARY.json",
+  "source_execution_sha256": "56e165f2349a7ca290bd769faf94e180d1620f24fbd3804758fcc60af2e43379",
+  "status": "PASS_PHASE6_POSTHOC_STATS_WITH_SIMULATED_ANNOTATION",
+  "total_tokens": 3303431
+}

@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "name": "repair_bounded",
+  "source": "logs/repair_endpoints/bounded/index.csv",
+  "source_sha256": "665ccd2d3a0c10dfd4abae25f0682d7f7f33c8a270e12a19f16dda96be54180f",
+  "id_field": "task_id",
+  "repeat_fields": [],
+  "selection": [
+    "method",
+    "gold"
+  ],
+  "assignment_count": 21,
+  "task_ids": [
+    "astropy__astropy-12907",
+    "astropy__astropy-14182",
+    "astropy__astropy-14365",
+    "astropy__astropy-14995",
+    "django__django-10924",
+    "matplotlib__matplotlib-23299",
+    "matplotlib__matplotlib-23314",
+    "matplotlib__matplotlib-23476",
+    "matplotlib__matplotlib-23562",
+    "mwaskom__seaborn-2848",
+    "mwaskom__seaborn-3010",
+    "mwaskom__seaborn-3190",
+    "mwaskom__seaborn-3407",
+    "pylint-dev__pylint-7228",
+    "scikit-learn__scikit-learn-10297",
+    "scikit-learn__scikit-learn-10508",
+    "scikit-learn__scikit-learn-10949",
+    "scikit-learn__scikit-learn-11040",
+    "sphinx-doc__sphinx-10325",
+    "sphinx-doc__sphinx-7686",
+    "sympy__sympy-11400"
+  ],
+  "units": [
+    {
+      "unit_id": "131df80c96f094f2474d8ef6",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907"
+      ],
+      "source_row": 11,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "19adb3acf1e2884ddebf523d",
+      "instance_id": "astropy__astropy-14182",
+      "source_key": [
+        "astropy__astropy-14182"
+      ],
+      "source_row": 56,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "0f9093f88d19555423037d12",
+      "instance_id": "astropy__astropy-14365",
+      "source_key": [
+        "astropy__astropy-14365"
+      ],
+      "source_row": 59,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "ff9b6edfeafbc06baf06545d",
+      "instance_id": "astropy__astropy-14995",
+      "source_key": [
+        "astropy__astropy-14995"
+      ],
+      "source_row": 62,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "7f9de9ceac9199d177b6e8f0",
+      "instance_id": "django__django-10924",
+      "source_key": [
+        "django__django-10924"
+      ],
+      "source_row": 8,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "b13e66ba8860631f85456980",
+      "instance_id": "matplotlib__matplotlib-23299",
+      "source_key": [
+        "matplotlib__matplotlib-23299"
+      ],
+      "source_row": 14,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "4608a862528a89a2a078b8ea",
+      "instance_id": "matplotlib__matplotlib-23314",
+      "source_key": [
+        "matplotlib__matplotlib-23314"
+      ],
+      "source_row": 35,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "5e04de431ecfbacb487ed7c7",
+      "instance_id": "matplotlib__matplotlib-23476",
+      "source_key": [
+        "matplotlib__matplotlib-23476"
+      ],
+      "source_row": 5,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "3deb9341b837734795cf33d3",
+      "instance_id": "matplotlib__matplotlib-23562",
+      "source_key": [
+        "matplotlib__matplotlib-23562"
+      ],
+      "source_row": 2,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "61e20c1e5224d4d936b0e007",
+      "instance_id": "mwaskom__seaborn-2848",
+      "source_key": [
+        "mwaskom__seaborn-2848"
+      ],
+      "source_row": 20,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "93408a259ea2fb3ea8a0896e",
+      "instance_id": "mwaskom__seaborn-3010",
+      "source_key": [
+        "mwaskom__seaborn-3010"
+      ],
+      "source_row": 23,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "c48b69cd48bff82ad3ff9a1f",
+      "instance_id": "mwaskom__seaborn-3190",
+      "source_key": [
+        "mwaskom__seaborn-3190"
+      ],
+      "source_row": 38,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "bb91d13f54a6c4a9310b705a",
+      "instance_id": "mwaskom__seaborn-3407",
+      "source_key": [
+        "mwaskom__seaborn-3407"
+      ],
+      "source_row": 41,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "e5b9396da5e44e8df0162610",
+      "instance_id": "pylint-dev__pylint-7228",
+      "source_key": [
+        "pylint-dev__pylint-7228"
+      ],
+      "source_row": 32,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "0efc488937f87dc53ebe7d3b",
+      "instance_id": "scikit-learn__scikit-learn-10297",
+      "source_key": [
+        "scikit-learn__scikit-learn-10297"
+      ],
+      "source_row": 44,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "28381ed6a4b4c4e9d949082c",
+      "instance_id": "scikit-learn__scikit-learn-10508",
+      "source_key": [
+        "scikit-learn__scikit-learn-10508"
+      ],
+      "source_row": 50,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "8304d5c17de7979e671899d5",
+      "instance_id": "scikit-learn__scikit-learn-10949",
+      "source_key": [
+        "scikit-learn__scikit-learn-10949"
+      ],
+      "source_row": 53,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "24a24d34287789b28587eb35",
+      "instance_id": "scikit-learn__scikit-learn-11040",
+      "source_key": [
+        "scikit-learn__scikit-learn-11040"
+      ],
+      "source_row": 26,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "bb98c51da964c5a3a45a7b05",
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "source_key": [
+        "sphinx-doc__sphinx-10325"
+      ],
+      "source_row": 47,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "47540c439d8d07382d3f0237",
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "source_key": [
+        "sphinx-doc__sphinx-7686"
+      ],
+      "source_row": 29,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "1228d553198818a3aa5bb3d8",
+      "instance_id": "sympy__sympy-11400",
+      "source_key": [
+        "sympy__sympy-11400"
+      ],
+      "source_row": 17,
+      "replicate": "1",
+      "checkpoint_id": ""
+    }
+  ]
+}

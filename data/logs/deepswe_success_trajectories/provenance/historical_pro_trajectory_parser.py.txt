@@ -1,0 +1,273 @@
+"""Parse only verified official SWE-bench Pro resolved=true trajectories.
+
+Raw .traj files remain the complete logs.  The CSV event table is an auditable
+index with bounded previews, hashes, and process-role labels; it never runs an
+evaluator or calls a model.  All prevalence outputs are descriptive success-
+only observations and are not necessity or causal estimates.
+"""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import re
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(r"[source-root]")
+PUBLIC_ROOT = ROOT / "work2" / "data" / "sota_public_official_logs"
+PRO_ROOT = PUBLIC_ROOT / "swe_bench_pro"
+MANIFEST = PRO_ROOT / "success_trajectory_download_manifest.csv"
+OUT = ROOT / "work2" / "analysis" / "work2_latest_pro_success_log_analysis_current_20260919"
+CLAIM = (
+    "Success-only official SWE-bench Pro resolved=true secondary-log analysis. "
+    "Prevalence and co-occurrence are descriptive; they do not establish necessity, "
+    "causality, semantic sufficiency, model-wide robustness, or formal Work2 promotion."
+)
+
+ROLE_ORDER = [
+    "issue_specification",
+    "repository_orientation",
+    "code_search",
+    "direct_file_read",
+    "history_lookup",
+    "environment_setup",
+    "dependency_or_network",
+    "edit_or_patch",
+    "test_or_build",
+    "diff_validation",
+    "feedback_recovery",
+    "other_tool_step",
+]
+
+FUTURE_GOLD_RE = re.compile(
+    r"\b(gold\s+patch|reference\s+solution|ground[- ]truth\s+patch|future\s+commit|"
+    r"test\s+patch|expected\s+diff|gold\s+diff|oracle\s+patch|upstream\s+fix)\b",
+    re.I,
+)
+HISTORY_RE = re.compile(r"\bgit\s+(log|show|blame|reflog|bisect)\b", re.I)
+NETWORK_RE = re.compile(r"\b(curl|wget|http://|https://|pip\s+install|npm\s+install|yarn\s+add|apt\s+install|conda\s+install)\b", re.I)
+TEST_RE = re.compile(r"\b(pytest|py\.test|unittest|tox|nose|npm\s+(test|run)|yarn\s+test|mvn\s+(test|verify)|gradle\s+test|cargo\s+test|go\s+test|make\s+(test|check))\b", re.I)
+SEARCH_RE = re.compile(r"\b(rg|ripgrep|grep|git\s+grep|find|locate|ack|ag)\b", re.I)
+READ_RE = re.compile(r"\b(cat|head|tail|sed\s+-n|less|more|bat|read_file|open_file)\b", re.I)
+EDIT_RE = re.compile(r"(apply_patch|git\s+apply|sed\s+-i|perl\s+-pi|\b(edit|write|modify)\b|>>|\btee\b)", re.I)
+DIFF_RE = re.compile(r"\b(git\s+diff|diff\s+-|compileall|py_compile|syntax|lint)\b", re.I)
+SETUP_RE = re.compile(r"\b(pip|virtualenv|venv|conda|poetry|npm|yarn|bundle|cargo|go\s+mod|make\s+build|setup|install)\b", re.I)
+
+
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for block in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def write_csv(path: Path, rows: list[dict[str, Any]]) -> int:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fields: list[str] = []
+    for row in rows:
+        for key in row:
+            if key not in fields:
+                fields.append(key)
+    with path.open("w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        w.writeheader()
+        w.writerows({k: row.get(k, "") for k in fields} for row in rows)
+    return len(rows)
+
+
+def preview(value: Any, limit: int = 4000) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, (dict, list)):
+        text = json.dumps(value, ensure_ascii=False)
+    else:
+        text = str(value)
+    return text if len(text) <= limit else text[:limit] + "...[truncated; raw .traj is complete]"
+
+
+def flatten_event(event: Any) -> tuple[str, str, str]:
+    if isinstance(event, dict):
+        action = event.get("action", event.get("command", event.get("tool", "")))
+        observation = event.get("observation", event.get("output", event.get("result", "")))
+        response = event.get("response", event.get("message", event.get("content", "")))
+        thought = event.get("thought", event.get("analysis", ""))
+        if isinstance(response, dict) and not thought:
+            thought = response.get("thought", response.get("analysis", ""))
+        return preview(action), preview(observation), preview(response if not thought else {"response": response, "thought": thought})
+    return "", preview(event), ""
+
+
+def classify(action: str, observation: str, response: str, index: int) -> str:
+    text = " ".join([action, observation, response])
+    if index == 0 and len(text) > 80 and not action:
+        return "issue_specification"
+    if HISTORY_RE.search(text):
+        return "history_lookup"
+    if EDIT_RE.search(text):
+        return "edit_or_patch"
+    if TEST_RE.search(text):
+        return "test_or_build"
+    if DIFF_RE.search(text):
+        return "diff_validation"
+    if NETWORK_RE.search(text):
+        return "dependency_or_network"
+    if SETUP_RE.search(text) and not SEARCH_RE.search(text):
+        return "environment_setup"
+    if SEARCH_RE.search(text):
+        return "code_search"
+    if READ_RE.search(text):
+        return "direct_file_read"
+    if re.search(r"(traceback|error:|failed|failure|non[- ]zero|returncode.{0,8}[1-9])", text, re.I) and re.search(r"(retry|again|adjust|fix|update|change|rerun)", text, re.I):
+        return "feedback_recovery"
+    if action or observation or response:
+        return "repository_orientation" if index <= 2 else "other_tool_step"
+    return "other_tool_step"
+
+
+def load_trajectory(path: Path) -> list[Any]:
+    raw = json.loads(path.read_text(encoding="utf-8-sig", errors="replace"))
+    if isinstance(raw, dict):
+        for key in ("trajectory", "events", "steps", "messages"):
+            if isinstance(raw.get(key), list):
+                return raw[key]
+    return raw if isinstance(raw, list) else []
+
+
+def main() -> int:
+    if not MANIFEST.is_file():
+        raise SystemExit(f"missing {MANIFEST}")
+    OUT.mkdir(parents=True, exist_ok=True)
+    manifest = read_csv(MANIFEST)
+    summaries: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = []
+    missing: list[dict[str, Any]] = []
+    for row in manifest:
+        path = Path(row.get("local_path", ""))
+        expected = int(row.get("expected_bytes") or 0)
+        if not path.is_file() or (expected and path.stat().st_size != expected):
+            missing.append({**row, "analysis_status": "missing_or_size_unverified", "claim_boundary": CLAIM})
+            continue
+        try:
+            traj = load_trajectory(path)
+        except Exception as exc:
+            missing.append({**row, "analysis_status": f"parse_error:{type(exc).__name__}", "claim_boundary": CLAIM})
+            continue
+        digest = sha256(path)
+        role_counts = Counter()
+        file_events: list[dict[str, Any]] = []
+        for index, item in enumerate(traj):
+            action, observation, response = flatten_event(item)
+            role = classify(action, observation, response, index)
+            text = " ".join([action, observation, response])
+            role_counts[role] += 1
+            file_events.append({
+                "benchmark": "SWE-bench Pro",
+                "run_id": row.get("run_id", ""),
+                "model": row.get("model", ""),
+                "instance_id": row.get("instance_id", ""),
+                "task_family": row.get("instance_id", "").split("__", 1)[0],
+                "trajectory_path": str(path),
+                "trajectory_sha256": digest,
+                "event_index": index,
+                "role": role,
+                "action": action,
+                "observation_preview": observation,
+                "response_preview": response,
+                "history_lookup": bool(HISTORY_RE.search(text)),
+                "test_selection_signal": bool(TEST_RE.search(text)),
+                "future_gold_signal": bool(FUTURE_GOLD_RE.search(text)),
+                "network_signal": bool(NETWORK_RE.search(text)),
+                "claim_boundary": CLAIM,
+            })
+        events.extend(file_events)
+        summaries.append({
+            "benchmark": "SWE-bench Pro",
+            "run_id": row.get("run_id", ""),
+            "model": row.get("model", ""),
+            "leaderboard_score_official_static": row.get("leaderboard_score_official_static", ""),
+            "instance_id": row.get("instance_id", ""),
+            "official_resolved": row.get("official_resolved", "True"),
+            "success_marker": "resolved=true",
+            "trajectory_path": str(path),
+            "trajectory_sha256": digest,
+            "trajectory_bytes": path.stat().st_size,
+            "source_url": row.get("source_url", ""),
+            "event_count": len(file_events),
+            "future_gold_signal_present": any(e["future_gold_signal"] for e in file_events),
+            "test_selection_signal_present": any(e["test_selection_signal"] for e in file_events),
+            "history_lookup_present": any(e["history_lookup"] for e in file_events),
+            "network_signal_present": any(e["network_signal"] for e in file_events),
+            **{f"{role}_event_count": role_counts.get(role, 0) for role in ROLE_ORDER},
+            **{f"{role}_present": role_counts.get(role, 0) > 0 for role in ROLE_ORDER},
+            "claim_boundary": CLAIM,
+        })
+
+    rq1 = []
+    n = len(summaries)
+    for role in ROLE_ORDER:
+        count = sum(bool(row.get(f"{role}_present")) for row in summaries)
+        rq1.append({"benchmark": "SWE-bench Pro", "context_or_middleware_step": role, "trajectory_count": count, "trajectory_denominator": n, "trajectory_prevalence": count / n if n else "", "claim_boundary": CLAIM})
+    rq2 = []
+    for role in ROLE_ORDER:
+        count = sum(bool(row.get(f"{role}_present")) for row in summaries)
+        rq2.append({"benchmark": "SWE-bench Pro", "factor": role, "success_trajectory_count": count, "success_trajectory_denominator": n, "candidate_non_universal_process": count < n if n else "", "future_or_gold_trigger_count": sum(bool(row.get("future_gold_signal_present")) for row in summaries), "claim_boundary": CLAIM})
+    rq3 = []
+    for role in ROLE_ORDER:
+        count = sum(bool(row.get(f"{role}_present")) for row in summaries)
+        status = "near_universal_observed" if n and count / n >= 0.95 else ("common_observed" if n and count / n >= 0.50 else ("variable_observed" if count else "not_observed"))
+        rq3.append({"benchmark": "SWE-bench Pro", "context_unit": role, "observed_success_trajectory_count": count, "success_trajectory_denominator": n, "observed_prevalence": count / n if n else "", "necessity_status": "indeterminate_from_success_only_logs", "observed_class": status, "claim_boundary": CLAIM})
+    models = sorted({row.get("model", "") for row in summaries})
+    rq4 = []
+    for model in models:
+        group = [row for row in summaries if row.get("model") == model]
+        rq4.append({"benchmark": "SWE-bench Pro", "model": model, "trajectory_count": len(group), "future_gold_trigger_count": sum(bool(row.get("future_gold_signal_present")) for row in group), "mean_event_count": sum(int(row.get("event_count") or 0) for row in group) / len(group) if group else "", "robustness_status": "descriptive_same_benchmark_success_log_stratum_only", "claim_boundary": CLAIM})
+
+    counts = {
+        "trajectory_summary_rows": write_csv(OUT / "work2_pro_success_trajectory_summary_current_20260919.csv", summaries),
+        "trajectory_event_rows": write_csv(OUT / "work2_pro_success_trajectory_events_current_20260919.csv", events),
+        "rq1_rows": write_csv(OUT / "work2_pro_success_rq1_context_middleware_current_20260919.csv", rq1),
+        "rq2_rows": write_csv(OUT / "work2_pro_success_rq2_factors_current_20260919.csv", rq2),
+        "rq3_rows": write_csv(OUT / "work2_pro_success_rq3_required_context_current_20260919.csv", rq3),
+        "rq4_rows": write_csv(OUT / "work2_pro_success_rq4_model_robustness_current_20260919.csv", rq4),
+        "missing_rows": write_csv(OUT / "work2_pro_success_missing_trajectory_queue_current_20260919.csv", missing),
+    }
+    index = {
+        "analysis_id": OUT.name,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "source_manifest": str(MANIFEST),
+        "source_manifest_sha256": sha256(MANIFEST),
+        "official_success_selection": "official_resolved=true only",
+        "provider_calls": 0,
+        "benchmark_rerun": False,
+        "raw_complete_logs": len(summaries),
+        "parsed_success_trajectories": len(summaries),
+        "missing_or_unparseable_trajectories": len(missing),
+        "event_rows": len(events),
+        "model_counts": dict(Counter(row.get("model", "") for row in summaries)),
+        "output_counts": counts,
+        "claim_boundary": CLAIM,
+    }
+    (OUT / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "README.md").write_text(
+        "# Work2 latest SWE-bench Pro success-only logs\n\n"
+        "The raw `.traj` objects under `work2/data/sota_public_official_logs/swe_bench_pro` are the complete success logs. "
+        "The CSV outputs contain hashes, row-level pointers, bounded previews and descriptive process labels. "
+        "Only official `resolved=true` rows are selected; no evaluator or model is run. High prevalence is not necessity.\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(index, ensure_ascii=False, indent=2))
+    return 0 if not missing else 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

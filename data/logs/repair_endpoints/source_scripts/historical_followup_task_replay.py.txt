@@ -1,0 +1,44 @@
+import run_work2_three_additional_tasks_replay_20260907 as runner
+
+
+runner.OUT = runner.ROOT / "artifacts/work2_three_next_replay_20260907_v1"
+runner.ZIP = runner.OUT.with_suffix(".zip")
+runner.TASKS = [
+    {
+        "task_id": "mwaskom__seaborn-3190",
+        "repository": "mwaskom/seaborn",
+        "image": "sweb.eval.x86_64.mwaskom__seaborn-3190:latest",
+        "base_commit": "4a9e54962a29c12a8b103d75f838e0e795a6974d",
+        "relative_dir": "logs_v10/gold_mwaskom__seaborn-3190",
+        "test_file": "tests/_core/test_scales.py",
+        "test_command": "pytest --no-header -rA tests/_core/test_scales.py",
+        "install": "python -m pip install -e .[dev]",
+        "allowed_paths": ["seaborn/_core/scales.py"],
+    },
+    {
+        "task_id": "mwaskom__seaborn-3407",
+        "repository": "mwaskom/seaborn",
+        "image": "sweb.eval.x86_64.mwaskom__seaborn-3407:latest",
+        "base_commit": "515286e02be3e4c0ff2ef4addb34a53c4a676ee4",
+        "relative_dir": "logs_v10/gold_mwaskom__seaborn-3407",
+        "test_file": "tests/test_axisgrid.py",
+        "test_command": "pytest --no-header -rA tests/test_axisgrid.py",
+        "install": "python -m pip install -e .[dev]",
+        "allowed_paths": ["seaborn/axisgrid.py"],
+    },
+    {
+        "task_id": "scikit-learn__scikit-learn-10297",
+        "repository": "scikit-learn/scikit-learn",
+        "image": "sweb.eval.x86_64.scikit-learn__scikit-learn-10297:latest",
+        "base_commit": "b90661d6a46aa3619d3eec94d5281f5888add501",
+        "relative_dir": "logs_v20/gold_scikit-learn__scikit-learn-10297",
+        "test_file": "sklearn/linear_model/tests/test_ridge.py",
+        "test_command": "pytest -rA sklearn/linear_model/tests/test_ridge.py",
+        "install": "python -m pip install -v --no-use-pep517 --no-build-isolation -e .",
+        "allowed_paths": ["sklearn/linear_model/ridge.py"],
+    },
+]
+
+
+if __name__ == "__main__":
+    raise SystemExit(runner.main())

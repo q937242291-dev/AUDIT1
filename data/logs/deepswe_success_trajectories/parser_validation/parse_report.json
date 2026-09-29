@@ -1,0 +1,14 @@
+{
+  "dataset": "deepswe",
+  "eligible_selected_rows": 1959,
+  "parsed_rows": 1308,
+  "event_rows": 109911,
+  "queued_rows": 651,
+  "reference_checked": true,
+  "reference_mismatches": 0,
+  "raw_payloads_copied": false,
+  "event_text_exported": false,
+  "network_calls": 0,
+  "model_calls": 0,
+  "manifest_sha256": "b8621962446db2784ff00cceb95c1f534b722bcab5d564fba1e957d5f306dcae"
+}

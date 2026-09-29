@@ -1,0 +1,6 @@
+condition,label,n,unique_tasks,issue_visible,future_payload_visible,location_payload_visible,diff_payload_visible
+O_original_future_info,Original registered condition,18,6,1.0,0.0,0.0,0.0
+C_future_scrubbed,Future-scrubbed,18,6,1.0,0.0,0.0,0.0
+P_equal_length_legal_history,Equal-length legal history,18,6,1.0,0.0,0.0,0.0
+L_location_only,Location-only,18,6,0.0,0.0,0.0,0.0
+D_diff_only,Diff-only,18,6,0.0,0.0,0.0,0.0

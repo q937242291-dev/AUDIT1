@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "variant_rows": {
+    "full_v5": 60,
+    "no_grounding": 60,
+    "no_ownership": 60,
+    "no_contradiction": 60,
+    "no_detour": 60,
+    "no_path_verifier": 60,
+    "no_memory": 60,
+    "no_abstention": 60,
+    "majority_vote_controller": 60
+  },
+  "verdict_rows": {
+    "full_v5": 420,
+    "no_grounding": 420,
+    "no_ownership": 420,
+    "no_contradiction": 420,
+    "no_detour": 420,
+    "no_path_verifier": 420,
+    "no_memory": 420,
+    "no_abstention": 420,
+    "majority_vote_controller": 420
+  },
+  "silver_rows": 0,
+  "intervention_rows": 0,
+  "gold_used_count": 0
+}

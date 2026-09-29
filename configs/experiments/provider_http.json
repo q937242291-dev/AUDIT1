@@ -1,0 +1,8 @@
+{
+  "transport": "compatible_http",
+  "endpoint_env": "AUDIT_HTTP_ENDPOINT",
+  "api_key_env": "AUDIT_API_KEY",
+  "timeout_seconds": 60,
+  "max_response_bytes": 2000000,
+  "send_reasoning_effort": true
+}

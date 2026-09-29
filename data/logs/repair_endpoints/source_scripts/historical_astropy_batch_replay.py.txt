@@ -1,0 +1,44 @@
+import run_work2_three_additional_tasks_replay_20260907 as runner
+
+
+runner.OUT = runner.ROOT / "artifacts/work2_astropy_three_replay_20260907_v1"
+runner.ZIP = runner.OUT.with_suffix(".zip")
+runner.TASKS = [
+    {
+        "task_id": "astropy__astropy-14182",
+        "repository": "astropy/astropy",
+        "image": "sweb.eval.x86_64.astropy__astropy-14182:latest",
+        "base_commit": "a5917978be39d13cd90b517e1de4e7a539ffaa48",
+        "relative_dir": "logs_v10/gold_astropy__astropy-14182",
+        "test_file": "astropy/io/ascii/tests/test_rst.py",
+        "test_command": "pytest -rA astropy/io/ascii/tests/test_rst.py",
+        "install": "python -m pip install -e .[test] --verbose",
+        "allowed_paths": ["astropy/io/ascii/rst.py"],
+    },
+    {
+        "task_id": "astropy__astropy-14365",
+        "repository": "astropy/astropy",
+        "image": "sweb.eval.x86_64.astropy__astropy-14365:latest",
+        "base_commit": "7269fa3e33e8d02485a647da91a5a2a60a06af61",
+        "relative_dir": "logs_v10/gold_astropy__astropy-14365",
+        "test_file": "astropy/io/ascii/tests/test_qdp.py",
+        "test_command": "pytest -rA astropy/io/ascii/tests/test_qdp.py",
+        "install": "python -m pip install -e .[test] --verbose",
+        "allowed_paths": ["astropy/io/ascii/qdp.py"],
+    },
+    {
+        "task_id": "astropy__astropy-14995",
+        "repository": "astropy/astropy",
+        "image": "sweb.eval.x86_64.astropy__astropy-14995:latest",
+        "base_commit": "b16c7d12ccbc7b2d20364b89fb44285bcbfede54",
+        "relative_dir": "logs_v10/gold_astropy__astropy-14995",
+        "test_file": "astropy/nddata/mixins/tests/test_ndarithmetic.py",
+        "test_command": "pytest -rA astropy/nddata/mixins/tests/test_ndarithmetic.py",
+        "install": "python -m pip install -e .[test] --verbose",
+        "allowed_paths": ["astropy/nddata/mixins/ndarithmetic.py"],
+    },
+]
+
+
+if __name__ == "__main__":
+    raise SystemExit(runner.main())

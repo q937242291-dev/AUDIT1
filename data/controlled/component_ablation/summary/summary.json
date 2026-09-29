@@ -1,0 +1,17 @@
+{
+  "artifact": "m3_pinai_causal60_descriptive_statistics_20260918_v1",
+  "provider": "PinAI",
+  "model": "gpt-5.6-luna",
+  "canonical_rows": 540,
+  "variants": 9,
+  "canonical_rows_per_variant": 60,
+  "completed_rows": 537,
+  "error_rows": 3,
+  "metric_rows": 108,
+  "paired_rows": 32,
+  "bootstrap_replicates": 5000,
+  "random_seed": 20260918,
+  "gold_used_runtime_count": 0,
+  "source_sha256": "f5dfa6bd2f444d0e80e69e474f818c177ded9d2e68e87689b05f2c92ad86ef6f",
+  "claim_boundary": "Denominator-aware descriptive model-only appendix. Conditional means use completed rows; coverage-normalized columns expose the effect of retained errors without imputing outcomes. Paired and bootstrap values are post-hoc and do not establish causal correctness."
+}

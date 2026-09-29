@@ -1,0 +1,224 @@
+"""Replay the recovered Matplotlib-23562 task in its cached reconstructed image.
+
+This is an additional process experiment.  It uses the task's original
+FAIL_TO_PASS and PASS_TO_PASS test lists, but the image is locally reconstructed
+and is therefore not promoted to the official current-native aggregate.
+"""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import shlex
+import subprocess
+import zipfile
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OBJECTIVE = Path(r"<USER_HOME>\.codex\attachments\8d2f80cc-875f-48d1-8eff-7a500c2d87c5\goal-objective.md")
+ACTIVE_SHA = "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9"
+OUT = ROOT / "artifacts/work2_matplotlib23562_reconstructed_exact_replay_20260907_v5"
+ZIP = OUT.with_suffix(".zip")
+JSONL = Path(r"<BENCHMARK_DATA_ROOT>/swebench_jsonl/SWE-bench__SWE-bench_Lite/test-00000-of-00001.jsonl")
+ORCA_PATCH = ROOT / "repos/experiments/evaluation/lite/20250113_OrcaLoca/logs/matplotlib__matplotlib-23562/patch.diff"
+IMAGE = "m3.reconstructed.sweb.eval.x86_64.matplotlib__matplotlib-23562:20260906"
+IMAGE_DIGEST = "sha256:b767647d65b82e24f2461d307218824538d174a8d8e65ea8a8cdab61a2756746"
+TASK_ID = "matplotlib__matplotlib-23562"
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def task_record() -> dict:
+    with JSONL.open(encoding="utf-8") as handle:
+        for line in handle:
+            row = json.loads(line)
+            if row.get("instance_id") == TASK_ID:
+                return row
+    raise SystemExit(f"missing_task_record:{TASK_ID}")
+
+
+def test_ids(task: dict) -> list[str]:
+    ids: list[str] = []
+    for field in ("FAIL_TO_PASS", "PASS_TO_PASS"):
+        for name in json.loads(task[field]):
+            if name not in ids:
+                ids.append(name)
+    return ids
+
+
+def write_eval_script(path: Path, ids: list[str]) -> None:
+    script = (
+        "#!/bin/bash\n"
+        "set -uxo pipefail\n"
+        "source /opt/miniconda3/bin/activate\n"
+        "conda activate testbed\n"
+        "cd /testbed\n"
+        "python -m pip install -e . --no-build-isolation\n"
+        "export MPLBACKEND=Agg\n"
+        ": '>>>>> Start Test Output'\n"
+        "pytest -rA lib/mpl_toolkits/tests/test_mplot3d.py\n"
+        "test_status=$?\n"
+        ": '>>>>> End Test Output'\n"
+        "exit $test_status\n"
+    )
+    path.write_text(script, encoding="utf-8", newline="\n")
+
+
+def parse_counts(output: str) -> tuple[int, int, int, bool]:
+    section = output.split(">>>>> Start Test Output", 1)[-1].split(">>>>> End Test Output", 1)[0]
+    import re
+
+    summary_lines = re.findall(r"=+\s*(.*?)\s+in\s+[0-9.]+s\s*=+", section)
+    if not summary_lines:
+        return 0, 0, 0, False
+    final = summary_lines[-1]
+    def count(label: str) -> int:
+        match = re.search(rf"(\d+)\s+{label}", final)
+        return int(match.group(1)) if match else 0
+    return count("passed"), count("failed"), count("skipped"), True
+
+
+def run_case(method: str, patch: Path, test_patch: Path, eval_script: Path, base_commit: str) -> dict[str, object]:
+    log_path = OUT / f"{method}.docker.log"
+    shell = (
+        "set -u; cd /testbed; git config --global --add safe.directory /testbed; "
+        f"git reset --hard {base_commit}; git clean -fdx; "
+        "printf 'HEAD='; git rev-parse HEAD; printf 'DIRTY='; git status --porcelain | wc -l; "
+        "git apply --ignore-whitespace --verbose /tmp/solution.diff; "
+        "git apply --ignore-whitespace --verbose /tmp/test.diff; "
+        "bash /tmp/eval.sh"
+    )
+    command = [
+        "docker", "run", "--rm", "--entrypoint", "/bin/bash",
+        "--mount", f"type=bind,source={patch},target=/tmp/solution.diff,readonly",
+        "--mount", f"type=bind,source={test_patch},target=/tmp/test.diff,readonly",
+        "--mount", f"type=bind,source={eval_script},target=/tmp/eval.sh,readonly",
+        IMAGE, "-lc", shell,
+    ]
+    completed = subprocess.run(
+        command, cwd=ROOT, text=True, stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT, encoding="utf-8", errors="replace",
+    )
+    log_path.write_text(completed.stdout, encoding="utf-8")
+    passed, failed, skipped, test_output_found = parse_counts(completed.stdout)
+    reset_ok = f"HEAD={base_commit}" in completed.stdout and "DIRTY=0" in completed.stdout
+    patch_apply_count = completed.stdout.count("Applied patch")
+    solution_patch_applied = method != "baseline" and patch_apply_count >= 2
+    test_patch_applied = patch_apply_count >= 1
+    test_entrypoint_error = not test_output_found or any(
+        marker in completed.stdout.split(">>>>> Start Test Output", 1)[-1]
+        for marker in ("Traceback", "ModuleNotFoundError", "ImportError", "ERROR:")
+    )
+    return {
+        "task_id": TASK_ID,
+        "method": method,
+        "image": IMAGE,
+        "image_digest": IMAGE_DIGEST,
+        "base_commit": base_commit,
+        "solution_patch_sha256": sha256(patch),
+        "eval_script_sha256": sha256(eval_script),
+        "reset_ok": reset_ok,
+        "solution_patch_applied": solution_patch_applied,
+        "test_patch_applied": test_patch_applied,
+        "test_entrypoint_executed": test_output_found,
+        "pytest_passed": passed,
+        "pytest_failed": failed,
+        "pytest_skipped": skipped,
+        "returncode": completed.returncode,
+        "test_entrypoint_error": test_entrypoint_error,
+        "resolved_process_signal": bool(method != "baseline" and reset_ok and solution_patch_applied and test_patch_applied and test_output_found and not test_entrypoint_error and failed == 0 and completed.returncode == 0),
+        "formal_outcome": False,
+        "provider_calls_added": 0,
+    }
+
+
+def main() -> int:
+    if OUT.exists() or ZIP.exists():
+        raise SystemExit(f"refusing_to_overwrite:{OUT}")
+    if sha256(OBJECTIVE) != ACTIVE_SHA:
+        raise SystemExit("active_objective_sha_mismatch")
+    if not JSONL.is_file() or not ORCA_PATCH.is_file():
+        raise SystemExit("required_task_or_orcaloca_patch_missing")
+    task = task_record()
+    ids = test_ids(task)
+    OUT.mkdir(parents=True)
+    (OUT / "baseline.patch").write_text("", encoding="utf-8", newline="\n")
+    (OUT / "gold.patch").write_text(task["patch"], encoding="utf-8", newline="\n")
+    (OUT / "orcaloca.patch").write_text(ORCA_PATCH.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
+    (OUT / "test.patch").write_text(task["test_patch"], encoding="utf-8", newline="\n")
+    write_eval_script(OUT / "eval.sh", ids)
+    results = [
+        run_case("baseline", OUT / "baseline.patch", OUT / "test.patch", OUT / "eval.sh", task["base_commit"]),
+        run_case("gold", OUT / "gold.patch", OUT / "test.patch", OUT / "eval.sh", task["base_commit"]),
+        run_case("orcaloca", OUT / "orcaloca.patch", OUT / "test.patch", OUT / "eval.sh", task["base_commit"]),
+    ]
+    summary = {
+        "analysis_id": OUT.name,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "active_objective_sha256": ACTIVE_SHA,
+        "task_id": TASK_ID,
+        "repository": task["repo"],
+        "image": IMAGE,
+        "image_digest": IMAGE_DIGEST,
+        "base_commit": task["base_commit"],
+        "test_id_count": len(ids),
+        "fail_to_pass_count": len(json.loads(task["FAIL_TO_PASS"])),
+        "pass_to_pass_count": len(json.loads(task["PASS_TO_PASS"])),
+        "test_scope": "lib/mpl_toolkits/tests/test_mplot3d.py (full file; avoids malformed parameterized node ids in source record)",
+        "result_rows": len(results),
+        "baseline_passed": int(results[0]["pytest_passed"]),
+        "baseline_failed": int(results[0]["pytest_failed"]),
+        "gold_f2p": int(results[1]["pytest_passed"]) - int(results[0]["pytest_passed"]),
+        "orcaloca_f2p": int(results[2]["pytest_passed"]) - int(results[0]["pytest_passed"]),
+        "test_executed_rows": sum(bool(row["test_entrypoint_executed"]) for row in results),
+        "resolved_process_signal_rows": sum(bool(row["resolved_process_signal"]) for row in results),
+        "pytest_passed": sum(int(row["pytest_passed"]) for row in results),
+        "pytest_failed": sum(int(row["pytest_failed"]) for row in results),
+        "pytest_skipped": sum(int(row["pytest_skipped"]) for row in results),
+        "provider_calls_added": 0,
+        "formal_outcome_rows": 0,
+        "formal_promotion": False,
+        "status": "completed_reconstructed_exact_image_replay" if all(bool(row["test_entrypoint_executed"]) for row in results) else "partial_reconstructed_exact_image_replay",
+        "claim_boundary": "Cached locally reconstructed exact-base image replay using the task's original test lists. This is a process/behavior signal and is not promoted to the official current-native aggregate or formal semantic, robust, causal, survival, or publication outcomes.",
+        "results": results,
+    }
+    fields = list(dict.fromkeys(key for row in results for key in row))
+    with (OUT / "result_rows.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(results)
+    (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "RESULTS_ZH.md").write_text(
+        "# Matplotlib-23562 reconstructed exact-image replay\n\n"
+        f"baseline/gold/OrcaLoca 各执行完整 mplot3d 文件；baseline={results[0]['pytest_passed']} passed/{results[0]['pytest_failed']} failed，"
+        f"gold={results[1]['pytest_passed']} passed/{results[1]['pytest_failed']} failed，"
+        f"OrcaLoca={results[2]['pytest_passed']} passed/{results[2]['pytest_failed']} failed。"
+        f"修复条件各恢复 {summary['gold_f2p']}/{summary['orcaloca_f2p']} 个通过测试。\n\n"
+        "该镜像为本地 reconstructed exact-base image；因此本包保留为补充过程/行为证据，不并入 official current-native aggregate，也不产生 formal outcome。\n",
+        encoding="utf-8",
+    )
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    manifest = [{"path": str(path.relative_to(OUT)).replace("\\", "/"), "bytes": path.stat().st_size, "sha256": sha256(path)} for path in files]
+    (OUT / "file_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    with zipfile.ZipFile(ZIP, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for path in files:
+            archive.write(path, path.relative_to(OUT))
+    with zipfile.ZipFile(ZIP) as archive:
+        if archive.testzip() is not None:
+            raise SystemExit("archive_integrity_failed")
+    print(json.dumps(summary, ensure_ascii=False))
+    return 0 if summary["status"] == "completed_reconstructed_exact_image_replay" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

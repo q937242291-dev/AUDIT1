@@ -1,0 +1,8 @@
+agent,pass,warn,fail,n
+CollaborationController,260,0,0,260
+ConsistencyCheckerAgent,152,108,0,260
+EvidenceGroundingAuditor,253,7,0,260
+InterventionValidatorAgent,235,25,0,260
+PathAuditAgent,186,39,35,260
+TrajectoryMemoryAgent,186,74,0,260
+TrajectoryVerifierAgent,70,171,19,260

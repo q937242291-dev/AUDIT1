@@ -1,0 +1,7 @@
+model,source_slice,n,unique_tasks,hit_1,hit_3,mean_total_tokens,path_audit_mean_tokens,path_audit_calls,provider,changed_component,dataset_membership
+gpt_4_1,Common200,200,200,0.795,0.91,1256.225,636.83,103,third_party_openai_compatible_gateway,path_audit_llm_only,unverified_source_slice
+gpt_4_1,Common300,300,300,0.8333333333333334,0.9433333333333334,921.5533333333333,508.62333333333333,128,third_party_openai_compatible_gateway,path_audit_llm_only,unverified_source_slice
+gpt_4_1_mini,Common200,200,200,0.785,0.91,1257.525,638.13,103,third_party_openai_compatible_gateway,path_audit_llm_only,unverified_source_slice
+gpt_4_1_mini,Common300,300,300,0.8333333333333334,0.9433333333333334,922.2066666666667,509.27666666666664,128,third_party_openai_compatible_gateway,path_audit_llm_only,unverified_source_slice
+gpt_5_1,Common200,200,200,0.795,0.91,1264.165,644.77,103,third_party_openai_compatible_gateway,path_audit_llm_only,unverified_source_slice
+gpt_5_1,Common300,300,300,0.8333333333333334,0.9433333333333334,927.59,514.66,128,third_party_openai_compatible_gateway,path_audit_llm_only,unverified_source_slice

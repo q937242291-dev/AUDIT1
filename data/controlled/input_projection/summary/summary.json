@@ -1,0 +1,16 @@
+{
+  "active_objective_sha256": "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9",
+  "analysis_id": "m3_pinai_work2_leakage90_model_only_statistics_20260824_v1",
+  "bootstrap_replicates": 5000,
+  "cell_rows": 90,
+  "claim_boundary": "Post-hoc descriptive model-only leakage-condition statistics. No future/location/diff payload was supplied, so no leakage, causal, correctness, recovery, human-label or formal promotion is claimed.",
+  "complete_rows": 90,
+  "condition_count": 5,
+  "error_rows": 0,
+  "formal_outcome_rows": 0,
+  "gold_used_at_runtime": false,
+  "gold_used_posthoc_for_filehit": true,
+  "source_run": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_pinai_work2_leakage90_model_only_probe_20260824_v1",
+  "source_run_sha256": "e2598dc619652b4cfe9a86be64dd8d6c4225eb91d20268c4eefdcdcb5d5e163a",
+  "unique_tasks": 6
+}

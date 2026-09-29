@@ -1,0 +1,34 @@
+{
+  "claim_boundary": "Fresh blind identifier-mutation continuation observations over persistent transformed workspaces. Gold/patch were hidden; benchmark success, semantic correctness, human labels and causal effects remain post-hoc NA.",
+  "completion_tokens": 48416,
+  "coverage_audit": {
+    "all_latest_completed": true,
+    "all_provider_identity_valid": true,
+    "coverage_complete": true,
+    "expected_fork_rows": 120,
+    "latest_completed_rows": 120,
+    "latest_error_rows": 0,
+    "missing_fork_ids": [],
+    "model_values": [
+      "gpt-5.6-luna"
+    ],
+    "provider_values": [
+      "PinAI"
+    ],
+    "raw_rows": 123,
+    "unexpected_fork_ids": [],
+    "unique_latest_fork_rows": 120,
+    "workspace_manifest_present": true
+  },
+  "generated_at_utc": "2026-09-10T19:52:19Z",
+  "latest_completed_rows": 120,
+  "model": "gpt-5.6-luna",
+  "prompt_tokens": 667389,
+  "provider": "PinAI",
+  "provider_calls_observed": 120,
+  "raw_append_only_rows": 123,
+  "registered_fork_rows": 120,
+  "retry_history_rows": 3,
+  "status": "PASS_MERGED_IDENTIFIER_MUTATION",
+  "total_tokens": 715805
+}

@@ -1,0 +1,5 @@
+﻿comparison,metric,n_paired,C0_mean,condition_mean,paired_delta_mean,bootstrap95_lo,bootstrap95_hi,delta_positive_n,delta_equal_n,delta_negative_n,mcnemar_exact_two_sided_p,claim_boundary
+C1_executable_failure_vs_C0_issue_only,FileHit@1_posthoc,240,0.25,0.408333,0.158333,0.1125,0.204167,40,198,2,0.0,Paired post-hoc descriptive comparison; no formal causal correctness is inferred.
+C2_structural_localization_vs_C0_issue_only,FileHit@1_posthoc,240,0.25,0.4625,0.2125,0.1625,0.266667,51,189,0,0.0,Paired post-hoc descriptive comparison; no formal causal correctness is inferred.
+C3_requirement_design_vs_C0_issue_only,FileHit@1_posthoc,240,0.25,0.704167,0.454167,0.3875,0.520833,110,129,1,0.0,Paired post-hoc descriptive comparison; no formal causal correctness is inferred.
+C4_evidence_bundle_vs_C0_issue_only,FileHit@1_posthoc,240,0.25,0.720833,0.470833,0.404167,0.5375,116,121,3,0.0,Paired post-hoc descriptive comparison; no formal causal correctness is inferred.

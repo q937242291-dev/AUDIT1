@@ -1,0 +1,5 @@
+﻿comparison,condition_id,paired_tasks,descriptive_FileHit@1_delta_mean,bootstrap95_low,bootstrap95_high,interpretation
+C_future_scrubbed - O_original_future_info,C_future_scrubbed,6,0.0000,-0.1667,0.1667,descriptive model-only contrast; not leakage causal dependence because the registered payloads were not supplied or independently reviewed
+D_diff_only - O_original_future_info,D_diff_only,6,-0.8889,-1.0000,-0.7778,descriptive model-only contrast; not leakage causal dependence because the registered payloads were not supplied or independently reviewed
+L_location_only - O_original_future_info,L_location_only,6,-0.8889,-1.0000,-0.7778,descriptive model-only contrast; not leakage causal dependence because the registered payloads were not supplied or independently reviewed
+P_equal_length_legal_history - O_original_future_info,P_equal_length_legal_history,6,-0.0556,-0.3333,0.1667,descriptive model-only contrast; not leakage causal dependence because the registered payloads were not supplied or independently reviewed

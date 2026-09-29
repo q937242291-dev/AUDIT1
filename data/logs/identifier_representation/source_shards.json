@@ -1,0 +1,26 @@
+{
+  "shards": [
+    {
+      "path": "artifacts/m3_pinai_identifier_mutation_deep_execution_20260912_v2_shard0_v1",
+      "rows": 30,
+      "sha256": "73944c862e62595fc386598eda1292b22dce8f1c89a412ee40a84ca878816a25"
+    },
+    {
+      "path": "artifacts/m3_pinai_identifier_mutation_deep_execution_20260912_v2_shard1_v1",
+      "rows": 33,
+      "sha256": "ff608a4516042b946b06dafbe502435444a0f1384deea470a9555d40009e89a7"
+    },
+    {
+      "path": "artifacts/m3_pinai_identifier_mutation_deep_execution_20260912_v2_shard2_v1",
+      "rows": 30,
+      "sha256": "9e4656af064e9ea11ca60b1154275c2d2628c0dbd57d87149de0082a56979524"
+    },
+    {
+      "path": "artifacts/m3_pinai_identifier_mutation_deep_execution_20260912_v2_shard3_v1",
+      "rows": 30,
+      "sha256": "9149a27885ce0a0cb77cc51447729c05f33ec5f1432e29c995db77ad740b4f04"
+    }
+  ],
+  "source_phase1": "artifacts/m3_shenji_phase1_pilot_execution_pinai_tool_search_20260912_v1_merged",
+  "workspace_manifest": "artifacts/m3_imw12/TRANSFORMED_WORKSPACE_MANIFEST.csv"
+}

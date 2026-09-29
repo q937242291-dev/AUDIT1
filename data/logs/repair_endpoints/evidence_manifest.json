@@ -1,0 +1,1676 @@
+{
+  "schema_version": 1,
+  "bounded_sources": [
+    {
+      "source_id": "source_01",
+      "path": "data/logs/repair_endpoints/bounded/source_01/result_rows.csv",
+      "rows": 3
+    },
+    {
+      "source_id": "source_02",
+      "path": "data/logs/repair_endpoints/bounded/source_02/result_rows.csv",
+      "rows": 3
+    },
+    {
+      "source_id": "source_03",
+      "path": "data/logs/repair_endpoints/bounded/source_03/result_rows.csv",
+      "rows": 3
+    },
+    {
+      "source_id": "source_04",
+      "path": "data/logs/repair_endpoints/bounded/source_04/result_rows.csv",
+      "rows": 3
+    },
+    {
+      "source_id": "source_05",
+      "path": "data/logs/repair_endpoints/bounded/source_05/result_rows.csv",
+      "rows": 6
+    },
+    {
+      "source_id": "source_06",
+      "path": "data/logs/repair_endpoints/bounded/source_06/result_rows.csv",
+      "rows": 9
+    },
+    {
+      "source_id": "source_07",
+      "path": "data/logs/repair_endpoints/bounded/source_07/result_rows.csv",
+      "rows": 9
+    },
+    {
+      "source_id": "source_08",
+      "path": "data/logs/repair_endpoints/bounded/source_08/result_rows.csv",
+      "rows": 9
+    },
+    {
+      "source_id": "source_09",
+      "path": "data/logs/repair_endpoints/bounded/source_09/result_rows.csv",
+      "rows": 9
+    },
+    {
+      "source_id": "source_10",
+      "path": "data/logs/repair_endpoints/bounded/source_10/result_rows.csv",
+      "rows": 9
+    }
+  ],
+  "bounded_index": "data/logs/repair_endpoints/bounded/index.csv",
+  "official_index": "data/logs/repair_endpoints/official/index.csv",
+  "official_ledger": "data/logs/repair_endpoints/official/ledger.csv",
+  "component_metrics": "data/logs/component_ablation/component_ablation_case_metrics.jsonl",
+  "diagnostic_verdicts": "data/logs/localization_methods/full_audit_localization/audit_verdicts.jsonl",
+  "diagnostics_60": "data/logs/component_activity/diagnostics_60.jsonl",
+  "task_join": "data/logs/component_activity/task_join.csv",
+  "metric_boundaries": {
+    "bounded_full_pass": "source tests_failed == 0 and returncode == 0; cross-checked against raw test output; not semantic or robust correctness",
+    "official_resolution": "resolved boolean from each individual official evaluator report; all report-bearing branch rows retained",
+    "activation": "warn or fail after exact instance_id subset; separate observational and removal runs"
+  },
+  "files": [
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/result_rows.csv",
+      "sha256": "f59164b7ed15ba4100f8290201e733e2efb350b8e20489b959616c9196668017",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/matplotlib__matplotlib-23562.baseline.log.gz.b64",
+      "sha256": "32c3b8bd12253691314821b9997df2201cd7bf24eee299bdd2b9244651df6208",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/matplotlib__matplotlib-23562.gold.log.gz.b64",
+      "sha256": "db6c353057f9ba05329f5cde222ced89d051d538e5c8c891b76d8b5633f955ea",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/matplotlib__matplotlib-23562.orcaloca.log.gz.b64",
+      "sha256": "1b725dd7fb35e9892b44a43ced182c40c163da2fccc0c1daa864148ba1485564",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/gold.patch",
+      "sha256": "3b180488c3529ec12b650e953281a79f4e3c0f6a107c461374dc807ab53a4f98",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/orcaloca.patch",
+      "sha256": "acc841c5c8b4fadaa6837aa663164c29c098f0cf73ce98541c4f665580ffa0ef",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/test.patch",
+      "sha256": "0e88f9d85926e87e9a863a91f405b393a8b8fd90eb2ce5acfe0f646be7a6dfe5",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_01/eval.sh",
+      "sha256": "21f7d15f233871b22d93a4fd87e47278b8e084605d0e1fbf6ad3eac49e9c1f19",
+      "kind": "historical_evaluation_script"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/result_rows.csv",
+      "sha256": "8a392fe9c4545260922e9cf95d82344fa8d2c0405cbff92f36b070e8b9481626",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/matplotlib__matplotlib-23476.baseline.log.gz.b64",
+      "sha256": "50b1a1b0785461036ba6e18ae23e21686fbc8604338c41038ffdcb0ae87156c6",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/matplotlib__matplotlib-23476.gold.log.gz.b64",
+      "sha256": "23a04d0d715644854a5420aa7055b1d5904ffe280aa4b21e646c7b1ad976f41f",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/matplotlib__matplotlib-23476.orcaloca.log.gz.b64",
+      "sha256": "aef7fc461bcc4659a1d9edb75864887dcd7bc535970b086bb9ca95610ff033ec",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/gold.patch",
+      "sha256": "53bad7abbcfa1aeec0314c6786e989922eea9a6e6f068cfebe1124c22e18abd8",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/orcaloca.patch",
+      "sha256": "aec756a20ae8b04ec6c6cf2ddf07d0cb0a76bd456e0c5264473de823d0d9731e",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_02/test.patch",
+      "sha256": "5eff9c9fe12de1fa0fa0d5803715b5f345602d5d9f031e324e808da90caf3185",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/result_rows.csv",
+      "sha256": "adf0534b90a25c8a5ddc0dfca0eef0033e67d605290e3d68fdce19c703f740d4",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/django__django-10924.baseline.log.gz.b64",
+      "sha256": "bdb4fe2a1d9014096536bd613b8d71faf4169d23b4eadf5c8cf0f090b648e7c6",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/django__django-10924.gold.log.gz.b64",
+      "sha256": "911899ce75210c9bc49c53051f0b3bfa709be6597546302c9cd703712a3b753f",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/django__django-10924.orcaloca.log.gz.b64",
+      "sha256": "a68539f8bf3c8acb53430aa35e29ebb4f1ac9fa79d6c1ad74c7b7a9c2dc60e89",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/gold.patch",
+      "sha256": "6838a829e890ca1c6cd56a0e0035131f0d4fea6109d81adf8e1a675caf4cfb4e",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/orcaloca.patch",
+      "sha256": "24c3e316304cf88f24b9de838c1ab070112373880d8d6e0f45de4d6092161f44",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_03/test.patch",
+      "sha256": "bb2a0eea90d85ae6ea90d3769a46da04ebca3ebad4ad1505b8eac7310887ec22",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/result_rows.csv",
+      "sha256": "7dccbc6a1e2a2872d8a5aee5f32882846dd3e47528fae6520516536a1434d3bf",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/astropy__astropy-12907.baseline.log.gz.b64",
+      "sha256": "4ebcbae1f5087388f7abee76f3e3dcfda807209c70308c2a6cc7c6308a85746b",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/astropy__astropy-12907.gold.log.gz.b64",
+      "sha256": "46d434c79651aa6b80f724708c53be4b383d502e029404971dec2bec61cf270d",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/astropy__astropy-12907.orcaloca.log.gz.b64",
+      "sha256": "dad364da03f26a076d9d21c930194bdfb1ca71c29ef2bca2345e6ffe636490e6",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/gold.patch",
+      "sha256": "0172ca0d430e58fc42e46d478f879e667a9a6e262295d7b49aea68cbc53d5986",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/orcaloca.patch",
+      "sha256": "9ad64b2d5711f3da10ac19251857e6825ebc29d53d5fd296079b13d7c25dbc6f",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_04/test.patch",
+      "sha256": "16a36d0fc6ab8636fcc96c3af617ad72401bed0b76127fa5649b086c1b4d0285",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/result_rows.csv",
+      "sha256": "5d9c98b6454ac0eebdb5039627d3f0aa804d3e0432f996bab898ae92a0285ceb",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/matplotlib__matplotlib-23299.baseline.log.gz.b64",
+      "sha256": "2c6d1a0a29c167f2247b06171f870b0a29d241fb7790a2496a78014b8602b27a",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/matplotlib__matplotlib-23299.gold.log.gz.b64",
+      "sha256": "bdf5ac0848a3b9af54bc9b3dbdf50badbd6a75b8efc99b27ae7bd443138aa304",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/matplotlib__matplotlib-23299.orcaloca.log.gz.b64",
+      "sha256": "1073167a0aafedaa1b25bbd1c2bfabbfc5ee7dfc153f6b8d5af779c3464408a7",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/sympy__sympy-11400.baseline.log.gz.b64",
+      "sha256": "b776cf799a34c1746f39342db05de2e672358ed1094e55fef02af7625e60bc28",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/sympy__sympy-11400.gold.log.gz.b64",
+      "sha256": "15e6d9965143515f4d021100322584f67108fa000f9f907b39da53d205c99e4c",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/sympy__sympy-11400.orcaloca.log.gz.b64",
+      "sha256": "d376d13f6bd04fe1f2ea00faab761680082e6fcba4b8a995796a2e207b8ec853",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/matplotlib__matplotlib-23299.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/matplotlib__matplotlib-23299.gold.patch",
+      "sha256": "b15079ba0b887c4386893f5beb03cc077d9ff65b167d1910de6bfbc8151cfb2e",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/matplotlib__matplotlib-23299.orcaloca.patch",
+      "sha256": "7baf90c72e78a8d69d2e0fe5d65d51d8f876344f448ffc481b99ad6801209d43",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/matplotlib__matplotlib-23299.test.patch",
+      "sha256": "19e51af38103ee4b6d9057aa1d4368333f0591497a9de7f0b4d333239d7e14d4",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/sympy__sympy-11400.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/sympy__sympy-11400.gold.patch",
+      "sha256": "7f79e0c6e6909a311c54215f3e858f057db77bb11248853e84095261195d6c1b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/sympy__sympy-11400.orcaloca.patch",
+      "sha256": "e453c23067e7eca7b35dafa18badfa3d132fc305687763abd11457e7efad31d6",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_05/sympy__sympy-11400.test.patch",
+      "sha256": "2fa3210916900c1f13f3d8cb6bd2a452b683289de5616ea64cb5e427f93d06d4",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/result_rows.csv",
+      "sha256": "e417bdc1e14c73f13e9113d723f9c94a4397bdd3847a4fc501b9bd183cedbe87",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-2848.baseline.log.gz.b64",
+      "sha256": "ac0f44b7530ae8cd57a77f3e225a0fc169a99785f4c5042093d0ed1024533eff",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-2848.gold.log.gz.b64",
+      "sha256": "c6cdd507e763bf4545ebc45a0b4413c2ee24b26fd8b10b4a83a6462f71d7cabb",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-2848.orcaloca.log.gz.b64",
+      "sha256": "7580eec6147805c4d7a84eaf851fb74ef361bcf6fbead3ea437d81df09ca7f03",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-3010.baseline.log.gz.b64",
+      "sha256": "e3f9526da81d8c5d3f8cef89e661caf0353697061328b09af0b883aca0609830",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-3010.gold.log.gz.b64",
+      "sha256": "388b9752f87cf0e942b7a9031b93c9d9bd1a984194b8f2231c5c71ebcbca09df",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-3010.orcaloca.log.gz.b64",
+      "sha256": "3b767edf6061778f89c716cc5e2805d36651fc3bf013aa5a9e7cecf91a9cb287",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/scikit-learn__scikit-learn-11040.baseline.log.gz.b64",
+      "sha256": "c68b3445e41f50665ae7024666fb71d0e01794d16c98cda8cf902a9afa0e5bbd",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/scikit-learn__scikit-learn-11040.gold.log.gz.b64",
+      "sha256": "58b9ef69a9c4b0657973efb02ec43cc98b9dca0e06f4338297c06c88bd6ee098",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/scikit-learn__scikit-learn-11040.orcaloca.log.gz.b64",
+      "sha256": "ada1334b09e672e1620e43b5f71afb6adb0a118185f330f90218ec660b32243a",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-2848.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-2848.gold.patch",
+      "sha256": "c57a9e1c3469d1fa115576ec277fa828a7a5e4b32c41e3975bc5b426cf33048d",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-2848.orcaloca.patch",
+      "sha256": "f8640d8c6e03491a1a9b21b198b6b055c6dce8472351edecae7b3e49c467b5a5",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-2848.test.patch",
+      "sha256": "93d6ab51c0671b5bc01d6295cb56bc38423db5bd68d25f480885eae704207470",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-3010.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-3010.gold.patch",
+      "sha256": "2d282a78db2b88dc42330fea5dc78b0551629b7d15c6d5b22f20c57a2ee3d1d7",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-3010.orcaloca.patch",
+      "sha256": "9f81b90b769ad369c59f8236878432f058d570e13bca625b02e4bb1966aaee08",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/mwaskom__seaborn-3010.test.patch",
+      "sha256": "5e320fb4903f24c6c4179f1c6b4146c6241355c0c213507b0a41edfdba62bb2c",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/scikit-learn__scikit-learn-11040.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/scikit-learn__scikit-learn-11040.gold.patch",
+      "sha256": "d770bda380b128a8d911b61f4694928eba0685d0585a1c7a32f0f28b05aaa7b2",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/scikit-learn__scikit-learn-11040.orcaloca.patch",
+      "sha256": "268a7b1fcefca83185cd0db40131a40fd413027d6e043c0dd0a0f709e48ff62d",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_06/scikit-learn__scikit-learn-11040.test.patch",
+      "sha256": "c0bfab227f0ca051ab42985cd5065797d84cf8ab8db48d798d0b676566dac49c",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/result_rows.csv",
+      "sha256": "9035061733c0458700f5dbb5e6c5c71356628c71899ca42bd8917d7b0dd221cc",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/sphinx-doc__sphinx-7686.baseline.log.gz.b64",
+      "sha256": "761355594734ff7a7337912f1e86c1b18c181f6f8b65a0ba0b1b704f5c307e35",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/sphinx-doc__sphinx-7686.gold.log.gz.b64",
+      "sha256": "cefa87f4a1e85a5d583ddaf99b8339889a037924a4c13cceaec2a38382ac2b2e",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/sphinx-doc__sphinx-7686.orcaloca.log.gz.b64",
+      "sha256": "a4cc87a9c6719733a3777804b7e92535b691d456a5e9929a0c4d730380dfc875",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/pylint-dev__pylint-7228.baseline.log.gz.b64",
+      "sha256": "165cff0d531840cd244edb31e6e8235b91cb76df746909cf2e16f26787391a79",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/pylint-dev__pylint-7228.gold.log.gz.b64",
+      "sha256": "f1d0436b2fe89c654e65d00ececd29349313593871340046bbbbde62c9c7682a",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/pylint-dev__pylint-7228.orcaloca.log.gz.b64",
+      "sha256": "cc14c8c2a94a93cd3dbd6649e863fbf4b91b26a25344bbd09c0795367ac7b8a7",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/matplotlib__matplotlib-23314.baseline.log.gz.b64",
+      "sha256": "44fc3906d02ae1c0b5f42a1e221429cbb546b0ab4f574a7c3740f81070097e15",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/matplotlib__matplotlib-23314.gold.log.gz.b64",
+      "sha256": "3b607fe8ced68c13d616723575990ad86d3b562f2888ef75634ed9f988963856",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/matplotlib__matplotlib-23314.orcaloca.log.gz.b64",
+      "sha256": "f680556592052315057aaf31bc8e57db161b200c648a8a9cb4b2b30caabccd47",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/matplotlib__matplotlib-23314.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/matplotlib__matplotlib-23314.gold.patch",
+      "sha256": "b6d8952d0d9b8851d9ddd2a7f97980a3cee631902f1b92f9965ac62159d58fc4",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/matplotlib__matplotlib-23314.orcaloca.patch",
+      "sha256": "d84de209e0805bb299b368a5f58949f0752d8bd80e9a38dfa4d4562b3642282c",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/matplotlib__matplotlib-23314.test.patch",
+      "sha256": "634f1feb0ffd31cbb65bb203bc89f87e4d1b8b49935f1713f8e9c44e1a31deda",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/pylint-dev__pylint-7228.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/pylint-dev__pylint-7228.gold.patch",
+      "sha256": "8b6796ff816cae34a8ba96c465e367f321f95931a64b9dff5932f0f9ab701d1b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/pylint-dev__pylint-7228.orcaloca.patch",
+      "sha256": "719f9a10d0b1d37e263a449ceab7878360459827601703aacfa1392e73a35fc3",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/pylint-dev__pylint-7228.test.patch",
+      "sha256": "ffd90d22dff9785cf0fb60686e30d02dfba7b9ed2f7b4deda1fa8028937352c0",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/sphinx-doc__sphinx-7686.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/sphinx-doc__sphinx-7686.gold.patch",
+      "sha256": "d3fff7eaa9d59034884ef053f33aa2a87898242d6ae00bb101800c9eefddd594",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/sphinx-doc__sphinx-7686.orcaloca.patch",
+      "sha256": "73304dd3d601f2d06e57e97c65d7b544daabd81e3e8773cfd75d3f3e0ef542cc",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_07/sphinx-doc__sphinx-7686.test.patch",
+      "sha256": "19c95581dca6608629bca76b2c6a4583390c54c63c2ba723efc850f97beb2150",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/result_rows.csv",
+      "sha256": "3d5d04e4403c1492a407a9652da414be17090009e0f3437ce0c827996273a426",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3190.baseline.log.gz.b64",
+      "sha256": "91196346c3cf091ebcc34e8bb1cbf6d081740c936d9955f72f8558cd56bd25f4",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3190.gold.log.gz.b64",
+      "sha256": "99d9a1ff5d383495527a38ca4c33b82da56f64f26c605971bc252c1425fbad8e",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3190.orcaloca.log.gz.b64",
+      "sha256": "47f1293949d50884c7e6aac244e268c4de39cda8e60de3b77df606a64deee5fa",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3407.baseline.log.gz.b64",
+      "sha256": "e97670125cb1c2f311224ebe192adf627e2f796177b890fd140fb8f4a4d58f54",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3407.gold.log.gz.b64",
+      "sha256": "27b583792c0e6b157f507afbaa4cfcf7b1477b56c2d32d13cabfd10f3e4702d1",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3407.orcaloca.log.gz.b64",
+      "sha256": "61d29a1728899730c1e0b17b0409eb402196137891f7f588eda1a0cd0e567ffc",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/scikit-learn__scikit-learn-10297.baseline.log.gz.b64",
+      "sha256": "e4104e0e6a0ed82bb972f06c4f5976cac4aa13b169dee5066ca0cdbbfb079cda",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/scikit-learn__scikit-learn-10297.gold.log.gz.b64",
+      "sha256": "fb92df7495a833b3d03d5499dcf187fd668f6a00ee472feabc67f659000cf34a",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/scikit-learn__scikit-learn-10297.orcaloca.log.gz.b64",
+      "sha256": "0ee9cfd4bee1c10afdcb01836a665b5499530340b613f271657c868df4b97dc1",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3190.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3190.gold.patch",
+      "sha256": "e014761e43e1a1d3eb8879a4ac67aadc810db3aab87701a8f499ba7c4571fe77",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3190.orcaloca.patch",
+      "sha256": "828414df06e182d0810475018cdf07b36068d3cee8456764948fbecf3969ba61",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3190.test.patch",
+      "sha256": "450caca3d1f7e0182799634cb80bf34bb5375be841aec5dab1baecbb9d7c8459",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3407.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3407.gold.patch",
+      "sha256": "a1d60cf5bd6ca42f45bbd89aef9d736758cdf9ca4c81357efddf7fb78a942b1a",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3407.orcaloca.patch",
+      "sha256": "a38c0171ff34abc9c3fe344e6dcf9299cfe0e22e6d60c69dffeacec930d4b769",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/mwaskom__seaborn-3407.test.patch",
+      "sha256": "66d85e58e8581de7f1c8e2838b0aa8cb360bdbc8c47bf232a31aed6ee4cb7c50",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/scikit-learn__scikit-learn-10297.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/scikit-learn__scikit-learn-10297.gold.patch",
+      "sha256": "36db36590ab75976c976fa4aef8b12d64caf9a65f849e7147b56fb67c4e2aa09",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/scikit-learn__scikit-learn-10297.orcaloca.patch",
+      "sha256": "b64462c0c7dc0426b6144f207da03fb71d5e961fa778bd4617607878b402d6eb",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_08/scikit-learn__scikit-learn-10297.test.patch",
+      "sha256": "93406fdeacdc7634798c3b74b0d95f2330d95a3585306afe60a67fced8443d72",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/result_rows.csv",
+      "sha256": "51f396407966b234a227f3c5144decfdacb169865e8fd8c3b03d65abeb2569ef",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/sphinx-doc__sphinx-10325.baseline.log.gz.b64",
+      "sha256": "b88dfbe0dc9a332ad19fb83f40b0676a0ae4b94fe25a9fc9ce3062ddd5e1b757",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/sphinx-doc__sphinx-10325.gold.log.gz.b64",
+      "sha256": "1727d5aca42d68aceb8de74b3d670856b5805c24ea463d0fc876630918d98253",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/sphinx-doc__sphinx-10325.orcaloca.log.gz.b64",
+      "sha256": "face4b76dc626889ed6e7a6dcad8a13753c708a9d3db050182ae0a42298ecdc7",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10508.baseline.log.gz.b64",
+      "sha256": "ad5274b00f6e1b38a49e80138ab4bb6f9dc7051fda42d0f2b6bab538d40ca0d5",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10508.gold.log.gz.b64",
+      "sha256": "6fd815eb3a50170143ed3411da0499007e2970087efb8365c0ac642d257006c3",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10508.orcaloca.log.gz.b64",
+      "sha256": "30cca70c8054b7f5ba17b08630e48988b5ff55a186b0ebd739e5b7c2b50768df",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10949.baseline.log.gz.b64",
+      "sha256": "836ecd307cd9cf85e9832bdde57c58b3eebeab8dd7038e02bcbe12e902e97238",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10949.gold.log.gz.b64",
+      "sha256": "668d23a2c4412d419aaf0a76e531668dc8cd5b30c80a823c3dfc6c778e2eaa03",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10949.orcaloca.log.gz.b64",
+      "sha256": "7d90dcd3a87ef787f1e544fb8f5816c26821c6aa31c6adca5b2233e3e39f9178",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10508.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10508.gold.patch",
+      "sha256": "7664039eb8b692bddab2bcf1ad5e20b59cd319827a8b2b792818b0769d5d6065",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10508.orcaloca.patch",
+      "sha256": "af823916c3c9ab835f49621c8abf08fe2c1eec078d394b64756c7fb198c3c985",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10508.test.patch",
+      "sha256": "12690c1f1a8ba16249c287e4030104ab440804de0b7430ce7ded9a90c877a042",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10949.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10949.gold.patch",
+      "sha256": "aa168cdbc5873f2b6658f12c884eacb82802b44ab74259f7266aa5d9d8f8f913",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10949.orcaloca.patch",
+      "sha256": "ca51a864ffdeba86771a9642e58e03ac00a5de2b261af42305073a6643ffc046",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/scikit-learn__scikit-learn-10949.test.patch",
+      "sha256": "2a1a165f9c07e93f1e6d6bab3324d7f2be5c58b48e73a7455e99f0820261b0d2",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/sphinx-doc__sphinx-10325.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/sphinx-doc__sphinx-10325.gold.patch",
+      "sha256": "2108eab79d715181db3ba0eea8b9514403cbfe106e63bf1f335808adfa9f2651",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/sphinx-doc__sphinx-10325.orcaloca.patch",
+      "sha256": "03f4d74283a91488521496d32bce2c416341f5f9f0d12baf7e28715841f2ea62",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_09/sphinx-doc__sphinx-10325.test.patch",
+      "sha256": "6ff86f7139529c71b0916d03ab348ff5be18239b302e19e0f5e6042fd511c0cc",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/result_rows.csv",
+      "sha256": "f5b3daaaacfe06f4c2102a7b493fa2eccc346fadf6a05229879181f119472fc5",
+      "kind": "bounded_result_table"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14182.baseline.log.gz.b64",
+      "sha256": "236217b9b45f9815c1a40ac208aa60c9cbd0a86686b67d5dc1bb73d00323aee1",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14182.gold.log.gz.b64",
+      "sha256": "a14825f9ef23a421db82a28f25a3f7c7f7b08a157f39be4634eb896f4d5a716e",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14182.orcaloca.log.gz.b64",
+      "sha256": "4bc55e017248849bba4d28c57c3a3c9eb199db7d5ec9a9316e2546c77175e559",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14365.baseline.log.gz.b64",
+      "sha256": "0b24a22ffdbc981c40c3fd08b286a2cd72d94129f42725f55239c6fab1c2974a",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14365.gold.log.gz.b64",
+      "sha256": "08548810ee6ae793f0b75722de596c409e78cdb655900cc0f59a926a3dd7820d",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14365.orcaloca.log.gz.b64",
+      "sha256": "82bb2d9fef8a8aea08eecc830e4653bcbec20be27487e424efe8d088cfd24a19",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14995.baseline.log.gz.b64",
+      "sha256": "3fa0ee50cad2664dee55d0fca1bbd5e2f572e6af21a81ecea2dac83fd7028b96",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14995.gold.log.gz.b64",
+      "sha256": "08781839cea720c310422e856c7898c2e6ab8f7b15be306a37b848e33cf21c1d",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14995.orcaloca.log.gz.b64",
+      "sha256": "b955315189b758add339573583d1851c4896813cdf7baed130ea38ca6b69d31e",
+      "kind": "bounded_raw_test_log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14182.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14182.gold.patch",
+      "sha256": "1c80b57d515ed4da42842dff56cfec5b5c72fee6a469c9bb33f2f6b59dba0f3c",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14182.orcaloca.patch",
+      "sha256": "436d728fe211fb292872f83c7d33c3ca8e5da7e8ef08352b0ddeef66eee14297",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14182.test.patch",
+      "sha256": "9f8c76993ab53e129a9e6ddd2bf5d03eb19962166ae9d432869ecaa9c05d4f80",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14365.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14365.gold.patch",
+      "sha256": "42420ff7003feddd01ddde186a66486ab686dc91af2a3155970dea6ca4df63c3",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14365.orcaloca.patch",
+      "sha256": "765f1a0d453527d020e3002e62fdc569cb35b46016a4355d3e96891b79c810b6",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14365.test.patch",
+      "sha256": "d05e15eb78cac786f96ffaedb804da53417dee31c3c1b53820f6e9640497bf8e",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14995.baseline.patch",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14995.gold.patch",
+      "sha256": "370b3ff97b3a0627c29b74cf0b60bae46fe75edcd35a8d121c2dbe0f0421899a",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14995.orcaloca.patch",
+      "sha256": "7b99818a61f962d9fc42bb239368c86fe2fc3cd3866ffcfa153c94779881054e",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/source_10/astropy__astropy-14995.test.patch",
+      "sha256": "508a7cb6cbb152cc0b6f7e9c0664f67711a6e97dfa4d355dcf4987c379d2953b",
+      "kind": "patch"
+    },
+    {
+      "path": "data/logs/repair_endpoints/bounded/index.csv",
+      "sha256": "665ccd2d3a0c10dfd4abae25f0682d7f7f33c8a270e12a19f16dda96be54180f",
+      "kind": "bounded_record_locator"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/agent/report.json",
+      "sha256": "4e4a7b32678fe9a07b38b17950ae7b6c19fc3abcf5f6c612e40a21a31e80bb09",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/agent/test_output.txt.gz.b64",
+      "sha256": "7238d51c45dde92deaa320c34d82c419efd3d01a31a5da6880157fd2f19cce04",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/agent/offline_runner.log.gz.b64",
+      "sha256": "ab6d340be28163b0813317e4c5c3d09c9f679da879cc477dff5158cfd55a46cb",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/agent/eval.sh",
+      "sha256": "229f462fcbdcae232228507f9491b8538c5aeaeede709c5fc822b586245d9460",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/agent/patch.diff",
+      "sha256": "9ad64b2d5711f3da10ac19251857e6825ebc29d53d5fd296079b13d7c25dbc6f",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/reference/report.json",
+      "sha256": "16e3c154d566808900a55e51db26e28604c18145faf845990588ea21f4902a65",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/reference/test_output.txt.gz.b64",
+      "sha256": "0218bca6ed9fbc6cba4de2d925da6e6107ab3958f10e65a5309b61fff65e16bf",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/reference/offline_runner.log.gz.b64",
+      "sha256": "49fa92530c8e087b31ace3f56b2512644b76beb8c0dcb01465a9cf913e9f4391",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/reference/eval.sh",
+      "sha256": "229f462fcbdcae232228507f9491b8538c5aeaeede709c5fc822b586245d9460",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-12907/reference/patch.diff",
+      "sha256": "0f3e44432ed8540e9526edff4f83793948a2f139fc3971b67c30043c1eb7964a",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/agent/report.json",
+      "sha256": "fe85a05f75a1c8f096c9e99c6bed74ecd94a5dd95898add27d73ca093f018539",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/agent/test_output.txt.gz.b64",
+      "sha256": "74e150196e5066634545529ae88e3079b95817daa86e9cc6f34c8cc82cc93f31",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/agent/offline_runner.log.gz.b64",
+      "sha256": "52535dec1e6efaf87daee029b3393d304e85ced202bee702e8c20e2ffd0900cf",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/agent/eval.sh",
+      "sha256": "db7c84a6b12b0e3eea6659b406d3f79ae85cd9066a75dc3c756f522786d174e2",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/agent/patch.diff",
+      "sha256": "436d728fe211fb292872f83c7d33c3ca8e5da7e8ef08352b0ddeef66eee14297",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/reference/report.json",
+      "sha256": "fe85a05f75a1c8f096c9e99c6bed74ecd94a5dd95898add27d73ca093f018539",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/reference/test_output.txt.gz.b64",
+      "sha256": "045251f2e1c9a7a0234222413e0e728dfcd2319f2796491d3b0d89a56e1db447",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/reference/offline_runner.log.gz.b64",
+      "sha256": "8aa840283aaf21d319dc4165120826c1aceed346d77e8bc0fa7debb7f24890bc",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/reference/eval.sh",
+      "sha256": "db7c84a6b12b0e3eea6659b406d3f79ae85cd9066a75dc3c756f522786d174e2",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14182/reference/patch.diff",
+      "sha256": "1c80b57d515ed4da42842dff56cfec5b5c72fee6a469c9bb33f2f6b59dba0f3c",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/agent/report.json",
+      "sha256": "5e28e32d6739f54ef5b592c2a1d3b3973e0ac620bcad03b71301440219e03bbd",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/agent/test_output.txt.gz.b64",
+      "sha256": "ccd6cc5f29e4a07f1ff55f4df35b0f0164a25c0718fddb737dc1256b70c3c9fb",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/agent/offline_runner.log.gz.b64",
+      "sha256": "5a990407d85d2d5289c2406f19c3b1e50e25b7c4af316a1f9814c127b4ebf1ab",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/agent/eval.sh",
+      "sha256": "bd7699563c7f58f5cfd1f97f7f0e906f752a3e9a3851f1d84c9179d0499fd3cf",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/agent/patch.diff",
+      "sha256": "765f1a0d453527d020e3002e62fdc569cb35b46016a4355d3e96891b79c810b6",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/reference/report.json",
+      "sha256": "706985cee57b15f66406398815bc2097dd00983c12c0e3515acf36d3098037e5",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/reference/test_output.txt.gz.b64",
+      "sha256": "b97bd25125917a73180c9e22b7e1672fb409b08c5fecbb3cebfbe5de6a0c6663",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/reference/offline_runner.log.gz.b64",
+      "sha256": "c13d713eee67eb76d16bcd76e796af6f7e993c69fd890a5bf20542bd88f624cf",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/reference/eval.sh",
+      "sha256": "bd7699563c7f58f5cfd1f97f7f0e906f752a3e9a3851f1d84c9179d0499fd3cf",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14365/reference/patch.diff",
+      "sha256": "42420ff7003feddd01ddde186a66486ab686dc91af2a3155970dea6ca4df63c3",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/agent/report.json",
+      "sha256": "904af9246aa960374ac580764b07f386048ce53f272cd01ea9dc3ac19dcf9db6",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/agent/test_output.txt.gz.b64",
+      "sha256": "7eb2530e15e86019591cac7cb6d050952bd412c1030b62f80be992153ee93e38",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/agent/offline_runner.log.gz.b64",
+      "sha256": "ead82b9c3b07308622c9fff2f47390168bb6b2c70eb5acde04d808de551ea2b5",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/agent/eval.sh",
+      "sha256": "531bb27926131716174d0fbe919209477e6cdad72358766c2da4d9ca7d5cd1df",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/agent/patch.diff",
+      "sha256": "7b99818a61f962d9fc42bb239368c86fe2fc3cd3866ffcfa153c94779881054e",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/reference/report.json",
+      "sha256": "904af9246aa960374ac580764b07f386048ce53f272cd01ea9dc3ac19dcf9db6",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/reference/test_output.txt.gz.b64",
+      "sha256": "ae754a8d3eed442ee796002b393f4b1a181eb255e2f8f56eba6d2daca0490e7e",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/reference/offline_runner.log.gz.b64",
+      "sha256": "bc011cfed23fe695a96a23b54e089e7c43a2340c5a24ee1aed78d8d2c1e19682",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/reference/eval.sh",
+      "sha256": "531bb27926131716174d0fbe919209477e6cdad72358766c2da4d9ca7d5cd1df",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/astropy__astropy-14995/reference/patch.diff",
+      "sha256": "370b3ff97b3a0627c29b74cf0b60bae46fe75edcd35a8d121c2dbe0f0421899a",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/agent/report.json",
+      "sha256": "eaac071191a0078c00d8c5334b0ee8e765674cc74c8734c5142e1a45a2a5c470",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/agent/test_output.txt.gz.b64",
+      "sha256": "b159af65107941c5d8ddc4101ab4b2574c2110d71229316c15e182d3c4efc54d",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/agent/offline_runner.log.gz.b64",
+      "sha256": "d219da47cf7f358554a8fb52f0eaa268093d819e63e7b3d323823fb63355cd84",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/agent/eval.sh",
+      "sha256": "0068fa7436eedd069a147e52d5be335bb813ea20ef8c028315d7559e0e3a661c",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/agent/patch.diff",
+      "sha256": "f8640d8c6e03491a1a9b21b198b6b055c6dce8472351edecae7b3e49c467b5a5",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/reference/report.json",
+      "sha256": "eaac071191a0078c00d8c5334b0ee8e765674cc74c8734c5142e1a45a2a5c470",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/reference/test_output.txt.gz.b64",
+      "sha256": "59feaff30ae0b14ed4360ff364dc46f3eb79b37a07e12f849227e4fc21debf4a",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/reference/offline_runner.log.gz.b64",
+      "sha256": "61a6b9f61f7dbfe89fe27b71ea9b89d98e1dabff7381d2a9025cab0714f00c3f",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/reference/eval.sh",
+      "sha256": "0068fa7436eedd069a147e52d5be335bb813ea20ef8c028315d7559e0e3a661c",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-2848/reference/patch.diff",
+      "sha256": "c57a9e1c3469d1fa115576ec277fa828a7a5e4b32c41e3975bc5b426cf33048d",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/agent/report.json",
+      "sha256": "ce82d7a3a5b35118dae1f35113041d5d6602299f78889eb9915966f2c91aa093",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/agent/test_output.txt.gz.b64",
+      "sha256": "a8f28f6af9584870d1eb547f3cc1e3cbb990271315917b2bc3bdd45e509e0b45",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/agent/offline_runner.log.gz.b64",
+      "sha256": "b047435c81fcb0522037bb27984bceaccdfa8fe7d39bf672487dd3fdd520c5ee",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/agent/eval.sh",
+      "sha256": "d2057edb12009fa94fc60b3834393e0cb033cb9b7d310e76bdcd0bd13107cbc0",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/agent/patch.diff",
+      "sha256": "9f81b90b769ad369c59f8236878432f058d570e13bca625b02e4bb1966aaee08",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/reference/report.json",
+      "sha256": "ce82d7a3a5b35118dae1f35113041d5d6602299f78889eb9915966f2c91aa093",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/reference/test_output.txt.gz.b64",
+      "sha256": "89a82cfd5e8af6fd78c87e4398904ae8731b535a51d723542faa07f555317356",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/reference/offline_runner.log.gz.b64",
+      "sha256": "da21689b8e60dd0d0506e19b3170f6d9366e05c6dc2567c858ab45aea57cf5b4",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/reference/eval.sh",
+      "sha256": "d2057edb12009fa94fc60b3834393e0cb033cb9b7d310e76bdcd0bd13107cbc0",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3010/reference/patch.diff",
+      "sha256": "2d282a78db2b88dc42330fea5dc78b0551629b7d15c6d5b22f20c57a2ee3d1d7",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/agent/report.json",
+      "sha256": "f6651f479a093dbfe47813a83c4c2f06548ac5d6c3d412d8390e03dafdf0f6ba",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/agent/test_output.txt.gz.b64",
+      "sha256": "93a36bfc65df44548013c003932de84db3c3b80bcc8fa72b1e6034934e433042",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/agent/offline_runner.log.gz.b64",
+      "sha256": "bb47109270a6cc0cf6d628922ce7ae956ff9814c0f9ebb1c2280f985b71aa868",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/agent/eval.sh",
+      "sha256": "740cea7754242c52c34e1fa69cf455f5be24259b289c177ed23fa094e75dd2ff",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/agent/patch.diff",
+      "sha256": "828414df06e182d0810475018cdf07b36068d3cee8456764948fbecf3969ba61",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/reference/report.json",
+      "sha256": "f6651f479a093dbfe47813a83c4c2f06548ac5d6c3d412d8390e03dafdf0f6ba",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/reference/test_output.txt.gz.b64",
+      "sha256": "9e5d9f7d681f730ec37d842a49aff47052b424c6f0f936d2534d22bf0d110f48",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/reference/offline_runner.log.gz.b64",
+      "sha256": "b3bc4fdda4c2f92419e43b64931c5df9383714054d0635df62bd68b31448cbc0",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/reference/eval.sh",
+      "sha256": "740cea7754242c52c34e1fa69cf455f5be24259b289c177ed23fa094e75dd2ff",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3190/reference/patch.diff",
+      "sha256": "e014761e43e1a1d3eb8879a4ac67aadc810db3aab87701a8f499ba7c4571fe77",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/agent/report.json",
+      "sha256": "f1f3000714080fbb95d0105ca9623771ff1377ca3a727b0944173308fac2817a",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/agent/test_output.txt.gz.b64",
+      "sha256": "a13aea1f30656f73035c5267578c51a371b7cb16655454c957b574bbaad4d687",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/agent/offline_runner.log.gz.b64",
+      "sha256": "d1f08156aba2d6752e3fdd0c32dedb57f3cccd4f9cc6e4d80ececadc2b19f5f7",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/agent/eval.sh",
+      "sha256": "6cb3e6e683bfd410f19581f0363687c284d5f06307d92f9561cd7d6d839eff15",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/agent/patch.diff",
+      "sha256": "a38c0171ff34abc9c3fe344e6dcf9299cfe0e22e6d60c69dffeacec930d4b769",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/reference/report.json",
+      "sha256": "52a4e110906f3f0b97c24719de49efaf1d9768a19c74185c62aef25f62fa4253",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/reference/test_output.txt.gz.b64",
+      "sha256": "d5b69fd51ec5cbab5534cc8301aae1231d7fe4d5856bc3c5798d492e837ab780",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/reference/offline_runner.log.gz.b64",
+      "sha256": "353895addc44f88262ef3c6a2b4ba13f5af6d1c84c229cc0052d6476e72f20f4",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/reference/eval.sh",
+      "sha256": "6cb3e6e683bfd410f19581f0363687c284d5f06307d92f9561cd7d6d839eff15",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/mwaskom__seaborn-3407/reference/patch.diff",
+      "sha256": "a1d60cf5bd6ca42f45bbd89aef9d736758cdf9ca4c81357efddf7fb78a942b1a",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/agent/report.json",
+      "sha256": "483f3ebb7120aa725c9f88bbfe6af5b4271ae222afab8a7fb105325a3ad624d5",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/agent/test_output.txt.gz.b64",
+      "sha256": "697d3596f0a2e326fd77ed1316bda119a3b87201d9fb2b5b0514ff63a43a9f74",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/agent/offline_runner.log.gz.b64",
+      "sha256": "03a5a9475816ebcf40a7bca9a959642f308fde4a001efbed614546e92c2b3023",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/agent/eval.sh",
+      "sha256": "3db3a6931c7b82d136e428db2a1cf9dbbf53e06b17c41cfc937ba3c4ea40bc7c",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/agent/patch.diff",
+      "sha256": "a4c6fe2be97d5432bb1390e952537318d3735ba2874f760c30f728ed5c1e1377",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/reference/report.json",
+      "sha256": "1206a998e7897be9ab43ec0725b0f1f5ea4f576e933f1b27f65d26b891b5227d",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/reference/test_output.txt.gz.b64",
+      "sha256": "e77ce7b21af0978f54e4b803d862eedf99e85f08e9ea760ef260aeddf7c1d4d9",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/reference/offline_runner.log.gz.b64",
+      "sha256": "26115807badc7713c785fd3f915ce7ab44476614c920c2b5f57b72782f0b6053",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/reference/eval.sh",
+      "sha256": "3db3a6931c7b82d136e428db2a1cf9dbbf53e06b17c41cfc937ba3c4ea40bc7c",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-4045/reference/patch.diff",
+      "sha256": "6c4055e1cb35cf9c5d50bbba639af1787d6f5d5146f9539cedc364a43d01c687",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/agent/report.json",
+      "sha256": "de2239d250b05304f01f3e7327ab04802695f7dff9b69c4709d450bfb78a2343",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/agent/test_output.txt.gz.b64",
+      "sha256": "d40388163a36942c17891f3e2b3d4bc4784f6c4a9c395ff181ae70b512cbb945",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/agent/offline_runner.log.gz.b64",
+      "sha256": "6ff55a63c96f98b333f7d9b5141a979c201e770ed62e81ee58ecd828ce0dbea6",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/agent/eval.sh",
+      "sha256": "23266f774bc2a958d1cad661209e7cb69d3485969db4b63f8b56e6312db9be3c",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/agent/patch.diff",
+      "sha256": "6ed719799e679a461b29df8bf1916ee615a1fd487add99ddc733f33beb74002c",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/reference/report.json",
+      "sha256": "de2239d250b05304f01f3e7327ab04802695f7dff9b69c4709d450bfb78a2343",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/reference/test_output.txt.gz.b64",
+      "sha256": "302ccc8eed54cbbd0f077ecf8d0585e1128da6de2271019399bfa024bcb409a8",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/reference/offline_runner.log.gz.b64",
+      "sha256": "f234648b62812dbfadc7848c7c8e98aeff17c5192befad38820df46b72092710",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/reference/eval.sh",
+      "sha256": "23266f774bc2a958d1cad661209e7cb69d3485969db4b63f8b56e6312db9be3c",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pallets__flask-5063/reference/patch.diff",
+      "sha256": "f9c1ef426acac91e34d551f80f34dfe27fc124ac316af71d70eec1764b4a6497",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/agent/report.json",
+      "sha256": "1412bb82619f0e00dc4ace168a9aa80582a521deac3eb341692d3caf15ca5040",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/agent/test_output.txt.gz.b64",
+      "sha256": "d880339b24cc1f8a94d8b96961d81422323295f18b3a145473dab31dfa2c5dbe",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/agent/offline_runner.log.gz.b64",
+      "sha256": "3d1a0a48af862d55c76b8849a37b9e7975491cbc3253eb078bd5ceddb75f5f69",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/agent/eval.sh",
+      "sha256": "03fac751c885570eace2e22e82b23cd92882901bd2299123738000c93d4d09f4",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/agent/patch.diff",
+      "sha256": "55ecebb3f86bf8ef46582ccf12495648b0da88492593387799151c486be8199e",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/reference/report.json",
+      "sha256": "1412bb82619f0e00dc4ace168a9aa80582a521deac3eb341692d3caf15ca5040",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/reference/test_output.txt.gz.b64",
+      "sha256": "d596182d3d2eccf112a946ec9a1325743c577a5f73e3ec72e6c4d09e806a70b5",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/reference/offline_runner.log.gz.b64",
+      "sha256": "bfb1907daef59b276189321f2b6c30aacb231d4583efe7bd49b752e64a6f84ca",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/reference/eval.sh",
+      "sha256": "03fac751c885570eace2e22e82b23cd92882901bd2299123738000c93d4d09f4",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-6506/reference/patch.diff",
+      "sha256": "d998b15278fc2bfaddeeb5d44319201298246247a7ed18c76203e9d27d12b12a",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/agent/report.json",
+      "sha256": "c5246fe7a6d0f2508b9abbcbaf43e920796c903c895b1bf9ae46cba1051aa34b",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/agent/test_output.txt.gz.b64",
+      "sha256": "3ab89e056325077449fe90422ad130d236131fda9d10de52d86ef26d031c9a59",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/agent/offline_runner.log.gz.b64",
+      "sha256": "e430d632f5642a757080950d0474ba1c9b7c58bb23fc023eff2fc1ec981d0dd2",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/agent/eval.sh",
+      "sha256": "f19f19799be3225727fe3c1024f0613619db73cd31895de9482365b7923b20ae",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/agent/patch.diff",
+      "sha256": "0f6574f8d24aeb5598db22a2f2b7bcebfe7cd2352448f98479367040af8a0568",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/reference/report.json",
+      "sha256": "c5246fe7a6d0f2508b9abbcbaf43e920796c903c895b1bf9ae46cba1051aa34b",
+      "kind": "official_evaluator_report"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/reference/test_output.txt.gz.b64",
+      "sha256": "d646b1095989215dfc64be011b39be5e741da13dfac96ef93733b2e6ad886c4d",
+      "kind": "official_test_output.txt",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/reference/offline_runner.log.gz.b64",
+      "sha256": "bdfd4703d1664b51b3022f39b29a77b7f4e3242b0e39558b0a4635d533e31393",
+      "kind": "official_offline_runner.log",
+      "encoding": "gzip+base64; decoded text is anonymized UTF-8"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/reference/eval.sh",
+      "sha256": "f19f19799be3225727fe3c1024f0613619db73cd31895de9482365b7923b20ae",
+      "kind": "official_eval.sh"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/pylint-dev__pylint-7080/reference/patch.diff",
+      "sha256": "f908ad1f6d4b8df3755a634c6741abf8ae613bc59278a54c16560c16d255580f",
+      "kind": "official_patch.diff"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/ledger.csv",
+      "sha256": "ac9f53f274d82a59eac114b739f93a0a948786b8fbf29be74d57fa638b894785",
+      "kind": "official_ledger_selected_columns"
+    },
+    {
+      "path": "data/logs/repair_endpoints/official/index.csv",
+      "sha256": "f47240e6711fa0162fdcf401606cd5b779060d91b1ba884b3f9b4c4cde03ed1e",
+      "kind": "official_record_locator"
+    },
+    {
+      "path": "data/logs/component_activity/diagnostics_60.jsonl",
+      "sha256": "1f6ec434d2f09aaef94fe20826652e676bb86ae0d3e3f76f6d8594f2b8953c4b",
+      "kind": "exact_task_subset"
+    },
+    {
+      "path": "data/logs/component_activity/task_join.csv",
+      "sha256": "2ba04d5793b7b52ec5b147107238e980cd5ce39831c54e63c6bd213ed45c9871",
+      "kind": "task_join"
+    },
+    {
+      "path": "data/logs/component_ablation/component_ablation_case_metrics.jsonl",
+      "sha256": "f5dfa6bd2f444d0e80e69e474f818c177ded9d2e68e87689b05f2c92ad86ef6f",
+      "kind": "existing_package_join_input"
+    },
+    {
+      "path": "data/logs/localization_methods/full_audit_localization/audit_verdicts.jsonl",
+      "sha256": "e2074036911e63f41d7157fbf69c4497b1765ceb86d5c6fc78601f21ce71832f",
+      "kind": "existing_package_join_input"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_bounded_aggregate.py.txt",
+      "sha256": "38a3e65a75acd4aa62e167e8daf135525ee9620d917d8a57f2a5dbf864522494",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_matplotlib_reconstructed_replay.py.txt",
+      "sha256": "26d9de9f54212ffce4319b9b7cc9d2a321d812ceff733e09e9f0aa760527a6ce",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_matplotlib_condition_replay.py.txt",
+      "sha256": "0af8b12af30a0e764ec6fa490abe27d91f7e7a1c17b142a8374926aebb22e1db",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_django_selected_test_replay.py.txt",
+      "sha256": "2aa79241c0cbfbcc48cc1dafcd87e0a51caf1e8378808777bb417ee35977026b",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_astropy_separability_replay.py.txt",
+      "sha256": "3fab1eb2c516e188891acf8f39cd6179e8a441f118ef96017d88d04845ef9fa5",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_cached_pair_replay.py.txt",
+      "sha256": "a4a508ac6c1cb10262a66e82c49b171d4986c1ff71577eeeeb622b4281dda115",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_additional_task_replay.py.txt",
+      "sha256": "efa293a970833a954a01329d1648bc1a4b9c8bf3581dec9363dc9d64980acd1d",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_bounded_replay_collector.py.txt",
+      "sha256": "7c45950c62edeebb51f5401ad2b2a845a5d7acd167386e034ef1074bbb701cb3",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_extended_task_replay.py.txt",
+      "sha256": "1ece2f4df46b948217f8ef9f476a4fef2de7eea84e088b1ac01f2af575e6be5f",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_followup_task_replay.py.txt",
+      "sha256": "70523ef626e3ced1c2fd9965792b4a9185c0e071f422ad12a0daf10477b6e77f",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_sphinx_scikit_replay.py.txt",
+      "sha256": "1ba2fbd95edb08d8ba50d52c683a6d202487d29ca9412cb0294c511898c63a70",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_astropy_batch_replay.py.txt",
+      "sha256": "49c1acfd7feb04ace284137a44236f0b17fa462735534c27cf05d4592a9da166",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_official_result_collector.py.txt",
+      "sha256": "5ebc8aaf32a78f46a91868faf4db8c5c32194b55d0b788c9171343b10d7b8349",
+      "kind": "historical_source_inspection_only"
+    },
+    {
+      "path": "data/logs/repair_endpoints/source_scripts/historical_official_result_collector_extended.py.txt",
+      "sha256": "593705642c7674ea13d36c15df403430b20a502405903922bae450234c8ce48b",
+      "kind": "historical_source_inspection_only"
+    }
+  ],
+  "release_adaptation": "Neutral snapshot names and local-path redaction; outcomes unchanged. Original-byte hashes retained separately."
+}

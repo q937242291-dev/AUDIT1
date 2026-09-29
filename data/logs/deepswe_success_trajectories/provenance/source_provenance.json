@@ -1,0 +1,115 @@
+{
+  "schema": "observational-provenance-v1",
+  "archived_statistics_source_rows": 13605,
+  "archived_statistics_source_strata": 63,
+  "paper_subset_rows": 1308,
+  "paper_subset_strata": 4,
+  "archived_statistics_are_not_four_stratum_rng_results": true,
+  "anonymization": "No author identities added. Host absolute paths removed from packaged copies. Dataset/model/task/trial identifiers preserved.",
+  "sources": [
+    {
+      "source_basename": "work2_success_sota_context_prevalence_ci_current_20260922.csv",
+      "original_sha256": "17fcb48c34cd66f79d7b4958af4da39e8b203ae391bd3c61cc5f04e6ef4eb9fd",
+      "original_rows": 693,
+      "selected_rows": 44,
+      "packaged_path": "data/logs/deepswe_success_trajectories/provenance/archived_context_prevalence_ci.csv",
+      "packaged_sha256": "98c937f1d7a9ae544be5368a40bee9b06a97b1ee45a458ab0494996fe1b8b399",
+      "transformation": "exact selected rows for the four paper configurations; identifiers and statistics unchanged"
+    },
+    {
+      "source_basename": "work2_success_sota_task_cluster_bootstrap_current_20260922.csv",
+      "original_sha256": "8841b38a5c2d47b4dabe6e4d3c4224b8d5ddbd6681eb48e130da9c0fbb191c0a",
+      "original_rows": 693,
+      "selected_rows": 44,
+      "packaged_path": "data/logs/deepswe_success_trajectories/provenance/archived_task_cluster_bootstrap.csv",
+      "packaged_sha256": "4c9967195cd3392570943d81f1e3c927485c08f21277ec1d4b15523069ce736e",
+      "transformation": "exact selected rows for the four paper configurations; identifiers and statistics unchanged"
+    },
+    {
+      "source_basename": "work2_success_sota_model_stratum_process_ci_current_20260922.csv",
+      "original_sha256": "92b03f950d2a9e4faa04bb605406d88287f10efc583a805d9d628637dbfb4cb2",
+      "original_rows": 63,
+      "selected_rows": 4,
+      "packaged_path": "data/logs/deepswe_success_trajectories/provenance/archived_model_stratum_process_ci.csv",
+      "packaged_sha256": "9d6496939526810a5fb3edaa226fc07a5055698c832940fa702e5ddb5811ea56",
+      "transformation": "exact selected rows for the four paper configurations; identifiers and statistics unchanged"
+    },
+    {
+      "source_basename": "work2_success_sota_paired_model_summary_current_20260922.csv",
+      "original_sha256": "cca7955e02355bdc65a5eb2694c64ac3ce9fd053ae055d52cbd9a050406ad531",
+      "original_rows": 29295,
+      "selected_rows": 3,
+      "packaged_path": "data/logs/deepswe_success_trajectories/provenance/archived_paired_model_summary.csv",
+      "packaged_sha256": "3b455c3f5ce7d9d0fddd492e7ce1a4fae19c8aedf45495a46d49e91f52cbba38",
+      "transformation": "exact selected rows for the four paper configurations; identifiers and statistics unchanged"
+    },
+    {
+      "source_basename": "work2_success_sota_confidence_statistics_summary_current_20260922.json",
+      "original_sha256": "f39be335273a8a5c19b489c942830d526639dd66c9aef91d8e4c4ed3d350e127",
+      "packaged_path": "data/logs/deepswe_success_trajectories/provenance/archived_confidence_summary.json",
+      "packaged_sha256": "597dda7186a4b3e41fc4d32f9abfaa292f28ebbc2d43cc947d4bf9829b855420",
+      "transformation": "absolute source path reduced to source filename"
+    },
+    {
+      "source_basename": "success_manifest.csv",
+      "original_sha256": "b8621962446db2784ff00cceb95c1f534b722bcab5d564fba1e957d5f306dcae",
+      "packaged_path": "data/logs/deepswe_success_trajectories/success_manifest.csv",
+      "packaged_sha256": "da6094f64b8778f5394bc86f3dca806072e976ab1436598679b0ba1a69b8ab7b",
+      "transformation": "only trajectory/local path columns replaced with relative acquisition targets; IDs and numeric data unchanged"
+    },
+    {
+      "source_basename": "success_trajectory_summary.csv",
+      "original_sha256": "0df9000b09821591352e0d67813b9809036257ed5c3afaa730e1f383eed0e30d",
+      "packaged_path": "data/logs/deepswe_success_trajectories/success_trajectory_summary.csv",
+      "packaged_sha256": "2ef439590b9ab34687d4bfd5575aae0249739e412a7cd3bd753cfd13227f6688",
+      "transformation": "only trajectory/local path columns replaced with relative acquisition targets; IDs and numeric data unchanged"
+    },
+    {
+      "source_basename": "parse_summary.json",
+      "original_sha256": "45762c3b4c24cd8e467a7e228391667e53bf60c834824d195c71c923f4607277",
+      "packaged_path": "data/logs/deepswe_success_trajectories/parse_summary.json",
+      "packaged_sha256": "d19bfba99f51b7a5baffe54e66764cfdafaf86ed11a11e06574256c323ad1d0f",
+      "transformation": "absolute source paths reduced to filenames"
+    },
+    {
+      "source_basename": "selection_summary.json",
+      "original_sha256": "5f079abf8b20bc1b376bd486e747432e009003aff9cdcba7d80e8c22a0a46b23",
+      "packaged_path": "data/logs/deepswe_success_trajectories/selection_summary.json",
+      "packaged_sha256": "f3528bd79437cf588a0568b66d2a49ac7c7e9fb2f4d337bf96e02f73790cf236",
+      "transformation": "absolute source paths reduced to filenames"
+    },
+    {
+      "source_basename": "success_trajectory_summary.csv",
+      "original_sha256": "1b2f5301905c1e68887a960a400f91d48168458ad2235850cb0446448c197145",
+      "packaged_path": "data/logs/swebench_pro_success_trajectories/success_trajectory_summary.csv",
+      "packaged_sha256": "fde9b723f7d3bdabf12935df60c046ab90006eaa54e54f7774cd63a1439ca677",
+      "transformation": "only trajectory/local path columns replaced with relative acquisition targets; IDs and numeric data unchanged"
+    },
+    {
+      "source_basename": "work2_deepswe_all_success_trajectory_summary_current_20260904.csv",
+      "original_sha256": "afb2b66eba73e6d8d96895560fda241929e08cbb87e114e7a5c4723f338ef4a7",
+      "selected_rows": 1308,
+      "selected_identity_and_statistics_equal": true,
+      "comparison_fields": [
+        "model",
+        "reasoning_effort",
+        "config",
+        "task_name",
+        "event_count",
+        "future_gold_signal_present",
+        "issue_specification_present",
+        "repository_orientation_present",
+        "code_search_present",
+        "direct_file_read_present",
+        "history_lookup_present",
+        "environment_setup_present",
+        "dependency_or_network_present",
+        "edit_or_patch_present",
+        "test_or_build_present",
+        "diff_validation_present",
+        "feedback_recovery_present",
+        "other_tool_step_present"
+      ]
+    }
+  ]
+}

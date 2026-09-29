@@ -1,0 +1,253 @@
+{
+  "analysis_id": "work2_replay_descriptive_analysis_current_20260904",
+  "generated_at_utc": "2026-09-04T03:56:15.161573+00:00",
+  "active_objective_sha256": "a3eff2928e60880e264b0ba75ece3b38ec62b4d9609588a9211f19046b52df5b",
+  "historical_source_objective_sha256": "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9",
+  "source_csv": "[LOCAL_DRIVE]/lossoracc\\analysis_outputs\\work2_30_task_multicheckpoint_replay_current_20260901\\multicheckpoint_replay.csv",
+  "source_csv_sha256": "5c2402d62a284a5da4876d02b4c5659dde5622237eb9815334dcf92f4c4c6171",
+  "source_rows": 300,
+  "unique_tasks": 30,
+  "repositories": 9,
+  "branches": {
+    "human": 150,
+    "OrcaLoca": 150
+  },
+  "checkpoint_days": [
+    7,
+    30,
+    90,
+    180,
+    365
+  ],
+  "derived_rows": {
+    "checkpoint_branch_metrics": 10,
+    "repo_checkpoint_branch_metrics": 90,
+    "task_trajectory": 60,
+    "status_transitions": 22,
+    "paired_checkpoint_metrics": 5
+  },
+  "branch_completed_all_rows": {
+    "human": 39,
+    "OrcaLoca": 37
+  },
+  "branch_completed_excluding_source_and_setup": {
+    "human": 0.325,
+    "OrcaLoca": 0.3008130081300813
+  },
+  "checkpoint_branch_metrics": [
+    {
+      "checkpoint_days": 7,
+      "branch": "human",
+      "rows": 30,
+      "completed_n": 17,
+      "textual_conflict_n": 8,
+      "source_unavailable_n": 3,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.5666666666666667,
+      "patch_only_denominator": 25,
+      "completed_rate_excluding_source_and_setup": 0.68,
+      "completed_rate_all_wilson95_low": 0.3919730700081361,
+      "completed_rate_all_wilson95_high": 0.7262251442353347,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.48410269273102247,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.8279480969309202
+    },
+    {
+      "checkpoint_days": 7,
+      "branch": "OrcaLoca",
+      "rows": 30,
+      "completed_n": 17,
+      "textual_conflict_n": 8,
+      "source_unavailable_n": 3,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.5666666666666667,
+      "patch_only_denominator": 25,
+      "completed_rate_excluding_source_and_setup": 0.68,
+      "completed_rate_all_wilson95_low": 0.3919730700081361,
+      "completed_rate_all_wilson95_high": 0.7262251442353347,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.48410269273102247,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.8279480969309202
+    },
+    {
+      "checkpoint_days": 30,
+      "branch": "human",
+      "rows": 30,
+      "completed_n": 12,
+      "textual_conflict_n": 13,
+      "source_unavailable_n": 3,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.4,
+      "patch_only_denominator": 25,
+      "completed_rate_excluding_source_and_setup": 0.48,
+      "completed_rate_all_wilson95_low": 0.24590628116801852,
+      "completed_rate_all_wilson95_high": 0.5767963974667752,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.30031285954112974,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.6650148304964322
+    },
+    {
+      "checkpoint_days": 30,
+      "branch": "OrcaLoca",
+      "rows": 30,
+      "completed_n": 11,
+      "textual_conflict_n": 14,
+      "source_unavailable_n": 3,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.36666666666666664,
+      "patch_only_denominator": 25,
+      "completed_rate_excluding_source_and_setup": 0.44,
+      "completed_rate_all_wilson95_low": 0.21873920806100708,
+      "completed_rate_all_wilson95_high": 0.5448643634520511,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.26665638881067344,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.6293266813020123
+    },
+    {
+      "checkpoint_days": 90,
+      "branch": "human",
+      "rows": 30,
+      "completed_n": 6,
+      "textual_conflict_n": 18,
+      "source_unavailable_n": 4,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.2,
+      "patch_only_denominator": 24,
+      "completed_rate_excluding_source_and_setup": 0.25,
+      "completed_rate_all_wilson95_low": 0.0950510717728987,
+      "completed_rate_all_wilson95_high": 0.3730569641314825,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.11999366228595004,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.44899444005154004
+    },
+    {
+      "checkpoint_days": 90,
+      "branch": "OrcaLoca",
+      "rows": 30,
+      "completed_n": 6,
+      "textual_conflict_n": 19,
+      "source_unavailable_n": 3,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.2,
+      "patch_only_denominator": 25,
+      "completed_rate_excluding_source_and_setup": 0.24,
+      "completed_rate_all_wilson95_low": 0.0950510717728987,
+      "completed_rate_all_wilson95_high": 0.3730569641314825,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.11496313693401444,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.4342968335542908
+    },
+    {
+      "checkpoint_days": 180,
+      "branch": "human",
+      "rows": 30,
+      "completed_n": 2,
+      "textual_conflict_n": 21,
+      "source_unavailable_n": 5,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.06666666666666667,
+      "patch_only_denominator": 23,
+      "completed_rate_excluding_source_and_setup": 0.08695652173913043,
+      "completed_rate_all_wilson95_low": 0.018477023791270378,
+      "completed_rate_all_wilson95_high": 0.2132345836261692,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.024180004484220363,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.26795981075743663
+    },
+    {
+      "checkpoint_days": 180,
+      "branch": "OrcaLoca",
+      "rows": 30,
+      "completed_n": 2,
+      "textual_conflict_n": 22,
+      "source_unavailable_n": 4,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.06666666666666667,
+      "patch_only_denominator": 24,
+      "completed_rate_excluding_source_and_setup": 0.08333333333333333,
+      "completed_rate_all_wilson95_low": 0.018477023791270378,
+      "completed_rate_all_wilson95_high": 0.2132345836261692,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.023158815297043306,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.25848802193210685
+    },
+    {
+      "checkpoint_days": 365,
+      "branch": "human",
+      "rows": 30,
+      "completed_n": 2,
+      "textual_conflict_n": 21,
+      "source_unavailable_n": 5,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.06666666666666667,
+      "patch_only_denominator": 23,
+      "completed_rate_excluding_source_and_setup": 0.08695652173913043,
+      "completed_rate_all_wilson95_low": 0.018477023791270378,
+      "completed_rate_all_wilson95_high": 0.2132345836261692,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.024180004484220363,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.26795981075743663
+    },
+    {
+      "checkpoint_days": 365,
+      "branch": "OrcaLoca",
+      "rows": 30,
+      "completed_n": 1,
+      "textual_conflict_n": 23,
+      "source_unavailable_n": 4,
+      "task_setup_failure_n": 2,
+      "completed_rate_all_rows": 0.03333333333333333,
+      "patch_only_denominator": 24,
+      "completed_rate_excluding_source_and_setup": 0.041666666666666664,
+      "completed_rate_all_wilson95_low": 0.005908590381612455,
+      "completed_rate_all_wilson95_high": 0.16670390991409173,
+      "completed_rate_excluding_source_and_setup_wilson95_low": 0.0073934561655057685,
+      "completed_rate_excluding_source_and_setup_wilson95_high": 0.20241806478655938
+    }
+  ],
+  "paired_checkpoint_metrics": [
+    {
+      "checkpoint_days": 7,
+      "task_pairs": 30,
+      "status_identical_pairs": 30,
+      "status_identical_rate": 1.0,
+      "discordant_pairs": 0,
+      "pairs_by_status": "{\"same:checkpoint_replay_completed\": 17, \"same:future_textual_conflict\": 8, \"same:source_unavailable_during_replay\": 3, \"same:task_setup_failure\": 2}"
+    },
+    {
+      "checkpoint_days": 30,
+      "task_pairs": 30,
+      "status_identical_pairs": 29,
+      "status_identical_rate": 0.9666666666666667,
+      "discordant_pairs": 1,
+      "pairs_by_status": "{\"discordant:checkpoint_replay_completed__future_textual_conflict\": 1, \"same:checkpoint_replay_completed\": 11, \"same:future_textual_conflict\": 13, \"same:source_unavailable_during_replay\": 3, \"same:task_setup_failure\": 2}"
+    },
+    {
+      "checkpoint_days": 90,
+      "task_pairs": 30,
+      "status_identical_pairs": 29,
+      "status_identical_rate": 0.9666666666666667,
+      "discordant_pairs": 1,
+      "pairs_by_status": "{\"discordant:source_unavailable_during_replay__future_textual_conflict\": 1, \"same:checkpoint_replay_completed\": 6, \"same:future_textual_conflict\": 18, \"same:source_unavailable_during_replay\": 3, \"same:task_setup_failure\": 2}"
+    },
+    {
+      "checkpoint_days": 180,
+      "task_pairs": 30,
+      "status_identical_pairs": 29,
+      "status_identical_rate": 0.9666666666666667,
+      "discordant_pairs": 1,
+      "pairs_by_status": "{\"discordant:source_unavailable_during_replay__future_textual_conflict\": 1, \"same:checkpoint_replay_completed\": 2, \"same:future_textual_conflict\": 21, \"same:source_unavailable_during_replay\": 4, \"same:task_setup_failure\": 2}"
+    },
+    {
+      "checkpoint_days": 365,
+      "task_pairs": 30,
+      "status_identical_pairs": 28,
+      "status_identical_rate": 0.9333333333333333,
+      "discordant_pairs": 2,
+      "pairs_by_status": "{\"discordant:checkpoint_replay_completed__future_textual_conflict\": 1, \"discordant:source_unavailable_during_replay__future_textual_conflict\": 1, \"same:checkpoint_replay_completed\": 1, \"same:future_textual_conflict\": 21, \"same:source_unavailable_during_replay\": 4, \"same:task_setup_failure\": 2}"
+    }
+  ],
+  "status_counts": {
+    "future_textual_conflict": 167,
+    "checkpoint_replay_completed": 76,
+    "task_setup_failure": 20,
+    "source_unavailable_during_replay": 37
+  },
+  "data_identity_match": true,
+  "formal_promotion": false,
+  "provider_calls": 0,
+  "network_used": false,
+  "audit_pass": true,
+  "claim_boundary": "Provider-free descriptive stratification of an existing 30-task, five-checkpoint F2P replay. Each checkpoint is an independently attempted bounded replay, so the rows describe checkpoint state composition and paired status agreement; they are not longitudinal survival, semantic, behavioral, adaptation, causal, or formal current-objective outcomes."
+}

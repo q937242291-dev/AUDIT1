@@ -1,0 +1,4 @@
+stratum_a,stratum_b,shared_task_count,mean_difference_a_minus_b,bootstrap95_lower,bootstrap95_upper,replicates,seed,estimator
+claude-opus-5[high],gpt-5-6-sol[max],89,12.350187265917603,7.963483146067416,17.406367041198504,2000,20260922,mean_of_task_mean_event_differences
+claude-opus-5[max],gpt-5-6-sol[max],89,39.36797752808989,34.57303370786517,44.55149812734083,2000,20260922,mean_of_task_mean_event_differences
+claude-opus-5[xhigh],gpt-5-6-sol[max],88,28.233901515151516,23.268939393939394,33.40056818181818,2000,20260922,mean_of_task_mean_event_differences

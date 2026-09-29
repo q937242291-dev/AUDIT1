@@ -1,0 +1,43 @@
+{
+  "name": "minus_path_verification",
+  "enabled_modules": [
+    "grounding",
+    "ownership",
+    "contradiction",
+    "detour",
+    "memory",
+    "abstention"
+  ],
+  "controller": "full",
+  "module_parameters": {
+    "minimum_grounding_refs": 1,
+    "minimum_abstention_refs": 1,
+    "detour_window": 8,
+    "detour_repeat_threshold": 2
+  },
+  "controller_parameters": {
+    "hard_veto_modules": [
+      "path_verification",
+      "grounding",
+      "ownership",
+      "contradiction"
+    ],
+    "evidence_precedence": [
+      "grounding",
+      "ownership",
+      "contradiction",
+      "path_verification",
+      "memory",
+      "detour"
+    ],
+    "vote_rule": "plurality",
+    "candidate_tie_break": "lexical_path",
+    "abstain_tie_priority": "first"
+  },
+  "quality_parameters": {
+    "token_budget": 4096,
+    "call_budget": 16,
+    "elapsed_ms_budget": null
+  },
+  "parameter_origin": "artifact_configuration"
+}

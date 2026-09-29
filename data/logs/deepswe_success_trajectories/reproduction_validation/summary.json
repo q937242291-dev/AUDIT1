@@ -1,0 +1,66 @@
+{
+  "trajectory_count": 1308,
+  "total_events": 109911,
+  "signatures": 98,
+  "backbone_count": 1089,
+  "backbone_share": 0.8325688073394495,
+  "task_counts": {
+    "claude-opus-5[high]": 99,
+    "claude-opus-5[max]": 100,
+    "claude-opus-5[xhigh]": 97,
+    "gpt-5-6-sol[max]": 97
+  },
+  "replicates": 2000,
+  "seed": 20260922,
+  "bootstrap_rng": "random.Random, sequential source ordering over four strata",
+  "quantiles": "sorted draws indices max(0,int(.025*B)-1), min(B-1,int(.975*B))",
+  "repository_bootstrap": "unavailable: no repository identifier",
+  "network_calls": 0,
+  "model_calls": 0,
+  "paper_numeric_mismatches": [
+    {
+      "claim": "Table3C/claude-opus-5[high]/mean_units",
+      "computed": 5.4067278287461775,
+      "manuscript": 6.41,
+      "difference": -1.0032721712538226,
+      "comparison_decimal_places": 2,
+      "status": "MISMATCH"
+    },
+    {
+      "claim": "Table3C/claude-opus-5[max]/mean_units",
+      "computed": 5.758409785932722,
+      "manuscript": 6.76,
+      "difference": -1.0015902140672779,
+      "comparison_decimal_places": 2,
+      "status": "MISMATCH"
+    },
+    {
+      "claim": "Table3C/claude-opus-5[xhigh]/mean_units",
+      "computed": 5.681957186544342,
+      "manuscript": 6.68,
+      "difference": -0.9980428134556574,
+      "comparison_decimal_places": 2,
+      "status": "MISMATCH"
+    },
+    {
+      "claim": "Table3C/gpt-5-6-sol[max]/mean_units",
+      "computed": 4.26605504587156,
+      "manuscript": 5.27,
+      "difference": -1.00394495412844,
+      "comparison_decimal_places": 2,
+      "status": "MISMATCH"
+    },
+    {
+      "claim": "Table3C/Overall/mean_units",
+      "computed": 5.2782874617737,
+      "manuscript": 6.28,
+      "difference": -1.0017125382263004,
+      "comparison_decimal_places": 2,
+      "status": "MISMATCH"
+    }
+  ],
+  "estimator_mismatch": "Table 3 pooled/stratum/Wilson columns describe trajectories; historical task bootstrap describes at-least-one-positive-run tasks.",
+  "input_sha256": "2ef439590b9ab34687d4bfd5575aae0249739e412a7cd3bd753cfd13227f6688",
+  "script_sha256": "e988628fe2bb88d77152bb98dae1326cd695826d2fa1200cd228e87956a796e5",
+  "python_version": "3.13.3"
+}

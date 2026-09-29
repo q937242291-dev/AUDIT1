@@ -1,0 +1,10 @@
+{
+  "figures_1_2": "Cropped manuscript illustrations; source data and editable artwork are not reconstructed by extraction.",
+  "figure_3": "Success-conditioned trajectory prevalence; orientation zero is parser non-observation.",
+  "figure_4c": "Completed-run denominator, aligned with Table 5; original scheduled-rate panel differs for two incomplete variants.",
+  "figure_4d": "260-task diagnostic cohort, distinct from the Table 1 60-task same-ID different-run join.",
+  "figure_5": "Projection is 6 distinct tasks \u00d7 3 seeds \u00d7 5 conditions. Table 4 effects are run-level and include repeated tasks.",
+  "figure_7b": "Recomputed from 2400 recovered prediction rows. Only path-audit LLM varies; source slices not certified as benchmark release splits.",
+  "figure_7c": "d7=34/60=56.7%; d30=23/60=38.3%; manuscript labels 56.5/38.2 are not retained.",
+  "layout": "New data-driven layouts; panel placement and typography need not be pixel-identical to manuscript."
+}

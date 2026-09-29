@@ -1,0 +1,44 @@
+import run_work2_three_additional_tasks_replay_20260907 as runner
+
+
+runner.OUT = runner.ROOT / "artifacts/work2_sphinx_scikit_batch2_replay_20260907_v1"
+runner.ZIP = runner.OUT.with_suffix(".zip")
+runner.TASKS = [
+    {
+        "task_id": "sphinx-doc__sphinx-10325",
+        "repository": "sphinx-doc/sphinx",
+        "image": "ghcr.io/openhands/eval-agent-server:3e0a3a0-sweb.eval.x86_64.sphinx-doc_1776_sphinx-10325-source-minimal",
+        "base_commit": "7bdc11e87c7d86dcc2a087eccb7a7c129a473415",
+        "relative_dir": "logs_v20/gold_sphinx-doc__sphinx-10325",
+        "test_file": "tests/roots/test-ext-autodoc/target/inheritance.py; tests/test_ext_autodoc_automodule.py",
+        "test_command": "tox --current-env -epy39 -v -- tests/roots/test-ext-autodoc/target/inheritance.py tests/test_ext_autodoc_automodule.py",
+        "install": "python -m pip install 'Jinja2==3.0.3'; python -m pip install -e .[test]",
+        "allowed_paths": ["sphinx/ext/autodoc/__init__.py"],
+    },
+    {
+        "task_id": "scikit-learn__scikit-learn-10508",
+        "repository": "scikit-learn/scikit-learn",
+        "image": "sweb.eval.x86_64.scikit-learn__scikit-learn-10508:latest",
+        "base_commit": "c753b77ac49e72ebc0fe5e3c2369fe628f975017",
+        "relative_dir": "logs_v20/gold_scikit-learn__scikit-learn-10508",
+        "test_file": "sklearn/preprocessing/tests/test_label.py",
+        "test_command": "pytest -rA sklearn/preprocessing/tests/test_label.py",
+        "install": "python -m pip install -v --no-use-pep517 --no-build-isolation -e .",
+        "allowed_paths": ["sklearn/preprocessing/label.py"],
+    },
+    {
+        "task_id": "scikit-learn__scikit-learn-10949",
+        "repository": "scikit-learn/scikit-learn",
+        "image": "sweb.eval.x86_64.scikit-learn__scikit-learn-10949:latest",
+        "base_commit": "3b5abf76597ce6aff76192869f92647c1b5259e7",
+        "relative_dir": "logs_v20/gold_scikit-learn__scikit-learn-10949",
+        "test_file": "sklearn/utils/tests/test_validation.py",
+        "test_command": "pytest -rA sklearn/utils/tests/test_validation.py",
+        "install": "python -m pip install -v --no-use-pep517 --no-build-isolation -e .",
+        "allowed_paths": ["sklearn/utils/validation.py"],
+    },
+]
+
+
+if __name__ == "__main__":
+    raise SystemExit(runner.main())

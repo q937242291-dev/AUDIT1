@@ -1,0 +1,6 @@
+﻿condition_id,condition_label,n,completed,errors,candidate_nonempty_rate,confidence_mean,FileHit@1_posthoc_mean,FileHit@3_posthoc_mean,FileHit@5_posthoc_mean,FileHit@1_bootstrap95_low,FileHit@1_bootstrap95_high,candidate_count_mean,total_tokens_mean,latency_ms_mean,issue_visible_rate,future_payload_visible_rate,location_payload_visible_rate,diff_payload_visible_rate
+C_future_scrubbed,C,18,18,0,1.0000,0.8294,0.8889,1.0000,1.0000,0.7222,1.0000,2.1111,1206.2778,12287.3889,1.0000,0.0000,0.0000,0.0000
+D_diff_only,D,18,18,0,0.0000,0.2778,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,440.9444,7062.8333,0.0000,0.0000,0.0000,0.0000
+L_location_only,L,18,18,0,0.0000,0.1111,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,442.8889,6995.5556,0.0000,0.0000,0.0000,0.0000
+O_original_future_info,O,18,18,0,0.9444,0.8217,0.8889,0.9444,0.9444,0.7222,1.0000,1.8333,1200.3889,14593.5556,1.0000,0.0000,0.0000,0.0000
+P_equal_length_legal_history,P,18,18,0,0.8889,0.7511,0.8333,0.8889,0.8889,0.6667,1.0000,1.7778,1157.0000,12169.1667,1.0000,0.0000,0.0000,0.0000

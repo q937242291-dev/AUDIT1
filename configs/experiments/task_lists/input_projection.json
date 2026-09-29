@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "name": "input_projection",
+  "source": "controlled/input_projection/summary/cell_level_metrics.csv",
+  "source_sha256": "3ebbda5ba0fe54ddd7895c369ddb539a8bc572c45fba37fbcff2873a483a27cb",
+  "id_field": "task_id",
+  "repeat_fields": [
+    "seed",
+    "variant"
+  ],
+  "selection": [
+    "condition_id",
+    "C_future_scrubbed"
+  ],
+  "assignment_count": 18,
+  "task_ids": [
+    "astropy__astropy-12907",
+    "django__django-12308",
+    "django__django-13448",
+    "django__django-13590",
+    "django__django-13660",
+    "django__django-15738"
+  ],
+  "units": [
+    {
+      "unit_id": "0c2a44a1fc7599a6453fc55d",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "seed-01",
+        "shenji_v9_no_memory"
+      ],
+      "source_row": 1,
+      "replicate": "seed-01",
+      "checkpoint_id": "",
+      "seed": "seed-01",
+      "variant": "shenji_v9_no_memory"
+    },
+    {
+      "unit_id": "6b8d244c230f0b6df956a32b",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "seed-02",
+        "shenji_v9_no_memory"
+      ],
+      "source_row": 2,
+      "replicate": "seed-02",
+      "checkpoint_id": "",
+      "seed": "seed-02",
+      "variant": "shenji_v9_no_memory"
+    },
+    {
+      "unit_id": "756d8c734890932c0fbc7426",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907",
+        "seed-03",
+        "shenji_v9_no_memory"
+      ],
+      "source_row": 3,
+      "replicate": "seed-03",
+      "checkpoint_id": "",
+      "seed": "seed-03",
+      "variant": "shenji_v9_no_memory"
+    },
+    {
+      "unit_id": "51050c401d7bf163348ab55a",
+      "instance_id": "django__django-12308",
+      "source_key": [
+        "django__django-12308",
+        "seed-01",
+        "shenji_v9_no_contradiction"
+      ],
+      "source_row": 16,
+      "replicate": "seed-01",
+      "checkpoint_id": "",
+      "seed": "seed-01",
+      "variant": "shenji_v9_no_contradiction"
+    },
+    {
+      "unit_id": "26ce909cc0db079767582f4f",
+      "instance_id": "django__django-12308",
+      "source_key": [
+        "django__django-12308",
+        "seed-02",
+        "shenji_v9_no_contradiction"
+      ],
+      "source_row": 17,
+      "replicate": "seed-02",
+      "checkpoint_id": "",
+      "seed": "seed-02",
+      "variant": "shenji_v9_no_contradiction"
+    },
+    {
+      "unit_id": "07ffdb007aa3ab98d012173c",
+      "instance_id": "django__django-12308",
+      "source_key": [
+        "django__django-12308",
+        "seed-03",
+        "shenji_v9_no_contradiction"
+      ],
+      "source_row": 18,
+      "replicate": "seed-03",
+      "checkpoint_id": "",
+      "seed": "seed-03",
+      "variant": "shenji_v9_no_contradiction"
+    },
+    {
+      "unit_id": "3ba1a948020bd41d269dd544",
+      "instance_id": "django__django-13448",
+      "source_key": [
+        "django__django-13448",
+        "seed-01",
+        "shenji_v9_no_detour"
+      ],
+      "source_row": 31,
+      "replicate": "seed-01",
+      "checkpoint_id": "",
+      "seed": "seed-01",
+      "variant": "shenji_v9_no_detour"
+    },
+    {
+      "unit_id": "e2ac82df9b6ffb098005408a",
+      "instance_id": "django__django-13448",
+      "source_key": [
+        "django__django-13448",
+        "seed-02",
+        "shenji_v9_no_detour"
+      ],
+      "source_row": 32,
+      "replicate": "seed-02",
+      "checkpoint_id": "",
+      "seed": "seed-02",
+      "variant": "shenji_v9_no_detour"
+    },
+    {
+      "unit_id": "25d8c6bb8c40f830dc44a905",
+      "instance_id": "django__django-13448",
+      "source_key": [
+        "django__django-13448",
+        "seed-03",
+        "shenji_v9_no_detour"
+      ],
+      "source_row": 33,
+      "replicate": "seed-03",
+      "checkpoint_id": "",
+      "seed": "seed-03",
+      "variant": "shenji_v9_no_detour"
+    },
+    {
+      "unit_id": "c21f77f3a7710ba0f9847493",
+      "instance_id": "django__django-13590",
+      "source_key": [
+        "django__django-13590",
+        "seed-01",
+        "shenji_v9_audit_no_expansion"
+      ],
+      "source_row": 46,
+      "replicate": "seed-01",
+      "checkpoint_id": "",
+      "seed": "seed-01",
+      "variant": "shenji_v9_audit_no_expansion"
+    },
+    {
+      "unit_id": "055c876d8e89f90c394186f9",
+      "instance_id": "django__django-13590",
+      "source_key": [
+        "django__django-13590",
+        "seed-02",
+        "shenji_v9_audit_no_expansion"
+      ],
+      "source_row": 47,
+      "replicate": "seed-02",
+      "checkpoint_id": "",
+      "seed": "seed-02",
+      "variant": "shenji_v9_audit_no_expansion"
+    },
+    {
+      "unit_id": "b2dac3f5421d898e8d0ac1df",
+      "instance_id": "django__django-13590",
+      "source_key": [
+        "django__django-13590",
+        "seed-03",
+        "shenji_v9_audit_no_expansion"
+      ],
+      "source_row": 48,
+      "replicate": "seed-03",
+      "checkpoint_id": "",
+      "seed": "seed-03",
+      "variant": "shenji_v9_audit_no_expansion"
+    },
+    {
+      "unit_id": "82993a70215d226bd336173a",
+      "instance_id": "django__django-13660",
+      "source_key": [
+        "django__django-13660",
+        "seed-01",
+        "shenji_v9_majority_vote_controller"
+      ],
+      "source_row": 61,
+      "replicate": "seed-01",
+      "checkpoint_id": "",
+      "seed": "seed-01",
+      "variant": "shenji_v9_majority_vote_controller"
+    },
+    {
+      "unit_id": "ae7cf60f17c988aa8ad7ab65",
+      "instance_id": "django__django-13660",
+      "source_key": [
+        "django__django-13660",
+        "seed-02",
+        "shenji_v9_majority_vote_controller"
+      ],
+      "source_row": 62,
+      "replicate": "seed-02",
+      "checkpoint_id": "",
+      "seed": "seed-02",
+      "variant": "shenji_v9_majority_vote_controller"
+    },
+    {
+      "unit_id": "276315be21fbca51d8f5b9ba",
+      "instance_id": "django__django-13660",
+      "source_key": [
+        "django__django-13660",
+        "seed-03",
+        "shenji_v9_majority_vote_controller"
+      ],
+      "source_row": 63,
+      "replicate": "seed-03",
+      "checkpoint_id": "",
+      "seed": "seed-03",
+      "variant": "shenji_v9_majority_vote_controller"
+    },
+    {
+      "unit_id": "b399bbcf4bcacf1ab1919463",
+      "instance_id": "django__django-15738",
+      "source_key": [
+        "django__django-15738",
+        "seed-01",
+        "shenji_v9_no_abstention"
+      ],
+      "source_row": 76,
+      "replicate": "seed-01",
+      "checkpoint_id": "",
+      "seed": "seed-01",
+      "variant": "shenji_v9_no_abstention"
+    },
+    {
+      "unit_id": "2f74b663ace9e60da70f0b9b",
+      "instance_id": "django__django-15738",
+      "source_key": [
+        "django__django-15738",
+        "seed-02",
+        "shenji_v9_no_abstention"
+      ],
+      "source_row": 77,
+      "replicate": "seed-02",
+      "checkpoint_id": "",
+      "seed": "seed-02",
+      "variant": "shenji_v9_no_abstention"
+    },
+    {
+      "unit_id": "edaca6c534194dcbb4c0b969",
+      "instance_id": "django__django-15738",
+      "source_key": [
+        "django__django-15738",
+        "seed-03",
+        "shenji_v9_no_abstention"
+      ],
+      "source_row": 78,
+      "replicate": "seed-03",
+      "checkpoint_id": "",
+      "seed": "seed-03",
+      "variant": "shenji_v9_no_abstention"
+    }
+  ]
+}

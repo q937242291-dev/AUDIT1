@@ -1,0 +1,292 @@
+{
+  "scope": "Neutral filenames and local-path/credential redactions only; no empirical outcome substitution",
+  "changes": [
+    {
+      "action": "archive_obsolete",
+      "path": "paper/fse2027_audit_manuscript.pdf",
+      "source_sha256": "73301e92e2f4bef2881f73a5c22cce5392b2c777e188c46b25182a083e7d83c7"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "github_upload_guide.md",
+      "source_sha256": "e032f85c066464f86f03c45ffbbfee0aa986966e22ace8cd44de0819e3e76de7"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "scripts/make_paper_figures.py",
+      "source_sha256": "9d5030b5540d1492eaf3d1234960654ce95b2aca89a4a9904a969b409d166f02"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "scripts/recompute_paper_tables.py",
+      "source_sha256": "84230e7fb301006a86c84a469c6952d779ebb1c5a981bdc5bb43a0a356b336a9"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "scripts/package_project.ps1",
+      "source_sha256": "d0b86af7445dcd78b8e1545081996818e455be44feb611f1fac472afe063559f"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "scripts/validate_package.ps1",
+      "source_sha256": "bde69b9733245a0e2554a7f32477049b992d217f011077090d244e5ff22e4682"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "docs/legacy_package_comparison.md",
+      "source_sha256": "a68179e41f9ee900659afc7f63d68604b6fc5b3016245a1dcfc1b923a66b2f25"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "docs/paper_alignment.md",
+      "source_sha256": "e83b9529b279c0b6a0c656dd33d1b61d8b64a9f5f4e5c5bcf1b805fdf0a418f7"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "docs/reproduce.md",
+      "source_sha256": "a37d31905b3eb94ccc01e505f1ca977f754886d6d68f9082305857d4e73c2b55"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "docs/security_and_publication.md",
+      "source_sha256": "fe17200c5ad08017c80bc51498675ff1556df2dd75eb2639b28cb72718409e0c"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "docs/data_scope.md",
+      "source_sha256": "0031c6ab1f175e8dd6c025929e296de904594ff36c0a10d63697e64b85c86e8f"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "docs/data_acquisition_and_provenance.md",
+      "source_sha256": "95040165e263816ab0b3652bda502e4a240fa53af6c6f769e10e8c077654d87b"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "figures/fig4_progressive_context.svg",
+      "source_sha256": "a254e070098d9b4ae0a5b63b698b8443ac357caaac5f65aa6ae05432b76408df"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "figures/fig7_replay_categories.svg",
+      "source_sha256": "f5ae7f5f85f38039b0ce65c079b7880a06dcad73366189b7d23fa4c299bc638e"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "figures/fig8_matched_context_cost.svg",
+      "source_sha256": "ea743f3a425c4832a2e7f4ca299d81b6ce15bb3bb71fa849625afe419a51c872"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "data/derived/table2_component_activity.csv",
+      "source_sha256": "adc5de0354f8a7b27d9a72eeda43b1b7e8bf62024ce580ebf0c060f1cbf98e4f"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "data/derived/model_swap_summary.csv",
+      "source_sha256": "fbaa7aa35b1485639ba02b1a561dc71da9acf99f5f1dfc1861394cc40eaa1481"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "data/manifests/evidence_layer_register.csv",
+      "source_sha256": "153eb55a5238b1ae8ff00f6b4dd99d9b38027ab00f9efdd687c54646e4c3d4c2"
+    },
+    {
+      "action": "archive_obsolete",
+      "path": "data/logs/repair_endpoints/reproduced",
+      "source_sha256": "directory"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/build_work2_three_condition_aggregate_current_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_bounded_aggregate.py.txt",
+      "source_sha256": "38a3e65a75acd4aa62e167e8daf135525ee9620d917d8a57f2a5dbf864522494"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/build_work2_three_more_final_replay_package_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_bounded_replay_collector.py.txt",
+      "source_sha256": "7c45950c62edeebb51f5401ad2b2a845a5d7acd167386e034ef1074bbb701cb3"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/collect_work2_t0_official_results_20260901.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_official_result_collector.py.txt",
+      "source_sha256": "5ebc8aaf32a78f46a91868faf4db8c5c32194b55d0b788c9171343b10d7b8349"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/collect_work2_t0_official_results_current_v8_20260901.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_official_result_collector_extended.py.txt",
+      "source_sha256": "593705642c7674ea13d36c15df403430b20a502405903922bae450234c8ce48b"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_astropy12907_three_condition_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_astropy_separability_replay.py.txt",
+      "source_sha256": "3fab1eb2c516e188891acf8f39cd6179e8a441f118ef96017d88d04845ef9fa5"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_astropy_three_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_astropy_batch_replay.py.txt",
+      "source_sha256": "49c1acfd7feb04ace284137a44236f0b17fa462735534c27cf05d4592a9da166"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_cached_two_task_three_condition_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_cached_pair_replay.py.txt",
+      "source_sha256": "a4a508ac6c1cb10262a66e82c49b171d4986c1ff71577eeeeb622b4281dda115"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_django10924_three_condition_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_django_selected_test_replay.py.txt",
+      "source_sha256": "2aa79241c0cbfbcc48cc1dafcd87e0a51caf1e8378808777bb417ee35977026b"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_matplotlib23476_three_condition_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_matplotlib_condition_replay.py.txt",
+      "source_sha256": "0af8b12af30a0e764ec6fa490abe27d91f7e7a1c17b142a8374926aebb22e1db"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_matplotlib23562_reconstructed_exact_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_matplotlib_reconstructed_replay.py.txt",
+      "source_sha256": "26d9de9f54212ffce4319b9b7cc9d2a321d812ceff733e09e9f0aa760527a6ce"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_sphinx_scikit_batch2_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_sphinx_scikit_replay.py.txt",
+      "source_sha256": "1ba2fbd95edb08d8ba50d52c683a6d202487d29ca9412cb0294c511898c63a70"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_three_additional_tasks_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_additional_task_replay.py.txt",
+      "source_sha256": "efa293a970833a954a01329d1648bc1a4b9c8bf3581dec9363dc9d64980acd1d"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_three_more_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_extended_task_replay.py.txt",
+      "source_sha256": "1ece2f4df46b948217f8ef9f476a4fef2de7eea84e088b1ac01f2af575e6be5f"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/repair_endpoints/source_scripts/run_work2_three_next_replay_20260907.py.txt",
+      "released_path": "data/logs/repair_endpoints/source_scripts/historical_followup_task_replay.py.txt",
+      "source_sha256": "70523ef626e3ced1c2fd9965792b4a9185c0e071f422ad12a0daf10477b6e77f"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/deepswe_success_trajectories/provenance/build_work2_latest_pro_success_log_analysis_current_20260919.py.txt",
+      "released_path": "data/logs/deepswe_success_trajectories/provenance/historical_pro_trajectory_parser.py.txt",
+      "source_sha256": "fd0faa7e488314cc85f093eceb71e3401ad4569c846b5036faf18fc4d8059e60"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/deepswe_success_trajectories/provenance/build_work2_success_sota_confidence_statistics_current_20260922.py.txt",
+      "released_path": "data/logs/deepswe_success_trajectories/provenance/historical_success_confidence_statistics.py.txt",
+      "source_sha256": "34262dc8a9d54383456c1f6bf0bc80affc9cd1cb62f778e61768c1202c2836d1"
+    },
+    {
+      "action": "rename",
+      "path": "data/logs/deepswe_success_trajectories/provenance/parse_work2_deepswe_current_sota_top10_success_logs_current_20260922.py.txt",
+      "released_path": "data/logs/deepswe_success_trajectories/provenance/historical_deepswe_trajectory_parser.py.txt",
+      "source_sha256": "2941fcfae2e79405be60f1e27839e1d28d2fce236d45536331f1b5ecf999b64e"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "external/public_artifact_pointers.md",
+      "source_sha256": "fe3964847d36f9c4d77ca4f01bc88c3b3f9521e654109452c0411ae027fbe116",
+      "released_sha256": "e8b647d98fc36126e97a451b2b62c3131a051d9a254c68b9d2d810cf5178a73a"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "scripts/fetch_public_trajectory_logs.py",
+      "source_sha256": "264d2b71bfe6a8c54fca705d84f9b5013b8a6d992bd6cb5eaeaceb94898c18e3",
+      "released_sha256": "2836d6f35ba36b9e0e0850b35c5a6691a8791f9cc2460d69898d7df85ecfce4e"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "scripts/parse_public_trajectory_logs.py",
+      "source_sha256": "61882fd915650fb9f96a37e7226b801bfa8c23d3d3f0de80dd8e9d972876f19d",
+      "released_sha256": "7b0f94e4b973361a783d8bd394a492b50aa4f0b10b5848e9c25830dd40515c4f"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "reproduced/run_logs/figures.txt",
+      "source_sha256": "016428a915ccf3100dc3264fb6787903a603050c47983475b411e29931d244e1",
+      "released_sha256": "8699cb2f4b6a4ddce9582106ed1659c57efc1c6696dc6767100ace8445abefd9"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/logs/audit_policy/acquisition_worklog.json",
+      "source_sha256": "5bf18f8c225a0bba812afb8c9c965a9d11b49f2b8e074a090350768000321369",
+      "released_sha256": "e5d5be4f196a5ef21c4e9296d4e2383902b27420cd0549f133c1e3897c172747"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/logs/audit_policy/summary.json",
+      "source_sha256": "56e165f2349a7ca290bd769faf94e180d1620f24fbd3804758fcc60af2e43379",
+      "released_sha256": "3dc1a6373195f6c142680f32d40a3190277d99c05f0199478e624b8aaca172a7"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/logs/matched_context/reconciliation.json",
+      "source_sha256": "a8d6737d5347fa57a422cff7dde83b4879192941af8ba5cc7e929e1b1055c382",
+      "released_sha256": "200db8ad31a1414765ef2cd678860bb23d87fb9f8cc3daa9f3e46f6af0dc1cad"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/logs/repair_endpoints/evidence_manifest.json",
+      "source_sha256": "42fabb8f4cf979d1f306cf9fba7e7fc44924f58492c5cfd84df5178f55f616a0",
+      "released_sha256": "ea357ed1b0dc71cdcac9985c5de3758b735c4c05575227d67a809e967747cd7d"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/logs/trajectory_replay/history_event_ledger.csv",
+      "source_sha256": "c0d00fa84e8ab9af76ff04de18b741085dd044b75e9b63fd8c2322d8e840b3c1",
+      "released_sha256": "851b6c7f6dc24c58d7cee39447df7f46261a1903b431d7c99b157995b83cc970"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/logs/trajectory_replay/multicheckpoint_replay.csv",
+      "source_sha256": "5c2402d62a284a5da4876d02b4c5659dde5622237eb9815334dcf92f4c4c6171",
+      "released_sha256": "2a2b684c64b377dfdd9166d0432dbd56a372b7bf58c030275144b6f737000e11"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/logs/deepswe_success_trajectories/provenance/source_methods.json",
+      "source_sha256": "097431485d85629c593e2cf741084e2c1abec05a7f85582d9d884d3767370591",
+      "released_sha256": "1f3c2ba29f8eb36dabe34f813975ee8375b0c0b7d124cb86efbdba1159c5d9f3"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/controlled/trajectory_replay/analysis/core_replay_summary.json",
+      "source_sha256": "e4febd6248f571536f1a03393a6c214c43b65e5325b0465a66942cad8bcd2271",
+      "released_sha256": "89281e145807a61d97dc5432d74a8765c5cffdb92d695e14b25245dc9c5bdc5e"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/controlled/trajectory_replay/analysis/replay_failure_diagnostics.csv",
+      "source_sha256": "8d71083afe7279b4816479315b494296dce8e43f929ae398091ee7c58aee7540",
+      "released_sha256": "49c55cd0bed33f9d72db724a27ee6a29b81f848a9fea1f4380a94d328b8eeb1f"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/controlled/input_projection/summary/summary.json",
+      "source_sha256": "63d143fef4100ace7bae0512fcccbc06ccf2a02954113e80b6706822723b064e",
+      "released_sha256": "b3303ff874d2e2f1add2929dfa705ddfe9c3e819ef7256439d956a87af48aec8"
+    },
+    {
+      "action": "redact_or_rewrite_file_reference",
+      "path": "data/controlled/audit_policy/summary/summary.json",
+      "source_sha256": "2c02864581231a02fb2f68df42a8e9c5e3a9ee4b1cca346498afe3a50d08dc20",
+      "released_sha256": "7e1d57f6003c64d2a5b8448fcae8b3e206ee333bda48b606930a7cde06fe2a22"
+    }
+  ]
+}

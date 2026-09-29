@@ -1,0 +1,72 @@
+{
+  "verification": "finite_offline_statistics_verified",
+  "python_version": "3.13.3",
+  "embedded_unit_tests": 18,
+  "commands": [
+    {
+      "command": "scripts/reproduce_success_trajectories.py --out data/logs/deepswe_success_trajectories/reproduction_validation",
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "command": "scripts/reproduce_success_trajectories.py --self-test",
+      "returncode": 0,
+      "stderr": "test_estimators_differ (__main__.ReproductionTests.test_estimators_differ) ... ok\ntest_invalid_counts_fail (__main__.ReproductionTests.test_invalid_counts_fail) ... ok\ntest_missing_flags_fail (__main__.ReproductionTests.test_missing_flags_fail) ... ok\ntest_percentiles_source_indices (__main__.ReproductionTests.test_percentiles_source_indices) ... ok\ntest_seed_repeatability (__main__.ReproductionTests.test_seed_repeatability) ... ok\ntest_task_means_not_run_difference (__main__.ReproductionTests.test_task_means_not_run_difference) ... ok\ntest_wilson_extremes (__main__.ReproductionTests.test_wilson_extremes) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "command": "scripts/parse_public_trajectory_logs.py --self-test",
+      "returncode": 0,
+      "stderr": "test_compact_limit (__main__.ParserTests.test_compact_limit) ... ok\ntest_deepswe_priority_preserved (__main__.ParserTests.test_deepswe_priority_preserved) ... ok\ntest_missing_success_not_selected (__main__.ParserTests.test_missing_success_not_selected) ... ok\ntest_non_dict_step_skipped (__main__.ParserTests.test_non_dict_step_skipped) ... ok\ntest_pro_priority_preserved (__main__.ParserTests.test_pro_priority_preserved) ... ok\ntest_schema_failure_not_empty_success (__main__.ParserTests.test_schema_failure_not_empty_success) ... ok\ntest_traversal_rejected (__main__.ParserTests.test_traversal_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "command": "scripts/fetch_public_trajectory_logs.py --self-test",
+      "returncode": 0,
+      "stderr": "test_credentials_rejected (__main__.FetchTests.test_credentials_rejected) ... ok\ntest_ids_preserved (__main__.FetchTests.test_ids_preserved) ... ok\ntest_no_success_inference (__main__.FetchTests.test_no_success_inference) ... ok\ntest_traversal_rejected (__main__.FetchTests.test_traversal_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "command": "scripts/fetch_public_trajectory_logs.py",
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "command": "scripts/fetch_public_trajectory_logs.py --dataset swebench-pro",
+      "returncode": 0,
+      "stderr": ""
+    }
+  ],
+  "output_row_counts": {
+    "behavior_signatures.csv": 98,
+    "bootstrap_replicates.csv": 88000,
+    "figure3_process_prevalence.csv": 11,
+    "paired_event_bootstrap_replicates.csv": 6000,
+    "paired_event_summary.csv": 3,
+    "paired_task_event_deltas.csv": 266,
+    "paper_comparison.csv": 144,
+    "stratum_wilson.csv": 44,
+    "table3_panel_a.csv": 11,
+    "table3_panel_b.csv": 6,
+    "table3_panel_c.csv": 5,
+    "task_any_bootstrap.csv": 44,
+    "trajectory_prevalence_cluster_bootstrap.csv": 44
+  },
+  "deterministic_csv_hashes_equal": true,
+  "paper_checks": 144,
+  "paper_numeric_mismatches": 5,
+  "input_sha256": "2ef439590b9ab34687d4bfd5575aae0249739e412a7cd3bd753cfd13227f6688",
+  "output_csv_sha256": {
+    "behavior_signatures.csv": "036300eb12df659a8917bb7d1c58f73a83136e6c34906e282e306bc608f5f54a",
+    "bootstrap_replicates.csv": "49d476b80d014d1cc5693d6642c08fe44b2ff62e30db3541fd3e501737dee1d7",
+    "figure3_process_prevalence.csv": "37d01f5e7c8a84b330e60ec45e3f103fa22fd1bac1be470cbbb6a520b146dc72",
+    "paired_event_bootstrap_replicates.csv": "271cad8f37ee716e07f4b9f00b0fee87bcc75ee08ac3c1ef3a0731b6b2bca07f",
+    "paired_event_summary.csv": "a9305463eaf123c3151d0d93ed480246477bfcb0ffcd25e80caf994a38858bec",
+    "paired_task_event_deltas.csv": "f6230ab1ce8a58f07bc7650a66131f832179b0003eb2f165e87679367222fa05",
+    "paper_comparison.csv": "7fe60bed03044ff37d71c2840d11b82b6b032362e9a5a0c0e9c75121dd9d8ea7",
+    "stratum_wilson.csv": "20ed12f9eac8a30e8bc2124e0d62aa3eed300fa66a7addd8a0bd2878a5dd92e0",
+    "table3_panel_a.csv": "3bbe35c6360296bc3b56c5e8564d4f24de0505b3ec2f42c4d960c829096b8da7",
+    "table3_panel_b.csv": "3a8e011c6bef1152085929a3ec240abade4a4f63c82da72fb3f26727b92c6eb0",
+    "table3_panel_c.csv": "3c44234431591da0d99e0cee8557c60fe5eb38b2a0ecd460e93224150ccfae6d",
+    "task_any_bootstrap.csv": "7ddefb9ee9f5834fb241fde0d92f75a58a4aeb9a670c31565424e7230e171c82",
+    "trajectory_prevalence_cluster_bootstrap.csv": "c49b72e3996f521143a2cf225893b3c700008d5cd90d20ef083dbc700e8244a9"
+  },
+  "source_originals_modified": false
+}

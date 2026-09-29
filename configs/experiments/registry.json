@@ -1,0 +1,730 @@
+{
+  "schema_version": 1,
+  "experiments": {
+    "progressive_context": {
+      "cohorts": [
+        "progressive_context"
+      ],
+      "conditions": [
+        {
+          "id": "C0_issue_only",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "C0_issue_only"
+        },
+        {
+          "id": "C1_executable_failure",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "C1_executable_failure"
+        },
+        {
+          "id": "C2_structural_localization",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "C2_structural_localization"
+        },
+        {
+          "id": "C3_requirement_design",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "C3_requirement_design"
+        },
+        {
+          "id": "C4_evidence_bundle",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "C4_evidence_bundle"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "component_ablation": {
+      "cohorts": [
+        "component_ablation"
+      ],
+      "conditions": [
+        {
+          "id": "full_audit",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "full_audit",
+          "source_condition_id": "full_v5",
+          "paper_label": "Full audit",
+          "enabled_modules": [
+            "grounding",
+            "ownership",
+            "contradiction",
+            "detour",
+            "path_verification",
+            "memory",
+            "abstention"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "minus_grounding",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "minus_grounding",
+          "source_condition_id": "no_grounding",
+          "paper_label": "Minus grounding",
+          "enabled_modules": [
+            "ownership",
+            "contradiction",
+            "detour",
+            "path_verification",
+            "memory",
+            "abstention"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "minus_ownership",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "minus_ownership",
+          "source_condition_id": "no_ownership",
+          "paper_label": "Minus ownership",
+          "enabled_modules": [
+            "grounding",
+            "contradiction",
+            "detour",
+            "path_verification",
+            "memory",
+            "abstention"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "minus_contradiction",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "minus_contradiction",
+          "source_condition_id": "no_contradiction",
+          "paper_label": "Minus contradiction",
+          "enabled_modules": [
+            "grounding",
+            "ownership",
+            "detour",
+            "path_verification",
+            "memory",
+            "abstention"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "minus_detour",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "minus_detour",
+          "source_condition_id": "no_detour",
+          "paper_label": "Minus detour",
+          "enabled_modules": [
+            "grounding",
+            "ownership",
+            "contradiction",
+            "path_verification",
+            "memory",
+            "abstention"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "minus_path_verification",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "minus_path_verification",
+          "source_condition_id": "no_path_verifier",
+          "paper_label": "Minus path verification",
+          "enabled_modules": [
+            "grounding",
+            "ownership",
+            "contradiction",
+            "detour",
+            "memory",
+            "abstention"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "minus_memory",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "minus_memory",
+          "source_condition_id": "no_memory",
+          "paper_label": "Minus memory",
+          "enabled_modules": [
+            "grounding",
+            "ownership",
+            "contradiction",
+            "detour",
+            "path_verification",
+            "abstention"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "minus_abstention",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "minus_abstention",
+          "source_condition_id": "no_abstention",
+          "paper_label": "Minus abstention",
+          "enabled_modules": [
+            "grounding",
+            "ownership",
+            "contradiction",
+            "detour",
+            "path_verification",
+            "memory"
+          ],
+          "controller": "full"
+        },
+        {
+          "id": "majority_controller",
+          "pipeline": "component",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "core_condition": "majority_controller",
+          "source_condition_id": "majority_vote_controller",
+          "paper_label": "Majority controller",
+          "enabled_modules": [
+            "grounding",
+            "ownership",
+            "contradiction",
+            "detour",
+            "path_verification",
+            "memory",
+            "abstention"
+          ],
+          "controller": "majority"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "localization_methods": {
+      "cohorts": [
+        "localization_methods"
+      ],
+      "conditions": [
+        {
+          "id": "one_shot",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "source_condition_id": "luna_one_shot",
+          "paper_label": "One-shot"
+        },
+        {
+          "id": "tool_search",
+          "pipeline": "tool_search",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "source_condition_id": "luna_tool_search",
+          "paper_label": "Tool-search"
+        },
+        {
+          "id": "no_audit",
+          "pipeline": "no_audit",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "source_condition_id": "shenji_no_audit",
+          "paper_label": "No audit"
+        },
+        {
+          "id": "full_audit",
+          "pipeline": "full_audit",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "source_condition_id": "shenji_v3_full_audit",
+          "paper_label": "Full audit"
+        },
+        {
+          "id": "trust_first",
+          "pipeline": "trust_first",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "source_condition_id": "shenji_v4_trust_first",
+          "paper_label": "Trust-first"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "matched_context": {
+      "cohorts": [
+        "matched_context"
+      ],
+      "conditions": [
+        {
+          "id": "c0_issue_only",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "c0_issue_only"
+        },
+        {
+          "id": "c1_entity_tree",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "c1_entity_tree"
+        },
+        {
+          "id": "c2_symbol_evidence",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "c2_symbol_evidence"
+        },
+        {
+          "id": "c3_dependency_api",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "c3_dependency_api"
+        },
+        {
+          "id": "c4_structural_bundle",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "c4_structural_bundle"
+        },
+        {
+          "id": "c5_checkpoint_history",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "c5_checkpoint_history"
+        },
+        {
+          "id": "c6_bounded_full_context",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "c6_bounded_full_context"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "input_projection": {
+      "cohorts": [
+        "input_projection"
+      ],
+      "conditions": [
+        {
+          "id": "O_original_future_info",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "O_original_future_info"
+        },
+        {
+          "id": "C_future_scrubbed",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "C_future_scrubbed"
+        },
+        {
+          "id": "P_equal_length_legal_history",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "P_equal_length_legal_history"
+        },
+        {
+          "id": "L_location_only",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "L_location_only"
+        },
+        {
+          "id": "D_diff_only",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "projection": "D_diff_only"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "search": {
+      "cohorts": [
+        "search"
+      ],
+      "conditions": [
+        {
+          "id": "one_shot",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max"
+        },
+        {
+          "id": "tool_search",
+          "pipeline": "tool_search",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "representation": {
+      "cohorts": [
+        "representation"
+      ],
+      "conditions": [
+        {
+          "id": "natural",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "representation": "natural"
+        },
+        {
+          "id": "identifier_mutation",
+          "pipeline": "one_shot",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "representation": "identifier_mutation"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "audit_policy": {
+      "cohorts": [
+        "audit_policy"
+      ],
+      "conditions": [
+        {
+          "id": "solver_only",
+          "pipeline": "policy",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "policy": "solver_only",
+          "source_condition_id": "solver_only",
+          "paper_label": "Solver only"
+        },
+        {
+          "id": "end_of_run_audit",
+          "pipeline": "policy",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "policy": "end_of_run_audit",
+          "source_condition_id": "solver_plus_end_of_run_audit",
+          "paper_label": "End of run audit"
+        },
+        {
+          "id": "evidence_grounded_intervention",
+          "pipeline": "policy",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "policy": "evidence_grounded_intervention",
+          "source_condition_id": "solver_plus_evidence_grounded_intervention",
+          "paper_label": "Evidence grounded intervention"
+        },
+        {
+          "id": "full_audit",
+          "pipeline": "policy",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "policy": "full_audit",
+          "source_condition_id": "solver_plus_full_shenji",
+          "paper_label": "Full audit"
+        },
+        {
+          "id": "observe_only_audit",
+          "pipeline": "policy",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "policy": "observe_only_audit",
+          "source_condition_id": "solver_plus_observe_only_shenji",
+          "paper_label": "Observe only audit"
+        },
+        {
+          "id": "online_generic_intervention",
+          "pipeline": "policy",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "policy": "online_generic_intervention",
+          "source_condition_id": "solver_plus_online_generic_intervention",
+          "paper_label": "Online generic intervention"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "path_verifier_models": {
+      "cohorts": [
+        "path_verifier_common_200",
+        "path_verifier_common_300"
+      ],
+      "conditions": [
+        {
+          "id": "path_4_1_mini",
+          "pipeline": "path_verifier",
+          "model_alias": "path_4_1_mini",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max"
+        },
+        {
+          "id": "path_4_1",
+          "pipeline": "path_verifier",
+          "model_alias": "path_4_1",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max"
+        },
+        {
+          "id": "path_5_1",
+          "pipeline": "path_verifier",
+          "model_alias": "path_5_1",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max"
+        }
+      ],
+      "endpoint": "localization",
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "history_replay": {
+      "cohorts": [
+        "history_replay"
+      ],
+      "endpoint": "history_replay",
+      "conditions": [
+        {
+          "id": "human",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "patch_branch": "reference"
+        },
+        {
+          "id": "OrcaLoca",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "patch_branch": "agent"
+        }
+      ],
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "repair_bounded": {
+      "cohorts": [
+        "repair_bounded"
+      ],
+      "endpoint": "bounded_test",
+      "conditions": [
+        {
+          "id": "baseline",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "patch_branch": "baseline"
+        },
+        {
+          "id": "gold",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "patch_branch": "gold"
+        },
+        {
+          "id": "agent",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "patch_branch": "agent"
+        }
+      ],
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    },
+    "repair_official": {
+      "cohorts": [
+        "repair_official"
+      ],
+      "endpoint": "official_resolution",
+      "conditions": [
+        {
+          "id": "reference",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "patch_branch": "reference"
+        },
+        {
+          "id": "agent",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "patch_branch": "agent"
+        }
+      ],
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
+    }
+  },
+  "model_aliases": {
+    "base": "AUDIT_BASE_MODEL",
+    "path_4_1_mini": "AUDIT_PATH_MODEL_SMALL",
+    "path_4_1": "AUDIT_PATH_MODEL_MEDIUM",
+    "path_5_1": "AUDIT_PATH_MODEL_NEW"
+  },
+  "parameters": {
+    "max_context_chars": 16000,
+    "max_tool_turns": 6,
+    "max_tool_chars": 8000,
+    "max_tool_matches": 20,
+    "audit_interval": 1,
+    "parameter_origin": "configurable_execution_parameters"
+  },
+  "prompt_templates": {
+    "localization_v1": "prompts/localization_v1.txt"
+  },
+  "execution_policy": {
+    "default": "plan",
+    "automatic_retries": 0,
+    "source_data_read_only": true,
+    "model_ids_from_environment": true
+  }
+}

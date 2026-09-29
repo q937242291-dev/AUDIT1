@@ -1,0 +1,23 @@
+{
+  "method": "M3-CMR v2",
+  "sample": 50,
+  "RCR@1": 0.76,
+  "RCR@3": 0.92,
+  "Hit@1": 0.76,
+  "Hit@3": 0.92,
+  "FalseCreditRate": 0.24,
+  "model_calls": 170,
+  "tokens": 157897,
+  "path_audit_enabled": true,
+  "path_audit_credit_status": "credited",
+  "path_audit_not_counted_reason": "",
+  "path_audit_needed_cases": 26,
+  "path_audit_ok_cases": 26,
+  "path_audit_blocked_cases": 0,
+  "path_audit_error_cases": 0,
+  "path_audit_skipped_cases": 24,
+  "path_audit_tokens": 34018,
+  "memory_protocol": "leave-one-out file-family memory; no current-case gold in ranking; frozen heuristics exposed",
+  "component_schema": "source_agreement,rank_position,issue_overlap,trajectory_impact,patch_impact,memory_prior,detour_penalty,contradiction_penalty,top1_margin",
+  "input_cases_jsonl": "[LOCAL_PATH_REDACTED]"
+}

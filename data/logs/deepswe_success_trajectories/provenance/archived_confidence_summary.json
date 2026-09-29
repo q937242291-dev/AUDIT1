@@ -1,0 +1,27 @@
+{
+  "analysis_id": "work2_success_sota_confidence_statistics_current_20260922",
+  "generated_at_utc": "2026-09-21T22:14:05.487794+00:00",
+  "source": "work2_deepswe_all_success_trajectory_summary_current_20260904.csv",
+  "source_rows": 13605,
+  "parsed_success_rows": 13605,
+  "strata": 63,
+  "context_units": 11,
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20260922,
+  "paired_model_strata": 1953,
+  "paired_model_contrast_rows": 1756200,
+  "paired_model_summary_rows": 29295,
+  "paired_task_pairing_unit": "task_name_aggregated_success_rows",
+  "repository_identifier_available": false,
+  "provider_calls": 0,
+  "benchmark_rerun": false,
+  "formal_promotion": false,
+  "counts": {
+    "context_prevalence_ci": 693,
+    "model_stratum_process_ci": 63,
+    "task_cluster_bootstrap": 693,
+    "paired_model_contrasts": 1756200,
+    "paired_model_summary": 29295
+  },
+  "claim_boundary": "Success-only offline statistics from already parsed official public trajectories. Intervals describe uncertainty in observed success-conditioned process prevalence; they do not establish necessity, causality, correctness, robustness, or formal Work2 promotion."
+}

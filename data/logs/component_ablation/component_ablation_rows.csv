@@ -1,0 +1,10 @@
+﻿variant,rows,completed,paired_completed_vs_full,ChangedTop1_vs_full,Improved_vs_full,Regressed_vs_full,McNemar_exact_p_vs_full,execution_mode,FileHit@1,FileHit@3,FileHit@5,MRR@3,RootOwnerHit,SymbolHit@1,HunkHit,EdgeF1,CompleteOwnerPath,EvidenceRefValidity,SilverOwnerPathValidity,EvidenceInterventionConsistency,SilverTrustedLoc@1,SilverIndependentFalseCredit@1,FileHit@1_95CI
+full_v5,60,60,60,0,0,0,1.0,fresh_isolated_luna_causal_ablation,0.3,0.333333,0.333333,0.313889,0.283333,0.133333,0.0,0.0,0.0,0.0,NA,NA,NA,NA,"[0.183,0.417]"
+no_grounding,60,60,60,8,1,0,1.0,fresh_isolated_luna_causal_ablation,0.316667,0.316667,0.316667,0.316667,0.3,0.2,0.0,0.0,0.0,0.04,NA,NA,NA,NA,"[0.200,0.433]"
+no_ownership,60,60,60,4,0,0,1.0,fresh_isolated_luna_causal_ablation,0.3,0.333333,0.333333,0.313889,0.283333,0.166667,0.0,0.0,0.0,0.0,NA,NA,NA,NA,"[0.183,0.417]"
+no_contradiction,60,60,60,4,1,0,1.0,fresh_isolated_luna_causal_ablation,0.316667,0.316667,0.316667,0.316667,0.3,0.166667,0.016667,0.0,0.0,0.0,NA,NA,NA,NA,"[0.200,0.433]"
+no_detour,60,60,60,5,0,0,1.0,fresh_isolated_luna_causal_ablation,0.3,0.316667,0.316667,0.308333,0.283333,0.183333,0.0,0.0,0.0,0.0,NA,NA,NA,NA,"[0.183,0.417]"
+no_path_verifier,60,60,60,6,0,0,1.0,fresh_isolated_luna_causal_ablation,0.3,0.316667,0.316667,0.308333,0.283333,0.166667,0.0,0.0,0.0,0.0,NA,NA,NA,NA,"[0.183,0.417]"
+no_memory,60,58,58,5,1,0,1.0,fresh_isolated_luna_causal_ablation,0.327586,0.327586,0.327586,0.327586,0.310345,0.137931,0.0,0.0,0.0,0.0,NA,NA,NA,NA,"[0.207,0.448]"
+no_abstention,60,59,59,5,0,0,1.0,fresh_isolated_luna_causal_ablation,0.305085,0.322034,0.322034,0.313559,0.288136,0.152542,0.0,0.0,0.0,0.0,NA,NA,NA,NA,"[0.186,0.424]"
+majority_vote_controller,60,60,60,4,0,1,1.0,fresh_isolated_luna_causal_ablation,0.283333,0.3,0.3,0.291667,0.283333,0.15,0.0,0.0,0.0,0.0,NA,NA,NA,NA,"[0.167,0.400]"

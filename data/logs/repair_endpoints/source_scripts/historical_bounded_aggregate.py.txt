@@ -1,0 +1,209 @@
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import zipfile
+from collections import defaultdict
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "artifacts/work2_three_condition_aggregate_current_20260907_v2"
+ZIP = OUT.with_suffix(".zip")
+ACTIVE_SHA = "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9"
+SOURCES = [
+    "work2_matplotlib23562_reconstructed_exact_replay_20260907_v5",
+    "work2_matplotlib23476_three_condition_replay_20260907_v2",
+    "work2_django10924_three_condition_replay_20260907_v2",
+    "work2_astropy12907_three_condition_replay_20260907_v2",
+    "work2_cached_two_task_three_condition_replay_20260907_v2",
+    "work2_three_additional_tasks_replay_20260907_v1",
+    "work2_three_more_final_replay_20260907_v1",
+    "work2_three_next_replay_20260907_v1",
+    "work2_sphinx_scikit_batch2_replay_20260907_v1",
+    "work2_astropy_three_replay_20260907_v1",
+]
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def first(row: dict[str, str], *keys: str, default: str = "") -> str:
+    for key in keys:
+        value = row.get(key, "")
+        if value != "":
+            return value
+    return default
+
+
+def as_int(value: str) -> int:
+    return int(value or 0)
+
+
+def main() -> int:
+    if OUT.exists() or ZIP.exists():
+        raise SystemExit(f"refusing_to_overwrite:{OUT}")
+    OUT.mkdir(parents=True)
+    normalized: list[dict[str, str]] = []
+    source_rows: list[dict[str, object]] = []
+    for source_name in SOURCES:
+        source_dir = ROOT / "artifacts" / source_name
+        result_path = source_dir / "result_rows.csv"
+        if not result_path.is_file():
+            raise SystemExit(f"missing_result_rows:{result_path}")
+        source_hash = sha256(result_path)
+        source_data = list(csv.DictReader(result_path.open(encoding="utf-8-sig", newline="")))
+        source_rows.append({
+            "source_package": source_name,
+            "source_path": str(result_path),
+            "source_result_rows_sha256": source_hash,
+            "source_row_count": len(source_data),
+        })
+        for ordinal, row in enumerate(source_data, start=1):
+            normalized.append({
+                "task_id": row["task_id"],
+                "method": row["method"],
+                "repository": first(row, "repository", default=row["task_id"].split("__", 1)[0]),
+                "source_package": source_name,
+                "source_row_ordinal": str(ordinal),
+                "source_result_rows_sha256": source_hash,
+                "image": row.get("image", ""),
+                "image_digest": first(row, "image_digest", "image_id"),
+                "base_commit": row.get("base_commit", ""),
+                "test_file": row.get("test_file", ""),
+                "solution_patch_sha256": row.get("solution_patch_sha256", ""),
+                "test_patch_sha256": row.get("test_patch_sha256", ""),
+                "reset_ok": row.get("reset_ok", ""),
+                "solution_patch_applied": row.get("solution_patch_applied", ""),
+                "test_patch_applied": row.get("test_patch_applied", ""),
+                "test_executed": first(row, "test_executed", "test_entrypoint_executed"),
+                "tests_passed": first(row, "tests_passed", "pytest_passed", default="0"),
+                "tests_failed": first(row, "tests_failed", "pytest_failed", default="0"),
+                "tests_skipped": first(row, "tests_skipped", "pytest_skipped", default="0"),
+                "tests_run": first(row, "tests_run", "pytest_run", default=""),
+                "returncode": row.get("returncode", ""),
+                "resolved_process_signal": row.get("resolved_process_signal", ""),
+                "formal_outcome": row.get("formal_outcome", ""),
+                "provider_calls_added": row.get("provider_calls_added", "0"),
+            })
+    keys = [(row["task_id"], row["method"]) for row in normalized]
+    if len(normalized) != 63 or len(set(keys)) != len(keys):
+        raise SystemExit(f"unexpected_or_duplicate_rows:{len(normalized)}:{len(set(keys))}")
+    for row in normalized:
+        if not row["tests_run"]:
+            row["tests_run"] = str(as_int(row["tests_passed"]) + as_int(row["tests_failed"]) + as_int(row["tests_skipped"]))
+    fields = list(normalized[0])
+    with (OUT / "work2_three_condition_all_results.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(normalized)
+
+    by_task: dict[str, dict[str, dict[str, str]]] = defaultdict(dict)
+    for row in normalized:
+        by_task[row["task_id"]][row["method"]] = row
+    task_summary: list[dict[str, object]] = []
+    for task_id in sorted(by_task):
+        cells = by_task[task_id]
+        baseline, gold, orca = (cells[name] for name in ("baseline", "gold", "orcaloca"))
+        task_summary.append({
+            "task_id": task_id,
+            "repository": baseline["repository"],
+            "source_package": baseline["source_package"],
+            "base_commit": baseline["base_commit"],
+            "baseline_tests": baseline["tests_run"],
+            "baseline_passed": baseline["tests_passed"],
+            "baseline_failed": baseline["tests_failed"],
+            "baseline_skipped": baseline["tests_skipped"],
+            "gold_passed": gold["tests_passed"],
+            "gold_failed": gold["tests_failed"],
+            "gold_skipped": gold["tests_skipped"],
+            "orcaloca_passed": orca["tests_passed"],
+            "orcaloca_failed": orca["tests_failed"],
+            "orcaloca_skipped": orca["tests_skipped"],
+            "gold_f2p_observed": str(as_int(gold["tests_failed"]) < as_int(baseline["tests_failed"])),
+            "orcaloca_f2p_observed": str(as_int(orca["tests_failed"]) < as_int(baseline["tests_failed"])),
+            "gold_full_test_pass": str(as_int(gold["tests_failed"]) == 0 and gold["returncode"] == "0"),
+            "orcaloca_full_test_pass": str(as_int(orca["tests_failed"]) == 0 and orca["returncode"] == "0"),
+            "gold_resolved_process_signal": gold["resolved_process_signal"],
+            "orcaloca_resolved_process_signal": orca["resolved_process_signal"],
+            "all_three_reset_ok": str(all(cells[name]["reset_ok"] == "True" for name in ("baseline", "gold", "orcaloca"))),
+            "all_three_test_executed": str(all(cells[name]["test_executed"] == "True" for name in ("baseline", "gold", "orcaloca"))),
+        })
+    task_fields = list(task_summary[0])
+    with (OUT / "work2_three_condition_task_summary.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=task_fields)
+        writer.writeheader()
+        writer.writerows(task_summary)
+
+    method_summary: list[dict[str, object]] = []
+    for method in ("baseline", "gold", "orcaloca"):
+        selected = [row for row in normalized if row["method"] == method]
+        method_summary.append({
+            "method": method,
+            "task_rows": len(selected),
+            "executed_rows": sum(row["test_executed"] == "True" for row in selected),
+            "reset_ok_rows": sum(row["reset_ok"] == "True" for row in selected),
+            "solution_patch_applied_rows": sum(row["solution_patch_applied"] == "True" for row in selected),
+            "test_patch_applied_rows": sum(row["test_patch_applied"] == "True" for row in selected),
+            "tests_passed": sum(as_int(row["tests_passed"]) for row in selected),
+            "tests_failed": sum(as_int(row["tests_failed"]) for row in selected),
+            "tests_skipped": sum(as_int(row["tests_skipped"]) for row in selected),
+            "fully_passing_tasks": sum(as_int(row["tests_failed"]) == 0 and row["returncode"] == "0" for row in selected),
+            "resolved_process_signal_rows": sum(row["resolved_process_signal"] == "True" for row in selected),
+        })
+    with (OUT / "work2_three_condition_method_summary.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(method_summary[0]))
+        writer.writeheader()
+        writer.writerows(method_summary)
+    with (OUT / "source_manifest.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(source_rows[0]))
+        writer.writeheader()
+        writer.writerows(source_rows)
+
+    summary = {
+        "analysis_id": OUT.name,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "active_objective_sha256": ACTIVE_SHA,
+        "source_package_count": len(SOURCES),
+        "task_count": len(task_summary),
+        "condition_rows": len(normalized),
+        "method_rows": len(method_summary),
+        "test_executed_rows": sum(row["test_executed"] == "True" for row in normalized),
+        "resolved_process_signal_rows": sum(row["resolved_process_signal"] == "True" for row in normalized),
+        "formal_outcome_rows": 0,
+        "provider_calls_added": 0,
+        "formal_promotion": False,
+        "claim_boundary": "Unified source-preserving baseline/gold/OrcaLoca exact-base or reconstructed-image process/test diagnostics for 21 tasks and 63 condition rows; test F2P signals are not semantic, robust, causal, survival, or formal outcomes.",
+        "source_manifest": source_rows,
+        "method_summary": method_summary,
+    }
+    (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "RESULTS_ZH.md").write_text(
+        "# Work2 三条件回放统一汇总\n\n"
+        "该包将 21 个任务的 baseline/gold/OrcaLoca 条件统一为 63 条逐条件行，并生成 task-level、method-level 汇总。每条行保留 source package、source row ordinal、结果文件 hash、base commit、补丁应用与测试计数。\n\n"
+        "该汇总只用于 process/test 诊断；不产生 provider 调用，不产生 formal outcome。\n",
+        encoding="utf-8",
+    )
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    manifest = [{"path": str(path.relative_to(OUT)).replace("\\", "/"), "bytes": path.stat().st_size, "sha256": sha256(path)} for path in files]
+    (OUT / "file_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    with zipfile.ZipFile(ZIP, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for path in files:
+            archive.write(path, path.relative_to(OUT))
+    with zipfile.ZipFile(ZIP) as archive:
+        if archive.testzip() is not None:
+            raise SystemExit("archive_integrity_failed")
+    print(json.dumps(summary, ensure_ascii=False))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

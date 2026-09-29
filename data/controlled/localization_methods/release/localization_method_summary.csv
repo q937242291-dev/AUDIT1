@@ -1,0 +1,6 @@
+﻿method,valid_cases,expected_cases,coverage,model,provider,calls_sum,prompt_tokens_sum,completion_tokens_sum,tokens_sum,latency_ms_sum,process_valid_rate,abstained_untrusted_rate,mean_FileHit@1,mean_FileHit@3,mean_FileHit@5,mean_FileHit@6,mean_MRR@3,mean_MultiFileRecall@6,mean_Top1MissRate
+luna_one_shot,260,260,1.0,gpt-5.6-luna,PinAI,260,546066,250008,796074,6673393,0.0,0.0,0.223077,0.242308,0.25,0.253846,0.230769,0.098059,0.776923
+luna_tool_search,260,260,1.0,gpt-5.6-luna,PinAI,1316,4659042,436855,5095897,17758585,0.0,0.0,0.153846,0.2,0.207692,0.219231,0.174359,0.081302,0.846154
+shenji_no_audit,260,260,1.0,gpt-5.6-luna,PinAI,1576,5205108,686863,5891971,24431978,0.0,0.0,0.103846,0.192308,0.211538,0.215385,0.146154,0.086375,0.896154
+shenji_v3_full_audit,260,260,1.0,gpt-5.6-luna,PinAI,1727,5322932,719395,6042327,26060465,0.0,0.0,0.165385,0.192308,0.211538,0.215385,0.178205,0.086375,0.834615
+shenji_v4_trust_first,260,260,1.0,gpt-5.6-luna,PinAI,1727,5322932,719395,6042327,26060465,0.538462,0.461538,0.157692,0.184615,0.188462,0.2,0.169231,0.07795,0.842308

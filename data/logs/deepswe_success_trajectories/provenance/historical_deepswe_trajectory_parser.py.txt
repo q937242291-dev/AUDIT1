@@ -1,0 +1,221 @@
+"""Parse the current official DeepSWE top-10 success-log acquisition.
+
+Deterministic, success-only parser.  It reuses the same role taxonomy as the
+earlier v1.1 parser, but takes the current top-10 acquisition manifest so
+current configurations such as Claude Opus high/xhigh and Gemini medium are
+not silently omitted.  No model, benchmark, or evaluator is called.
+"""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import re
+import zipfile
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(r"[source-root]")
+ACQ = ROOT / "work2/analysis/work2_official_deepswe_v11_current_top10_success_logs_current_20260922"
+MANIFEST = ACQ / "work2_deepswe_current_sota_top10_success_manifest_current_20260922.csv"
+SUMMARY = ACQ / "work2_deepswe_current_sota_top10_success_trajectory_summary_current_20260922.csv"
+EVENTS = ACQ / "work2_deepswe_current_sota_top10_success_trajectory_events_current_20260922.csv"
+QUEUE = ACQ / "work2_deepswe_current_sota_top10_success_parse_queue_current_20260922.csv"
+RQ1 = ACQ / "work2_deepswe_current_sota_top10_rq1_context_middleware_current_20260922.csv"
+RQ2 = ACQ / "work2_deepswe_current_sota_top10_rq2_factors_current_20260922.csv"
+RQ3 = ACQ / "work2_deepswe_current_sota_top10_rq3_required_context_current_20260922.csv"
+RQ4 = ACQ / "work2_deepswe_current_sota_top10_rq4_model_robustness_current_20260922.csv"
+ARCHIVE = ACQ / "work2_deepswe_current_sota_top10_success_trajectory_raw_json_current_20260922.zip"
+CLAIM = "Official current DeepSWE v1.1 top-10 passed=true trajectory signal only; descriptive process prevalence, not necessity, causality, robustness, or formal Work2 promotion."
+COLLECTION_NAME = "official_deepswe_v11_current_top10_success_trajectory"
+SCHEMA_ID = "work2_deepswe_current_sota_top10_success_trajectory_parse_v1"
+README_TEXT = "# DeepSWE current official top-10 success trajectories\n\nDeterministic parsing of complete JSON trajectory artifacts selected from the current official v1.1 top-10 leaderboard configurations. Only `passed=true` and `has_trajectory=true` public artifacts are included; the parse queue preserves inaccessible/malformed rows. No benchmark or model was run.\n"
+ROLES = (
+    "issue_specification", "repository_orientation", "code_search", "direct_file_read",
+    "history_lookup", "environment_setup", "dependency_or_network", "edit_or_patch",
+    "test_or_build", "diff_validation", "feedback_recovery", "other_tool_step",
+)
+
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
+    fields: list[str] = []
+    for row in rows:
+        for field in row:
+            if field not in fields:
+                fields.append(field)
+    with path.open("w", encoding="utf-8-sig", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def compact_text(value: Any, limit: int = 900) -> str:
+    parts: list[str] = []
+
+    def visit(item: Any) -> None:
+        if sum(len(part) for part in parts) >= limit:
+            return
+        if isinstance(item, dict):
+            for key, child in item.items():
+                if key in {"text", "message", "content", "output", "observation", "error", "role", "name", "command", "function_name"}:
+                    visit(child)
+                elif isinstance(child, (dict, list)):
+                    visit(child)
+        elif isinstance(item, list):
+            for child in item:
+                visit(child)
+        elif isinstance(item, (str, int, float, bool)):
+            remaining = limit - sum(len(part) for part in parts)
+            if remaining > 0:
+                parts.append(str(item)[:remaining])
+
+    visit(value)
+    return re.sub(r"\s+", " ", " ".join(parts)).strip()[:limit]
+
+
+def tool_names(step: dict[str, Any]) -> list[str]:
+    names: list[str] = []
+    for call in step.get("tool_calls", []) if isinstance(step.get("tool_calls"), list) else []:
+        if isinstance(call, dict):
+            name = call.get("function_name") or call.get("name") or call.get("tool_name")
+            if name:
+                names.append(str(name))
+    return names
+
+
+def role_for(tool_text: str, step_text: str) -> str:
+    text = f"{tool_text} {step_text}".lower()
+    if re.search(r"test|pytest|build|compile|lint|check", text): return "test_or_build"
+    if re.search(r"git diff|diff --|status --porcelain|review diff", text): return "diff_validation"
+    if re.search(r"apply_patch|git apply|edit|write|replace|patch", text): return "edit_or_patch"
+    if re.search(r"grep|rg |ripgrep|search|find ", text): return "code_search"
+    if re.search(r"read|cat |sed |head |tail |view|open file", text): return "direct_file_read"
+    if re.search(r"git log|git blame|history|commit", text): return "history_lookup"
+    if re.search(r"pip |npm |yarn |cargo |go mod|install|dependency|http|curl|wget", text): return "dependency_or_network"
+    if re.search(r"docker|environment|venv|virtualenv|cd |pwd|which ", text): return "environment_setup"
+    if re.search(r"issue|requirement|problem statement|task description", text): return "issue_specification"
+    if re.search(r"error|failed|failure|traceback|retry|fix", text): return "feedback_recovery"
+    return "other_tool_step"
+
+
+def future_signal(text: str) -> bool:
+    return bool(re.search(r"gold patch|reference patch|hidden test|future test|grader|test patch|expected fix", text.lower()))
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def numeric(value: Any) -> Any:
+    return value if isinstance(value, (int, float)) else ""
+
+
+def main() -> int:
+    rows = read_csv(MANIFEST)
+    summaries: list[dict[str, Any]] = []
+    events: list[dict[str, Any]] = []
+    queue: list[dict[str, Any]] = []
+    groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for row in sorted(rows, key=lambda item: str(item.get("trial_name", ""))):
+        trial = row.get("trial_name", "")
+        raw_path = ROOT / row.get("local_path", "") if row.get("local_path") else Path("")
+        base: dict[str, Any] = {
+            "benchmark": "DeepSWE v1.1", "source_collection": COLLECTION_NAME,
+            "model": row.get("model", ""), "reasoning_effort": row.get("reasoning_effort", ""),
+            "config": row.get("config", ""), "trial_name": trial, "task_name": row.get("task_name", ""),
+            "official_success": "True", "official_success_marker": "passed=true",
+            "trajectory_path": row.get("local_path", ""), "trajectory_url": row.get("trajectory_url", ""),
+            "public_log_complete": False, "parse_status": "missing_raw_trajectory", "claim_boundary": CLAIM,
+        }
+        if not raw_path.is_file():
+            queue.append({**base, "queue_status": "pending_raw_retrieval", "error": "raw trajectory file missing"})
+            continue
+        try:
+            payload = json.loads(raw_path.read_text(encoding="utf-8"))
+            if not isinstance(payload, dict) or not isinstance(payload.get("steps"), list):
+                raise ValueError("top-level steps list missing")
+        except Exception as exc:
+            queue.append({**base, "queue_status": "pending_schema_review", "error": f"{type(exc).__name__}:{exc}"})
+            continue
+        digest = sha256(raw_path)
+        role_seen = {role: False for role in ROLES}
+        trial_events: list[dict[str, Any]] = []
+        future = False
+        for step_index, step in enumerate(payload.get("steps", [])):
+            if not isinstance(step, dict):
+                continue
+            names = tool_names(step)
+            excerpt = compact_text(step)
+            role = role_for(" ".join(names), excerpt)
+            role_seen[role] = True
+            signal = future_signal(excerpt)
+            future = future or signal
+            trial_events.append({
+                "benchmark": "DeepSWE v1.1", "source_collection": COLLECTION_NAME,
+                "model": row.get("model", ""), "reasoning_effort": row.get("reasoning_effort", ""),
+                "config": row.get("config", ""), "trial_name": trial, "task_name": row.get("task_name", ""),
+                "event_index": len(trial_events), "step_index": step_index, "step_source": step.get("source", ""),
+                "role": role, "tool_names": json.dumps(names, ensure_ascii=False), "text_excerpt": excerpt,
+                "future_gold_signal_present": signal, "trajectory_path": row.get("local_path", ""),
+                "trajectory_sha256": digest, "claim_boundary": CLAIM,
+            })
+        final_metrics = payload.get("final_metrics") if isinstance(payload.get("final_metrics"), dict) else {}
+        summary = {
+            **base, "trajectory_sha256": digest, "public_log_complete": True, "parse_status": "parsed",
+            "trajectory_step_count": len(payload.get("steps", [])), "event_count": len(trial_events),
+            "total_cost_usd": numeric(final_metrics.get("total_cost_usd")),
+            "total_prompt_tokens": numeric(final_metrics.get("total_prompt_tokens")),
+            "total_completion_tokens": numeric(final_metrics.get("total_completion_tokens")),
+            "future_gold_signal_present": future,
+        }
+        summary.update({f"{role}_present": role_seen[role] for role in ROLES})
+        summaries.append(summary)
+        events.extend(trial_events)
+        groups[(str(row.get("model", "")), str(row.get("reasoning_effort", "")))].append(summary)
+    write_csv(SUMMARY, summaries)
+    write_csv(EVENTS, events)
+    write_csv(QUEUE, queue)
+    rq1: list[dict[str, Any]] = []; rq2: list[dict[str, Any]] = []; rq3: list[dict[str, Any]] = []; rq4: list[dict[str, Any]] = []
+    for (model, effort), group in sorted(groups.items()):
+        denominator = len(group)
+        for role in ROLES:
+            count = sum(bool(item.get(f"{role}_present")) for item in group)
+            prevalence = count / denominator if denominator else ""
+            rq1.append({"benchmark": "DeepSWE v1.1", "model": model, "reasoning_effort": effort, "context_or_middleware_step": role, "trajectory_count": count, "trajectory_denominator": denominator, "trajectory_prevalence": prevalence, "claim_boundary": CLAIM})
+            rq2.append({"benchmark": "DeepSWE v1.1", "model": model, "reasoning_effort": effort, "factor": role, "success_trajectory_count": count, "success_trajectory_denominator": denominator, "candidate_non_universal_process": count < denominator if denominator else "", "future_gold_trigger_count": sum(bool(item.get("future_gold_signal_present")) for item in group), "claim_boundary": CLAIM})
+            rq3.append({"benchmark": "DeepSWE v1.1", "model": model, "reasoning_effort": effort, "context_unit": role, "observed_success_trajectory_count": count, "success_trajectory_denominator": denominator, "observed_prevalence": prevalence, "necessity_status": "indeterminate_from_success_only_logs", "observed_class": "near_universal_observed" if denominator and prevalence >= .95 else ("common_observed" if denominator and prevalence >= .5 else ("variable_observed" if count else "not_observed")), "claim_boundary": CLAIM})
+        rq4.append({"benchmark": "DeepSWE v1.1", "model": model, "reasoning_effort": effort, "trajectory_count": denominator, "complete_raw_log_count": denominator, "future_gold_trigger_count": sum(bool(item.get("future_gold_signal_present")) for item in group), "mean_event_count": sum(int(item.get("event_count") or 0) for item in group) / denominator if denominator else "", "robustness_status": "descriptive_stratum_only", "claim_boundary": CLAIM})
+    write_csv(RQ1, rq1); write_csv(RQ2, rq2); write_csv(RQ3, rq3); write_csv(RQ4, rq4)
+    with zipfile.ZipFile(ARCHIVE, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+        for row in summaries:
+            raw_path = ROOT / row["trajectory_path"]
+            if raw_path.is_file():
+                archive.write(raw_path, arcname=f"raw_trajectory_json/{raw_path.name}")
+    summary = {
+        "schema_id": SCHEMA_ID,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(), "manifest_rows": len(rows),
+        "parsed_success_trajectories": len(summaries), "parse_queue_rows": len(queue), "event_rows": len(events),
+        "models": dict(Counter(f"{row.get('model')}[{row.get('reasoning_effort')}]" for row in summaries)),
+        "archive": str(ARCHIVE), "archive_bytes": ARCHIVE.stat().st_size, "benchmark_rerun": False, "provider_calls": 0,
+        "claim_boundary": CLAIM,
+    }
+    (ACQ / "parse_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (ACQ / "README.md").write_text(README_TEXT, encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

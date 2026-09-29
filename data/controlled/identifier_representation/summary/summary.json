@@ -1,0 +1,48 @@
+{
+  "status": "PASS_PAIRED_IDENTIFIER_MUTATION_DESCRIPTIVE_COMPARISON",
+  "natural_rows": 120,
+  "identifier_mutation_rows": 120,
+  "paired_rows": 120,
+  "summary_table": [
+    {
+      "metric": "file_hit_1",
+      "n": 120,
+      "natural_mean": 0.258333,
+      "identifier_mutation_mean": 0.55,
+      "paired_delta_mean": 0.291667,
+      "positive_count": 41,
+      "equal_count": 73,
+      "negative_count": 6,
+      "mcnemar_exact_two_sided_p": 1.8e-07
+    },
+    {
+      "metric": "file_hit_3",
+      "n": 120,
+      "natural_mean": 0.325,
+      "identifier_mutation_mean": 0.658333,
+      "paired_delta_mean": 0.333333,
+      "positive_count": 49,
+      "equal_count": 62,
+      "negative_count": 9,
+      "mcnemar_exact_two_sided_p": 9e-08
+    },
+    {
+      "metric": "file_hit_5",
+      "n": 120,
+      "natural_mean": 0.325,
+      "identifier_mutation_mean": 0.683333,
+      "paired_delta_mean": 0.358333,
+      "positive_count": 49,
+      "equal_count": 65,
+      "negative_count": 6,
+      "mcnemar_exact_two_sided_p": 0.0
+    }
+  ],
+  "natural_total_tokens": 267954,
+  "identifier_mutation_total_tokens": 715805,
+  "claim_boundary": "Paired post-hoc FileHit comparison of identifier-mutation versus natural-continuation observations. It is descriptive only; benchmark success, semantic correctness and causal effects remain unobserved.",
+  "source_sha256": {
+    "natural": "c5f99e51589941dfa941c3bd634f32391cf95f1086680bc8b78d9eefd01838b3",
+    "identifier_mutation": "6187e32824c684ead723aa9f19a75a12ce8e58a1b1eeb6299998ad1fbe8ccf20"
+  }
+}

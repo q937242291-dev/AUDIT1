@@ -1,0 +1,5 @@
+# Optional dependencies for figure generation and manuscript reading.
+# The AUDIT core, acquisition, numerical analysis and contract tests use stdlib.
+matplotlib==3.10.8
+pypdf==6.8.0
+

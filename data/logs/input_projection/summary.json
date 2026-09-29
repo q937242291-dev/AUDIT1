@@ -1,0 +1,35 @@
+{
+  "analysis_id": "m3_pinai_work2_leakage90_model_only_probe_20260824_v1",
+  "claim_boundary": "Fresh PinAI/gpt-5.6-luna model-only leakage-condition probes; no future/location/diff payloads were supplied, so no leakage, causal or correctness claim is made.",
+  "completed_by_condition_id": {
+    "C_future_scrubbed": 18,
+    "D_diff_only": 18,
+    "L_location_only": 18,
+    "O_original_future_info": 18,
+    "P_equal_length_legal_history": 18
+  },
+  "completed_by_dataset": {
+    "lite300": 90
+  },
+  "completed_by_seed": {
+    "seed-01": 30,
+    "seed-02": 30,
+    "seed-03": 30
+  },
+  "completed_rows": 90,
+  "completion_tokens": 16584,
+  "error_rows": 0,
+  "formal_promotion_rows": 0,
+  "generated_at_utc": "2026-09-12T13:27:38Z",
+  "gold_visible_to_model_rows": 0,
+  "latest_unique_rows": 90,
+  "leakage_dependence_rows": 0,
+  "planned_rows_this_invocation": 90,
+  "prompt_tokens": 63471,
+  "provider_calls": 90,
+  "raw_append_rows": 91,
+  "retry_append_rows": 1,
+  "runtime_correctness_rows": 0,
+  "status": "PASS_MODEL_ONLY",
+  "total_tokens": 80055
+}

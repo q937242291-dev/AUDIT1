@@ -1,0 +1,28 @@
+{
+  "dataset": "swebench-pro",
+  "manifest_sha256": "24c016b21f1915b26a667dc8ff76429c3673e9214287a4faa67f17456df514d9",
+  "selected_rows": 1,
+  "mode": "HEAD_probe",
+  "transferred_bytes": 0,
+  "network_requests_requested": true,
+  "model_calls": 0,
+  "artifacts": [
+    {
+      "dataset": "swebench-pro",
+      "trial_name": "",
+      "task_name": "",
+      "run_id": "claude-45sonnet-10132025",
+      "instance_id": "internetarchive__openlibrary-6e889f4a733c9f8ce9a9bd2ec6a934413adcedb9-ve8c8d62a2b60610a3c4631f5f23ed866bada9818",
+      "url": "https://scaleapi-results.s3.amazonaws.com/swe-bench-pro/claude-45sonnet-10132025/traj/instance_internetarchive__openlibrary-6e889f4a733c9f8ce9a9bd2ec6a934413adcedb9-ve8c8d62a2b60610a3c4631f5f23ed866bada9818/instance_internetarchive__openlibrary-6e889f4a733c9f8ce9a9bd2ec6a934413adcedb9-ve8c8d62a2b60610a3c4631f5f23ed866bada9818.traj",
+      "expected_sha256": "b5d84c468e916a4ca7ea73e82ac82c675536be292b6a835c545f2e52000f29fe",
+      "historical_status": "parsed_success_in_supplied_summary",
+      "historical_http_status": "",
+      "status": "failed",
+      "sha256": "",
+      "bytes_verified": false,
+      "artifact": "claude-45sonnet-10132025/instance_internetarchive__openlibrary-6e889f4a733c9f8ce9a9bd2ec6a934413adcedb9-ve8c8d62a2b60610a3c4631f5f23ed866bada9818.traj",
+      "checked_at_utc": "2026-09-25T16:16:43.576916+00:00",
+      "error_type": "URLError"
+    }
+  ]
+}

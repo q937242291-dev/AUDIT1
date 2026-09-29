@@ -1,0 +1,7 @@
+category,label,rows,denominator,share
+completed,Completed,76,300,0.25333333333333335
+future_patch_not_applicable,Patch not applicable,135,300,0.45
+future_target_already_exists,Target already exists,4,300,0.013333333333333334
+future_target_missing,Target missing,28,300,0.09333333333333334
+source_unavailable,Source unavailable,37,300,0.12333333333333334
+task_setup_failure,Setup failure,20,300,0.06666666666666667

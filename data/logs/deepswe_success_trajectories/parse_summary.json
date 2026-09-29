@@ -1,0 +1,19 @@
+{
+  "schema_id": "work2_deepswe_current_sota_top10_success_trajectory_parse_v1",
+  "generated_at_utc": "2026-09-21T15:37:07.693541+00:00",
+  "manifest_rows": 1959,
+  "parsed_success_trajectories": 1308,
+  "parse_queue_rows": 651,
+  "event_rows": 109911,
+  "models": {
+    "claude-opus-5[xhigh]": 327,
+    "gpt-5-6-sol[max]": 327,
+    "claude-opus-5[high]": 327,
+    "claude-opus-5[max]": 327
+  },
+  "archive": "work2_deepswe_current_sota_top10_success_trajectory_raw_json_current_20260922.zip",
+  "archive_bytes": 115326911,
+  "benchmark_rerun": false,
+  "provider_calls": 0,
+  "claim_boundary": "Official current DeepSWE v1.1 top-10 passed=true trajectory signal only; descriptive process prevalence, not necessity, causality, robustness, or formal Work2 promotion."
+}

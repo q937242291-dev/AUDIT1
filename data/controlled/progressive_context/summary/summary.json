@@ -1,0 +1,35 @@
+{
+  "analysis_id": "m3_pinai_work1_c0c4_model_only_statistics_20260824_v1",
+  "bootstrap_replicates": 5000,
+  "bootstrap_seed": 20260824,
+  "claim_boundary": "PinAI/gpt-5.6-luna model-only C0-C4 observations with post-hoc localization metrics. Gold is used only by this independent analysis; no evaluator, patch/test, causal correctness or human-label claim is made.",
+  "condition_counts": {
+    "C0_issue_only": 240,
+    "C1_executable_failure": 240,
+    "C2_structural_localization": 240,
+    "C3_requirement_design": 240,
+    "C4_evidence_bundle": 240
+  },
+  "condition_summary_rows": 5,
+  "evaluator_rows": 0,
+  "formal_promotion_rows": 0,
+  "gold_used_posthoc_analysis": true,
+  "gold_used_runtime_count": 0,
+  "human_annotation_rows": 0,
+  "model": "gpt-5.6-luna",
+  "paired_comparison_rows": 4,
+  "provider": "PinAI",
+  "seed_counts": {
+    "1": 600,
+    "2": 600
+  },
+  "source_analysis_id": "m3_pinai_work1_c0c4_model_only_20260824_v1",
+  "source_completed_rows": 1200,
+  "source_sha256": {
+    "anchor": "e229b52a33ee2282c8317f2a68d74e482f12e128e837c93c4ba0c3d825e8d326",
+    "model_outputs": "cbff9b450674f389dc279a2d616df51cd6e5d43db475027dfb3b992154212b39",
+    "task_frame": "83f5695d16b1702804db2093456030c9477b1cf41cd23e3c8d8d8314d8d27a2a"
+  },
+  "status": "PASS_INDEPENDENT_POSTHOC_DESCRIPTIVE_STATISTICS",
+  "unique_task_condition_seed_keys": 1200
+}

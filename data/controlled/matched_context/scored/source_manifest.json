@@ -1,0 +1,6 @@
+{
+  "context_summary_sha256": "c85c09c5fdbccfd1a96d0bb5caeda362647ecaf3c3071f8c608c80b4549e1120",
+  "base_posthoc_summary_sha256": "02e8cb5f0eeb441061a9794c9aea363f2165f3d931640b519010e02d4390e613",
+  "gold_source_sha256": "11fe22682c71ec0a04c3a0d46a64dc9c692637a8faaf93025c7e342a52395690",
+  "repair_rows_scored": 3
+}

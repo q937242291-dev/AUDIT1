@@ -1,0 +1,5 @@
+behavior,diagnostic_agent,removal_variant,pass_n,warn_n,fail_n,activation_n,activation_denominator,activation_percent,pair_denominator,gain_after_removal_n,loss_after_removal_n,keep_effect_pp,same_task,same_run
+Grounding,EvidenceGroundingAuditor,no_grounding,59,1,0,1,60,1.6666666666666667,60,1,0,-1.6666666666666667,True,False
+Consistency,ConsistencyCheckerAgent,no_contradiction,35,25,0,25,60,41.666666666666664,60,1,0,-1.6666666666666667,True,False
+Path verification,PathAuditAgent,no_path_verifier,44,11,5,16,60,26.666666666666668,60,0,0,0.0,True,False
+Memory,TrajectoryMemoryAgent,no_memory,46,14,0,14,60,23.333333333333332,58,1,0,-1.7241379310344827,True,False

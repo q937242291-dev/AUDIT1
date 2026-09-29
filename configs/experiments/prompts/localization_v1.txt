@@ -1,0 +1,8 @@
+Use only the supplied issue, repository observations and in-trial evidence.
+Return one JSON object with files: [{path, evidence_refs, score, rationale}].
+Paths must be repository-relative. Cite only supplied evidence identifiers.
+If information is insufficient, return an empty files array and explain uncertainty.
+Do not request or use solution patches, evaluator labels or future outcomes.
+For tool-search, return {action, path, query} for one permitted read-only tool,
+or {action: "final", files: [...]} when ready. Permitted tools are list_tree,
+search_text, find_symbol and read_file.

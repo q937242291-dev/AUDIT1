@@ -1,0 +1,332 @@
+"""Offline uncertainty summaries for current official success-only logs.
+
+This script never reruns a benchmark and never calls a provider.  It uses the
+already parsed current DeepSWE top-10 public success trajectories to add
+Wilson intervals and a deterministic task-level cluster bootstrap.  The public
+trajectory schema does not expose a repository identifier, so the bootstrap is
+explicitly task-clustered and is not mislabeled as a repository bootstrap.
+"""
+
+from __future__ import annotations
+
+import csv
+import json
+import math
+import random
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+from itertools import combinations
+from pathlib import Path
+from statistics import mean, median
+from typing import Any
+
+
+ROOT = Path(r"[source-root]")
+ALL_SOURCE = ROOT / "work2" / "analysis" / "work2_official_deepswe_v11_all_success_trajectories_current_20260904" / "work2_deepswe_all_success_trajectory_summary_current_20260904.csv"
+TOP10_SOURCE = ROOT / "work2" / "analysis" / "work2_official_deepswe_v11_current_top10_success_logs_current_20260922" / "work2_deepswe_current_sota_top10_success_trajectory_summary_current_20260922.csv"
+SOURCE = ALL_SOURCE if ALL_SOURCE.is_file() else TOP10_SOURCE
+OUT = ROOT / "work2" / "analysis" / "work2_success_sota_confidence_statistics_current_20260922"
+CLAIM = (
+    "Success-only offline statistics from already parsed official public trajectories. "
+    "Intervals describe uncertainty in observed success-conditioned process prevalence; "
+    "they do not establish necessity, causality, correctness, robustness, or formal Work2 promotion."
+)
+ROLES = [
+    "issue_specification",
+    "repository_orientation",
+    "code_search",
+    "direct_file_read",
+    "history_lookup",
+    "environment_setup",
+    "dependency_or_network",
+    "edit_or_patch",
+    "test_or_build",
+    "diff_validation",
+    "feedback_recovery",
+]
+BOOTSTRAP_REPLICATES = 2000
+BOOTSTRAP_SEED = 20260922
+
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def write_csv(path: Path, rows: list[dict[str, Any]]) -> int:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fields: list[str] = []
+    for row in rows:
+        for field in row:
+            if field not in fields:
+                fields.append(field)
+    with path.open("w", encoding="utf-8-sig", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields or ["analysis_id"], extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(row for row in rows)
+    return len(rows)
+
+
+def truth(value: Any) -> bool:
+    return str(value).strip().lower() in {"true", "1", "yes", "pass", "pass_observed"}
+
+
+def number(value: Any) -> float:
+    try:
+        return float(str(value or "").strip())
+    except ValueError:
+        return 0.0
+
+
+def wilson(successes: int, total: int, z: float = 1.96) -> tuple[float | None, float | None, float | None]:
+    if total <= 0:
+        return None, None, None
+    p = successes / total
+    denominator = 1.0 + z * z / total
+    center = (p + z * z / (2.0 * total)) / denominator
+    margin = z * math.sqrt((p * (1.0 - p) / total) + (z * z / (4.0 * total * total))) / denominator
+    return p, max(0.0, center - margin), min(1.0, center + margin)
+
+
+def observed_class(prevalence: float | None, count: int) -> str:
+    if prevalence is None:
+        return "not_observed"
+    if prevalence >= 0.95:
+        return "near_universal_observed"
+    if prevalence >= 0.50:
+        return "common_observed"
+    if count:
+        return "variable_observed"
+    return "not_observed"
+
+
+def task_cluster_rows(rows: list[dict[str, str]], field: str) -> list[tuple[str, bool]]:
+    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        grouped[row.get("task_name", "") or row.get("trial_name", "")].append(row)
+    return [(task, any(truth(item.get(field, "")) for item in task_rows)) for task, task_rows in sorted(grouped.items())]
+
+
+def bootstrap_mean(values: list[bool], rng: random.Random) -> tuple[float | None, float | None]:
+    if not values:
+        return None, None
+    n = len(values)
+    draws: list[float] = []
+    for _ in range(BOOTSTRAP_REPLICATES):
+        total = sum(values[rng.randrange(n)] for _ in range(n))
+        draws.append(total / n)
+    draws.sort()
+    lower = draws[max(0, int(0.025 * len(draws)) - 1)]
+    upper = draws[min(len(draws) - 1, int(0.975 * len(draws)))]
+    return lower, upper
+
+
+def main() -> int:
+    all_rows = read_csv(SOURCE)
+    rows = [
+        row for row in all_rows
+        if truth(row.get("official_success"))
+        and truth(row.get("public_log_complete"))
+        and row.get("parse_status") == "parsed"
+    ]
+    if not rows:
+        raise RuntimeError("no locally parsed success trajectories available")
+
+    strata: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        strata[(row.get("model", ""), row.get("reasoning_effort", ""), row.get("config", ""))].append(row)
+
+    prevalence_rows: list[dict[str, Any]] = []
+    model_rows: list[dict[str, Any]] = []
+    bootstrap_rows: list[dict[str, Any]] = []
+    pairwise_rows: list[dict[str, Any]] = []
+    pairwise_summary_rows: list[dict[str, Any]] = []
+    rng = random.Random(BOOTSTRAP_SEED)
+    for (model, effort, config), group in sorted(strata.items()):
+        n = len(group)
+        trigger_count = sum(truth(row.get("future_gold_signal_present")) for row in group)
+        trigger_p, trigger_lo, trigger_hi = wilson(trigger_count, n)
+        event_values = [number(row.get("event_count")) for row in group]
+        step_values = [number(row.get("trajectory_step_count")) for row in group]
+        model_rows.append({
+            "benchmark": "DeepSWE v1.1",
+            "model": model,
+            "reasoning_effort": effort,
+            "config": config,
+            "success_trajectory_count": n,
+            "future_gold_trigger_count": trigger_count,
+            "future_gold_trigger_rate": trigger_p,
+            "future_gold_trigger_wilson95_lower": trigger_lo,
+            "future_gold_trigger_wilson95_upper": trigger_hi,
+            "mean_event_count": mean(event_values) if event_values else None,
+            "median_event_count": median(event_values) if event_values else None,
+            "mean_trajectory_step_count": mean(step_values) if step_values else None,
+            "complete_log_count": sum(bool(row.get("trajectory_sha256")) for row in group),
+            "robustness_status": "descriptive_stratum_only",
+            "claim_boundary": CLAIM,
+        })
+        for role in ROLES:
+            field = f"{role}_present"
+            missing = sum(not str(row.get(field, "")).strip() for row in group)
+            successes = sum(truth(row.get(field, "")) for row in group)
+            p, lower, upper = wilson(successes, n - missing)
+            prevalence_rows.append({
+                "benchmark": "DeepSWE v1.1",
+                "model": model,
+                "reasoning_effort": effort,
+                "config": config,
+                "context_unit": role,
+                "observed_success_rows": successes,
+                "observed_denominator_rows": n - missing,
+                "missing_field_rows": missing,
+                "observed_prevalence": p,
+                "wilson95_lower": lower,
+                "wilson95_upper": upper,
+                "observed_class": observed_class(p, successes),
+                "necessity_status": "not_identifiable_from_success_only_logs",
+                "future_gold_trigger_count_in_stratum": trigger_count,
+                "formal_promotion": False,
+                "claim_boundary": CLAIM,
+            })
+            clusters = task_cluster_rows(group, field)
+            cluster_values = [value for _, value in clusters]
+            cluster_p = sum(cluster_values) / len(cluster_values) if cluster_values else None
+            lower_boot, upper_boot = bootstrap_mean(cluster_values, rng)
+            bootstrap_rows.append({
+                "benchmark": "DeepSWE v1.1",
+                "model": model,
+                "reasoning_effort": effort,
+                "config": config,
+                "context_unit": role,
+                "cluster_unit": "task_name",
+                "cluster_count": len(clusters),
+                "cluster_point_prevalence": cluster_p,
+                "bootstrap_replicates": BOOTSTRAP_REPLICATES,
+                "bootstrap_seed": BOOTSTRAP_SEED,
+                "bootstrap95_lower": lower_boot,
+                "bootstrap95_upper": upper_boot,
+                "repository_identifier_available": False,
+                "repository_bootstrap_status": "not_possible_repository_identifier_absent_from_public_trajectory_schema",
+                "task_level_bootstrap_status": "success_conditioned_cluster_supplement",
+                "formal_promotion": False,
+                "claim_boundary": CLAIM,
+            })
+
+    def task_aggregates(group: list[dict[str, str]]) -> dict[str, dict[str, float]]:
+        by_task: dict[str, list[dict[str, str]]] = defaultdict(list)
+        for row in group:
+            by_task[row.get("task_name", "") or row.get("trial_name", "")].append(row)
+        result: dict[str, dict[str, float]] = {}
+        for task, task_rows in by_task.items():
+            values: dict[str, float] = {
+                "event_count": mean([number(row.get("event_count")) for row in task_rows]),
+                "trajectory_step_count": mean([number(row.get("trajectory_step_count")) for row in task_rows]),
+                "total_cost_usd": mean([number(row.get("total_cost_usd")) for row in task_rows]),
+                "future_gold_signal": float(any(truth(row.get("future_gold_signal_present")) for row in task_rows)),
+            }
+            for role in ROLES:
+                values[f"{role}_present"] = float(any(truth(row.get(f"{role}_present")) for row in task_rows))
+            result[task] = values
+        return result
+
+    aggregate_by_stratum = {key: task_aggregates(group) for key, group in strata.items()}
+    pair_metrics = ["event_count", "trajectory_step_count", "total_cost_usd", "future_gold_signal"] + [f"{role}_present" for role in ROLES]
+    for key_a, key_b in combinations(sorted(aggregate_by_stratum), 2):
+        label_a = f"{key_a[0]}[{key_a[1]}]"
+        label_b = f"{key_b[0]}[{key_b[1]}]"
+        shared = sorted(set(aggregate_by_stratum[key_a]) & set(aggregate_by_stratum[key_b]))
+        pair_id = f"{label_a}__vs__{label_b}"
+        for metric in pair_metrics:
+            differences: list[float] = []
+            for task in shared:
+                value_a = aggregate_by_stratum[key_a][task][metric]
+                value_b = aggregate_by_stratum[key_b][task][metric]
+                difference = value_a - value_b
+                differences.append(difference)
+                pairwise_rows.append({
+                    "pair_id": pair_id,
+                    "stratum_a": label_a,
+                    "stratum_b": label_b,
+                    "task_name": task,
+                    "metric": metric,
+                    "stratum_a_value": value_a,
+                    "stratum_b_value": value_b,
+                    "difference_a_minus_b": difference,
+                    "shared_task_count": len(shared),
+                    "pairing_unit": "task_name_aggregated_success_rows",
+                    "formal_promotion": False,
+                    "claim_boundary": CLAIM,
+                })
+            if not differences:
+                continue
+            n = len(differences)
+            point = mean(differences)
+            draws: list[float] = []
+            for _ in range(BOOTSTRAP_REPLICATES):
+                draws.append(sum(differences[rng.randrange(n)] for _ in range(n)) / n)
+            draws.sort()
+            lower = draws[max(0, int(0.025 * len(draws)) - 1)]
+            upper = draws[min(len(draws) - 1, int(0.975 * len(draws)))]
+            pairwise_summary_rows.append({
+                "pair_id": pair_id,
+                "stratum_a": label_a,
+                "stratum_b": label_b,
+                "metric": metric,
+                "shared_task_count": n,
+                "mean_difference_a_minus_b": point,
+                "median_difference_a_minus_b": median(differences),
+                "a_greater_than_b_tasks": sum(value > 0 for value in differences),
+                "b_greater_than_a_tasks": sum(value < 0 for value in differences),
+                "tie_tasks": sum(value == 0 for value in differences),
+                "paired_bootstrap_replicates": BOOTSTRAP_REPLICATES,
+                "paired_bootstrap_seed": BOOTSTRAP_SEED,
+                "paired_bootstrap95_lower": lower,
+                "paired_bootstrap95_upper": upper,
+                "robustness_status": "descriptive_success_conditioned_paired_process_contrast",
+                "formal_promotion": False,
+                "claim_boundary": CLAIM,
+            })
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    counts = {
+        "context_prevalence_ci": write_csv(OUT / "work2_success_sota_context_prevalence_ci_current_20260922.csv", prevalence_rows),
+        "model_stratum_process_ci": write_csv(OUT / "work2_success_sota_model_stratum_process_ci_current_20260922.csv", model_rows),
+        "task_cluster_bootstrap": write_csv(OUT / "work2_success_sota_task_cluster_bootstrap_current_20260922.csv", bootstrap_rows),
+        "paired_model_contrasts": write_csv(OUT / "work2_success_sota_paired_model_contrasts_current_20260922.csv", pairwise_rows),
+        "paired_model_summary": write_csv(OUT / "work2_success_sota_paired_model_summary_current_20260922.csv", pairwise_summary_rows),
+    }
+    summary = {
+        "analysis_id": OUT.name,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "source": str(SOURCE),
+        "source_rows": len(all_rows),
+        "parsed_success_rows": len(rows),
+        "strata": len(strata),
+        "context_units": len(ROLES),
+        "bootstrap_replicates": BOOTSTRAP_REPLICATES,
+        "bootstrap_seed": BOOTSTRAP_SEED,
+        "paired_model_strata": len(list(combinations(sorted(strata), 2))),
+        "paired_model_contrast_rows": len(pairwise_rows),
+        "paired_model_summary_rows": len(pairwise_summary_rows),
+        "paired_task_pairing_unit": "task_name_aggregated_success_rows",
+        "repository_identifier_available": False,
+        "provider_calls": 0,
+        "benchmark_rerun": False,
+        "formal_promotion": False,
+        "counts": counts,
+        "claim_boundary": CLAIM,
+    }
+    (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "README.md").write_text(
+        "# Work2 success-only SOTA confidence statistics\n\n"
+        f"This offline supplement computes Wilson 95% intervals for context-unit prevalence, a deterministic task-level cluster bootstrap, and same-task paired process contrasts across {len(strata)} locally complete model/config strata from {len(rows)} parsed current official DeepSWE success trajectories. "
+        "The public trajectory schema does not expose a repository identifier, so repository bootstrap is explicitly marked unavailable and is not approximated by task names. "
+        "No benchmark, model, provider, or evaluator was run. The statistics remain descriptive and success-conditioned.\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

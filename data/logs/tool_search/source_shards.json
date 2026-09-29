@@ -1,0 +1,91 @@
+{
+  "namespace": "pinai_phase1_tool_search_20260912_v1",
+  "setting_id": "luna_tool_search",
+  "shards": [
+    {
+      "path": "artifacts/m3_shenji_phase1_pilot_execution_pinai_tool_search_20260912_shard0_v1",
+      "summary": {
+        "claim_boundary": "No localization metric is computed online; no human or causal result is inferred.",
+        "complete_token_call_event_equality": true,
+        "completed_runs": 70,
+        "completion_tokens": 50561,
+        "error_runs": 0,
+        "ledger_summary_status": "PASS",
+        "model": "gpt-5.6-luna",
+        "planned_runs": 70,
+        "prompt_tokens": 419624,
+        "provider": "PinAI",
+        "provider_calls_observed": 70,
+        "provider_usage_source": "PinAI response usage only; unknown is NA",
+        "retry_policy": "max_retries=0; persisted errors are skipped unless retry_errors is explicit",
+        "status": "completed",
+        "total_tokens": 470185
+      },
+      "summary_sha256": "43a4696475768f35cd12a727f2111b5c68e14d1116cb74d631ffb0427e50a013"
+    },
+    {
+      "path": "artifacts/m3_shenji_phase1_pilot_execution_pinai_tool_search_20260912_shard1_v1",
+      "summary": {
+        "claim_boundary": "No localization metric is computed online; no human or causal result is inferred.",
+        "complete_token_call_event_equality": true,
+        "completed_runs": 70,
+        "completion_tokens": 50984,
+        "error_runs": 0,
+        "ledger_summary_status": "PASS",
+        "model": "gpt-5.6-luna",
+        "planned_runs": 70,
+        "prompt_tokens": 391388,
+        "provider": "PinAI",
+        "provider_calls_observed": 70,
+        "provider_usage_source": "PinAI response usage only; unknown is NA",
+        "retry_policy": "max_retries=0; persisted errors are skipped unless retry_errors is explicit",
+        "status": "completed",
+        "total_tokens": 442372
+      },
+      "summary_sha256": "4506f89ceb133cf08b0ece183932a81690da488127d9f4bf3fb3ce76c84f4bc8"
+    },
+    {
+      "path": "artifacts/m3_shenji_phase1_pilot_execution_pinai_tool_search_20260912_shard2_v1",
+      "summary": {
+        "claim_boundary": "No localization metric is computed online; no human or causal result is inferred.",
+        "complete_token_call_event_equality": true,
+        "completed_runs": 70,
+        "completion_tokens": 49740,
+        "error_runs": 0,
+        "ledger_summary_status": "PASS",
+        "model": "gpt-5.6-luna",
+        "planned_runs": 70,
+        "prompt_tokens": 373280,
+        "provider": "PinAI",
+        "provider_calls_observed": 70,
+        "provider_usage_source": "PinAI response usage only; unknown is NA",
+        "retry_policy": "max_retries=0; persisted errors are skipped unless retry_errors is explicit",
+        "status": "completed",
+        "total_tokens": 423020
+      },
+      "summary_sha256": "8bd6f21f64aa6f087cb9f065ef3d3716e507e8d99c0ee59a3158c3d5e8f673f4"
+    },
+    {
+      "path": "artifacts/m3_shenji_phase1_pilot_execution_pinai_tool_search_20260912_shard3_v1",
+      "summary": {
+        "claim_boundary": "No localization metric is computed online; no human or causal result is inferred.",
+        "complete_token_call_event_equality": true,
+        "completed_runs": 70,
+        "completion_tokens": 55111,
+        "error_runs": 0,
+        "ledger_summary_status": "PASS",
+        "model": "gpt-5.6-luna",
+        "planned_runs": 70,
+        "prompt_tokens": 376155,
+        "provider": "PinAI",
+        "provider_calls_observed": 70,
+        "provider_usage_source": "PinAI response usage only; unknown is NA",
+        "retry_policy": "max_retries=0; persisted errors are skipped unless retry_errors is explicit",
+        "status": "completed",
+        "total_tokens": 431266
+      },
+      "summary_sha256": "fd637008d7fc20d1399b78e50ce6a9bada4ca4e0903d687293ae335117637921"
+    }
+  ],
+  "registration_manifest": "artifacts/m3_shenji_phase1_pilot_registration_20260815_v2_final"
+}

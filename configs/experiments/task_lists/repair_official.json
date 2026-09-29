@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "name": "repair_official",
+  "source": "logs/repair_endpoints/official/index.csv",
+  "source_sha256": "f47240e6711fa0162fdcf401606cd5b779060d91b1ba884b3f9b4c4cde03ed1e",
+  "id_field": "task_id",
+  "repeat_fields": [],
+  "selection": [
+    "branch",
+    "reference"
+  ],
+  "assignment_count": 12,
+  "task_ids": [
+    "astropy__astropy-12907",
+    "astropy__astropy-14182",
+    "astropy__astropy-14365",
+    "astropy__astropy-14995",
+    "mwaskom__seaborn-2848",
+    "mwaskom__seaborn-3010",
+    "mwaskom__seaborn-3190",
+    "mwaskom__seaborn-3407",
+    "pallets__flask-4045",
+    "pallets__flask-5063",
+    "pylint-dev__pylint-6506",
+    "pylint-dev__pylint-7080"
+  ],
+  "units": [
+    {
+      "unit_id": "988e64fa0a7c257cfb466ecd",
+      "instance_id": "astropy__astropy-12907",
+      "source_key": [
+        "astropy__astropy-12907"
+      ],
+      "source_row": 2,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "514ad1d0fb41335837b597ca",
+      "instance_id": "astropy__astropy-14182",
+      "source_key": [
+        "astropy__astropy-14182"
+      ],
+      "source_row": 4,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "3f5aa111267729bf113f4dd0",
+      "instance_id": "astropy__astropy-14365",
+      "source_key": [
+        "astropy__astropy-14365"
+      ],
+      "source_row": 6,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "99230e4ec94e9590353c9392",
+      "instance_id": "astropy__astropy-14995",
+      "source_key": [
+        "astropy__astropy-14995"
+      ],
+      "source_row": 8,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "f276e85b05a132c3428c710e",
+      "instance_id": "mwaskom__seaborn-2848",
+      "source_key": [
+        "mwaskom__seaborn-2848"
+      ],
+      "source_row": 10,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "4aee00b0f09542e40494f82d",
+      "instance_id": "mwaskom__seaborn-3010",
+      "source_key": [
+        "mwaskom__seaborn-3010"
+      ],
+      "source_row": 12,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "21d4e47c85dd43b45bd79c70",
+      "instance_id": "mwaskom__seaborn-3190",
+      "source_key": [
+        "mwaskom__seaborn-3190"
+      ],
+      "source_row": 14,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "132fc6c23a56dd7c8736cc91",
+      "instance_id": "mwaskom__seaborn-3407",
+      "source_key": [
+        "mwaskom__seaborn-3407"
+      ],
+      "source_row": 16,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "ce2bc0f4c1e74964a17de2dc",
+      "instance_id": "pallets__flask-4045",
+      "source_key": [
+        "pallets__flask-4045"
+      ],
+      "source_row": 18,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "24a86d53d703ed04b2aab987",
+      "instance_id": "pallets__flask-5063",
+      "source_key": [
+        "pallets__flask-5063"
+      ],
+      "source_row": 20,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "446fadfc8bd90c5e8673e5f8",
+      "instance_id": "pylint-dev__pylint-6506",
+      "source_key": [
+        "pylint-dev__pylint-6506"
+      ],
+      "source_row": 22,
+      "replicate": "1",
+      "checkpoint_id": ""
+    },
+    {
+      "unit_id": "931383ce7342815a69ce7f58",
+      "instance_id": "pylint-dev__pylint-7080",
+      "source_key": [
+        "pylint-dev__pylint-7080"
+      ],
+      "source_row": 24,
+      "replicate": "1",
+      "checkpoint_id": ""
+    }
+  ]
+}

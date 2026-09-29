@@ -1,0 +1,233 @@
+"""Collect task-level official SWE-bench reports for the current Work 2 t0 gate.
+
+This collector deliberately records only the official harness result.  Augmented,
+independent/differential, semantic, and robust-correctness fields remain NA until
+their separate evidence is available.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parent
+OBJECTIVE = Path(
+    r"<SOURCE_ROOT>\current_objective_goal_objective_20260901.md"
+)
+EXPECTED_OBJECTIVE_HASH = "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9"
+PREPARED_DIR = ROOT / "analysis_outputs" / "work2_t0_official_evaluation_20260901"
+EVALUATION_MANIFEST = PREPARED_DIR / "evaluation_manifest.json"
+LOG_ROOT = ROOT / "logs" / "run_evaluation"
+OUT = ROOT / "analysis_outputs" / "work2_t0_official_results_20260901"
+RESULTS_CSV = OUT / "official_results.csv"
+SUMMARY_JSON = OUT / "official_results_summary.json"
+
+FIELDS = [
+    "analysis_id", "objective_sha256", "branch", "run_id", "task_id",
+    "report_path", "report_sha256", "patch_path", "patch_sha256",
+    "prediction_patch_sha256", "patch_hash_matches", "patch_exists",
+    "patch_successfully_applied", "resolved", "fail_to_pass_success_count",
+    "fail_to_pass_failure_count", "pass_to_pass_success_count",
+    "pass_to_pass_failure_count", "harness_process_exit_code",
+    "official_report_status", "report_generation_status", "augmented_tests_pass",
+    "independent_test_pass", "semantic_review_pass", "robust_correct",
+    "current_objective_eligibility", "provider_calls", "study_rows_created",
+    "claim_boundary",
+]
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def sha256_text(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def report_payload(path: Path) -> tuple[str, dict[str, Any]]:
+    payload = read_json(path)
+    if len(payload) != 1:
+        raise RuntimeError(f"expected one task in report {path}, got {len(payload)}")
+    task_id, report = next(iter(payload.items()))
+    if not isinstance(report, dict):
+        raise RuntimeError(f"report payload is not an object: {path}")
+    return str(task_id), report
+
+
+def prediction_patches(manifest: dict[str, Any], branch: str) -> dict[str, str]:
+    key = "human_predictions_path" if branch == "human" else "agent_predictions_path"
+    path = Path(manifest[key])
+    predictions: dict[str, str] = {}
+    with path.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            task_id = str(row["instance_id"])
+            if task_id in predictions:
+                raise RuntimeError(f"duplicate prediction row: {task_id}")
+            predictions[task_id] = str(row.get("model_patch") or "")
+    if len(predictions) != manifest.get("prediction_row_count_per_branch"):
+        raise RuntimeError(f"unexpected {branch} prediction count: {len(predictions)}")
+    return predictions
+
+
+def find_report(run_id: str, task_id: str) -> Path:
+    candidates = sorted((LOG_ROOT / run_id).rglob("report.json"))
+    matches: list[Path] = []
+    for path in candidates:
+        report_task_id, _ = report_payload(path)
+        if report_task_id == task_id:
+            matches.append(path)
+    if len(matches) != 1:
+        raise RuntimeError(f"expected one report for {run_id}/{task_id}, got {len(matches)}")
+    return matches[0]
+
+
+def parse_run_spec(value: str) -> tuple[str, str, str, int]:
+    try:
+        branch, task_id, run_id, exit_code = value.split(":", 3)
+        if branch not in {"human", "agent"} or not task_id or not run_id:
+            raise ValueError
+        return branch, task_id, run_id, int(exit_code)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            "run must be BRANCH:TASK_ID:RUN_ID:HARNESS_EXIT_CODE"
+        ) from exc
+
+
+def collect(run_specs: list[tuple[str, str, str, int]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    objective_hash = sha256_file(OBJECTIVE)
+    if objective_hash != EXPECTED_OBJECTIVE_HASH:
+        raise RuntimeError(f"objective hash mismatch: {objective_hash}")
+    manifest = read_json(EVALUATION_MANIFEST)
+    if manifest.get("objective_sha256") != objective_hash:
+        raise RuntimeError("evaluation manifest is not bound to the current objective")
+    if manifest.get("provider_calls") is not False or manifest.get("study_rows_created") is not False:
+        raise RuntimeError("official t0 collector requires provider-free prepared inputs")
+    prediction_by_branch = {
+        branch: prediction_patches(manifest, branch) for branch in {spec[0] for spec in run_specs}
+    }
+    rows: list[dict[str, Any]] = []
+    for branch, task_id, run_id, exit_code in run_specs:
+        if task_id not in prediction_by_branch[branch]:
+            raise RuntimeError(f"task is missing from {branch} predictions: {task_id}")
+        report_path = find_report(run_id, task_id)
+        report_task_id, report = report_payload(report_path)
+        if report_task_id != task_id:
+            raise RuntimeError(f"report task mismatch: {report_task_id} != {task_id}")
+        patch_path = report_path.parent / "patch.diff"
+        tests = report.get("tests_status", {})
+        fail_to_pass = tests.get("FAIL_TO_PASS", {})
+        pass_to_pass = tests.get("PASS_TO_PASS", {})
+        prediction_hash = sha256_text(prediction_by_branch[branch][task_id])
+        patch_hash = sha256_file(patch_path) if patch_path.is_file() else "NA"
+        resolved = report.get("resolved") is True
+        report_status = "resolved" if resolved else "official_report_present_unresolved"
+        cleanup_status = (
+            "report_generation_failed_no_report" if not report_path.is_file()
+            else "report_generation_failed_stale_container_inventory" if exit_code != 0 and resolved
+            else "report_generation_ok"
+        )
+        rows.append({
+                "analysis_id": "work2_t0_official_results_20260901",
+                "objective_sha256": objective_hash,
+                "branch": branch,
+                "run_id": run_id,
+                "task_id": task_id,
+                "report_path": str(report_path),
+                "report_sha256": sha256_file(report_path),
+                "patch_path": str(patch_path),
+                "patch_sha256": patch_hash,
+                "prediction_patch_sha256": prediction_hash,
+                "patch_hash_matches": str(patch_hash == prediction_hash).lower() if patch_hash != "NA" else "false",
+                "patch_exists": str(report.get("patch_exists") is True).lower(),
+                "patch_successfully_applied": str(report.get("patch_successfully_applied") is True).lower(),
+                "resolved": str(resolved).lower(),
+                "fail_to_pass_success_count": len(fail_to_pass.get("success", [])),
+                "fail_to_pass_failure_count": len(fail_to_pass.get("failure", [])),
+                "pass_to_pass_success_count": len(pass_to_pass.get("success", [])),
+                "pass_to_pass_failure_count": len(pass_to_pass.get("failure", [])),
+                "harness_process_exit_code": exit_code,
+                "official_report_status": report_status,
+                "report_generation_status": cleanup_status,
+                "augmented_tests_pass": "NA",
+                "independent_test_pass": "NA",
+                "semantic_review_pass": "NA",
+                "robust_correct": "NA",
+                "current_objective_eligibility": "0",
+                "provider_calls": "false",
+                "study_rows_created": "false",
+                "claim_boundary": "Official harness outcome only. Required augmented, independent/differential, semantic/contract, robust-correctness, and paired-valid gates remain unobserved.",
+        })
+    rows.sort(key=lambda row: (row["task_id"], row["branch"]))
+    return rows, manifest
+
+
+def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=FIELDS, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--run", dest="run_specs", action="append", type=parse_run_spec, required=True,
+        help="completed run spec BRANCH:TASK_ID:RUN_ID:HARNESS_EXIT_CODE; repeat per branch/run",
+    )
+    args = parser.parse_args()
+    rows, manifest = collect(args.run_specs)
+    OUT.mkdir(parents=True, exist_ok=True)
+    write_csv(RESULTS_CSV, rows)
+    summary = {
+        "analysis_id": "work2_t0_official_results_20260901",
+        "objective_path": str(OBJECTIVE),
+        "objective_sha256": EXPECTED_OBJECTIVE_HASH,
+        "prepared_evaluation_manifest": str(EVALUATION_MANIFEST),
+        "prepared_evaluation_manifest_sha256": sha256_file(EVALUATION_MANIFEST),
+        "rows_path": str(RESULTS_CSV),
+        "row_count": len(rows),
+        "branch_counts": dict(sorted(Counter(row["branch"] for row in rows).items())),
+        "task_count": len({row["task_id"] for row in rows}),
+        "official_resolved_count": sum(row["resolved"] == "true" for row in rows),
+        "official_patch_applied_count": sum(row["patch_successfully_applied"] == "true" for row in rows),
+        "harness_exit_code_counts": dict(sorted(Counter(str(row["harness_process_exit_code"]) for row in rows).items())),
+        "report_generation_status_counts": dict(sorted(Counter(row["report_generation_status"] for row in rows).items())),
+        "augmented_observed_count": 0,
+        "independent_observed_count": 0,
+        "semantic_observed_count": 0,
+        "robust_correct_observed_count": 0,
+        "current_objective_eligible_count": 0,
+        "provider_calls": False,
+        "study_rows_created": False,
+        "status": "OFFICIAL_RESULTS_OBSERVED_T0_GATES_REMAIN_OPEN",
+        "claim_boundary": "Official SWE-bench harness reports are observed for the collected rows. A nonzero harness exit with a resolved task is retained as a report-generation cleanup defect; no row is promoted to robust correctness or t0 eligibility.",
+        "run_specs": [f"{branch}:{task_id}:{run_id}:{exit_code}" for branch, task_id, run_id, exit_code in args.run_specs],
+        "input_candidate_count": manifest.get("candidate_count"),
+    }
+    SUMMARY_JSON.write_text(json.dumps(summary, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+    summary["rows_sha256"] = sha256_file(RESULTS_CSV)
+    SUMMARY_JSON.write_text(json.dumps(summary, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(summary, ensure_ascii=True, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

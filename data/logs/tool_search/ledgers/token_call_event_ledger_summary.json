@@ -1,0 +1,27 @@
+{
+  "call_rows": 280,
+  "claim_boundary": "Fresh Phase-1 observed rows only; equality is asserted across the three model-call ledgers, while all trajectory events remain in the separate full ledger. Missing provider observations remain NA.",
+  "complete_token_call_event_equality": true,
+  "completed_case_rows": 280,
+  "completion_tokens": 206396,
+  "error_rows": 0,
+  "errors": [],
+  "lineage_key": "pro260|task_id|setting_id|run_id|provider_event_id",
+  "model_call_event_rows": 280,
+  "non_model_trajectory_events_separate": true,
+  "paths": {
+    "call_ledger": "ledgers/call_ledger.jsonl",
+    "model_call_event_ledger": "ledgers/model_call_event_ledger.jsonl",
+    "token_ledger": "ledgers/token_ledger.jsonl",
+    "trajectory_event_ledger": "ledgers/trajectory_event_ledger.jsonl"
+  },
+  "planned_runs": 280,
+  "prompt_tokens": 1560447,
+  "provider_calls_by_builder": 0,
+  "provider_calls_observed": 280,
+  "schema_version": "shenji_phase1_token_call_event_v1",
+  "status": "PASS",
+  "token_rows": 280,
+  "total_tokens": 1766843,
+  "trajectory_event_rows": 2520
+}

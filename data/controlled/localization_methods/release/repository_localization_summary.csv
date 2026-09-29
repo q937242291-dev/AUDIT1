@@ -1,0 +1,16 @@
+﻿method,repo,valid_cases,expected_cases,mean_FileHit@1,mean_FileHit@3,mean_FileHit@5,mean_FileHit@6,mean_MRR@3,mean_MultiFileRecall@6,mean_Top1MissRate,tokens_sum
+luna_one_shot,ansible/ansible,94,94,0.56383,0.606383,0.617021,0.617021,0.58156,0.24314,0.43617,316910
+luna_one_shot,internetarchive/openlibrary,90,90,0.055556,0.066667,0.077778,0.088889,0.059259,0.029335,0.944444,277272
+luna_one_shot,qutebrowser/qutebrowser,76,76,0.0,0.0,0.0,0.0,0.0,0.0,1.0,201892
+luna_tool_search,ansible/ansible,94,94,0.393617,0.489362,0.510638,0.542553,0.439716,0.206033,0.606383,2201776
+luna_tool_search,internetarchive/openlibrary,90,90,0.033333,0.055556,0.055556,0.055556,0.040741,0.016905,0.966667,1646400
+luna_tool_search,qutebrowser/qutebrowser,76,76,0.0,0.013158,0.013158,0.013158,0.004386,0.003289,1.0,1247721
+shenji_no_audit,ansible/ansible,94,94,0.265957,0.5,0.542553,0.553191,0.37766,0.225384,0.734043,2518686
+shenji_no_audit,internetarchive/openlibrary,90,90,0.022222,0.033333,0.044444,0.044444,0.027778,0.014127,0.977778,1923672
+shenji_no_audit,qutebrowser/qutebrowser,76,76,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1449613
+shenji_v3_full_audit,ansible/ansible,94,94,0.425532,0.5,0.542553,0.553191,0.460993,0.225384,0.574468,2598557
+shenji_v3_full_audit,internetarchive/openlibrary,90,90,0.033333,0.033333,0.044444,0.044444,0.033333,0.014127,0.966667,1955903
+shenji_v3_full_audit,qutebrowser/qutebrowser,76,76,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1487867
+shenji_v4_trust_first,ansible/ansible,94,94,0.404255,0.457447,0.468085,0.5,0.429078,0.199422,0.595745,2598557
+shenji_v4_trust_first,internetarchive/openlibrary,90,90,0.033333,0.044444,0.044444,0.044444,0.037037,0.014127,0.966667,1955903
+shenji_v4_trust_first,qutebrowser/qutebrowser,76,76,0.0,0.013158,0.013158,0.013158,0.004386,0.003289,1.0,1487867

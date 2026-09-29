@@ -1,0 +1,27 @@
+{
+  "all_latest_completed": true,
+  "all_provider_identity_valid": true,
+  "coverage_complete": true,
+  "expected_fork_rows": 120,
+  "latest_completed_rows": 120,
+  "latest_error_rows": 0,
+  "missing_fork_ids": [],
+  "model_values": [
+    "gpt-5.6-luna"
+  ],
+  "provider_calls_observed": 120,
+  "provider_values": [
+    "PinAI"
+  ],
+  "raw_rows": 123,
+  "retry_history_rows": 3,
+  "status": "PASS_MERGED_IDENTIFIER_MUTATION",
+  "unexpected_fork_ids": [],
+  "unique_latest_fork_rows": 120,
+  "usage": {
+    "completion_tokens": 48416,
+    "prompt_tokens": 667389,
+    "total_tokens": 715805
+  },
+  "workspace_manifest_present": true
+}

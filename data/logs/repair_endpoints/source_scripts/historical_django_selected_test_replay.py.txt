@@ -1,0 +1,156 @@
+"""Run an exact-base baseline/gold/OrcaLoca comparison for Django-10924."""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import re
+import subprocess
+import zipfile
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OBJECTIVE = Path(r"<USER_HOME>\.codex\attachments\8d2f80cc-875f-48d1-8eff-7a500c2d87c5\goal-objective.md")
+ACTIVE_SHA = "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9"
+OUT = ROOT / "artifacts/work2_django10924_three_condition_replay_20260907_v2"
+ZIP = OUT.with_suffix(".zip")
+IMAGE = "ghcr.io/openhands/eval-agent-server:3e0a3a0-sweb.eval.x86_64.django_1776_django-10924-source-minimal"
+TASK_ID = "django__django-10924"
+BASE_COMMIT = "bceadd2788dc2dad53eba0caae172bd8522fd483"
+GOLD_PATCH = ROOT / "artifacts/work2_t0_django10924_docker_replay_20260906_v1/solution_source_patch.diff"
+TEST_PATCH = ROOT / "artifacts/work2_t0_django10924_docker_replay_20260906_v1/evaluation_test_patch_adapted.diff"
+ORCA_PATCH = ROOT / "repos/experiments/evaluation/lite/20250113_OrcaLoca/logs/django__django-10924/patch.diff"
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def parse_counts(output: str) -> tuple[int, int, bool]:
+    match = re.search(r"Ran (\d+) tests? in ", output)
+    ran = int(match.group(1)) if match else 0
+    passed = ran if re.search(r"\nOK(?:\s|$)", output) else 0
+    if "FAILED (" in output or re.search(r"\nFAIL\s*$", output):
+        passed = 0
+    return passed, ran - passed, bool(match)
+
+
+def run_case(method: str, solution_patch: Path, test_patch: Path) -> dict[str, object]:
+    log_path = OUT / f"{method}.docker.log"
+    solution_step = "" if method == "baseline" else "git apply --ignore-whitespace --verbose /tmp/solution.diff; "
+    shell = "".join([
+        "set -u; cd /testbed; git config --global --add safe.directory /testbed; ",
+        f"git reset --hard {BASE_COMMIT}; git clean -fdx; ",
+        "printf 'HEAD='; git rev-parse HEAD; printf 'DIRTY='; git status --porcelain | wc -l; ",
+        solution_step,
+        "git apply --ignore-whitespace --verbose /tmp/test.diff; ",
+        "source /opt/miniconda3/bin/activate; conda activate testbed; ",
+        "python tests/runtests.py forms_tests.field_tests.test_filepathfield --verbosity 1",
+    ])
+    command = [
+        "docker", "run", "--rm", "--entrypoint", "/bin/bash",
+        "--mount", f"type=bind,source={solution_patch},target=/tmp/solution.diff,readonly",
+        "--mount", f"type=bind,source={test_patch},target=/tmp/test.diff,readonly",
+        IMAGE, "-lc", shell,
+    ]
+    completed = subprocess.run(command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="utf-8", errors="replace")
+    log_path.write_text(completed.stdout, encoding="utf-8")
+    passed, failed, executed = parse_counts(completed.stdout)
+    patch_count = completed.stdout.count("Applied patch")
+    solution_applied = method != "baseline" and patch_count >= 2
+    test_applied = patch_count >= 1
+    reset_ok = f"HEAD={BASE_COMMIT}" in completed.stdout and "DIRTY=0" in completed.stdout
+    return {
+        "task_id": TASK_ID,
+        "method": method,
+        "image": IMAGE,
+        "base_commit": BASE_COMMIT,
+        "solution_patch_sha256": sha256(solution_patch),
+        "test_patch_sha256": sha256(test_patch),
+        "reset_ok": reset_ok,
+        "solution_patch_applied": solution_applied,
+        "test_patch_applied": test_applied,
+        "test_executed": executed,
+        "tests_passed": passed,
+        "tests_failed": failed,
+        "tests_run": passed + failed,
+        "returncode": completed.returncode,
+        "resolved_process_signal": bool(method != "baseline" and reset_ok and solution_applied and test_applied and executed and failed == 0 and completed.returncode == 0),
+        "formal_outcome": False,
+        "provider_calls_added": 0,
+    }
+
+
+def main() -> int:
+    if OUT.exists() or ZIP.exists():
+        raise SystemExit(f"refusing_to_overwrite:{OUT}")
+    if sha256(OBJECTIVE) != ACTIVE_SHA:
+        raise SystemExit("active_objective_sha_mismatch")
+    for path in (GOLD_PATCH, TEST_PATCH, ORCA_PATCH):
+        if not path.is_file():
+            raise SystemExit(f"missing_input:{path}")
+    OUT.mkdir(parents=True)
+    (OUT / "baseline.patch").write_text("", encoding="utf-8", newline="\n")
+    (OUT / "gold.patch").write_text(GOLD_PATCH.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
+    (OUT / "test.patch").write_text(TEST_PATCH.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
+    (OUT / "orcaloca.patch").write_text(ORCA_PATCH.read_text(encoding="utf-8"), encoding="utf-8", newline="\n")
+    results = [run_case("baseline", OUT / "baseline.patch", OUT / "test.patch"), run_case("gold", OUT / "gold.patch", OUT / "test.patch"), run_case("orcaloca", OUT / "orcaloca.patch", OUT / "test.patch")]
+    summary = {
+        "analysis_id": OUT.name,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "active_objective_sha256": ACTIVE_SHA,
+        "task_id": TASK_ID,
+        "repository": "django/django",
+        "image": IMAGE,
+        "base_commit": BASE_COMMIT,
+        "test_scope": "tests/forms_tests/field_tests/test_filepathfield.py via Django runtests.py",
+        "result_rows": len(results),
+        "baseline_passed": int(results[0]["tests_passed"]),
+        "baseline_failed": int(results[0]["tests_failed"]),
+        "gold_passed": int(results[1]["tests_passed"]),
+        "orcaloca_passed": int(results[2]["tests_passed"]),
+        "gold_f2p": int(results[1]["tests_passed"]) - int(results[0]["tests_passed"]),
+        "orcaloca_f2p": int(results[2]["tests_passed"]) - int(results[0]["tests_passed"]),
+        "test_executed_rows": sum(bool(row["test_executed"]) for row in results),
+        "resolved_process_signal_rows": sum(bool(row["resolved_process_signal"]) for row in results),
+        "formal_outcome_rows": 0,
+        "provider_calls_added": 0,
+        "formal_promotion": False,
+        "status": "completed_exact_base_three_condition_replay" if all(bool(row["test_executed"]) for row in results) else "partial_exact_base_three_condition_replay",
+        "claim_boundary": "Exact-base Django source reset with baseline/gold/OrcaLoca process comparison. F2P is a test-sensitivity diagnostic, not a semantic, robust, causal, survival, or formal outcome.",
+        "results": results,
+    }
+    fields = list(dict.fromkeys(key for row in results for key in row))
+    with (OUT / "result_rows.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(results)
+    (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "RESULTS_ZH.md").write_text(
+        "# Django-10924 exact-base three-condition replay\n\n"
+        f"baseline={summary['baseline_passed']} passed/{summary['baseline_failed']} failed；gold={summary['gold_passed']}；OrcaLoca={summary['orcaloca_passed']}；F2P gold/OrcaLoca={summary['gold_f2p']}/{summary['orcaloca_f2p']}。\n\n"
+        "该包是 exact-base process/test sensitivity diagnostic，不是 formal outcome。\n",
+        encoding="utf-8",
+    )
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    (OUT / "file_manifest.json").write_text(json.dumps([{"path": str(path.relative_to(OUT)).replace("\\", "/"), "bytes": path.stat().st_size, "sha256": sha256(path)} for path in files], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    with zipfile.ZipFile(ZIP, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for path in files:
+            archive.write(path, path.relative_to(OUT))
+    with zipfile.ZipFile(ZIP) as archive:
+        if archive.testzip() is not None:
+            raise SystemExit("archive_integrity_failed")
+    print(json.dumps(summary, ensure_ascii=False))
+    return 0 if summary["status"] == "completed_exact_base_three_condition_replay" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

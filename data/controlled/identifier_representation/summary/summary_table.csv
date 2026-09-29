@@ -1,0 +1,4 @@
+﻿metric,n,natural_mean,identifier_mutation_mean,paired_delta_mean,positive_count,equal_count,negative_count,mcnemar_exact_two_sided_p
+file_hit_1,120,0.258333,0.55,0.291667,41,73,6,1.8e-07
+file_hit_3,120,0.325,0.658333,0.333333,49,62,9,9e-08
+file_hit_5,120,0.325,0.683333,0.358333,49,65,6,0.0

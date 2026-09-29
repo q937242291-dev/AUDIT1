@@ -1,0 +1,15 @@
+method_layer,log_directory,files,bytes
+audit_policy,data/logs/audit_policy,6,14125181
+component_ablation,data/logs/component_ablation,3,2028111
+component_activity,data/logs/component_activity,3,294767
+deepswe_success_trajectories,data/logs/deepswe_success_trajectories,41,21635856
+identifier_representation,data/logs/identifier_representation,5,428504
+input_projection,data/logs/input_projection,3,242762
+localization_methods,data/logs/localization_methods,15,51022389
+matched_context,data/logs/matched_context,5,966625
+model_swap,data/logs/model_swap,46,7354417
+progressive_context,data/logs/progressive_context,3,3538460
+repair_endpoints,data/logs/repair_endpoints,297,1644317
+swebench_pro_success_trajectories,data/logs/swebench_pro_success_trajectories,10,1064533
+tool_search,data/logs/tool_search,10,24452823
+trajectory_replay,data/logs/trajectory_replay,2,1290978

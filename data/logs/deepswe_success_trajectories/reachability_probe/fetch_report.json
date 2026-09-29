@@ -1,0 +1,45 @@
+{
+  "dataset": "deepswe",
+  "manifest_sha256": "b8621962446db2784ff00cceb95c1f534b722bcab5d564fba1e957d5f306dcae",
+  "selected_rows": 2,
+  "mode": "HEAD_probe",
+  "transferred_bytes": 0,
+  "network_requests_requested": true,
+  "model_calls": 0,
+  "artifacts": [
+    {
+      "dataset": "deepswe",
+      "trial_name": "abs-module-cache-flags__3qgXKJu",
+      "task_name": "abs-module-cache-flags",
+      "run_id": "",
+      "instance_id": "",
+      "url": "https://d3ujjcmjq6o8v6.cloudfront.net/v1.1/trial-artifacts/abs-module-cache-flags__3qgXKJu/agent/trajectory.json",
+      "expected_sha256": "68e73ed2bee70b7a0732123a936235ce2aabe3d68c5dd9f4c93e38277743e860",
+      "historical_status": "downloaded",
+      "historical_http_status": "200",
+      "status": "failed",
+      "sha256": "",
+      "bytes_verified": false,
+      "artifact": "abs-module-cache-flags__3qgXKJu.json",
+      "checked_at_utc": "2026-09-25T16:06:45.474056+00:00",
+      "error_type": "URLError"
+    },
+    {
+      "dataset": "deepswe",
+      "trial_name": "abs-module-cache-flags__4SQmVkm",
+      "task_name": "abs-module-cache-flags",
+      "run_id": "",
+      "instance_id": "",
+      "url": "https://d3ujjcmjq6o8v6.cloudfront.net/v1.1/trial-artifacts/abs-module-cache-flags__4SQmVkm/agent/trajectory.json",
+      "expected_sha256": "",
+      "historical_status": "failed",
+      "historical_http_status": "403",
+      "status": "failed",
+      "sha256": "",
+      "bytes_verified": false,
+      "artifact": "abs-module-cache-flags__4SQmVkm.json",
+      "checked_at_utc": "2026-09-25T16:06:45.492816+00:00",
+      "error_type": "URLError"
+    }
+  ]
+}

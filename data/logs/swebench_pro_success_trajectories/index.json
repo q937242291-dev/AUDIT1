@@ -1,0 +1,44 @@
+{
+  "benchmark": "SWE-bench Pro",
+  "success_only": true,
+  "summary_rows": 584,
+  "event_rows": 41014,
+  "model_counts": {
+    "claude-4.5-sonnet": 319,
+    "gpt-5": 265
+  },
+  "provider_calls": 0,
+  "benchmark_rerun": false,
+  "source_index_note": "Original index described a combined 1867-row corpus, not this 584-row CSV; historical object retained below.",
+  "historical_combined_index": {
+    "analysis_id": "work2_latest_pro_deepswe_success_log_combined_current_20260919",
+    "generated_at_utc": "2026-09-19T10:34:25.667842+00:00",
+    "benchmarks": [
+      "SWE-bench Pro",
+      "DeepSWE v1.1"
+    ],
+    "success_only": true,
+    "provider_calls": 0,
+    "benchmark_rerun": false,
+    "summary_rows": 1867,
+    "event_rows": 171732,
+    "pro_rows": 584,
+    "deepswe_rows": 1283,
+    "model_counts": {
+      "claude-4.5-sonnet": 319,
+      "gpt-5": 265,
+      "claude-opus-5": 956,
+      "gpt-5-6-sol": 327
+    },
+    "future_gold_trigger_rows": 9,
+    "output_counts": {
+      "trajectory_summary": 1867,
+      "trajectory_events": 171732,
+      "rq1": 48,
+      "rq2": 48,
+      "rq3": 48,
+      "rq4": 4
+    },
+    "claim_boundary": "Official success-only secondary-log analysis for SWE-bench Pro resolved=true and DeepSWE v1.1 passed=true public artifacts. All prevalence is descriptive; it does not identify necessity, causality, semantic sufficiency, robustness, or formal Work2 promotion."
+  }
+}

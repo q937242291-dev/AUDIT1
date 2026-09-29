@@ -1,0 +1,7 @@
+﻿config_id,observed_n,model,provider,provider_calls_sum,provider_calls_mean,prompt_tokens_sum,prompt_tokens_mean,completion_tokens_sum,completion_tokens_mean,total_tokens_sum,total_tokens_mean,claim_boundary
+solver_only,30,gpt-5.6-luna,PinAI,30.0,1.0,306913.0,10230.433333,13415.0,447.166667,320328.0,10677.6,"Observed provider usage only; NA is unavailable, not zero."
+solver_plus_observe_only_shenji,30,gpt-5.6-luna,PinAI,93.0,3.1,1027540.0,34251.333333,47040.0,1568.0,1074580.0,35819.333333,"Observed provider usage only; NA is unavailable, not zero."
+solver_plus_end_of_run_audit,30,gpt-5.6-luna,PinAI,30.0,1.0,306913.0,10230.433333,12561.0,418.7,319474.0,10649.133333,"Observed provider usage only; NA is unavailable, not zero."
+solver_plus_online_generic_intervention,30,gpt-5.6-luna,PinAI,30.0,1.0,306913.0,10230.433333,12401.0,413.366667,319314.0,10643.8,"Observed provider usage only; NA is unavailable, not zero."
+solver_plus_evidence_grounded_intervention,30,gpt-5.6-luna,PinAI,30.0,1.0,306913.0,10230.433333,12393.0,413.1,319306.0,10643.533333,"Observed provider usage only; NA is unavailable, not zero."
+solver_plus_full_shenji,30,gpt-5.6-luna,PinAI,80.0,2.666667,909544.0,30318.133333,40885.0,1362.833333,950429.0,31680.966667,"Observed provider usage only; NA is unavailable, not zero."

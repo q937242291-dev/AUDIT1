@@ -1,0 +1,4 @@
+﻿metric,n,one_shot_mean,tool_search_mean,paired_delta_mean,paired_delta_percentile95_lo,paired_delta_percentile95_hi,delta_positive_count,delta_equal_count,delta_negative_count,mcnemar_exact_two_sided_p
+file_hit_1,280,0.467857,0.607143,0.139286,-1.0,1.0,66,187,27,6.467e-05
+file_hit_3,280,0.521429,0.725,0.203571,-1.0,1.0,79,179,22,1e-08
+file_hit_5,280,0.525,0.732143,0.207143,-1.0,1.0,79,180,21,0.0

@@ -1,0 +1,7 @@
+factor,metric,unique_tasks,n,control_mean,treatment_mean,gain,loss,ties,delta,exact_mcnemar_p,inference_boundary
+Search,Hit@1,120,280,0.46785714285714286,0.6071428571428571,66,27,187,0.1392857142857143,6.467045262218053e-05,Run-level McNemar reconstruction; repeated task observations are not independent tasks
+Search,Hit@3,120,280,0.5214285714285715,0.725,79,22,179,0.20357142857142857,1.012134755360389e-08,Run-level McNemar reconstruction; repeated task observations are not independent tasks
+Search,Hit@5,120,280,0.525,0.7321428571428571,79,21,180,0.20714285714285716,4.337366633421638e-09,Run-level McNemar reconstruction; repeated task observations are not independent tasks
+Representation,Hit@1,40,120,0.25833333333333336,0.55,41,6,73,0.2916666666666667,1.7716986633331544e-07,Run-level McNemar reconstruction; repeated task observations are not independent tasks
+Representation,Hit@3,40,120,0.325,0.6583333333333333,49,9,62,0.3333333333333333,8.959402428981855e-08,Run-level McNemar reconstruction; repeated task observations are not independent tasks
+Representation,Hit@5,40,120,0.325,0.6833333333333333,49,6,65,0.35833333333333334,1.822834494458192e-09,Run-level McNemar reconstruction; repeated task observations are not independent tasks

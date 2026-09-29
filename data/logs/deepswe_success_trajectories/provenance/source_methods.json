@@ -1,0 +1,23 @@
+{
+  "source_path_note": "Historical work2/scripts location missing; actual source definitions recovered from sibling scripts directory. Absolute host root replaced by [source-root] only. These .txt snapshots are archival, not runnable entry points.",
+  "sources": [
+    {
+      "source_basename": "parse_work2_deepswe_current_sota_top10_success_logs_current_20260922.py",
+      "original_sha256": "aba35a1004db0994a30263e89552d6f54295a4edbab5b5b6e1ed45589749526c",
+      "anonymization": "host absolute root replaced with [source-root]; identifiers and classifier/statistic definitions preserved",
+      "archival_snapshot": "historical_deepswe_trajectory_parser.py.txt"
+    },
+    {
+      "source_basename": "build_work2_latest_pro_success_log_analysis_current_20260919.py",
+      "original_sha256": "bde39feec9ca5b6054c79151293407b37541e699d69e38c185986174ff48d0f2",
+      "anonymization": "host absolute root replaced with [source-root]; identifiers and classifier/statistic definitions preserved",
+      "archival_snapshot": "historical_pro_trajectory_parser.py.txt"
+    },
+    {
+      "source_basename": "build_work2_success_sota_confidence_statistics_current_20260922.py",
+      "original_sha256": "a94d29bccbc5daadd32510e302d02acd2dc59b9e3645fe0f67402cc2a76c41e1",
+      "anonymization": "host absolute root replaced with [source-root]; identifiers and classifier/statistic definitions preserved",
+      "archival_snapshot": "historical_success_confidence_statistics.py.txt"
+    }
+  ]
+}

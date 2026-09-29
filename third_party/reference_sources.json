@@ -1,0 +1,47 @@
+{
+  "schema": "audit-reference-sources/v1",
+  "sources": [
+    {
+      "name": "DeepSWE",
+      "paper_references": [9],
+      "repository": "https://github.com/datacurve-ai/deep-swe",
+      "commit": "0b9fabbb63b9104d678fe965e1632f2dd9eaa2ea",
+      "license_observed": "Apache-2.0",
+      "license_path": "LICENSE",
+      "copied_code": false,
+      "usage": "Official mini-swe-agent/Pier and trajectory-format documentation; AUDIT authors its own parser."
+    },
+    {
+      "name": "Reflexion",
+      "paper_references": [47],
+      "repository": "https://github.com/noahshinn/reflexion",
+      "commit": "218cf0ef1df84b05ce379dd4a8e47f17766733a0",
+      "license_observed": "MIT",
+      "license_path": "LICENSE",
+      "copied_code": false,
+      "usage": "Idea-level reference for prior verbal feedback; no original Reflexion code reused."
+    },
+    {
+      "name": "HiAgent",
+      "paper_references": [31],
+      "repository": "https://github.com/HiAgent2024/HiAgent",
+      "commit": "cebdd8e4eacec1a532ce2c0041db8902217b90ba",
+      "official_evidence": "https://github.com/Aaron617",
+      "license_observed": null,
+      "checked_root_paths": ["LICENSE", "LICENSE.md", "LICENSE.txt"],
+      "copied_code": false,
+      "usage": "Idea-level hierarchical working-memory reference; no verified redistribution license in checked paths."
+    },
+    {
+      "name": "Agentic Memory (AgeMem)",
+      "paper_references": [32],
+      "repository": "https://github.com/y1y5/AgeMem",
+      "commit": "98f563f907d67b2f2436e3ae7b7ceff32e482814",
+      "official_evidence": "Repository README matches the cited paper title and author identity; arXiv:2601.01885.",
+      "license_observed": null,
+      "checked_root_paths": ["LICENSE", "LICENSE.md", "LICENSE.txt"],
+      "copied_code": false,
+      "usage": "Idea-level unified memory-management reference; no verified redistribution license in checked paths."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "status": "PASS_MERGED_FRESH_PHASE1_TOOL_SEARCH",
+  "expected_registered_rows": 280,
+  "actual_canonical_rows": 280,
+  "actual_error_rows": 0,
+  "unique_run_ids": 280,
+  "duplicate_run_ids": [],
+  "duplicate_task_replicates": [],
+  "missing_registered_run_ids": [],
+  "unexpected_registration_run_ids": [],
+  "provider_values": [
+    "PinAI"
+  ],
+  "model_values": [
+    "gpt-5.6-luna"
+  ],
+  "status_values": [
+    "completed"
+  ],
+  "setting_values": [
+    "luna_tool_search"
+  ],
+  "all_rows_completed": true,
+  "all_provider_identity_valid": true,
+  "coverage_complete": true,
+  "errors_empty": true,
+  "ledger": {
+    "schema_version": "shenji_phase1_token_call_event_v1",
+    "status": "PASS",
+    "planned_runs": 280,
+    "completed_case_rows": 280,
+    "error_rows": 0,
+    "call_rows": 280,
+    "token_rows": 280,
+    "model_call_event_rows": 280,
+    "trajectory_event_rows": 2520,
+    "complete_token_call_event_equality": true,
+    "lineage_key": "pro260|task_id|setting_id|run_id|provider_event_id",
+    "non_model_trajectory_events_separate": true,
+    "provider_calls_by_builder": 0,
+    "provider_calls_observed": 280,
+    "prompt_tokens": 1560447,
+    "completion_tokens": 206396,
+    "total_tokens": 1766843,
+    "errors": [],
+    "paths": {
+      "call_ledger": "ledgers/call_ledger.jsonl",
+      "token_ledger": "ledgers/token_ledger.jsonl",
+      "model_call_event_ledger": "ledgers/model_call_event_ledger.jsonl",
+      "trajectory_event_ledger": "ledgers/trajectory_event_ledger.jsonl"
+    },
+    "claim_boundary": "Fresh Phase-1 observed rows only; equality is asserted across the three model-call ledgers, while all trajectory events remain in the separate full ledger. Missing provider observations remain NA."
+  }
+}

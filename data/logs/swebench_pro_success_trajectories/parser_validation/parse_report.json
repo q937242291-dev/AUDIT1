@@ -1,0 +1,14 @@
+{
+  "dataset": "swebench-pro",
+  "eligible_selected_rows": 2,
+  "parsed_rows": 2,
+  "event_rows": 168,
+  "queued_rows": 0,
+  "reference_checked": true,
+  "reference_mismatches": 0,
+  "raw_payloads_copied": false,
+  "event_text_exported": false,
+  "network_calls": 0,
+  "model_calls": 0,
+  "manifest_sha256": "24c016b21f1915b26a667dc8ff76429c3673e9214287a4faa67f17456df514d9"
+}

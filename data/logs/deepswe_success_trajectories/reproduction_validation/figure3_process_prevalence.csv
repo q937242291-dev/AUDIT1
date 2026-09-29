@@ -1,0 +1,12 @@
+process_unit,k,n,prevalence,band
+test_or_build,1308,1308,1.0,high
+direct_file_read,1251,1308,0.9564220183486238,high
+edit_or_patch,1224,1308,0.9357798165137615,high
+code_search,1168,1308,0.8929663608562691,high
+diff_validation,654,1308,0.5,intermediate
+history_lookup,466,1308,0.3562691131498471,intermediate
+environment_setup,407,1308,0.31116207951070335,intermediate
+issue_specification,282,1308,0.21559633027522937,intermediate
+dependency_or_network,116,1308,0.08868501529051988,low
+feedback_recovery,28,1308,0.021406727828746176,low
+repository_orientation,0,1308,0.0,low

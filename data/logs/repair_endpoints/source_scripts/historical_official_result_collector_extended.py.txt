@@ -1,0 +1,21 @@
+"""Collect the current-objective official t0 reports after batch v7."""
+
+from pathlib import Path
+
+import collect_work2_t0_official_results_20260901 as implementation
+
+
+ROOT = Path(__file__).resolve().parent
+implementation.OBJECTIVE = Path(
+    r"<USER_HOME>\.codex\attachments\17cd3747-9c2f-4756-98d2-6052fe4b678e\goal-objective.md"
+)
+implementation.EXPECTED_OBJECTIVE_HASH = implementation.sha256_file(implementation.OBJECTIVE)
+implementation.PREPARED_DIR = ROOT / "analysis_outputs" / "work2_t0_official_evaluation_current_20260901_v2"
+implementation.EVALUATION_MANIFEST = implementation.PREPARED_DIR / "evaluation_manifest.json"
+implementation.OUT = ROOT / "analysis_outputs" / "work2_t0_official_results_current_v8_20260901"
+implementation.RESULTS_CSV = implementation.OUT / "official_results.csv"
+implementation.SUMMARY_JSON = implementation.OUT / "official_results_summary.json"
+
+
+if __name__ == "__main__":
+    raise SystemExit(implementation.main())

@@ -1,0 +1,155 @@
+{
+  "schema": "audit-upstream-sources/v1",
+  "sources": {
+    "critic": {
+      "commit": "5cf70eb41cdaa1d8faa3e1265d95ee5792d49a53",
+      "files": {
+        "CRITIC/src/program/critic.py": {
+          "bytes": 5468,
+          "sha256": "6f0e1c59d1cb4cbe74452627b8953d20e4a0e8b21626613da8ae148b8478436b",
+          "url": "https://raw.githubusercontent.com/microsoft/ProphetNet/5cf70eb41cdaa1d8faa3e1265d95ee5792d49a53/CRITIC/src/program/critic.py"
+        },
+        "CRITIC/src/qa/critic.py": {
+          "bytes": 7814,
+          "sha256": "e0745486a6975f951cec5f4aa4851226f21faf6be8250447bef71a8bfbcca76e",
+          "url": "https://raw.githubusercontent.com/microsoft/ProphetNet/5cf70eb41cdaa1d8faa3e1265d95ee5792d49a53/CRITIC/src/qa/critic.py"
+        },
+        "CRITIC/src/utils.py": {
+          "bytes": 1120,
+          "sha256": "de0ea7219dcf027f1a10669d05673f64315e83973a883baf8d0a25ce313ff91a",
+          "url": "https://raw.githubusercontent.com/microsoft/ProphetNet/5cf70eb41cdaa1d8faa3e1265d95ee5792d49a53/CRITIC/src/utils.py"
+        },
+        "LICENSE": {
+          "bytes": 1162,
+          "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b",
+          "url": "https://raw.githubusercontent.com/microsoft/ProphetNet/5cf70eb41cdaa1d8faa3e1265d95ee5792d49a53/LICENSE"
+        }
+      },
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "paper_references": [
+        30
+      ],
+      "repository": "microsoft/ProphetNet"
+    },
+    "mini_swe_agent": {
+      "commit": "04d809ceab9df28f9adaed044884180159172930",
+      "files": {
+        "LICENSE.md": {
+          "bytes": 1094,
+          "sha256": "0f796e58f91d1c07bb2c1b1d0f8bf3a83017c3a5dec1bdc6fae733b2cd2e875b",
+          "url": "https://raw.githubusercontent.com/SWE-agent/mini-swe-agent/04d809ceab9df28f9adaed044884180159172930/LICENSE.md"
+        },
+        "src/minisweagent/agents/default.py": {
+          "bytes": 8043,
+          "sha256": "e8ef8aa365942d739c2ec5cb0879f60f377d2dc2de8ec670aaedf3bafb45a4c2",
+          "url": "https://raw.githubusercontent.com/SWE-agent/mini-swe-agent/04d809ceab9df28f9adaed044884180159172930/src/minisweagent/agents/default.py"
+        },
+        "src/minisweagent/utils/serialize.py": {
+          "bytes": 938,
+          "sha256": "3035b27cfeffdf91117c72bc8131340bd9c5f67a3010baeb4ecd6b0c7406f462",
+          "url": "https://raw.githubusercontent.com/SWE-agent/mini-swe-agent/04d809ceab9df28f9adaed044884180159172930/src/minisweagent/utils/serialize.py"
+        }
+      },
+      "license": "MIT",
+      "license_file": "LICENSE.md",
+      "paper_references": [
+        9
+      ],
+      "repository": "SWE-agent/mini-swe-agent"
+    },
+    "swe_agent": {
+      "commit": "3ea751c087f32b16e039a2233dd6eefecef325d5",
+      "files": {
+        "LICENSE": {
+          "bytes": 1147,
+          "sha256": "7610ed3916f6674e34b78417894abd57ff538b3cfdda3085e3643d82acbaf31f",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/LICENSE"
+        },
+        "config/default.yaml": {
+          "bytes": 3242,
+          "sha256": "96aeb863cbfaa768044527155f8555c9b401c6644e937b5b6b0bba5538b6eee4",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/config/default.yaml"
+        },
+        "sweagent/agent/hooks/abstract.py": {
+          "bytes": 4064,
+          "sha256": "8f5d913a975f18a7fc8e2f355390a7b59aa1a6c9ec436cdc9326ab46868ac98b",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/sweagent/agent/hooks/abstract.py"
+        },
+        "sweagent/run/batch_instances.py": {
+          "bytes": 18161,
+          "sha256": "baf375fc3cf05484ebbd385d688e22c1713f466294579ba4e2d628638f1ad0a3",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/sweagent/run/batch_instances.py"
+        },
+        "sweagent/run/common.py": {
+          "bytes": 15254,
+          "sha256": "b62220fbcb77d3a791f373e738602a231b32ae132767ec1a80957eebaae2462a",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/sweagent/run/common.py"
+        },
+        "sweagent/run/merge_predictions.py": {
+          "bytes": 2245,
+          "sha256": "1fe64f58787805dbf47c7d0b77cfc5e4abfd386ea3f762d50178c0fddf818462",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/sweagent/run/merge_predictions.py"
+        },
+        "sweagent/run/run_batch.py": {
+          "bytes": 19644,
+          "sha256": "8c60a08a4a249e7108a82bdf6815fec2aaac0a3d6345a164267ec493a776d0ee",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/sweagent/run/run_batch.py"
+        },
+        "sweagent/run/run_single.py": {
+          "bytes": 9182,
+          "sha256": "4c373cdea6a7d3c67a7c8ad2c183ae1bb0d3e74fe820957ca6469b8a9e1eae80",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/sweagent/run/run_single.py"
+        },
+        "sweagent/types.py": {
+          "bytes": 2808,
+          "sha256": "6f09305a7a303e6c2cedf46adb94700e0a7ade116905bfcf82a7fba932db27d1",
+          "url": "https://raw.githubusercontent.com/SWE-agent/SWE-agent/3ea751c087f32b16e039a2233dd6eefecef325d5/sweagent/types.py"
+        }
+      },
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "paper_references": [
+        2
+      ],
+      "repository": "SWE-agent/SWE-agent"
+    },
+    "swe_bench_pro": {
+      "commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+      "files": {
+        "LICENSE": {
+          "bytes": 1070,
+          "sha256": "03a44b2f703779d3f34c18e056da5b893537ca61588e6b15b615a4a612e77fb9",
+          "url": "https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/66f92766bba642462d4bbe5479e83f91f9211862/LICENSE"
+        },
+        "helper_code/gather_patches.py": {
+          "bytes": 4382,
+          "sha256": "a1d4628461fa2b7e374160cad92f0e65f6bcdc67b0fc762fd4cc61438f8ab364",
+          "url": "https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/66f92766bba642462d4bbe5479e83f91f9211862/helper_code/gather_patches.py"
+        },
+        "helper_code/image_uri.py": {
+          "bytes": 1041,
+          "sha256": "d1a858866dd2622c0e37986dd7b86698e5ea53546f30901d1bf0d6ba1b97384f",
+          "url": "https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/66f92766bba642462d4bbe5479e83f91f9211862/helper_code/image_uri.py"
+        },
+        "requirements.txt": {
+          "bytes": 317,
+          "sha256": "ad4cd275ba654196092dceadf35c03e49772b5833e941b609e62e0c6b5d354e6",
+          "url": "https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/66f92766bba642462d4bbe5479e83f91f9211862/requirements.txt"
+        },
+        "swe_bench_pro_eval.py": {
+          "bytes": 22542,
+          "sha256": "bb5d4c5486be296e464e695df3747064aaa3bb197394bc6d39980634afec2034",
+          "url": "https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/66f92766bba642462d4bbe5479e83f91f9211862/swe_bench_pro_eval.py"
+        }
+      },
+      "license": "MIT",
+      "license_file": "LICENSE",
+      "paper_references": [
+        6,
+        7
+      ],
+      "repository": "scaleapi/SWE-bench_Pro-os"
+    }
+  }
+}

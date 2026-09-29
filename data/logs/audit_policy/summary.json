@@ -1,0 +1,67 @@
+{
+  "causal_results": "NA_until_posthoc_evaluation",
+  "claim_boundary": "Provider-returned Phase-6 model rows only; benchmark scores and simulated annotations are post-hoc, with no causal or real-human claim.",
+  "completion_tokens": 138695,
+  "dataset": "Pro-Python260",
+  "duplicate_rows_ignored": 0,
+  "error_rows": 0,
+  "gold_visible_to_runtime": false,
+  "human_labels": "NA",
+  "model": "gpt-5.6-luna",
+  "observed_result_rows": 180,
+  "observed_result_rows_by_config": {
+    "solver_only": 30,
+    "solver_plus_end_of_run_audit": 30,
+    "solver_plus_evidence_grounded_intervention": 30,
+    "solver_plus_full_shenji": 30,
+    "solver_plus_observe_only_shenji": 30,
+    "solver_plus_online_generic_intervention": 30
+  },
+  "patch_visible_to_runtime": false,
+  "planned_rows_in_shards": 180,
+  "prompt_tokens": 3164736,
+  "provider": "PinAI",
+  "provider_calls_observed": 293,
+  "release_id": "m3_shenji_phase6_pinai_luna_20260903_v3_merged",
+  "source_shards": [
+    {
+      "config_id": "solver_only",
+      "error_rows": 0,
+      "path": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_shenji_phase6_pinai_luna_20260903_v2_solver_only_001_030",
+      "result_rows": 30
+    },
+    {
+      "config_id": "solver_plus_observe_only_shenji",
+      "error_rows": 0,
+      "path": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_shenji_phase6_pinai_luna_20260903_v2_solver_plus_observe_only_shenji_001_030",
+      "result_rows": 30
+    },
+    {
+      "config_id": "solver_plus_end_of_run_audit",
+      "error_rows": 0,
+      "path": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_shenji_phase6_pinai_luna_20260903_v2_solver_plus_end_of_run_audit_001_030",
+      "result_rows": 30
+    },
+    {
+      "config_id": "solver_plus_online_generic_intervention",
+      "error_rows": 0,
+      "path": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_shenji_phase6_pinai_luna_20260903_v2_solver_plus_online_generic_intervention_001_030",
+      "result_rows": 30
+    },
+    {
+      "config_id": "solver_plus_evidence_grounded_intervention",
+      "error_rows": 0,
+      "path": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_shenji_phase6_pinai_luna_20260903_v2_solver_plus_evidence_grounded_intervention_001_030",
+      "result_rows": 30
+    },
+    {
+      "config_id": "solver_plus_full_shenji",
+      "error_rows": 0,
+      "path": "[LOCAL_DRIVE]/shenjiRAGagent\\artifacts\\m3_shenji_phase6_pinai_luna_20260903_v2_solver_plus_full_shenji_001_030",
+      "result_rows": 30
+    }
+  ],
+  "status": "PASS_PHASE6_MODEL_RESULTS_WITHOUT_POSTHOC_LABELS",
+  "test_patch_visible_to_runtime": false,
+  "total_tokens": 3303431
+}

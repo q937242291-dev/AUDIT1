@@ -1,0 +1,18 @@
+{
+  "analysis_id": "m3_pinai_work2_leakage90_model_only_probe_20260824_v1",
+  "objective_sha256": "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9",
+  "provider": "PinAI",
+  "model": "gpt-5.6-luna",
+  "registered_rows": 90,
+  "tasks": 6,
+  "condition_ids": [
+    "O",
+    "C",
+    "P",
+    "L",
+    "D"
+  ],
+  "seeds": 3,
+  "selected_rows": 90,
+  "runtime_boundary": "model-only; no future/location/diff payload, trajectory, code, gold, tests, evaluator or human label"
+}

@@ -1,0 +1,63 @@
+{
+  "status": "PASS_PAIRED_DESCRIPTIVE_SETTING_COMPARISON",
+  "one_shot_rows": 280,
+  "tool_search_rows": 280,
+  "paired_rows": 280,
+  "provider": [
+    "PinAI"
+  ],
+  "model": [
+    "gpt-5.6-luna"
+  ],
+  "summary_table": [
+    {
+      "metric": "file_hit_1",
+      "n": 280,
+      "one_shot_mean": 0.467857,
+      "tool_search_mean": 0.607143,
+      "paired_delta_mean": 0.139286,
+      "paired_delta_percentile95_lo": -1.0,
+      "paired_delta_percentile95_hi": 1.0,
+      "delta_positive_count": 66,
+      "delta_equal_count": 187,
+      "delta_negative_count": 27,
+      "mcnemar_exact_two_sided_p": 6.467e-05
+    },
+    {
+      "metric": "file_hit_3",
+      "n": 280,
+      "one_shot_mean": 0.521429,
+      "tool_search_mean": 0.725,
+      "paired_delta_mean": 0.203571,
+      "paired_delta_percentile95_lo": -1.0,
+      "paired_delta_percentile95_hi": 1.0,
+      "delta_positive_count": 79,
+      "delta_equal_count": 179,
+      "delta_negative_count": 22,
+      "mcnemar_exact_two_sided_p": 1e-08
+    },
+    {
+      "metric": "file_hit_5",
+      "n": 280,
+      "one_shot_mean": 0.525,
+      "tool_search_mean": 0.732143,
+      "paired_delta_mean": 0.207143,
+      "paired_delta_percentile95_lo": -1.0,
+      "paired_delta_percentile95_hi": 1.0,
+      "delta_positive_count": 79,
+      "delta_equal_count": 180,
+      "delta_negative_count": 21,
+      "mcnemar_exact_two_sided_p": 0.0
+    }
+  ],
+  "top1_changed_count": 178,
+  "top1_changed_rate": 0.635714,
+  "top5_jaccard_mean": 0.265662,
+  "one_shot_total_tokens": 514646,
+  "tool_search_total_tokens": 1766843,
+  "claim_boundary": "Paired post-hoc descriptive comparison of two fresh registered settings. Gold was loaded only after execution; no runtime controller used FileHit and no causal or benchmark-success claim is made.",
+  "source_sha256": {
+    "one_shot": "de9b2bef25cfdeb1223e12093e6f5a315c87f4f70f58c87a7302811115d84eaf",
+    "tool_search": "14292d7dfc66e7c5cf0b0aa67077e01e995097604f10cf111d233d0a0b857ba5"
+  }
+}

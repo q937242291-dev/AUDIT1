@@ -1,0 +1,257 @@
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import re
+import subprocess
+import zipfile
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OBJECTIVE = Path(r"<USER_HOME>\.codex\attachments\8d2f80cc-875f-48d1-8eff-7a500c2d87c5\goal-objective.md")
+ACTIVE_SHA = "390f6f7e27993fe039dc2fc278d840b6870ac939c5bacca3232960f9b7e273e9"
+OUT = ROOT / "artifacts/work2_three_additional_tasks_replay_20260907_v1"
+ZIP = OUT.with_suffix(".zip")
+BASE_DIR = ROOT / "artifacts/work2_official_native_replay_aggregate_20260905_v12"
+ORCA_ROOT = ROOT / "repos/experiments/evaluation/lite/20250113_OrcaLoca/logs"
+
+TASKS = [
+    {
+        "task_id": "mwaskom__seaborn-2848",
+        "repository": "mwaskom/seaborn",
+        "image": "ghcr.io/openhands/eval-agent-server:3e0a3a0-sweb.eval.x86_64.mwaskom_1776_seaborn-2848-source-minimal",
+        "base_commit": "94621cef29f80282436d73e8d2c0aa76dab81273",
+        "relative_dir": "logs_v10/gold_mwaskom__seaborn-2848",
+        "test_file": "tests/test_relational.py",
+        "test_command": "pytest --no-header -rA tests/test_relational.py",
+        "install": "python -m pip install -e .[dev]",
+        "allowed_paths": ["seaborn/_oldcore.py"],
+    },
+    {
+        "task_id": "mwaskom__seaborn-3010",
+        "repository": "mwaskom/seaborn",
+        "image": "ghcr.io/openhands/eval-agent-server:3e0a3a0-sweb.eval.x86_64.mwaskom_1776_seaborn-3010-source-minimal",
+        "base_commit": "0f5a013e2cf43562deec3b879458e59a73853813",
+        "relative_dir": "logs_v10/gold_mwaskom__seaborn-3010",
+        "test_file": "tests/_stats/test_regression.py",
+        "test_command": "pytest --no-header -rA tests/_stats/test_regression.py",
+        "install": "python -m pip install -e .[dev]",
+        "allowed_paths": ["seaborn/_stats/regression.py"],
+    },
+    {
+        "task_id": "scikit-learn__scikit-learn-11040",
+        "repository": "scikit-learn/scikit-learn",
+        "image": "ghcr.io/openhands/eval-agent-server:3e0a3a0-sweb.eval.x86_64.scikit-learn_1776_scikit-learn-11040-source-minimal",
+        "base_commit": "96a02f3934952d486589dddd3f00b40d5a5ab5f2",
+        "relative_dir": "logs_v20/gold_scikit-learn__scikit-learn-11040",
+        "test_file": "sklearn/neighbors/tests/test_neighbors.py",
+        "test_command": "pytest -rA sklearn/neighbors/tests/test_neighbors.py",
+        "install": "python -m pip install -v --no-use-pep517 --no-build-isolation -e .",
+        "allowed_paths": ["sklearn/neighbors/base.py"],
+    },
+]
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def extract_test_patch(eval_path: Path, destination: Path) -> None:
+    text = eval_path.read_text(encoding="utf-8", errors="replace").replace("\r\n", "\n").replace("\r", "\n")
+    match = re.search(r"git apply -v - <<'(?P<marker>[^']+)'\n(?P<patch>.*?)\n(?P=marker)", text, flags=re.DOTALL)
+    if match is None:
+        raise RuntimeError(f"test_patch_not_found:{eval_path}")
+    destination.write_text(match.group("patch") + "\n", encoding="utf-8", newline="\n")
+
+
+def filter_patch(source: Path, destination: Path, allowed_paths: list[str]) -> tuple[str, str]:
+    original = source.read_text(encoding="utf-8", errors="replace").replace("\r\n", "\n").replace("\r", "\n")
+    blocks: list[str] = []
+    current: list[str] = []
+    for line in original.splitlines(keepends=True):
+        if line.startswith("diff --git ") and current:
+            blocks.append("".join(current))
+            current = []
+        current.append(line)
+    if current:
+        blocks.append("".join(current))
+    selected = [
+        block for block in blocks
+        if any(f"a/{path}" in block.splitlines()[0] and f"b/{path}" in block.splitlines()[0] for path in allowed_paths)
+    ]
+    if not selected:
+        raise RuntimeError(f"allowed_patch_block_not_found:{source}:{allowed_paths}")
+    destination.write_text("".join(selected), encoding="utf-8", newline="\n")
+    return sha256(source), sha256(destination)
+
+
+def parse_counts(output: str) -> tuple[int, int, int, bool]:
+    passed_match = re.search(r"(\d+) passed", output)
+    failed_match = re.search(r"(\d+) failed", output)
+    skipped_match = re.search(r"(\d+) skipped", output)
+    if passed_match or failed_match or skipped_match:
+        passed = int(passed_match.group(1)) if passed_match else 0
+        failed = int(failed_match.group(1)) if failed_match else 0
+        skipped = int(skipped_match.group(1)) if skipped_match else 0
+        return passed, failed, skipped, True
+    # Django and other unittest-style runners report `Ran N tests` followed by
+    # `OK` or `FAILED (failures=..., errors=..., skipped=...)` rather than
+    # pytest's passed/failed/skipped summary.
+    ran_match = re.search(r"Ran (\d+) tests? in [^\n]+", output)
+    if ran_match:
+        total = int(ran_match.group(1))
+        unittest_skipped = re.search(r"skipped=(\d+)", output)
+        skipped = int(unittest_skipped.group(1)) if unittest_skipped else 0
+        failures_match = re.search(r"failures=(\d+)", output)
+        errors_match = re.search(r"errors=(\d+)", output)
+        failed = (int(failures_match.group(1)) if failures_match else 0) + (int(errors_match.group(1)) if errors_match else 0)
+        return max(0, total - failed - skipped), failed, skipped, True
+    return 0, 0, 0, False
+
+
+def run_case(task: dict[str, object], method: str, solution_patch: Path, test_patch: Path) -> dict[str, object]:
+    task_id = str(task["task_id"])
+    log_path = OUT / f"{task_id}.{method}.docker.log"
+    solution_step = "" if method == "baseline" else "if git apply --ignore-whitespace --verbose /tmp/solution.diff; then echo SOLUTION_PATCH_APPLIED=1; else echo SOLUTION_PATCH_APPLIED=0; fi; "
+    test_step = "if git apply --ignore-whitespace --verbose /tmp/test.diff; then echo TEST_PATCH_APPLIED=1; else echo TEST_PATCH_APPLIED=0; fi; "
+    shell = "".join([
+        "set -u; cd /testbed; git config --global --add safe.directory /testbed; ",
+        f"git reset --hard {task['base_commit']}; ",
+        "printf 'HEAD='; git rev-parse HEAD; printf 'DIRTY='; git status --porcelain | wc -l; ",
+        solution_step,
+        test_step,
+        "source /opt/miniconda3/bin/activate; conda activate testbed; ",
+        f"{task['install']}; " if task["install"] else "",
+        str(task["test_command"]),
+    ])
+    command = [
+        "docker", "run", "--rm", "--user", "root", "--entrypoint", "/bin/bash",
+        "--mount", f"type=bind,source={solution_patch},target=/tmp/solution.diff,readonly",
+        "--mount", f"type=bind,source={test_patch},target=/tmp/test.diff,readonly",
+    ]
+    for source, target in task.get("mounts", []):
+        command.extend(["--mount", f"type=bind,source={source},target={target},readonly"])
+    command.extend([str(task["image"]), "-lc", shell])
+    completed = subprocess.run(
+        command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        encoding="utf-8", errors="replace",
+    )
+    log_path.write_text(completed.stdout, encoding="utf-8")
+    passed, failed, skipped, executed = parse_counts(completed.stdout)
+    solution_applied = method != "baseline" and "SOLUTION_PATCH_APPLIED=1" in completed.stdout
+    test_applied = "TEST_PATCH_APPLIED=1" in completed.stdout
+    reset_ok = f"HEAD={task['base_commit']}" in completed.stdout and "DIRTY=0" in completed.stdout
+    return {
+        "task_id": task_id,
+        "method": method,
+        "repository": task["repository"],
+        "image": task["image"],
+        "base_commit": task["base_commit"],
+        "test_file": task["test_file"],
+        "solution_patch_sha256": sha256(solution_patch),
+        "test_patch_sha256": sha256(test_patch),
+        "reset_ok": reset_ok,
+        "solution_patch_applied": solution_applied,
+        "test_patch_applied": test_applied,
+        "test_executed": executed,
+        "tests_passed": passed,
+        "tests_failed": failed,
+        "tests_skipped": skipped,
+        "tests_run": passed + failed + skipped,
+        "returncode": completed.returncode,
+        "resolved_process_signal": bool(method != "baseline" and reset_ok and solution_applied and test_applied and executed and failed == 0 and completed.returncode == 0),
+        "formal_outcome": False,
+        "provider_calls_added": 0,
+    }
+
+
+def main() -> int:
+    if OUT.exists() or ZIP.exists():
+        raise SystemExit(f"refusing_to_overwrite:{OUT}")
+    if sha256(OBJECTIVE) != ACTIVE_SHA:
+        raise SystemExit("active_objective_sha_mismatch")
+    OUT.mkdir(parents=True)
+    all_results: list[dict[str, object]] = []
+    task_provenance: list[dict[str, object]] = []
+    for task in TASKS:
+        source_dir = BASE_DIR / str(task["relative_dir"])
+        gold_source = source_dir / "patch.diff"
+        eval_path = source_dir / "eval.sh"
+        orca_source = ORCA_ROOT / str(task["task_id"]) / "patch.diff"
+        test_patch = OUT / f"{task['task_id']}.test.patch"
+        gold_patch = OUT / f"{task['task_id']}.gold.patch"
+        orca_patch = OUT / f"{task['task_id']}.orcaloca.patch"
+        extract_test_patch(eval_path, test_patch)
+        gold_patch.write_text(gold_source.read_text(encoding="utf-8", errors="replace").replace("\r\n", "\n").replace("\r", "\n"), encoding="utf-8", newline="\n")
+        original_orca_sha, filtered_orca_sha = filter_patch(orca_source, orca_patch, list(task["allowed_paths"]))
+        task_provenance.append({
+            "task_id": task["task_id"],
+            "gold_source": str(gold_source),
+            "gold_patch_sha256": sha256(gold_patch),
+            "test_source": str(eval_path),
+            "test_patch_sha256": sha256(test_patch),
+            "orcaloca_source": str(orca_source),
+            "orcaloca_source_sha256": original_orca_sha,
+            "orcaloca_filtered_sha256": filtered_orca_sha,
+            "orcaloca_allowed_paths": task["allowed_paths"],
+            "base_commit": task["base_commit"],
+            "image": task["image"],
+        })
+        baseline_patch = OUT / f"{task['task_id']}.baseline.patch"
+        baseline_patch.write_text("", encoding="utf-8", newline="\n")
+        all_results.extend([
+            run_case(task, "baseline", baseline_patch, test_patch),
+            run_case(task, "gold", gold_patch, test_patch),
+            run_case(task, "orcaloca", orca_patch, test_patch),
+        ])
+    fields = list(dict.fromkeys(key for row in all_results for key in row))
+    with (OUT / "result_rows.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(all_results)
+    task_names = ", ".join(str(task["task_id"]) for task in TASKS)
+    summary = {
+        "analysis_id": OUT.name,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "active_objective_sha256": ACTIVE_SHA,
+        "task_count": len(TASKS),
+        "result_rows": len(all_results),
+        "test_executed_rows": sum(bool(row["test_executed"]) for row in all_results),
+        "resolved_process_signal_rows": sum(bool(row["resolved_process_signal"]) for row in all_results),
+        "formal_outcome_rows": 0,
+        "provider_calls_added": 0,
+        "formal_promotion": False,
+        "status": "completed_three_additional_tasks_replay" if all(bool(row["test_executed"]) for row in all_results) else "partial_three_additional_tasks_replay",
+        "claim_boundary": f"Cached exact-base Linux container process/test diagnostics for {task_names}. F2P is a test-sensitivity diagnostic, not semantic, robust, causal, survival, or formal outcome.",
+        "task_provenance": task_provenance,
+        "results": all_results,
+    }
+    (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (OUT / "RESULTS_ZH.md").write_text(
+        f"# {task_names} 三条件回放\n\n"
+        f"该包记录 {len(TASKS)} 个 exact-base 缓存镜像的 baseline/gold/OrcaLoca 三条件 process/test 诊断；保留原始日志、补丁和 hash。\n\n"
+        "不产生 provider 调用或 formal outcome。\n",
+        encoding="utf-8",
+    )
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    (OUT / "file_manifest.json").write_text(json.dumps([{"path": str(path.relative_to(OUT)).replace("\\", "/"), "bytes": path.stat().st_size, "sha256": sha256(path)} for path in files], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    files = sorted(path for path in OUT.rglob("*") if path.is_file())
+    with zipfile.ZipFile(ZIP, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for path in files:
+            archive.write(path, path.relative_to(OUT))
+    with zipfile.ZipFile(ZIP) as archive:
+        if archive.testzip() is not None:
+            raise SystemExit("archive_integrity_failed")
+    print(json.dumps(summary, ensure_ascii=False))
+    return 0 if summary["status"] == "completed_three_additional_tasks_replay" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,53 @@
+headline_id,rq,metric,numerator,denominator,estimate,unit,evidence_level,source_id,formal_promotion,interpretation
+H01,RQ1,checkpoint replay rows,300,300,1.0,rows,observed,core_replay,False,30 tasks x 2 branches x 5 independently attempted checkpoints
+H02,RQ1,replay completed,76,300,0.25333333333333335,rate,textual_status,core_replay,False,"bounded replay completion, not semantic or future-test correctness"
+H03,RQ1,future textual conflict,167,300,0.5566666666666666,rate,textual_status,core_replay,False,observed patch/history incompatibility
+H04,RQ1,source unavailable,37,300,0.12333333333333334,rate,environment_status,core_replay,False,infrastructure confound kept outside agent-failure interpretation
+H05,RQ1,task setup failure,20,300,0.06666666666666667,rate,environment_status,core_replay,False,setup confound kept separate from textual conflict
+H06,RQ1,pooled d7 replay completion,34,60,0.5666666666666667,rate,textual_status,core_replay,False,pooled branch/checkpoint composition
+H07,RQ1,pooled d30 replay completion,23,60,0.38333333333333336,rate,textual_status,core_replay,False,pooled branch/checkpoint composition
+H08,RQ1,pooled d90 replay completion,12,60,0.2,rate,textual_status,core_replay,False,pooled branch/checkpoint composition
+H09,RQ1,pooled d180 replay completion,4,60,0.06666666666666667,rate,textual_status,core_replay,False,pooled branch/checkpoint composition
+H10,RQ1,pooled d365 replay completion,3,60,0.05,rate,textual_status,core_replay,False,pooled branch/checkpoint composition
+H11,RQ1,d7 paired status agreement,30,30,1.0,rate,paired_status_proxy,core_replay,False,"agreement is on recorded replay status, not semantic behavior"
+H12,RQ1,d365 paired status agreement,28,30,0.9333333333333333,rate,paired_status_proxy,core_replay,False,"agreement is on recorded replay status, not semantic behavior"
+H13,t0 gate,robust-correct observed branches,0,60,0.0,rate,partial_gate,t0_validation,False,available t0 validation source is not bound to the active objective
+H14,t0 gate,paired-valid observed tasks,0,30,0.0,rate,partial_gate,t0_validation,False,available t0 validation source is not bound to the active objective
+H15,RQ2,manual adaptation LOC observed,0,300,0.0,observed count,unobserved,bounded_adaptation,False,"zero means no manual adaptation record, not zero cost"
+H16,RQ2,merge-feasible rows with augmented-test conflict,20,20,1.0,rate,diagnostic,bounded_adaptation,False,automatic merge was followed by test-patch conflict
+H17,RQ2,dependency-repaired rows with future test pass,0,13,0.0,rate,diagnostic,dependency_repair,False,test-result metadata appeared but no future pass
+H18,RQ3,supplemental behavior-mismatch pairs,1,4,0.25,rate,supplemental_behavior,behavior_diagnostic,False,one of four pairs differed on recorded behavior fields
+H19,RQ4,exploratory predictor association rows,36,36,1.0,rows,exploratory,proxy_predictors,False,retrospective proxy associations; no confirmatory causal inference
+H20,SOTA proxy,agent patch applies at recorded snapshots,266,720,0.36944444444444446,rate,apply_only,sota_compatibility,False,read-only apply compatibility; no test or behavior claim
+H21,SOTA proxy,agent patch applies at d365 snapshot,20,120,0.16666666666666666,rate,apply_only,sota_compatibility,False,late historical compatibility proxy
+H22,SOTA proxy,CodeFuse apply rate,0,180,0.0,rate,apply_only,sota_compatibility,False,method-specific descriptive proxy; no model ranking
+H23,SOTA method supplement,SWE-Fixer official resolution,21,58,0.3620689655172414,rate,exact_image_descriptive,swefixer_exact,False,independent archived SWE-Fixer patch replay; selected-task descriptive result
+H24,SOTA method supplement,reused gold control resolution,55,58,0.9482758620689655,rate,exact_image_control,swefixer_exact,False,gold control is reused and is not a fresh human-generation arm
+H25,SOTA method supplement,SWE-Fixer human-only paired outcomes,34,58,0.5862068965517241,rate,paired_descriptive,swefixer_exact,False,paired outcome contrast; selective exact-image cohort and no causal claim
+H26,SOTA method supplement,SWE-Fixer agent patch text difference,961.7586206896551,831.3965517241379,0.15679890504137206,relative_difference,patch_structure_descriptive,swefixer_exact,False,agent archive has larger mean patch text; not a quality estimate
+H27,SOTA method supplement,SWE-Fixer agent runtime difference,29.977482113344916,12.162161929854031,1.4648152430663042,relative_difference,runtime_descriptive,swefixer_exact,False,runner runtime difference under exact cached images; not generation cost
+H40,harness control,165-task exact-image both-branch official resolution,150,165,0.9090909090909091,rate,gold_equivalent_control,exact_gold_control,False,gold-equivalent control only; not an independent agent-method comparison
+H41,harness control,165-task exact-image patch apply,330,330,1.0,rate,gold_equivalent_control,exact_gold_control,False,all branches use gold-equivalent normalized patches; harness reproducibility only
+H42,RQ1 diagnostic,future-test process logs observed,76,76,1.0,rate,future_test_process,future_test_process_diagnostic,False,76 process returncodes/stderr logs extracted; environment blockers remain separate from L3 survival
+H43,RQ1 diagnostic,future-test process passes,0,76,0.0,rate,future_test_process,future_test_process_diagnostic,False,process pass is zero in this rebind; failures are not semantic patch failures without environment resolution
+H44,t0 Docker diagnostic,locally available Docker-image tasks,17,30,0.5666666666666667,rate,docker_process_diagnostic,docker_t0_probe,False,17 of 30 task IDs had a locally available benchmark image; unavailable tasks are not failures
+H45,t0 Docker diagnostic,Docker image-available branch rows,34,60,0.5666666666666667,rate,docker_process_diagnostic,docker_t0_probe,False,34 of 60 branch rows entered the container process; all rows retain explicit image availability
+H46,t0 Docker diagnostic,compile pass among image-available branches,34,34,1.0,rate,docker_process_diagnostic,docker_t0_probe,False,compileall reached pass for 34 of 34 available-image branches; this is a process diagnostic
+H47,t0 Docker diagnostic,official test process pass among image-available branches,18,34,0.5294117647058824,rate,docker_process_diagnostic,docker_t0_probe,False,18 of 34 available-image branches passed F2P and P2P; no semantic or longitudinal claim
+H48,t0 Docker paired diagnostic,human process pass among image-available task pairs,12,17,0.7058823529411765,rate,docker_pair_process_diagnostic,docker_t0_probe,False,same-task human branch process baseline on the 17 locally image-available pairs; diagnostic only
+H49,t0 Docker paired diagnostic,OrcaLoca process pass among image-available task pairs,6,17,0.35294117647058826,rate,docker_pair_process_diagnostic,docker_t0_probe,False,same-task OrcaLoca process outcome on the 17 locally image-available pairs; diagnostic only
+H50,t0 Docker paired diagnostic,human-only process-pass pairs,6,17,0.35294117647058826,rate,docker_pair_process_diagnostic,docker_t0_probe,False,"paired process pattern, not a semantic quality or causal comparison"
+H51,t0 Docker paired diagnostic,both-branch process-pass pairs,6,17,0.35294117647058826,rate,docker_pair_process_diagnostic,docker_t0_probe,False,paired process pattern with both F2P/P2P outcomes passing
+H52,t0 Docker paired diagnostic,neither-branch process-pass pairs,5,17,0.29411764705882354,rate,docker_pair_process_diagnostic,docker_t0_probe,False,paired process pattern; failures retain branch-level environment/test diagnostics
+H28,t0 process,canonical t0 official report coverage,24,60,0.4,rate,observability,t0_outcome_process,False,"24 of 60 canonical branch rows have an observed official report; remaining rows are missing, not failed"
+H29,t0 process,active supplemental independent-test pass,8,8,1.0,rate,supplemental_observed,t0_outcome_process,False,provider-free exact-image supplemental batch; excluded from canonical denominator
+H30,t0 process,active supplemental static semantic-screen pass,7,8,0.875,rate,supplemental_diagnostic,t0_outcome_process,False,static issue-contract screen only; human semantic adjudication remains pending
+H31,t0 supplement,expanded t0 human resolution,10,14,0.7142857142857143,rate,historical_rebound_supplement,t0_expanded_official,False,14-pair descriptive ledger with exact-image and alternate-image provenance kept separate
+H32,t0 supplement,expanded t0 agent resolution,4,14,0.2857142857142857,rate,historical_rebound_supplement,t0_expanded_official,False,same expanded ledger; not a current model ranking
+H33,t0 supplement,expanded human-minus-agent resolution gap,0.428571,1,0.428571,rate_difference,historical_rebound_supplement,t0_expanded_uncertainty,False,"2,500 task-resampling repetitions; source lineage mismatch is explicit"
+H34,t0 diagnostic,pinned Python 3.13 patch/build reached,56,60,0.9333333333333333,rate,diagnostic,t0_strengthened_py313,False,56/60 branches reached patch/build under the pinned dependency environment
+H35,t0 diagnostic,pinned Python 3.13 F2P pass,0,60,0.0,rate,diagnostic,t0_strengthened_py313,False,no F2P pass was observed; failures remain classified by runner/status
+H36,t0 diagnostic,pinned Python 3.13 P2P pass,0,60,0.0,rate,diagnostic,t0_strengthened_py313,False,no P2P pass was observed; failures remain classified by runner/status
+H37,t0 diagnostic,pinned Python 3.13 environment/import failure,48,60,0.8,rate,environment_status,t0_strengthened_py313,False,"runner/dependency status, not patch semantic failure"
+H38,t0 diagnostic,pinned Python 3.13 official-test failure,8,60,0.13333333333333333,rate,diagnostic,t0_strengthened_py313,False,official test process failure after patch/build; semantic adjudication remains absent
+H39,t0 diagnostic,pinned Python 3.13 base archive failure,4,60,0.06666666666666667,rate,environment_status,t0_strengthened_py313,False,"base archive/setup failure, excluded from patch-quality interpretation"

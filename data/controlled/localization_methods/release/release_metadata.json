@@ -1,0 +1,49 @@
+{
+  "status": "PASS_VALID_COMPLETE_WITH_RETAINED_RETRY_ERRORS",
+  "dataset": "Pro-Python260",
+  "expected_cases": 260,
+  "valid_common_cases": 260,
+  "valid_method_rows": 1300,
+  "expected_method_rows": 1300,
+  "missing_case_ids": [],
+  "method_valid_cases": {
+    "luna_one_shot": 260,
+    "luna_tool_search": 260,
+    "shenji_no_audit": 260,
+    "shenji_v3_full_audit": 260,
+    "shenji_v4_trust_first": 260
+  },
+  "method_raw_row_counts": {
+    "luna_one_shot": 263,
+    "luna_tool_search": 263,
+    "shenji_no_audit": 263,
+    "shenji_v3_full_audit": 263,
+    "shenji_v4_trust_first": 263
+  },
+  "method_raw_error_counts": {
+    "luna_one_shot": 3,
+    "luna_tool_search": 3,
+    "shenji_no_audit": 3,
+    "shenji_v3_full_audit": 3,
+    "shenji_v4_trust_first": 3
+  },
+  "provider": "PinAI",
+  "model": "gpt-5.6-luna",
+  "run_id": "pinai_pro_python260_full_20260909_v1",
+  "usage_events_completed": 1734,
+  "usage_prompt_tokens": 5378363,
+  "usage_completion_tokens": 725343,
+  "usage_total_tokens": 6103706,
+  "blocker_count": 3,
+  "failure_row_count": 15,
+  "annotation": {
+    "label": "人工+大模型辅助标注（模拟人工）",
+    "real_human_annotation_count": 0,
+    "human_agreement": "NA",
+    "status": "simulated_model_assisted_annotation_only",
+    "note": "This label is a disclosure name for model-assisted/simulated annotation and must not be read as real human annotation or human agreement."
+  },
+  "claim_boundary": "Descriptive model-only localization outputs with posthoc gold scoring; no real human, causal, robust, semantic, or survival conclusion is promoted.",
+  "gold_boundary": "Gold labels were excluded from inference/ranking and used only for posthoc scoring.",
+  "generated_at_utc": "2026-09-10T18:35:44.600999+00:00"
+}
