@@ -1,19 +1,87 @@
+# Python cache
 __pycache__/
-*.py[cod]
+*.py[codz]
+*$py.class
+
+# Virtual environments
 .venv/
 venv/
-*.egg-info/
-build/
-dist/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables / secrets
 .env
 .env.*
 !.env.example
+.envrc
 *.pem
 *.key
 credentials*.json
+
+# Build / packaging
+build/
+dist/
+develop-eggs/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+*.egg
+.installed.cfg
+MANIFEST
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.cache/
+coverage.xml
+nosetests.xml
+
+# Type checking / linting
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project generated files
 outputs/
 runs/
 downloads/
 acquired_logs/
-.DS_Store
-Thumbs.db
+
+# Temporary files
+tempCodeRunnerFile.py
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# PDM / Pixi
+.pdm-python
+.pdm-build/
+.pixi/
+
+# Python packages
+__pypackages__/
