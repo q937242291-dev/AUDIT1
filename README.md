@@ -31,9 +31,6 @@ Tests and link listing work without datasets, model providers or Docker. Unit fi
 | docs/paper_map.csv | Current Tables 1–11 and Figures 3–6 to script/output mapping |
 | docs/data_and_analysis.md | External input contracts and reproduction instructions |
 | docs/experiment_protocol.md | Planning, execution and original/reduced workflow contracts |
-| CHANGELOG.md | Human-readable modification log |
-| MODIFICATION_LOG.json | File-level changes with old and new SHA-256 hashes |
-| artifact_manifest.json / sha256sums.txt | Integrity checks for every delivered file |
 
 ## External benchmark identities
 
