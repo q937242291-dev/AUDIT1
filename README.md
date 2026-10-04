@@ -1,7 +1,7 @@
 # AUDIT Framework — 1.1.3
 
 Agent Utility and Dependency Intervention Testing. This complete source distribution aligns the analysis contracts and output numbering with the supplied current manuscript. 
-Task data and empirical logs are external.
+
 
 ## Quick start
 
