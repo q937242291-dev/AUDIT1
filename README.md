@@ -2,8 +2,6 @@
 
 Agent Utility and Dependency Intervention Testing. This complete source distribution aligns the analysis contracts and output numbering with the supplied current manuscript. Main controlled cohort: **266 distinct SWE-bench Pro V1 Python tasks**. Figure 6: **193 Luna paired successful trajectories**. Task data and empirical logs are external.
 
-Read `REPLACE_INSTRUCTIONS.md` for replacement and `CHANGELOG.md` for exact modifications. Official 266-case links are in `266_CASES_LINKS.md`; the paper's 193-sample statistics are in `193_SUCCESS_SAMPLE.md`.
-
 ## Quick start
 
 Python 3.10 or newer, from the project root:
