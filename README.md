@@ -2,7 +2,7 @@
 
 Agent Utility and Dependency Intervention Testing. This complete source distribution aligns the analysis contracts and output numbering with the supplied current manuscript. Main controlled cohort: **266 distinct SWE-bench Pro V1 Python tasks**. Figure 6: **193 randomly sampled Luna successful pairs**, within that cohort. Task data and empirical logs are external.
 
-Read `REPLACE_INSTRUCTIONS.md` for replacement and `CHANGELOG.md` for exact modifications. Official 266-case links are in `266_CASES_LINKS.md`; the paper's 193-sample statistics are in `193_SUCCESS_SAMPLE.md`.
+
 
 ## Quick start
 
@@ -67,4 +67,4 @@ audit-framework ablate --snapshot examples/trace_snapshot.json --out outputs/exa
 
 The component engine evaluates all seven module outputs once, removes one output per ablation and changes only aggregation for the majority arm. Trust-first checks the solver's original Top-1; a failed gate abstains while retaining candidates for inspection. Gold labels, final patches and evaluator outcomes remain outside model-facing snapshots.
 
-132 code tests and 144 Table 1 comparisons passed in this build. Benchmark access and the paper's success-sample statistics are documented in `266_CASES_LINKS.md` and `193_SUCCESS_SAMPLE.md`.
+132 code tests and 144 Table 1 comparisons passed in this build. Benchmark access
