@@ -86,7 +86,7 @@ def selected_paths(result: dict) -> list[str]:
     return [item['path'] for item in result.get('files', [])]
 
 
-def trust_first(snapshot: dict, audit: dict, anchored_ranking: list[str] | None = None) -> dict:
+def trust_first(snapshot: dict, audit: dict, anchored_ranking: list[str] | None = None, *, model_top1=...) -> dict:
     """Evidence, inspection, owner/path and critical-failure gate; no outcome labels."""
     # The controller establishes eligibility, not the trust-first preference order.
     # Feeding reordered candidates back through it would erase the tool anchor.
@@ -115,7 +115,12 @@ def trust_first(snapshot: dict, audit: dict, anchored_ranking: list[str] | None 
                         'critical_failure': critical, 'controller_eligible': path in eligible, 'valid': valid}
         if valid:
             accepted.append(path)
-    return {'files': [{'path': p} for p in accepted],
-            'retained_candidates': ranking, 'process_valid': bool(accepted), 'abstained': not accepted,
+    original_top1 = (ranking[0] if ranking else None) if model_top1 is ... else model_top1
+    require(original_top1 is None or original_top1 in ranking, 'Model Top-1 is outside retained candidates')
+    valid_top1 = bool(original_top1 and checks[original_top1]['valid'])
+    trusted = ([original_top1] + [p for p in accepted if p != original_top1]) if valid_top1 else []
+    return {'files': [{'path': p} for p in trusted],
+            'original_top1': original_top1, 'original_top1_valid': valid_top1,
+            'retained_candidates': ranking, 'process_valid': valid_top1, 'abstained': not valid_top1,
             'process_checks': checks,
             'audit': deepcopy(audit)}

@@ -12,6 +12,9 @@ import math
 from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import mean
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"src"))
+from audit_framework.experiments.benchmarks import read_catalog
 
 
 def read(path):
@@ -96,12 +99,54 @@ def unique_index(rows, keys):
     return result
 
 
+METHOD_ALIASES = [(['luna_one_shot','one_shot'],'One-shot'),(['luna_tool_search','tool_search'],'Tool-search'),(['shenji_no_audit','audit_no_audit','no_audit'],'No audit'),(['shenji_v3_full_audit','audit_v3_full_audit','full_audit'],'Full audit'),(['shenji_v4_trust_first','audit_v4_trust_first','trust_first'],'Trust-first')]
+
+def validate_distinct_grid(rows, condition_key, task_key, n, catalog=None):
+    by_condition=groups(rows,condition_key)
+    sets=[]
+    for name, group in by_condition.items():
+        unique_index(group,[task_key])
+        ids={r[task_key] for r in group}
+        if len(ids)!=n:raise ValueError(f'{name}: expected {n} distinct tasks; got {len(ids)}')
+        sets.append(ids)
+    if not sets or any(ids!=sets[0] for ids in sets):raise ValueError('Condition task sets differ')
+    if catalog:
+        if sets[0]!={r['instance_id'] for r in catalog['tasks']}:raise ValueError('Task set differs from frozen official identities')
+    return sets[0]
+
+def validate_method_grid(rows, catalog):
+    validate_distinct_grid(rows,'method_id','instance_id',266,catalog)
+    keys=set(groups(rows,'method_id'))
+    if len(keys)!=5 or any(len(keys & set(aliases))!=1 for aliases,_ in METHOD_ALIASES):raise ValueError('Expected exactly five canonical methods')
+
+def validate_component_fixed_outputs(rows):
+    validate_distinct_grid(rows,'variant','instance_id',60)
+    for task, group in groups(rows,'instance_id').items():
+        if len(group)!=9:raise ValueError('Component grid requires nine conditions')
+        for field in ('solver_model','repository_state','base_commit','prompt_template_sha256','snapshot_sha256'):
+            values=[r.get(field) for r in group]
+            if not all(values) or len(set(values))!=1:raise ValueError(f'{task}: missing/changed fixed {field}')
+        hashes=[r.get('all_module_outputs_sha256') for r in group if r['status']=='completed']
+        if not all(hashes) or len(set(hashes))!=1:raise ValueError('Removal/controller study must use the same recorded module outputs')
+
+def write_verification(out, checks, datasets):
+    write(out/'manuscript_comparisons.csv',checks)
+    mismatches=[r for r in checks if r['status']!='MATCH']
+    result=dict(status='MATCH' if checks and not mismatches else 'MISMATCH',checks=len(checks),mismatches=mismatches,datasets=datasets,provider_calls=0,benchmark_reruns=0,main_task_count=266,boundary='Reaggregation of supplied measurements; targets never create observations')
+    (out/'verification.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+    return result
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--out", type=Path)
+    parser.add_argument("--data-root",type=Path,required=True)
+    parser.add_argument("--pro-catalog",type=Path,required=True)
     args = parser.parse_args()
     root = args.root.resolve()
+    data_root = args.data_root.resolve()
+    pro_catalog = read_catalog(args.pro_catalog)
+    if pro_catalog["benchmark"] != "pro_python_266": raise ValueError("Requires frozen Pro Python266 catalog")
     out = (args.out or root / "reproduced" / "controlled").resolve()
     checks, datasets = [], []
 
@@ -119,8 +164,8 @@ def main():
                              min_rows_per_task=min(task_counts.values()), max_rows_per_task=max(task_counts.values())))
         write(out / "task_lists" / f"{layer}.csv", [dict(task_id=k, row_count=v) for k,v in sorted(task_counts.items())])
 
-    # Table 2: 120 distinct tasks x two seeds x five context arms.
-    prog = read(root / "data/controlled/progressive_context/summary/case_level_metrics.csv")
+    # Table 3: 120 distinct tasks x two seeds x five context arms.
+    prog = read(data_root / "controlled/progressive_context/summary/case_level_metrics.csv")
     register("progressive_context", prog, "task_id", "condition", ["task_id", "seed", "condition"])
     prog_labels = ["Issue only", "Executable failure", "Structural localization", "Requirement and design", "Evidence bundle"]
     prog_rows = []
@@ -131,9 +176,9 @@ def main():
                    file_hit_3=avg(rows, "filehit_3_posthoc"), file_hit_5=avg(rows, "filehit_5_posthoc"),
                    evidence_record_complete=avg(rows, "evidence_contract_satisfied"), mean_tokens=avg(rows, "total_tokens"))
         for key, value, tol in zip(["n", "candidate_nonempty", "file_hit_1", "evidence_record_complete", "mean_tokens"], expected, [0,.00051,.00051,.00051,.50001]):
-            check(f"Table 2/{label}",key,row[key],value,tol)
+            check(f"Table 3/{label}",key,row[key],value,tol)
         prog_rows.append(row)
-    write(out / "table_02_progressive_context.csv", prog_rows)
+    write(out / "table_03_progressive_context.csv", prog_rows)
     write(out / "progressive_repository_counts.csv", [dict(repository=k, rows=len(v), unique_tasks=len({r['task_id'] for r in v})) for k,v in sorted(groups(prog,"repository").items())])
 
     # Table 4: run-level paired effects; instance IDs expose repeat dependence.
@@ -141,7 +186,7 @@ def main():
     for factor, path, a, b, key in [
         ("Search", "tool_search", "one_shot", "tool_search", "pair_key"),
         ("Representation", "identifier_representation", "natural", "identifier_mutation", "fork_id")]:
-        rows = read(root / f"data/controlled/{path}/summary/paired_rows.csv")
+        rows = read(data_root / f"controlled/{path}/summary/paired_rows.csv")
         unique_index(rows, [key])
         write(out / "task_lists" / f"{path}.csv", [dict(instance_id=k, paired_runs=len(v)) for k,v in sorted(groups(rows,"instance_id").items())])
         datasets.append(dict(layer=path,row_count=len(rows),unique_tasks=len({r['instance_id'] for r in rows}),condition_count=2,task_key="instance_id",analysis_key=key,min_rows_per_task=min(Counter(r['instance_id'] for r in rows).values()),max_rows_per_task=max(Counter(r['instance_id'] for r in rows).values())))
@@ -152,6 +197,9 @@ def main():
             paired_rows.append(row)
             check(f"Table 4/{factor}/Hit@{cutoff}","gain",stat['gain'],counts[0])
             check(f"Table 4/{factor}/Hit@{cutoff}","loss",stat['loss'],counts[1])
+            targets = [(280,.468,.607,.139),(280,.521,.725,.204),(280,.525,.732,.207)] if factor=='Search' else [(120,.258,.550,.292),(120,.325,.658,.333),(120,.325,.683,.358)]
+            for field,expected in zip(('n','control_mean','treatment_mean','delta'),targets[[1,3,5].index(cutoff)]):
+                check(f'Table 4/{factor}/Hit@{cutoff}',field,stat[field],expected,0 if field=='n' else .00051)
         # Descriptive task-mean deltas retain equal issue weights.
         taskmeans=[]
         for task, taskrows in sorted(groups(rows,"instance_id").items()):
@@ -161,8 +209,9 @@ def main():
     write(out / "table_04_paired_search_representation.csv", paired_rows)
 
     # Table 5: incomplete rows stay visible and never enter paired outcomes.
-    comp = read(root / "data/logs/component_ablation/component_ablation_case_metrics.jsonl")
+    comp = read(data_root / "logs/component_ablation/component_ablation_case_metrics.jsonl")
     register("component_ablation", comp,"instance_id","variant",["instance_id","variant"])
+    validate_component_fixed_outputs(comp)
     by_variant = groups(comp,"variant")
     baseline_name = "full_v5" if "full_v5" in by_variant else "full_audit"
     base = {r['instance_id']:r for r in by_variant[baseline_name] if r['status']=='completed'}
@@ -176,16 +225,18 @@ def main():
         row=dict(variant=variant,label=label,planned=len(by_variant[variant]),completed=len(complete),errors=len(by_variant[variant])-len(complete),hits=sum(binary(r['FileHit@1']) for r in complete),file_hit_1=avg(complete,'FileHit@1'),changed_top1=changed,improve=stat['gain'],regress=stat['loss'],pair_count=stat['n'],paired_baseline_rate=stat['control_mean'],paired_keep_effect=-stat['delta'],exact_mcnemar_p=stat['exact_mcnemar_p'],mean_tokens=avg(complete,'tokens'))
         row['wilson_low'],row['wilson_high']=wilson(row['hits'],row['completed'])
         comp_rows.append(row)
+        check(f'Table 5/{label}','planned',row['planned'],60)
         for field,expected in zip(['completed','hits','changed_top1','improve','regress'],exp):
             check(f"Table 5/{label}",field,row[field],expected)
     write(out / "table_05_component_ablation.csv",comp_rows)
     write(out / "component_incomplete_rows.csv",[dict(instance_id=r['instance_id'],variant=r['variant'],status=r['status'],error=r.get('error','')) for r in comp if r['status']!='completed'])
 
-    # Table 6: 260 unique issues, each measured under five methods.
-    methods=read(root / "data/controlled/localization_methods/release/valid_completed_results.csv")
+    # Table 6: 266 unique issues, each measured under five methods.
+    methods=read(data_root / "controlled/localization_methods/release/valid_completed_results.csv")
     register('localization_methods',methods,'instance_id','method_id',['instance_id','method_id'])
+    validate_method_grid(methods,pro_catalog)
     method_groups=groups(methods,'method_id')
-    aliases=[(['luna_one_shot','one_shot'],'One-shot'),(['luna_tool_search','tool_search'],'Tool-search'),(['shenji_no_audit','audit_no_audit','no_audit'],'No audit'),(['shenji_v3_full_audit','audit_v3_full_audit','full_audit'],'Full audit'),(['shenji_v4_trust_first','audit_v4_trust_first','trust_first'],'Trust-first')]
+    aliases=METHOD_ALIASES
     method_rows=[]
     chosen={}
     for (keys,label),(hits,tokens,calls) in zip(aliases,[(58,3062,1.0),(40,19600,5.1),(27,22661,6.1),(43,23240,6.6),(41,23240,6.6)]):
@@ -193,6 +244,9 @@ def main():
         rows=method_groups[key]; chosen[label]={r['instance_id']:r for r in rows}
         row=dict(method=label,source_method_id=key,n=len(rows),hits=sum(binary(r['FileHit@1']) for r in rows),file_hit_1=avg(rows,'FileHit@1'),mean_tokens=avg(rows,'tokens'),calls_per_task=avg(rows,'calls'),process_valid_rate=avg(rows,'process_valid') if label=='Trust-first' else '')
         method_rows.append(row)
+        check(f'Table 6/{label}','n',row['n'],266)
+        check(f'Table 6/{label}','file_hit_1',row['file_hit_1'],hits/266,0.00051)
+        if label=='Trust-first':check(f'Table 6/{label}','process_valid_rate',row['process_valid_rate'],.526,.00051)
         check(f'Table 6/{label}','hits',row['hits'],hits)
         check(f'Table 6/{label}','mean_tokens',row['mean_tokens'],tokens,.5)
         check(f'Table 6/{label}','calls_per_task',row['calls_per_task'],calls,.05001)
@@ -200,12 +254,14 @@ def main():
     common=sorted(set(chosen['No audit'])&set(chosen['Full audit']))
     stack=paired([binary(chosen['No audit'][k]['FileHit@1']) for k in common],[binary(chosen['Full audit'][k]['FileHit@1']) for k in common])
     write(out / 'full_audit_vs_no_audit.csv',[stack])
+    check('Section 3.2/full-audit','n',stack['n'],266)
     check('Section 3.2/full-audit','gain',stack['gain'],16)
     check('Section 3.2/full-audit','loss',stack['loss'],0)
 
-    # Table 7: six issues x three seeds, not 18 independent issues.
-    projection=read(root / 'data/controlled/input_projection/summary/cell_level_metrics.csv')
+    # Table 7: 18 distinct tasks per condition; repeated seeds cannot replace tasks.
+    projection=read(data_root / 'controlled/input_projection/summary/cell_level_metrics.csv')
     register('input_projection',projection,'task_id','condition_id',['task_id','seed','condition_id'])
+    validate_distinct_grid(projection,'condition_id','task_id',18)
     p_groups=groups(projection,'condition_id'); projection_rows=[]
     for condition,label,issue in [('O_original_future_info','Original registered condition',1),('C_future_scrubbed','Future-scrubbed',1),('P_equal_length_legal_history','Equal-length legal history',1),('L_location_only','Location-only',0),('D_diff_only','Diff-only',0)]:
         rows=p_groups[condition]
@@ -216,8 +272,9 @@ def main():
     write(out / 'table_07_input_projection.csv',projection_rows)
 
     # Table 8 and Figure 8: cost/outcome marginal utility and dominance.
-    matched=read(root / 'data/controlled/matched_context/scored/scored_rows.csv')
+    matched=read(data_root / 'controlled/matched_context/scored/scored_rows.csv')
     register('matched_context',matched,'instance_id','variant_id',['instance_id','replicate','variant_id'])
+    validate_distinct_grid(matched,'variant_id','instance_id',40)
     matched_rows=[]
     for (variant,rows),label,exp in zip(sorted(groups(matched,'variant_id').items()),['Issue only','Entity tree','Symbol evidence','Dependency and API','Structural bundle','Checkpoint history','Bounded full context'],[(.525,.6,.6,1349),(.45,.55,.55,1864),(.525,.65,.65,2746),(.525,.65,.65,4072),(.55,.675,.675,5807),(.5,.625,.625,5804),(.5,.625,.625,5878)]):
         row=dict(variant=variant,label=label,n=len(rows),**{f'file_hit_{k}':avg(rows,f'file_hit_{k}') for k in [1,3,5]},mean_tokens=avg(rows,'total_tokens'))
@@ -237,12 +294,16 @@ def main():
             dominated=any(o['mean_tokens']<=row['mean_tokens'] and o[f'file_hit_{k}']>=row[f'file_hit_{k}'] and (o['mean_tokens']<row['mean_tokens'] or o[f'file_hit_{k}']>row[f'file_hit_{k}']) for o in matched_rows)
             item[f'nondominated_hit_{k}']=not dominated
         marginal.append(item)
-    write(out/'figure_08_context_marginal_utility.csv',marginal)
+    for row,(gain,loss) in zip(marginal,[(0,0),(7,10),(7,7),(7,7),(7,6),(7,8),(6,7)]):
+        check('Table 8/'+row['label'],'gain_hit_1',row['gain_hit_1'],gain)
+        check('Table 8/'+row['label'],'loss_hit_1',row['loss_hit_1'],loss)
+    write(out/'diagnostic_context_marginal_utility.csv',marginal)
 
     # Table 9: only audit ranking, not three copies of each provider run.
-    policy_all=read(root/'data/controlled/audit_policy/summary/audit_policy_ranking_metrics.csv')
+    policy_all=read(data_root/'controlled/audit_policy/summary/audit_policy_ranking_metrics.csv')
     policy=[r for r in policy_all if r['ranking_layer']=='audit']
     register('audit_policy',policy,'instance_id','config_id',['run_id','ranking_layer'])
+    validate_distinct_grid(policy,'config_id','instance_id',30)
     pg=groups(policy,'config_id'); policy_rows=[]
     policies=[('solver_only','Solver only',30,10678,1),('solver_plus_end_of_run_audit','End-of-run audit',27,10649,1),('solver_plus_evidence_grounded_intervention','Evidence-grounded intervention',29,10644,1),('solver_plus_full_shenji','Full audit',29,31681,2.67),('solver_plus_observe_only_shenji','Observe-only audit',30,35819,3.10),('solver_plus_online_generic_intervention','Online generic intervention',29,10644,1)]
     for key,label,exp_hits,exp_tokens,exp_calls in policies:
@@ -257,7 +318,7 @@ def main():
     write(out/'table_09_audit_policy.csv',policy_rows)
 
     # Table 11: derive detailed statuses from original replay row + failure log.
-    replay=read(root/'data/logs/trajectory_replay/multicheckpoint_replay.csv')
+    replay=read(data_root/'logs/trajectory_replay/multicheckpoint_replay.csv')
     register('history_replay',replay,'task_id','checkpoint_id',['task_id','agent_or_human','checkpoint_id'])
     classified=[]
     for row in replay:
@@ -281,16 +342,16 @@ def main():
     for day,rows in sorted(groups(classified,'checkpoint_days').items()):
         completed=sum(r['derived_failure_category']=='completed' for r in rows)
         timeline.append(dict(checkpoint_days=day,completed=completed,n=len(rows),completion_rate=completed/len(rows),unique_tasks=len({r['task_id'] for r in rows})))
-    write(out/'figure_07c_replay_checkpoints.csv',timeline)
-    check('Figure 7(c)/d7','displayed_percentage',timeline[0]['completion_rate']*100,56.5,.05)
-    check('Figure 7(c)/d30','displayed_percentage',timeline[1]['completion_rate']*100,38.2,.05)
+    write(out/'figure_05c_replay_checkpoints.csv',timeline)
+    if [r['checkpoint_days'] for r in timeline]!=[7,30,90,180,365]:raise ValueError('Checkpoint schedule differs from paper')
+    for row, expected in zip(timeline,[56.7,38.3,20.,6.7,5.]):
+        check(f"Figure 5(c)/d{row['checkpoint_days']}",'n',row['n'],60)
+        check(f"Figure 5(c)/d{row['checkpoint_days']}",'displayed_percentage',row['completion_rate']*100,expected,.05001)
     write(out/'dataset_denominators.csv',datasets)
-    result=dict(status='RECOMPUTED',datasets=datasets,
-                boundary='Offline analysis of released scored rows; no model calls or benchmark execution')
-    out.mkdir(parents=True,exist_ok=True)
-    (out/'verification.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+    result=write_verification(out,checks,datasets)
     print(json.dumps(result,indent=2))
-    return 0
+    return 0 if result['status']=='MATCH' else 1
+
 
 
 if __name__=='__main__':

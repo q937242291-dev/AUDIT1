@@ -1,22 +1,19 @@
-paper_location,implementation,evidence,analysis
-Section 2.1 canonical trace,src/audit_framework/schema.py,data/logs,src/audit_framework/quality.py
-Section 2.1 information boundary,src/audit_framework/boundary.py,data/logs/input_projection,scripts/reproduce_controlled_experiments.py
-Equation 1 process-quality vector,src/audit_framework/quality.py,data/logs,src/audit_framework/quality.py
-Equation 2 matched necessity,src/audit_framework/evaluation.py,data/controlled,scripts/reproduce_controlled_experiments.py
-Section 2.3.1 full audit and removals,src/audit_framework/conditions.py,data/logs/component_ablation,scripts/reproduce_controlled_experiments.py
-Section 2.3.1 controller replacement,src/audit_framework/controllers.py,data/logs/component_ablation,scripts/reproduce_controlled_experiments.py
-Section 2.4 memory and retained evidence,src/audit_framework/memory.py,data/logs/localization_methods,scripts/reproduce_repair_endpoints.py
-Table 1 diagnostic activity,src/audit_framework/modules.py,data/logs/component_activity,scripts/reproduce_repair_endpoints.py
-Table 2 progressive context,src/audit_framework/experiments,data/controlled/progressive_context,scripts/reproduce_controlled_experiments.py
-Table 3 and Figure 3 process prevalence,scripts/parse_public_trajectory_logs.py,data/logs/deepswe_success_trajectories,scripts/reproduce_success_trajectories.py
-Table 4 search and representation,src/audit_framework/experiments,data/controlled/tool_search,scripts/reproduce_controlled_experiments.py
-Table 5 component ablation,src/audit_framework/engine.py,data/logs/component_ablation,scripts/reproduce_controlled_experiments.py
-Table 6 five localization methods,src/audit_framework/experiments,data/logs/localization_methods,scripts/reproduce_controlled_experiments.py
-Table 7 input projection,src/audit_framework/experiments,data/controlled/input_projection,scripts/reproduce_controlled_experiments.py
-Table 8 matched context,src/audit_framework/experiments,data/controlled/matched_context,scripts/reproduce_controlled_experiments.py
-Table 9 audit policy,src/audit_framework/experiments,data/logs/audit_policy,scripts/reproduce_controlled_experiments.py
-Table 10 path-verifier model swaps,src/audit_framework/integrations,data/logs/model_swap,scripts/reproduce_model_swap.py
-Table 11 replay accounting,src/audit_framework/experiments,data/logs/trajectory_replay,scripts/reproduce_controlled_experiments.py
-Section 2.4.2 repair endpoints,src/audit_framework/evaluation.py,data/logs/repair_endpoints,scripts/reproduce_repair_endpoints.py
-Figures 1 and 2 illustrations,paper/manuscript.pdf,paper/manuscript.pdf,scripts/generate_figures.py
-Figures 4 through 8,scripts/generate_figures.py,data/controlled,scripts/reproduce_controlled_experiments.py
+paper_item,analysis_stage,output,denominator
+Table 1,observational,table_01_panel_a/b/c.csv,1308 successful trajectories
+Table 2,repair,table_02_activation_and_necessity.csv,60 component tasks
+Table 3,controlled,table_03_progressive_context.csv,240 runs per arm
+Table 4,controlled,table_04_paired_search_representation.csv,280 search/120 representation pairs
+Table 5,controlled,table_05_component_ablation.csv,60 tasks/540 planned/537 completed
+Table 6,controlled,table_06_localization_methods.csv,266 tasks/1330 rows
+Table 7,controlled,table_07_input_projection.csv,18 distinct tasks/90 rows
+Table 8,controlled,table_08_matched_context.csv,40 tasks/280 rows
+Table 9,controlled,table_09_audit_policy.csv,30 distinct tasks
+Table 10,model_swap,table_10_model_swap.csv,Verified200 and Lite300
+Table 11,controlled,table_11_history_replay.csv,300 rows/76 completed
+Figure 3,observational,figure3_process_prevalence.csv,1308 trajectories
+Figure 4,controlled,table_06_localization_methods.csv + table_11_history_replay.csv,266 methods/224 replay noncompletion
+Figure 5(a),controlled,table_09_audit_policy.csv,30 tasks
+Figure 5(b),model_swap,figure_05b_model_slices.csv,Lite50/100/150/200/300 across 3 models
+Figure 5(c),controlled,figure_05c_replay_checkpoints.csv,60 rows per horizon
+Figure 5(d),repair,repair_endpoint_rates.csv,21 bounded/12 official tasks per branch
+Figure 6,redundancy,figure_06_redundancy_categories.csv,193 random successful pairs within266

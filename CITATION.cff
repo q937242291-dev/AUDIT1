@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite the accompanying AUDIT paper when using this artifact."
 type: software
 title: "AUDIT"
-version: 1.0.0
+version: 1.1.2
 authors:
   - name: "Anonymous authors"
 abstract: "Research artifact for separating observed process quality from matched outcome necessity in software engineering agents."

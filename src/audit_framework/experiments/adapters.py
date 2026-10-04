@@ -262,7 +262,8 @@ class PipelineAdapter:
         anchored = tool_anchor(scored, selected_paths(tool))
         bundle = {'one_shot': direct, 'tool_search': tool,
                   'no_audit': {'files': deepcopy(current['candidates']), 'fusion_features': scored},
-                  'snapshot': current, 'anchored_ranking': [r['candidate_file'] for r in anchored]}
+                  'snapshot': current, 'anchored_ranking': [r['candidate_file'] for r in anchored],
+                  'model_top1': selected_paths(tool)[0] if selected_paths(tool) else None}
         self.cache[key] = deepcopy(bundle)
         return bundle
 
@@ -273,7 +274,7 @@ class PipelineAdapter:
         audit = evaluate(deepcopy(bundle['snapshot']), 'full_audit')
         if pipeline == 'full_audit':
             return audit
-        return trust_first(bundle['snapshot'], audit, bundle['anchored_ranking'])
+        return trust_first(bundle['snapshot'], audit, bundle['anchored_ranking'], model_top1=bundle['model_top1'])
 
     def evaluate_methods(self, snapshot: dict, conditions: list[dict]) -> dict:
         require(bool(conditions), 'Empty method grid')

@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import socket
+from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import Mock, patch
 from urllib.error import HTTPError
@@ -265,7 +266,10 @@ class MethodIsolationTests(OfflineTests):
         audited = audit_result(snapshot)
         audited['module_outputs']['path_verification']['assessments'][1]['verdict'] = 'fail'
         result = trust_first(snapshot, audited, ['src/b.py', 'src/a.py'])
-        self.assertEqual(result['files'], [{'path': 'src/a.py'}])
+        self.assertEqual(result['files'], [])
+        self.assertTrue(result['abstained'])
+        self.assertFalse(result['process_valid'])
+        self.assertEqual(result['retained_candidates'], ['src/b.py', 'src/a.py'])
         self.assertFalse(result['process_checks']['src/b.py']['valid'])
         audited['decision']['ranking'] = []
         self.assertTrue(trust_first(snapshot, audited, ['src/b.py', 'src/a.py'])['abstained'])
@@ -396,6 +400,16 @@ class HTTPProviderTests(OfflineTests):
 
 
 class PlanningContractTests(OfflineTests):
+    def setUp(self):
+        super().setUp()
+        from audit_framework.experiments.cohorts import seal_registration
+        directory = TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.task_list_root = Path(directory.name)
+        units = [{'instance_id': f'fixture_task_{n:03d}', 'repo': 'fixture_repo', 'base_commit': 'fixture_commit'} for n in range(60)]
+        registration = seal_registration('component_ablation', units, source='synthetic_test_fixture')
+        (self.task_list_root/'component_ablation.json').write_text(json.dumps(registration))
+
     def test_public_registry_is_current_and_runtime_methods_are_canonical(self):
         registry = load_registry()
         self.assertEqual(registry, registered_definitions())
@@ -410,19 +424,19 @@ class PlanningContractTests(OfflineTests):
         if not data_root.is_dir():
             data_root = PACKAGE_ROOT.parent / 'audit_anonymous_submission' / 'data'
         with patch('audit_framework.experiments.http_provider.build_opener', side_effect=AssertionError('Planning cannot construct transport')):
-            plan = build_plan('component_ablation', data_root=data_root)
+            plan = build_plan('component_ablation', task_list_root=self.task_list_root)
         self.assertEqual(plan['planned_jobs'], 540)
         self.assertEqual(len({j['instance_id'] for j in plan['jobs']}), 60)
         self.assertEqual(plan['provider_calls'], 0)
         self.assertEqual(len({j['prompt_template_sha256'] for j in plan['jobs']}), 1)
-        task_list = json.loads((CONFIG_ROOT / 'task_lists/component_ablation.json').read_text(encoding='utf-8'))
+        task_list = json.loads((self.task_list_root / 'component_ablation.json').read_text(encoding='utf-8'))
         self.assertEqual(set(task_list['task_ids']), {j['instance_id'] for j in plan['jobs']})
 
     def component_execution(self):
         data_root = PACKAGE_ROOT / 'data'
         if not data_root.is_dir():
             data_root = PACKAGE_ROOT.parent / 'audit_anonymous_submission' / 'data'
-        plan = build_plan('component_ablation', data_root=data_root, limit_units=1)
+        plan = build_plan('component_ablation', task_list_root=self.task_list_root, limit_units=1)
         job = plan['jobs'][0]
         snapshot = fixture()
         snapshot.update(task_id=job['instance_id'], trial_id=job['unit_id'])

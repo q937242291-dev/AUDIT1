@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-IGNORED = {'.git', '.venv', 'venv', '__pycache__', 'outputs', 'runs', 'downloads', 'acquired_logs'}
+IGNORED = {'.git', '.venv', 'venv', '__pycache__', 'outputs', 'runs', 'downloads', 'acquired_logs', 'reproduced', 'data', 'results', 'paper', 'Picture'}
 TEXT_SUFFIXES = {'.py', '.json', '.jsonl', '.csv', '.md', '.txt', '.yaml', '.yml', '.toml', '.example', '.sh'}
 
 def verify(root: Path) -> dict:
@@ -15,6 +15,10 @@ def verify(root: Path) -> dict:
     manifest = json.loads((root/'artifact_manifest.json').read_text(encoding='utf-8'))
     problems = []
     files = manifest['files']
+    if manifest.get('distribution') == 'complete_code_only':
+        for entry in files:
+            if Path(entry['path']).parts[0] in {'data','results','paper','Picture'}:
+                problems.append({'file':entry['path'],'problem':'empirical data must not be bundled'})
     seen = set()
     for entry in files:
         relative = entry['path']
@@ -25,7 +29,7 @@ def verify(root: Path) -> dict:
         seen.add(relative)
         if not path.is_file():
             problems.append({'file': relative, 'problem': 'missing'})
-        elif hashlib.sha256(path.read_bytes()).hexdigest() != entry['sha256']:
+        elif path.stat().st_size != entry.get('bytes',path.stat().st_size) or hashlib.sha256(path.read_bytes()).hexdigest() != entry['sha256']:
             problems.append({'file': relative, 'problem': 'SHA-256 mismatch'})
     patterns = [re.compile(r'\bsk-[A-Za-z0-9_-]{20,}\b'),
                 re.compile(r'\bgh[pousr]_[A-Za-z0-9]{30,}\b'),

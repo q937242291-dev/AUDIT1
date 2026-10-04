@@ -43,7 +43,7 @@ def registered_definitions() -> dict:
             arm('identifier_mutation', 'one_shot', representation='identifier_mutation')]},
         'audit_policy': {'cohorts': ['audit_policy'], 'conditions': [arm(n, 'policy', policy=n,
             source_condition_id=SOURCE_POLICIES[n], paper_label=n.replace('_', ' ').capitalize()) for n in POLICIES]},
-        'path_verifier_models': {'cohorts': ['path_verifier_common_200', 'path_verifier_common_300'],
+        'path_verifier_models': {'cohorts': ['path_verifier_verified_200'] + [f'path_verifier_lite_{n}' for n in (50,100,150,200,300)],
             'conditions': [arm(alias, 'path_verifier', model_alias=alias) for alias in
                            ('path_4_1_mini', 'path_4_1', 'path_5_1')]},
         'history_replay': {'cohorts': ['history_replay'], 'endpoint': 'history_replay',
@@ -53,6 +53,7 @@ def registered_definitions() -> dict:
         'repair_official': {'cohorts': ['repair_official'], 'endpoint': 'official_resolution',
             'conditions': [arm(n, 'repair', patch_branch=n) for n in ('reference', 'agent')]},
     }
+    definitions['original_reduced_workflows'] = {'cohorts': ['original_reduced_workflows'], 'endpoint': 'official_resolution', 'requires_recorded_workflow_config': True, 'conditions': [arm(n, 'repair', workflow_arm=n) for n in ('original', 'reduced')]}
     for entry in definitions.values():
         entry['endpoint'] = entry.get('endpoint', 'localization')
         entry['completion_key'] = ['cohort', 'unit_id', 'condition_id', 'checkpoint_id', 'endpoint']
@@ -64,7 +65,7 @@ def registered_definitions() -> dict:
                            'parameter_origin': 'configurable_execution_parameters'},
             'prompt_templates': {'localization_v1': 'prompts/localization_v1.txt'},
             'execution_policy': {'default': 'plan', 'automatic_retries': 0,
-                                 'source_data_read_only': True, 'model_ids_from_environment': True}}
+                                 'source_data_read_only': True, 'model_ids_from_environment': True, 'paper_main_model': 'GPT-5.6 Luna', 'paper_reasoning_effort': 'max', 'paper_scaffold': 'SWE-agent', 'benchmark_data_bundled': False}}
 
 
 def load_registry(config_root: Path = CONFIG_ROOT) -> dict:

@@ -21,6 +21,8 @@ def main(argv=None) -> int:
     parser.add_argument('--list', action='store_true', help='List registered experiments without executing')
     parser.add_argument('--experiment', default='all')
     parser.add_argument('--data-root', type=Path, default=ROOT / 'data')
+    parser.add_argument('--task-list-root', type=Path, help='External task identity registrations')
+    parser.add_argument('--workflow-config', type=Path, help='Actual recorded original/reduced workflow settings')
     parser.add_argument('--config-root', type=Path, default=CONFIG_ROOT)
     parser.add_argument('--out', type=Path, default=ROOT / 'runs' / 'experiment_plan.json')
     parser.add_argument('--limit-units', type=int, help='Select whole assignment grids, never partial pairs')
@@ -39,7 +41,8 @@ def main(argv=None) -> int:
             return 0
         parameters = json.loads(args.parameters.read_text(encoding='utf-8')) if args.parameters else None
         plan = build_plan(args.experiment, data_root=args.data_root, config_root=args.config_root,
-                          limit_units=args.limit_units, parameters=parameters)
+                          limit_units=args.limit_units, parameters=parameters, task_list_root=args.task_list_root,
+                          workflow_config=json.loads(args.workflow_config.read_text()) if args.workflow_config else None)
         target = output_path(args.out, ROOT)
         require(not target.exists(), f'Output already exists; choose a new --out path: {target}')
         artifact = plan

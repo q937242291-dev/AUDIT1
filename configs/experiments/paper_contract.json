@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "manuscript_targets_only_not_measured_outcomes",
+  "paper_sha256": "5436a05628886008830540c20a0f2b69a0832ad8fa2995ceb8e9aaf5cb4ee375",
+  "main": {
+    "tasks": 266,
+    "benchmark": "pro_python_266",
+    "localization_methods": 5,
+    "localization_jobs": 1330,
+    "original_reduced_jobs": 532,
+    "model_role": "GPT-5.6 Luna",
+    "reasoning_effort": "max",
+    "harness": "SWE-agent"
+  },
+  "figure_6": {
+    "sampled_successful_pairs": 193,
+    "total_steps": 20648,
+    "redundancy_labels": 7348,
+    "redundancy_label_rate": 0.356,
+    "categories_overlap": true,
+    "selection": "random subset of Luna original successes, with success in both workflows"
+  },
+  "component": {
+    "tasks": 60,
+    "arms": 9,
+    "planned": 540,
+    "completed": 537
+  },
+  "provenance": {
+    "benchmark_reference": "https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro",
+    "frozen_v1_reference": "https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro/tree/2d52cb3df914a3fcf80c7f66738b3a88ae37fc50/data/v1",
+    "case_links_document": "266_CASES_LINKS.md",
+    "success_sample_statistics_document": "193_SUCCESS_SAMPLE.md",
+    "sample_statistics_source": "provided manuscript Figure 6"
+  }
+}

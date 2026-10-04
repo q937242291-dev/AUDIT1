@@ -90,7 +90,7 @@ def map_identifiers(value, mapping: dict[str, str]):
     if isinstance(value, str):
         if not mapping:
             return value
-        pattern = r'(?<![w])(?:' + '|'.join(re.escape(k) for k in sorted(mapping, key=len, reverse=True)) + r')(?![w])'
+        pattern = r'(?<!\w)(?:' + '|'.join(re.escape(k) for k in sorted(mapping, key=len, reverse=True)) + r')(?!\w)'
         return re.sub(pattern, lambda m: mapping[m.group(0)], value)
     if isinstance(value, list):
         return [map_identifiers(v, mapping) for v in value]

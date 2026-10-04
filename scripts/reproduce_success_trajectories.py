@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline Table 3 / Figure 3 reproduction (Python 3.10+, standard library only).
+"""Offline Table 1 / Figure 3 reproduction (Python 3.10+, standard library only).
 
 Estimator and RNG ordering are specified in docs/data_and_analysis.md.
 No network, model, evaluator, or implicit source-directory dependency.
@@ -184,7 +184,8 @@ def reproduce(rows, out, replicates=2000, seed=20260922):
         config = label(k) if k else 'Overall'
         panel_c.append(dict(configuration=config, n=len(group), signatures=len(signatures),
                             largest_signature_count=max(signatures.values()), largest_signature_share=max(signatures.values())/len(group),
-                            mean_units=mean(sum(r[role+'_present'] for role in ROLES) for r in group),
+                            mean_named_units=mean(sum(r[role+'_present'] for role in ROLES) for r in group),
+                            mean_units=mean(sum(r[role+'_present'] for role in ROLES)+r['other_tool_step_present'] for r in group),
                             mean_units_including_other_tool_step=mean(sum(r[role+'_present'] for role in ROLES)+r['other_tool_step_present'] for r in group),
                             total_events=sum(r['event_count'] for r in group), mean_events=mean(r['event_count'] for r in group)))
         if k is None:
@@ -210,7 +211,8 @@ def reproduce(rows, out, replicates=2000, seed=20260922):
             rng.randrange(len(shared))
     backbone = sum(all(r[x+'_present'] for x in ('code_search', 'direct_file_read', 'edit_or_patch', 'test_or_build')) for r in rows)
     summary = dict(trajectory_count=len(rows), total_events=sum(r['event_count'] for r in rows),
-                   signatures=len(sig_rows), backbone_count=backbone, backbone_share=backbone/len(rows),
+                   signatures=len(sig_rows), backbone_cooccurrence_count=backbone, backbone_cooccurrence_share=backbone/len(rows),
+                   backbone_ordered_count=None, backbone_definition='Presence cooccurrence; no temporal order inferred from binary flags',
                    task_counts={label(k): len(v) for k,v in tasks.items()},
                    replicates=replicates, seed=seed, bootstrap_rng='random.Random, sequential source ordering over four strata',
                    quantiles='sorted draws indices max(0,int(.025*B)-1), min(B-1,int(.975*B))',
@@ -219,13 +221,20 @@ def reproduce(rows, out, replicates=2000, seed=20260922):
         'task_any_prevalence': 'fraction of tasks with at least one positive successful run',
         'trajectory_cluster_bootstrap': 'resample tasks with all their successful runs'}
     out.mkdir(parents=True, exist_ok=True)
-    for name, table in [('table3_panel_a', panel_a), ('table3_panel_b', panel_b), ('table3_panel_c', panel_c),
+    for name, table in [('table_01_panel_a', panel_a), ('table_01_panel_b', panel_b), ('table_01_panel_c', panel_c),
                         ('figure3_process_prevalence', [dict(process_unit=x['process_unit'], k=x['k'], n=x['n'], prevalence=x['pooled_prevalence'], band='high' if x['pooled_prevalence'] >= .8 else 'intermediate' if x['pooled_prevalence'] >= .2 else 'low') for x in panel_a]),
                         ('stratum_wilson', prevalence), ('task_any_bootstrap', boots),
                         ('trajectory_prevalence_cluster_bootstrap', ratio_boots), ('bootstrap_replicates', draws_out),
                         ('behavior_signatures', sig_rows), ('paired_task_event_deltas', pair_rows),
                         ('paired_event_summary', pairs), ('paired_event_bootstrap_replicates', pair_draws)]:
         write_csv(out / (name+'.csv'), table)
+    comparisons=audit_paper(panel_a,panel_b,panel_c,pairs,summary)
+    write_csv(out/'manuscript_comparisons.csv',comparisons)
+    summary['status']='MATCH' if comparisons and all(r['status']=='MATCH' for r in comparisons) else 'MISMATCH'
+    summary['checks']=len(comparisons)
+    summary['mismatches']=[r for r in comparisons if r['status']!='MATCH']
+    summary['provider_calls']=0;summary['benchmark_reruns']=0
+    (out/'verification.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
     (out/'summary.json').write_text(json.dumps(summary, indent=2)+'\n', encoding='utf-8')
     return summary
 
@@ -245,23 +254,23 @@ def audit_paper(a, b, c, pairs, summary):
                         comparison_decimal_places=places, status='MATCH' if match else 'MISMATCH'))
     for row, exp in zip(a, expected_a):
         for field, target in zip(('k','pooled_prevalence','stratum_min','stratum_max','wilson95_min','wilson95_max'), exp):
-            check('Table3A/'+row['process_unit']+'/'+field, row[field]*(1 if field=='k' else 100), target, 0 if field=='k' else 1)
+            check('Table1A/'+row['process_unit']+'/'+field, row[field]*(1 if field=='k' else 100), target, 0 if field=='k' else 1)
     for role, targets in {'code_search':(77.3,100.), 'diff_validation':(25.8,95.), 'history_lookup':(41.2,78.4), 'environment_setup':(23.7,73.2)}.items():
         row=next(x for x in a if x['process_unit']==role)
         for field, target in zip(('task_any_bootstrap95_min','task_any_bootstrap95_max'), targets):
-            check('Table3A/'+role+'/'+field,row[field]*100,target)
+            check('Table1A/'+role+'/'+field,row[field]*100,target)
     expected_b=((95.4,97.2,97.6,67.),(97.6,98.8,98.5,87.8),(93.,96.6,96.6,88.1),(47.1,72.2,65.1,15.6),(41.3,38.5,40.4,22.3),(34.3,38.8,37.3,14.1))
     for row, targets in zip(b,expected_b):
         for k,target in zip(KEYS,targets):
-            check('Table3B/'+row['process_unit']+'/'+label(k),row[label(k)]*100,target)
+            check('Table1B/'+row['process_unit']+'/'+label(k),row[label(k)]*100,target)
     for row, targets in zip(c,((327,47,13.5,6.41,76.8),(327,43,17.1,6.76,103.1),(327,40,13.5,6.68,93.1),(327,65,21.4,5.27,63.1),(1308,98,14.8,6.28,84.))):
         for field,target in zip(('n','signatures','largest_signature_share','mean_units','mean_events'),targets):
-            check('Table3C/'+row['configuration']+'/'+field,row[field]*(100 if field=='largest_signature_share' else 1),target,2 if field=='mean_units' else 0 if field in ('n','signatures') else 1)
-        check('Table3C/'+row['configuration']+'/mean_units_including_other_tool_step',row['mean_units_including_other_tool_step'],targets[3],2)
+            check('Table1C/'+row['configuration']+'/'+field,row[field]*(100 if field=='largest_signature_share' else 1),target,2 if field=='mean_units' else 0 if field in ('n','signatures') else 1)
+        check('Table1C/'+row['configuration']+'/mean_units_including_other_tool_step',row['mean_units_including_other_tool_step'],targets[3],2)
     for row,targets in zip(pairs,((89,12.4,8.,17.4),(89,39.4,34.6,44.6),(88,28.2,23.3,33.4))):
         for field,target in zip(('shared_task_count','mean_difference_a_minus_b','bootstrap95_lower','bootstrap95_upper'),targets):
             check('RQ4/'+row['stratum_a']+'/'+field,row[field],target,0 if field=='shared_task_count' else 1)
-    for field,target in [('trajectory_count',1308),('total_events',109911),('signatures',98),('backbone_count',1089)]:
+    for field,target in [('trajectory_count',1308),('total_events',109911),('signatures',98),('backbone_cooccurrence_count',1089)]:
         check(field,summary[field],target,0)
     return out
 
@@ -294,6 +303,7 @@ def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root',type=Path,default=ROOT)
     p.add_argument('--input',type=Path)
+    p.add_argument('--data-root',type=Path)
     p.add_argument('--out',type=Path,help='default: ROOT/reproduced/observational')
     p.add_argument('--replicates',type=int,default=2000)
     p.add_argument('--seed',type=int,default=20260922)
@@ -303,7 +313,7 @@ def main(argv=None):
         return 0 if unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(ReproductionTests)).wasSuccessful() else 1
     if args.replicates<40:
         p.error('--replicates must be at least 40')
-    source=args.input or args.root/'data/logs/deepswe_success_trajectories/success_trajectory_summary.csv'
+    source=args.input or (args.data_root or args.root/'data')/'logs/deepswe_success_trajectories/success_trajectory_summary.csv'
     out=(args.out or args.root/'reproduced/observational').resolve()
     if out==source.resolve().parent:
         p.error('output cannot overwrite the input data directory')
@@ -313,8 +323,9 @@ def main(argv=None):
     result['script_sha256']=sha256(Path(__file__))
     result['python_version']=sys.version.split()[0]
     (out/'summary.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+    (out/'verification.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,indent=2))
-    return 0
+    return 0 if result['status']=='MATCH' else 1
 
 
 if __name__=='__main__':

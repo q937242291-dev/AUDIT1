@@ -1,131 +1,70 @@
-# AUDIT Framework
+# AUDIT Framework — 1.1.2
 
+Agent Utility and Dependency Intervention Testing. This complete source distribution aligns the analysis contracts and output numbering with the supplied current manuscript. Main controlled cohort: **266 distinct SWE-bench Pro V1 Python tasks**. Figure 6: **193 randomly sampled Luna successful pairs**, within that cohort. Task data and empirical logs are external.
 
-
-**Agent Utility and Dependency Intervention Testing**
-
-AUDIT keeps process observations, matched localization necessity, repair
-outcomes, completion, and resource cost separate. It provides independently
-registered audit modules, explicit controller replacement, trace schemas,
-information-boundary checks, experiment configurations, and offline analysis.
+Read `REPLACE_INSTRUCTIONS.md` for replacement and `CHANGELOG.md` for exact modifications. Official 266-case links are in `266_CASES_LINKS.md`; the paper's 193-sample statistics are in `193_SUCCESS_SAMPLE.md`.
 
 ## Quick start
 
-Python 3.10 or newer. Run these commands from this directory:
+Python 3.10 or newer, from the project root:
 
-~~~sh
+```sh
 python -m pip install --no-deps -e .
 python reproduce.py --tests-only
 python scripts/verify_artifact.py
-audit-framework conditions
-audit-framework ablate --snapshot examples/trace_snapshot.json --out outputs/example_grid.json
-~~~
+python scripts/fetch_upstream_sources.py --verify
+python scripts/prepare_task_registration.py --links
+python scripts/run_experiments.py --list
+```
 
-These commands do not call model providers or rerun experiments. Unit and
-contract tests use fixtures, not additional empirical observations.
-The delivered data/ and results/ are inputs/read-only release artifacts;
-commands write new outputs separately under outputs/.
+Tests and link listing work without datasets, model providers or Docker. Unit fixtures are explicitly synthetic and do not represent experimental observations. Figure rendering additionally requires `pip install -r requirements.txt`. Explicit official identity fetching optionally requires `pip install datasets`.
 
-## Code and directories
+## Contents
 
 | Path | Purpose |
 |---|---|
-| src/audit_framework/ | AUDIT implementation and command-line entry point |
-| src/audit_framework/integrations/ | Upstream source and harness adapters |
-| src/audit_framework/experiments/ | Experimental conditions, inputs, schedules, and execution contracts |
-| configs/conditions/ | Full audit, seven single removals, and majority controller |
-| configs/experiments/ | Experiment registrations and supplied task/cohort selections |
-| scripts/ | Numerical reproduction, log acquisition, parsing, and experiment launchers |
-| data/logs/ | Logs grouped into 14 empirical-method collections |
-| data/controlled/ | Scored rows and controlled-experiment summaries |
-| results/ | Supplied analysis tables and figures |
-| third_party/ | Pinned upstream source material and retained licenses |
-| tests/ | Offline unit, boundary, ablation, and integration tests |
-| docs/paper_map.csv | Paper section/table/figure to code and evidence mapping |
-| docs/data_and_analysis.md | Data units, estimators, logs, and acquisition commands |
-| docs/experiment_protocol.md | Experiment planning and explicit execution instructions |
-| docs/third_party_sources.md | Exact upstream commits, reuse scope, and source notices |
+| src/audit_framework/ | Audit modules, controllers, boundaries, runtime and integrations |
+| configs/conditions/ | Full audit, seven single removals and majority controller |
+| configs/experiments/ | Registered experiment arms, model aliases and HTTP configuration |
+| scripts/ | Identity registration, all paper analysis stages, figures and source verification |
+| tests/ | 132 offline unit and contract tests |
+| third_party/ | All 21 pinned source files, four source licenses and acquisition locks |
+| docs/paper_map.csv | Current Tables 1–11 and Figures 3–6 to script/output mapping |
+| docs/data_and_analysis.md | External input contracts and reproduction instructions |
+| docs/experiment_protocol.md | Planning, execution and original/reduced workflow contracts |
+| CHANGELOG.md | Human-readable modification log |
+| MODIFICATION_LOG.json | File-level changes with old and new SHA-256 hashes |
+| artifact_manifest.json / sha256sums.txt | Integrity checks for every delivered file |
 
-Project Python filenames use English lower_snake_case. Source identifiers
-inside supplied records remain stable join keys. Third-party attribution and
-upstream license notices are retained instead of being renamed as our work.
+## External benchmark identities
 
-## Exact ablation contract
+The official source is [ScaleAI/SWE-bench_Pro](https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro). For the paper's 266-task denominator, use the frozen V1 configuration and filter `repo_language=python`; the current default dataset is not a substitute for that release. The immutable source and supplementary Verified/Lite links are in `docs/data_links.md`.
 
-| Condition | Enabled modules | Controller |
-|---|---|---|
-| full_audit | All seven | Full |
-| minus_grounding | All except grounding | Full |
-| minus_ownership | All except ownership | Full |
-| minus_contradiction | All except contradiction | Full |
-| minus_detour | All except detour | Full |
-| minus_path_verification | All except path verification | Full |
-| minus_memory | All except memory | Full |
-| minus_abstention | All except abstention | Full |
-| majority_controller | All seven, same outputs | Majority aggregation |
+Create identity-only registrations from your actual official rows/catalog. Nothing is downloaded without `--fetch`:
 
-The matrix computes module outputs once for a fixed model-facing snapshot.
-Each removal filters only the named output before aggregation. Other module
-outputs, the snapshot, model metadata, and configuration parameters stay fixed.
-The majority condition changes only aggregation. It uses equally weighted
-module ballots with an explicit plurality/tie rule and separately reports
-whether the winner has a strict majority.
+```sh
+python scripts/prepare_task_registration.py --benchmark pro_python_266 --cohort localization_methods --rows-jsonl /path/to/official_v1_rows.jsonl --out /path/to/task_lists
+python scripts/run_experiments.py --experiment localization_methods --task-list-root /path/to/task_lists --out runs/localization_plan.json
+```
 
-The full controller applies configured enabled-module vetoes and evidence
-precedence. Memory retains source-referenced evidence within a task/trial; it
-never learns from gold localization or final repair labels. Module definitions,
-thresholds, tie rules, and quality normalizers are explicit artifact parameters
-in configs/conditions, not inferred from outcome tables.
+The localization grid has 1,330 planned jobs (266 × five methods). The original/reduced grid has 532 jobs (266 × two workflows). Planning makes zero provider calls. Runs require actual runtime inputs and an explicitly activated adapter. Original/reduced execution additionally requires recorded workflow settings and a bound SWE-agent adapter; generic localization adapters cannot silently stand in for it.
 
-## Run AUDIT on model-facing evidence
+## Reproduce paper measurements
 
-A snapshot contains task/trial identifiers, issue/context, candidate files,
-evidence references, chronological tool/history events, repository inventory,
-and model metadata. The full typed contract is in src/audit_framework/schema.py.
-Gold files, benchmark patches, post-hoc labels, and final repair outcomes are
-not accepted as model-facing inputs.
+```sh
+python reproduce.py --data-root /path/to/actual_logs --pro-catalog /path/to/pro_catalog.json --identity-root /path/to/benchmark_catalogs --task-list-root /path/to/task_lists --out outputs/analysis
+```
 
-~~~sh
-audit-framework validate --snapshot my_snapshot.json
-audit-framework evaluate --snapshot my_snapshot.json --condition full_audit --out outputs/full_audit.json
-audit-framework ablate --snapshot my_snapshot.json --out outputs/component_grid.json
-~~~
+Add `--figures` after installing figure dependencies. To validate one stage, pass e.g. `--stages observational`. Each stage writes measured results, manuscript comparisons and a verification report. Any missing identity, altered denominator or mismatched value produces a failure; a partial run is reported as `PARTIAL_MATCH`. Numerical targets are comparison values only.
 
-Output includes enabled/disabled module sets, module-level evidence and
-verdicts, exact snapshot/output digests, controller decisions, canonical trace,
-and the five separate process-quality dimensions. Unsupported dimensions are
-null, not zero. Existing output files are not silently overwritten.
+## Audit evidence directly
 
-To build a snapshot from source files in a local checkout without model calls:
+```sh
+audit-framework conditions
+audit-framework validate --snapshot examples/trace_snapshot.json
+audit-framework ablate --snapshot examples/trace_snapshot.json --out outputs/example_grid.json
+```
 
-~~~sh
-audit-framework inspect --repository path/to/checkout --task-id issue_001 --issue-file issue.txt --candidate package/module.py --out outputs/snapshot.json
-~~~
+The component engine evaluates all seven module outputs once, removes one output per ablation and changes only aggregation for the majority arm. Trust-first checks the solver's original Top-1; a failed gate abstains while retaining candidates for inspection. Gold labels, final patches and evaluator outcomes remain outside model-facing snapshots.
 
-The inspection tool is read-only and does not establish repair correctness.
-Provider-driven execution and the fixed SWE-Agent integration are described
-in docs/experiment_protocol.md and docs/third_party_sources.md. They are
-separate from offline data analysis and require explicit execution parameters.
-
-## Analyze the supplied data
-
-~~~sh
-python reproduce.py --out outputs/analysis
-python -m pip install -r requirements.txt
-python reproduce.py --out outputs/analysis --figures
-~~~
-
-The analysis reads existing measurements. It does not regenerate model
-responses or benchmark outcomes. Numerical scripts use the standard library;
-plotting additionally uses the pinned requirements. The supplied results are
-not overwritten. See docs/data_and_analysis.md for estimands and denominators.
-
-## Public log acquisition and source reuse
-
-Per-object acquisition manifests provide source URLs and available SHA-256
-checksums. Full public logs can be acquired with the explicit download command
-in docs/data_and_analysis.md; unavailable objects remain unavailable rather
-than becoming successful observations. Upstream projects, exact commits,
-reused code, and retained license files are listed in docs/third_party_sources.md.
-
-## Anonymous 
+132 code tests and 144 Table 1 comparisons passed in this build. Benchmark access and the paper's success-sample statistics are documented in `266_CASES_LINKS.md` and `193_SUCCESS_SAMPLE.md`.

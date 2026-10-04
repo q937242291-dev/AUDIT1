@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = "data/logs/repair_endpoints/evidence_manifest.json"
 BEHAVIORS = {
     "Grounding": ("EvidenceGroundingAuditor", "no_grounding"),
-    "Consistency": ("ConsistencyCheckerAgent", "no_contradiction"),
+    "Contradiction": ("ConsistencyCheckerAgent", "no_contradiction"),
     "Path verification": ("PathAuditAgent", "no_path_verifier"),
     "Memory": ("TrajectoryMemoryAgent", "no_memory"),
 }
@@ -50,6 +50,8 @@ def integer(value):
 
 
 def file_path(root, relative):
+    relative=Path(relative)
+    if relative.parts and relative.parts[0]=='data':relative=Path(*relative.parts[1:])
     p = (root / relative).resolve()
     require(p.is_relative_to(root.resolve()), f"Input escapes package root: {relative}")
     return p
@@ -260,6 +262,8 @@ def pair_effect(full, removal):
 
 
 def read_activity(root, manifest):
+    join_mode=manifest.get('diagnostic_join_mode')
+    require(join_mode in {'same_run','same_task_different_run'},'Record diagnostic_join_mode explicitly')
     component = json_rows(file_path(root, manifest["component_metrics"]))
     unique(component, ("instance_id", "variant"))
     by_variant = defaultdict(dict)
@@ -285,7 +289,7 @@ def read_activity(root, manifest):
         require(row["diagnostic_record_lines"] == ";".join(str(x["source_line"]) for x in recs), "Diagnostic line locator mismatch")
         require(row["component_run_id"] == full[task]["run_id"], "Component run-ID mismatch")
         require({x["record"]["run_id"] for x in recs} == {row["diagnostic_run_id"]}, "Mixed diagnostic runs")
-        require(row["diagnostic_run_id"] != row["component_run_id"], "Cross-run boundary changed")
+        require((row['diagnostic_run_id']==row['component_run_id']) == (join_mode=='same_run'),'Diagnostic run identity differs from declared join mode')
     activity = []
     for behavior, (agent, variant) in BEHAVIORS.items():
         records = [lookup[(task, agent)] for task in full]
@@ -296,7 +300,7 @@ def read_activity(root, manifest):
             "pass_n": counts["pass"], "warn_n": counts["warn"], "fail_n": counts["fail"],
             "activation_n": activation, "activation_denominator": len(records), "activation_percent": 100 * activation / len(records),
             "pair_denominator": n, "gain_after_removal_n": gains, "loss_after_removal_n": losses,
-            "keep_effect_pp": 100 * (losses - gains) / n, "same_task": True, "same_run": False})
+            "keep_effect_pp": 100 * (losses - gains) / n, "same_task": True, "same_run": join_mode=="same_run"})
     completion = []
     for variant, rows in sorted(by_variant.items()):
         require(set(rows) == set(full), f"Scheduled cohort mismatch: {variant}")
@@ -399,18 +403,23 @@ def write_csv(path, rows):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, default=Path("reproduced/repair"), help="Output directory (default: reproduced/repair)")
+    parser.add_argument("--data-root",type=Path)
+    parser.add_argument("--self-test-only",action="store_true")
     parser.add_argument("--self-test", action="store_true", help="Run in-memory negative tests before validating real evidence")
     args = parser.parse_args()
     tests_run = 0
-    if args.self_test:
+    if args.self_test or args.self_test_only:
         result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(EvidenceTests))
         require(result.wasSuccessful(), "Self-tests failed")
         tests_run = result.testsRun
-    manifest = json.loads((ROOT / MANIFEST).read_text(encoding="utf-8"))
-    files_checked = verify_files(ROOT, manifest)
-    bounded = read_bounded(ROOT, manifest)
-    official = read_official(ROOT, manifest)
-    activity, completion, records, tasks = read_activity(ROOT, manifest)
+    if args.self_test_only:return 0
+    require(args.data_root is not None,'Supply external --data-root')
+    root=args.data_root.resolve()
+    manifest = json.loads(file_path(root,MANIFEST).read_text(encoding="utf-8"))
+    files_checked = verify_files(root, manifest)
+    bounded = read_bounded(root, manifest)
+    official = read_official(root, manifest)
+    activity, completion, records, tasks = read_activity(root, manifest)
     rates = endpoint_rates(bounded, official)
     # Cohort cardinalities verify frozen source coverage, not manuscript outcomes.
     require(len(bounded) == 63 and len(official) == 24 and records == 420 and tasks == 60, "Frozen cohort coverage changed")
@@ -422,21 +431,32 @@ def main():
             "source_failed": sum(r["source_failed"] for r in rows), "source_skipped": sum(r["source_skipped"] for r in rows),
             "source_log_count_disagreements": sum(not r["source_log_test_counts_match"] for r in rows)})
     output = args.out.resolve()
-    input_paths = {file_path(ROOT, entry["path"]) for entry in manifest["files"]} | {(ROOT / MANIFEST).resolve()}
+    input_paths = {file_path(root, entry["path"]) for entry in manifest["files"]} | {file_path(root,MANIFEST)}
     tables = {"repair_endpoint_rates.csv": rates, "bounded_rows.csv": bounded, "official_rows.csv": official,
               "bounded_test_totals.csv": summaries, "component_activity.csv": activity, "component_completion.csv": completion}
     require(all(output / name not in input_paths for name in tables), "Output would overwrite evidence")
     output.mkdir(parents=True, exist_ok=True)
     for name, rows in tables.items():
         write_csv(output / name, rows)
-    verification = {"status": "verified_local_reaggregation", "provider_calls": 0, "benchmark_reruns": 0,
+    checks=[]
+    def compare(claim,got,want,tolerance=0):
+        checks.append(dict(claim=claim,actual=got,manuscript=want,tolerance=tolerance,status='MATCH' if abs(got-want)<=tolerance else 'MISMATCH'))
+    for row,expected in zip(activity,[(1,1,0,60),(25,1,0,60),(16,0,0,60),(14,1,0,58)]):
+        compare('Table2/'+row['behavior']+'/denominator',row['activation_denominator'],60)
+        for field,want in zip(('activation_n','gain_after_removal_n','loss_after_removal_n','pair_denominator'),expected):compare('Table2/'+row['behavior']+'/'+field,row[field],want)
+    for row,(n,rate) in zip(rates,[(21,81.0),(21,38.1),(12,66.7),(12,33.3)]):
+        compare('Figure5(d)/'+row['endpoint']+'/'+row['branch']+'/denominator',row['denominator'],n)
+        compare('Figure5(d)/'+row['endpoint']+'/'+row['branch']+'/percent',row['percent'],rate,.05001)
+    write_csv(output/'manuscript_comparisons.csv',checks)
+    verification = {"status": 'MATCH' if checks and all(r['status']=='MATCH' for r in checks) else 'MISMATCH',
+        'checks':len(checks),'mismatches':[r for r in checks if r['status']!='MATCH'], "provider_calls": 0, "benchmark_reruns": 0,
         "input_files_hash_verified": files_checked, "negative_tests_passed": tests_run,
         "bounded_rows": len(bounded), "bounded_task_count": len({r['task_id'] for r in bounded}),
         "bounded_completed_test_processes": sum(r["completed"] for r in bounded),
         "official_report_count": len(official), "official_task_count": len({r['task_id'] for r in official}),
         "official_test_status_reports": sum(r["test_status_present"] for r in official),
         "official_patch_application_failures": sum(not r["patch_applied"] for r in official),
-        "diagnostic_records": records, "diagnostic_tasks": tasks, "same_task_join": True, "same_run_join": False,
+        "diagnostic_records": records, "diagnostic_tasks": tasks, "same_task_join": True, "same_run_join": manifest["diagnostic_join_mode"]=="same_run",
         "bounded_source_log_count_disagreements": [dict(task_id=r["task_id"], branch=r["branch"],
             source_failed=r["source_failed"], log_failed=r["log_failed"], log_errors=r["log_errors"])
             for r in bounded if not r["source_log_test_counts_match"]],
@@ -445,7 +465,7 @@ def main():
         "outputs": {name: sha256(output / name) for name in tables}}
     (output / "verification.json").write_text(json.dumps(verification, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(verification, indent=2, sort_keys=True))
-    return 0
+    return 0 if verification['status']=='MATCH' else 1
 
 
 if __name__ == "__main__":

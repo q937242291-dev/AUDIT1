@@ -567,8 +567,12 @@
     },
     "path_verifier_models": {
       "cohorts": [
-        "path_verifier_common_200",
-        "path_verifier_common_300"
+        "path_verifier_verified_200",
+        "path_verifier_lite_50",
+        "path_verifier_lite_100",
+        "path_verifier_lite_150",
+        "path_verifier_lite_200",
+        "path_verifier_lite_300"
       ],
       "conditions": [
         {
@@ -702,6 +706,38 @@
         "checkpoint_id",
         "endpoint"
       ]
+    },
+    "original_reduced_workflows": {
+      "cohorts": [
+        "original_reduced_workflows"
+      ],
+      "endpoint": "official_resolution",
+      "requires_recorded_workflow_config": true,
+      "conditions": [
+        {
+          "id": "original",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "workflow_arm": "original"
+        },
+        {
+          "id": "reduced",
+          "pipeline": "repair",
+          "model_alias": "base",
+          "prompt_template": "localization_v1",
+          "reasoning_effort": "max",
+          "workflow_arm": "reduced"
+        }
+      ],
+      "completion_key": [
+        "cohort",
+        "unit_id",
+        "condition_id",
+        "checkpoint_id",
+        "endpoint"
+      ]
     }
   },
   "model_aliases": {
@@ -725,6 +761,10 @@
     "default": "plan",
     "automatic_retries": 0,
     "source_data_read_only": true,
-    "model_ids_from_environment": true
+    "model_ids_from_environment": true,
+    "paper_main_model": "GPT-5.6 Luna",
+    "paper_reasoning_effort": "max",
+    "paper_scaffold": "SWE-agent",
+    "benchmark_data_bundled": false
   }
 }

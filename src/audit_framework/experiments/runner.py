@@ -114,6 +114,10 @@ def execute_plan(plan: dict, inputs: dict, *, evaluate=None, execute: bool = Fal
         if job['experiment'] == 'component_ablation':
             require(callable(getattr(adapter, 'evaluate_grid', None)), 'Component execution requires cached evaluate_grid')
         resolved[job['job_id']] = _resolved_model(plan, job['condition'], snapshot, adapter, environment)
+        if job['experiment'] == 'original_reduced_workflows':
+            fixed = plan['workflow_config']['fixed']
+            require(resolved[job['job_id']] == fixed['model'], 'Workflow model differs from recorded protocol')
+            require(getattr(adapter, 'paper_protocol', None) == fixed, 'Bind an actual SWE-agent adapter to the fixed paper protocol')
     rows = []
     for (experiment, cohort, unit_id), jobs in groups.items():
         envelope = deepcopy(inputs[(cohort, unit_id)])
@@ -129,6 +133,7 @@ def execute_plan(plan: dict, inputs: dict, *, evaluate=None, execute: bool = Fal
                 'repository_state': envelope['repository']['state_hash'],
                 'endpoint': job['endpoint'], 'checkpoint_id': job['checkpoint_id'],
                 'unit_id': unit_id, 'job_id': job['job_id'], 'unit': deepcopy(job['unit']),
+                'fixed_workflow_protocol': deepcopy(plan['workflow_config']['fixed']) if plan.get('workflow_config') else None,
             }
             prepared.append(condition)
         if experiment == 'component_ablation':
@@ -156,6 +161,7 @@ def execute_plan(plan: dict, inputs: dict, *, evaluate=None, execute: bool = Fal
                     require(result['all_module_outputs'] == saved['all_module_outputs'], 'Cached condition output differs')
                     row = _row(job, envelope, resolved[job['job_id']], result)
                     row['module_cache_key'] = key
+                    row['all_module_outputs_sha256'] = saved['module_outputs_sha256']
                     rows.append(row)
             except Exception as error:
                 rows.extend(_row(j, envelope, resolved[j['job_id']], status='error', error=f'{type(error).__name__}: {error}') for j in jobs)
