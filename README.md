@@ -1,6 +1,7 @@
 # AUDIT Framework — 1.1.3
 
-Agent Utility and Dependency Intervention Testing. This complete source distribution aligns the analysis contracts and output numbering with the supplied current manuscript. Main controlled cohort: **266 distinct SWE-bench Pro V1 Python tasks**. Figure 6: **193 Luna paired successful trajectories**. Task data and empirical logs are external.
+Agent Utility and Dependency Intervention Testing. This complete source distribution aligns the analysis contracts and output numbering with the supplied current manuscript. 
+Task data and empirical logs are external.
 
 ## Quick start
 
