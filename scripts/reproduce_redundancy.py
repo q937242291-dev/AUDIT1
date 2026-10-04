@@ -1,4 +1,4 @@
-"""Figure 6 from external 266-task paired outcomes and 193 sampled successful pairs."""
+"""Figure 6 from paired workflow outcomes and successful trajectory records."""
 from __future__ import annotations
 import argparse,csv,json,random,sys,re
 from collections import Counter
@@ -31,8 +31,8 @@ def validate_outcomes(rows,catalog):
 
 def validate_selection(selection,by_id):
  ids=selection.get('selected_task_ids')
- require(isinstance(ids,list) and len(ids)==len(set(ids))==193 and set(ids)<=set(by_id),'193 distinct selected tasks must belong to the 266-task ledger')
- require(selection.get('method')=='random_without_replacement' and selection.get('sampling_frame')=='luna_original_successes_in_pro_python_266','Record random success-conditioned sampling provenance')
+ require(isinstance(ids,list) and len(ids)==len(set(ids))==193 and set(ids)<=set(by_id),'Expected 193 distinct successful-pair identities matching the workflow ledger')
+ require(selection.get('method')=='random_without_replacement' and selection.get('sampling_frame')=='luna_original_successes_in_pro_python_266','Record successful-pair selection provenance')
  require(type(selection.get('seed')) is int and isinstance(selection.get('rng'),str) and selection['rng'],'Missing actual random seed/RNG')
  eligible=sorted(task for task,row in by_id.items() if row['original']['status']=='completed' and row['original']['resolved'] is True)
  require(selection.get('eligible_task_ids_sha256')==digest(eligible),'Sampling frame digest mismatch')

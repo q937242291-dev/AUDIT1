@@ -16,4 +16,4 @@ Figure 5(a),controlled,table_09_audit_policy.csv,30 tasks
 Figure 5(b),model_swap,figure_05b_model_slices.csv,Lite50/100/150/200/300 across 3 models
 Figure 5(c),controlled,figure_05c_replay_checkpoints.csv,60 rows per horizon
 Figure 5(d),repair,repair_endpoint_rates.csv,21 bounded/12 official tasks per branch
-Figure 6,redundancy,figure_06_redundancy_categories.csv,193 random successful pairs within266
+Figure 6,redundancy,figure_06_redundancy_categories.csv,193 paired successful trajectories

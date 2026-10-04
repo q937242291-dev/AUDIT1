@@ -25,6 +25,6 @@ For an explicit provider run use `--execute --snapshots ... --adapter audit_fram
 
 `--workflow-config` contains exactly fixed,original,reduced. fixed records model,reasoning_effort="max",harness="SWE-agent",immutable harness_revision,prompt_sha256,toolset_sha256,evaluation_protocol. Each arm records context_strategy:{id:...,...},memory_budget,enabled_modules. Original enables all seven; reduced names its actual removed modules, reduced memory budget and changed context strategy. The workflow configuration records the chosen process settings.
 
-Use an actual SWE-agent adapter exposing paper_protocol equal to fixed and capabilities including repair. The ordinary localization/core adapter cannot execute this grid. Both266-task workflows must retain the full execution ledger; only the actual random193 successful pairs enter the separate Figure6 analysis.
+Use an actual SWE-agent adapter exposing paper_protocol equal to fixed and capabilities including repair. The ordinary localization/core adapter cannot execute this grid. Both workflows retain the full execution ledger. Figure6 reports 193 paired successful trajectories.
 
 Pinned source adapters and official grading entry points are documented in third_party_sources.md. Full installed upstream harnesses, Docker/images, task checkouts and model service access are external dependencies. Offline tests validate the runtime and analysis contracts.

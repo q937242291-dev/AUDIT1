@@ -1,6 +1,6 @@
 # Build validation
 
-Version 1.1.2. Local Python 3.12.14.
+Version 1.1.3. Local Python 3.12.14.
 
 - 132 offline unit/contract tests passed.
 - 21 vendored files from four official source pins verified byte-for-byte, with their retained licenses.

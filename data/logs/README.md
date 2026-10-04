@@ -12,7 +12,7 @@ outputs/analysis/controlled/dataset_denominators.csv after offline analysis.
 | identifier_representation | 120 paired runs over 40 issues |
 | component_ablation | 60 tasks, nine variants; incomplete records retained |
 | component_activity | Exact task join between separate diagnostic and ablation runs |
-| localization_methods | Five methods on 260 issues, including verdict/tool records |
+| localization_methods | Five methods on 266 issues, including verdict/tool records |
 | input_projection | Six tasks, three seeds, five input-visibility conditions |
 | matched_context | 40 tasks and seven context conditions |
 | audit_policy | Six policies, 30 assignments, 14 distinct issues |

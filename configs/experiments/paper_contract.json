@@ -18,7 +18,7 @@
     "redundancy_labels": 7348,
     "redundancy_label_rate": 0.356,
     "categories_overlap": true,
-    "selection": "random subset of Luna original successes, with success in both workflows"
+    "selection": "paired successful trajectories"
   },
   "component": {
     "tasks": 60,

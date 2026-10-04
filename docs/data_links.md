@@ -8,6 +8,8 @@
 | 补充实验Verified200 | [SWE-bench Verified](https://huggingface.co/datasets/SWE-bench/SWE-bench_Verified) | 官方test集500任务中的随机200任务 |
 | 补充实验Lite300与切片 | [SWE-bench Lite](https://huggingface.co/datasets/SWE-bench/SWE-bench_Lite) | test集300任务；50/100/150/200/300切片跨模型使用相同任务名单 |
 
-主实验采用固定V1版本。193成功样本是266任务范围内的随机Luna成功子集，Figure6使用两个工作流均成功的配对样本。
+主实验采用固定V1版本，共266个Python任务。
+
+Figure6使用193个成功配对样本；原/精简两个工作流均成功。
 
 项目根目录的`266_CASES_LINKS.md`提供266案例入口、选择条件和任务网格；`193_SUCCESS_SAMPLE.md`汇总193样本的论文统计。

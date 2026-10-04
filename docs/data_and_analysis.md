@@ -17,7 +17,7 @@ All empirical inputs remain external. No task IDs, real outcomes or data tables 
 | Table 10 / Figure 5(b) | Random Verified200 plus full Lite300; Lite slices50/100/150/200/300, same IDs across three models |
 | Table 11 / Figure 5(c) | 300 replay rows; 60 rows per checkpoint7/30/90/180/365 |
 | Figure 5(d) | 21 bounded tasks and12 official endpoint tasks per branch |
-| Figure 6 |193 random paired successful issues within266;20,648 steps;7,348 overlapping redundancy labels |
+| Figure 6 |193 paired successful trajectories;20,648 steps;7,348 overlapping redundancy labels |
 
 Table1 means include Other tool step, while named-role signature definitions remain unchanged. Presence flags support backbone cooccurrence, not ordering. Bootstrap defaults are2,000 draws/seed20260922, preserving the source RNG stream.
 
@@ -42,7 +42,7 @@ Component rows retain solver_model, repository_state, base_commit, prompt_templa
 Three required files under external `logs/redundancy/`:
 
 - `workflow_outcomes.jsonl`: exactly266 distinct official tasks. Each row has instance_id,model_role="GPT-5.6 Luna",original,reduced. Each workflow records status,resolved,evaluator_report_sha256 and fixed model,reasoning_effort,harness,harness_revision,prompt_sha256,toolset_sha256,evaluation_protocol,repo,base_commit,repository_state. Completed outcomes use boolean resolved and an actual report hash. Other statuses retain resolved=null. Both arms must preserve all fixed fields.
-- `success_sample.json`: method=random_without_replacement,sampling_frame=luna_original_successes_in_pro_python_266,actual seed,RNG,eligible_task_ids_sha256,selected_task_ids (193). With python.random.Random, the source ordered sample must reproduce from sorted eligible IDs and that seed. Other RNGs require source_selection_sha256. Every selected task must be resolved by both workflows.
+- `success_sample.json`: records selected_task_ids, method, sampling_frame, seed, RNG, eligible_task_ids_sha256 and selection provenance. The selected list contains 193 successful pairs. Both workflows must resolve every selected issue. The validator checks recorded selection metadata and ordered identities using the declared generator.
 - `aligned_steps.jsonl`: instance_id,step_id,categories,omitted,reduced_step_id,alignment. Alignment records actual normalizer_version,method,source_sha256. Omitted=true requires reduced_step_id=null; otherwise it names the matched reduced step. Each of the193 tasks must have actual aligned steps; duplicate step keys fail.
 
 The five category names are Search / Exploration, Edit / Patch, Context / Information acquisition, Validation / Verification, Recovery / History. Category assignments may overlap. Total steps count unique normalized steps; redundancy labels count category assignments on omitted steps. Thus7,348/20,648 is not a count of unique removable steps. Approximate counts in the paper are checked through the displayed absolute and within-category percentages.

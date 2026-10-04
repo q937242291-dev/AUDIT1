@@ -35,6 +35,6 @@ def main(argv=None):
  rows=read(a.results/'redundancy/figure_06_redundancy_categories.csv');fig,axes=plt.subplots(1,3,figsize=(13,4),sharey=True)
  for ax,field,title in zip(axes,('step_share','absolute_redundancy_rate','within_category_redundancy_rate'),('All category events / steps','Redundancy labels / steps','Redundancy labels / category events')):
   ax.barh([r['category'] for r in rows][::-1],[100*float(r[field]) for r in rows][::-1]);ax.set(xlabel='Pooled event rate (%)',title=title)
- fig.suptitle('193 random Luna successful pairs from the 266-task Python subset; categories overlap');save(fig,'figure_06_behavior_redundancy')
+ fig.suptitle('193 Luna paired successful trajectories; categories overlap');save(fig,'figure_06_behavior_redundancy')
  print('Figures 3–6 generated from validated evidence.');return 0
 if __name__=='__main__':raise SystemExit(main())
